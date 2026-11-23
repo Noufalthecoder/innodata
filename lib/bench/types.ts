@@ -29,6 +29,14 @@ export interface Visibility {
   ok: boolean;
 }
 
+export interface RenderStyle {
+  hdri: string;
+  floor: string;
+  material: "matte" | "plastic" | "metal";
+  hdriRotation: number;
+  exposure: number;
+}
+
 export interface Task {
   id: string;
   seed: number;
@@ -43,6 +51,10 @@ export interface Task {
   answer: number;
   explanation: string;
   visibility: Visibility[];
+  /** lighting / floor / material used by the path-traced renderer */
+  render?: RenderStyle;
+  /** generation parameters that must be replayed to rebuild the task from its seed */
+  gen?: { stable?: boolean };
   width: number;
   height: number;
   /** path under public/, e.g. /bench/images/s1.jpg */

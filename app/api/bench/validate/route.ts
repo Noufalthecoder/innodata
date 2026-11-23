@@ -21,7 +21,7 @@ export async function POST() {
   const sample = tasks.filter((_, i) => i % Math.max(1, Math.floor(tasks.length / 8)) === 0).slice(0, 8);
   const notReproducible: string[] = [];
   for (const t of sample) {
-    const { task } = await generateTask({ kind: t.kind, seed: t.seed, objects: t.difficulty.objects, lighting: t.difficulty.lighting });
+    const { task } = await generateTask({ kind: t.kind, seed: t.seed, objects: t.difficulty.objects, lighting: t.difficulty.lighting, stable: t.gen?.stable });
     if (JSON.stringify(task.objects) !== JSON.stringify(t.objects) || task.answer !== t.answer) notReproducible.push(t.id);
   }
 

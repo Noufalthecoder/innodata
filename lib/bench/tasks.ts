@@ -2,6 +2,7 @@ import sharp from "sharp";
 import { len, makeProjector, objectName, sub } from "./geometry";
 import { renderSvg } from "./render";
 import { makeRng } from "./rng";
+import { styleFor } from "./style";
 import type { Camera, ColorName, Kind, SceneObject, Shape, Task, Vec } from "./types";
 import { checkVisibility } from "./visibility";
 
@@ -17,6 +18,8 @@ export interface GenOptions {
   seed: number;
   objects?: number; // 2-5 for relative tasks, 2-4 boxes for stacks
   lighting?: "normal" | "dim";
+  /** stability tasks only: force the outcome (true = stands, false = falls). Defaults to a hash of the seed. */
+  stable?: boolean;
 }
 
 export const KIND_TIER: Record<Kind, 1 | 2 | 3> = { orientation: 1, closer: 2, leftmost: 2, stability: 3 };
@@ -49,7 +52,8 @@ function randomObject(rng: ReturnType<typeof makeRng>, id: number, color: ColorN
 export function containerParts(id: number, rotY: number): SceneObject[] {
   const pivot: Vec = [0, 0, 0];
   const mk = (center: Vec, size: Vec): SceneObject => ({ id, shape: "box", color: "amber", center, size, rotY, pivot });
-  return [mk([0, 0.05, 0], [2, 0.1, 2]), mk([0, 0.55, -0.95], [2, 1, 0.1]), mk([-0.95, 0.55, 0], [0.1, 1, 2]), mk([0.95, 0.55, 0], [0.1, 1, 2])];
+  // walls meet without overlapping, so no coplanar faces (avoids rendering seams)
+  return [mk([0, 0.05, 0], [2, 0.1, 2]), mk([0, 0.6, -0.95], [2, 1, 0.1]), mk([-0.95, 0.6, 0.05], [0.1, 1, 1.9]), mk([0.95, 0.6, 0.05], [0.1, 1, 1.9])];
 }
 
 /** The open side faces local +z. After rotY(r) it faces (sin r, 0, cos r). */
@@ -69,6 +73,15 @@ export function stackAnalysis(xs: number[], width: number) {
   return { checks, stable: checks.every((c) => c.margin >= 0) };
 }
 
+/** Well-mixed bit from a seed (sequential seeds must not give correlated outcomes). */
+function hashBit(seed: number): boolean {
+  let h = Math.imul(seed ^ 0x9e3779b9, 0x85ebca6b);
+  h ^= h >>> 13;
+  h = Math.imul(h, 0xc2b2ae35);
+  h ^= h >>> 16;
+  return (h & 1) === 1;
+}
+
 async function finish(base: Omit<Task, "image" | "visibility">, subjectIds: number[], dim: number) {
   const visibility = await checkVisibility(base.objects, subjectIds, base.camera, WIDTH, HEIGHT);
   if (!visibility.every((v) => v.ok)) return null;
@@ -84,7 +97,7 @@ export async function generateTask(opts: GenOptions): Promise<{ task: Task; jpeg
   for (let attempt = 0; attempt < 300; attempt++) {
     const rng = makeRng(opts.seed * 1009 + attempt);
     const id = `s${opts.seed}`;
-    const common = { id, seed: opts.seed, kind: opts.kind, tier: KIND_TIER[opts.kind], width: WIDTH, height: HEIGHT };
+    const common = { id, seed: opts.seed, kind: opts.kind, tier: KIND_TIER[opts.kind], width: WIDTH, height: HEIGHT, render: styleFor(opts.seed) };
 
     if (opts.kind === "closer" || opts.kind === "leftmost") {
       const n = opts.objects ?? 3;
@@ -145,9 +158,10 @@ export async function generateTask(opts: GenOptions): Promise<{ task: Task; jpeg
 
     // stability
     const n = opts.objects ?? 3;
-    const wantStable = rng.next() < 0.5;
+    const wantStable = opts.stable ?? hashBit(opts.seed);
     const xs = [0];
-    for (let i = 1; i < n; i++) xs.push(xs[i - 1] + (wantStable ? rng.between(-0.25, 0.25) : rng.between(0.5, 0.85)));
+    // A 2-box stack only falls if the top box overhangs the support edge (0.75) by a clear margin, so the first step must be large.
+    for (let i = 1; i < n; i++) xs.push(xs[i - 1] + (wantStable ? rng.between(-0.25, 0.25) : i === 1 ? rng.between(0.95, 1.3) : rng.between(0.3, 0.9)));
     const a = stackAnalysis(xs, STACK_BOX[0]);
     if (a.stable !== wantStable || a.checks.some((c) => Math.abs(c.margin) < 0.12)) continue;
     const cols: ColorName[] = ["amber", "violet", "teal", "red"];
@@ -157,6 +171,7 @@ export async function generateTask(opts: GenOptions): Promise<{ task: Task; jpeg
     const r = await finish(
       {
         ...common,
+        gen: { stable: wantStable },
         difficulty: { objects: n, lighting },
         camera,
         objects,

@@ -11,23 +11,30 @@
     "bench:generate": "tsx scripts/bench/generate.ts",
     "bench:eval": "tsx scripts/bench/eval.ts",
     "bench:validate": "tsx scripts/bench/validate.ts",
-    "bench:report": "tsx scripts/bench/report.ts"
+    "bench:report": "tsx scripts/bench/report.ts",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "dependencies": {
+    "@react-three/drei": "^10.7.9",
+    "@react-three/fiber": "^9.8.2",
     "framer-motion": "^11.18.0",
     "next": "^15.1.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "three": "^0.171.0",
     "tsx": "^4.23.15"
   },
   "devDependencies": {
     "@types/node": "^22.0.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
+    "@types/three": "^0.171.0",
     "autoprefixer": "^10.4.20",
     "postcss": "^8.4.49",
     "sharp": "^0.35.5",
     "tailwindcss": "^3.4.17",
-    "typescript": "^5.7.0"
+    "typescript": "^5.7.0",
+    "vitest": "^5.1.1"
   }
 }

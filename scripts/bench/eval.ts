@@ -1,4 +1,4 @@
-// npm run bench:eval -- --model gemini [--limit 20]
+// npm run bench:eval -- --model gemini [--model-id gemini-3.5-flash] [--limit 20]
 // Sends each task's image and question to a vision model and scores the reply against ground truth.
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { askModel, MODELS, parseChoice, type Provider } from "../../lib/bench/models";
@@ -13,7 +13,7 @@ async function withRetry<T>(fn: () => Promise<T>): Promise<T> {
       return await fn();
     } catch (e) {
       const status = (e as { status?: number }).status;
-      if (attempt < 4 && (status === 429 || (status && status >= 500))) await sleep(2000 * 2 ** attempt);
+      if (attempt < 4 && (status === undefined || status === 429 || status >= 500)) await sleep(2000 * 2 ** attempt);
       else throw e;
     }
   }
@@ -23,6 +23,7 @@ async function main() {
   loadEnv();
   const provider = arg("model") as Provider;
   if (!provider || !(provider in MODELS)) throw new Error(`use --model ${Object.keys(MODELS).join("|")}`);
+  const modelId = arg("model-id") ?? MODELS[provider].model;
   const key = process.env[MODELS[provider].env];
   if (!key) throw new Error(`${MODELS[provider].env} is not set (put it in .env.local)`);
 
@@ -38,7 +39,7 @@ async function main() {
       try {
         const b64 = readFileSync(`public${t.image}`).toString("base64");
         // the ground-truth answer is never part of the request
-        const raw = await withRetry(() => askModel(provider, key!, b64, t.question, t.options));
+        const raw = await withRetry(() => askModel(provider, key!, b64, t.question, t.options, modelId));
         if (!raw.trim()) throw new Error("empty reply from model");
         const choice = parseChoice(raw, t.options.length);
         results.push({ id: t.id, raw: raw.trim(), choice, correct: choice === t.answer });
@@ -52,7 +53,7 @@ async function main() {
 
   results.sort((a, b) => a.id.localeCompare(b.id, undefined, { numeric: true }));
   mkdirSync("public/bench/results", { recursive: true });
-  writeFileSync(`public/bench/results/${provider}.json`, JSON.stringify({ provider, model: MODELS[provider].model, ran: new Date().toISOString(), results }, null, 2));
+  writeFileSync(`public/bench/results/${modelId.replace(/[^a-z0-9._-]/gi, "_")}.json`, JSON.stringify({ provider, model: modelId, ran: new Date().toISOString(), results }, null, 2));
   const ok = results.filter((r) => r.correct).length;
   const errs = results.filter((r) => r.error).length;
   console.log(`\n${MODELS[provider].label}: ${ok}/${results.length} correct (${((ok / results.length) * 100).toFixed(1)}%), ${errs} errors`);

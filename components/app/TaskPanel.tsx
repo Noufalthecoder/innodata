@@ -1,11 +1,15 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { useState } from "react";
 import { TIER_LABEL, type Task } from "@/lib/bench/types";
+
+const SceneViewer3D = dynamic(() => import("./SceneViewer3D"), { ssr: false, loading: () => <div className="grid aspect-[4/3] place-items-center rounded-lg border border-white/10 text-sm text-zinc-500">Loading 3D…</div> });
 
 /** Shows one task. Interactive: the visitor answers first, then sees ground truth. Static: answer is shown at once. */
 export default function TaskPanel({ task, interactive = true, onAnswered, extra }: { task: Task; interactive?: boolean; onAnswered?: (correct: boolean) => void; extra?: React.ReactNode }) {
   const [picked, setPicked] = useState<number | null>(null);
+  const [view, setView] = useState<"render" | "3d">("render");
   const revealed = !interactive || picked !== null;
 
   const choose = (k: number) => {
@@ -17,8 +21,19 @@ export default function TaskPanel({ task, interactive = true, onAnswered, extra 
   return (
     <div className="grid gap-8 lg:grid-cols-[1.25fr_1fr]">
       <div>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={task.image} alt={task.question} width={task.width} height={task.height} className="h-auto w-full rounded-lg border border-white/10" />
+        <div className="mb-3 inline-flex rounded-md border border-white/15 p-0.5 text-sm" role="group" aria-label="Scene view">
+          {(["render", "3d"] as const).map((v) => (
+            <button key={v} onClick={() => setView(v)} aria-pressed={view === v} className={`rounded px-3 py-1 transition-colors ${view === v ? "bg-white/10 text-white" : "text-zinc-400 hover:text-white"}`}>
+              {v === "render" ? "Rendered image" : "Interactive 3D"}
+            </button>
+          ))}
+        </div>
+        {view === "render" ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src={task.image} alt={task.question} width={task.width} height={task.height} className="h-auto w-full rounded-lg border border-white/10" />
+        ) : (
+          <SceneViewer3D task={task} allowTruth={revealed} />
+        )}
         <p className="mt-3 text-sm text-zinc-500">
           {task.id} · {task.difficulty.objects} object{task.difficulty.objects > 1 ? "s" : ""} · {task.difficulty.lighting} light · seed {task.seed}
         </p>
