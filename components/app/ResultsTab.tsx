@@ -58,7 +58,7 @@ npm run bench:report`}</pre>
           </thead>
           <tbody className="divide-y divide-white/10">
             {s.models.map((m) => (
-              <tr key={m.provider}>
+              <tr key={m.model}>
                 <td className="px-5 py-4 text-white">{m.model}</td>
                 {cols.map(([h, f]) => (
                   <td key={h} className="px-5 py-4 text-zinc-300">

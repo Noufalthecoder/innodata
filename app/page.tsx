@@ -4,6 +4,7 @@ import Problem from "@/components/Problem";
 import Findings from "@/components/Findings";
 import HowItWorks from "@/components/HowItWorks";
 import TaskTypes from "@/components/TaskTypes";
+import Explore3D from "@/components/Explore3D";
 import AppPreview from "@/components/AppPreview";
 import Results from "@/components/Results";
 import Faq from "@/components/Faq";
@@ -24,6 +25,7 @@ export default function Home() {
       <Findings />
       <HowItWorks />
       <TaskTypes />
+      <Explore3D />
       <AppPreview />
       <Results />
       <Faq />

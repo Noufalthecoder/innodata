@@ -111,7 +111,8 @@ function Overlays({ task }: { task: Task }) {
   );
 }
 
-export default function SceneViewer3D({ task, allowTruth = true }: { task: Task; allowTruth?: boolean }) {
+export default function SceneViewer3D({ task, allowTruth = true, autoRotate = false }: { task: Task; allowTruth?: boolean; autoRotate?: boolean }) {
+  const [spin, setSpin] = useState(autoRotate);
   const [overlay, setOverlay] = useState(true);
   const [key, setKey] = useState(0); // remounts controls to reset the view
   const material = task.render?.material ?? "matte";
@@ -136,7 +137,7 @@ export default function SceneViewer3D({ task, allowTruth = true }: { task: Task;
         ))}
         <ContactShadows position={[0, 0.005, 0]} opacity={0.5} scale={30} blur={2.2} far={6} />
         {allowTruth && overlay && <Overlays task={task} />}
-        <OrbitControls target={cam.look} enableDamping maxPolarAngle={Math.PI / 2 - 0.02} />
+        <OrbitControls target={cam.look} enableDamping autoRotate={spin} autoRotateSpeed={0.9} onStart={() => setSpin(false)} maxPolarAngle={Math.PI / 2 - 0.02} />
       </Canvas>
       <div className="absolute left-3 top-3 flex gap-2">
         {allowTruth && (
