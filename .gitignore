@@ -1,0 +1,9 @@
+node_modules
+assets-src
+.next
+out
+next-env.d.ts
+*.tsbuildinfo
+.env*
+__pycache__
+.venv

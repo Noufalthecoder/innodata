@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { color-scheme: dark; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: #08090c;
+  color: #e7e7ea;
+}
+
+section[id] { scroll-margin-top: 4rem; }
+::selection { background: #ff8731; color: #08090c; }
