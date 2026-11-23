@@ -1,0 +1,25 @@
+{
+  "provider": "gemini",
+  "model": "gemini-3.5-flash",
+  "ran": "2026-11-23T11:15:35.488Z",
+  "results": [
+    {
+      "id": "s1",
+      "raw": "B",
+      "choice": 1,
+      "correct": true
+    },
+    {
+      "id": "s3",
+      "raw": "D",
+      "choice": 3,
+      "correct": true
+    },
+    {
+      "id": "s4",
+      "raw": "A",
+      "choice": 0,
+      "correct": true
+    }
+  ]
+}

@@ -12,6 +12,9 @@ describe("parseChoice", () => {
     ["Answer: D", 4, 3],
     ["The answer is C", 3, 2],
     ["  A\n", 2, 0],
+    ["1. Look at the stack.\n2. Options: A. It stays standing, B. It falls\nThe correct option is B.B", 2, 1],
+    ["A. The violet cone\nB. The amber cone\nThe correct option is A.", 2, 0],
+    ["Reasoning about depth... so the answer is **C**", 3, 2],
   ])("reads %j", (raw, n, expected) => {
     expect(parseChoice(raw, n)).toBe(expected);
   });

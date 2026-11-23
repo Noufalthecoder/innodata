@@ -12,7 +12,16 @@ const files = existsSync(dir) ? readdirSync(dir).filter((f) => f.endsWith(".json
 
 const acc = (rows: Row[]) => ({ n: rows.length, correct: rows.filter((r) => r.correct).length, accuracy: rows.length ? rows.filter((r) => r.correct).length / rows.length : 0 });
 
-const models = files.map((f) => {
+// only report models that answered every task; partial runs (e.g. a daily quota hit) are skipped, not shown as a score
+const complete = files.filter((f) => {
+  const j = JSON.parse(readFileSync(`${dir}/${f}`, "utf8")) as { model: string; results: Row[] };
+  const answered = new Set(j.results.filter((r) => !r.error).map((r) => r.id));
+  const ok = tasks.every((t) => answered.has(t.id));
+  if (!ok) console.log(`skipped ${j.model}: answered ${answered.size}/${tasks.length} (incomplete; rerun bench:eval to resume)`);
+  return ok;
+});
+
+const models = complete.map((f) => {
   const j = JSON.parse(readFileSync(`${dir}/${f}`, "utf8")) as { provider: string; model: string; results: Row[] };
   const rows = j.results.filter((r) => !r.error);
   const group = (key: (t: Task) => string) => {
@@ -34,7 +43,7 @@ const models = files.map((f) => {
 
 // scenes every evaluated model got wrong: the failure gallery
 const allWrong = tasks
-  .filter((t) => files.length > 0 && files.every((f) => {
+  .filter((t) => complete.length > 0 && complete.every((f) => {
     const j = JSON.parse(readFileSync(`${dir}/${f}`, "utf8")) as { results: Row[] };
     const r = j.results.find((x) => x.id === t.id);
     return r && !r.error && !r.correct;

@@ -8,7 +8,6 @@ export const navLinks = [
   { href: "#app", label: "The app" },
   { href: "#why", label: "Why it matters" },
   { href: "#how", label: "How it works" },
-  { href: "#demo", label: "Try it" },
   { href: "#tiers", label: "Tiers" },
   { href: "#roadmap", label: "Roadmap" },
   { href: "#results", label: "Results" },

@@ -4,6 +4,11 @@ A procedurally generated benchmark that tests whether vision AI models understan
 
 Built for the Innodata AI Hackathon 2026, Track 2 (Visual Task Factory).
 
+## Documents
+
+- [Technical report](docs/TECHNICAL_REPORT.md): problem, task design, ground truth, validation, results and limitations
+- [Demo script](docs/DEMO_SCRIPT.md): a three-minute walkthrough
+
 ## Why this is trustworthy
 
 - **Ground truth comes from the scene, never from a person or a model.** Every object's position and rotation is chosen and recorded by the generator, so each answer is arithmetic on numbers we already hold.

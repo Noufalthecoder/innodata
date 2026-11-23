@@ -1,0 +1,33 @@
+{
+  "provider": "gemini",
+  "model": "gemini-3-flash-preview",
+  "ran": "2026-11-23T11:20:50.232Z",
+  "results": [
+    {
+      "id": "s1",
+      "raw": "B",
+      "choice": 1,
+      "correct": true
+    },
+    {
+      "id": "s2",
+      "raw": "",
+      "choice": null,
+      "correct": false,
+      "error": "429 {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://aistudio.google.co"
+    },
+    {
+      "id": "s3",
+      "raw": "D",
+      "choice": 3,
+      "correct": true
+    },
+    {
+      "id": "s4",
+      "raw": "",
+      "choice": null,
+      "correct": false,
+      "error": "429 {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://aistudio.google.co"
+    }
+  ]
+}

@@ -4,7 +4,6 @@ import About from "@/components/About";
 import AppPreview from "@/components/AppPreview";
 import Why from "@/components/Why";
 import HowItWorks from "@/components/HowItWorks";
-import Demo from "@/components/Demo";
 import Tiers from "@/components/Tiers";
 import Roadmap from "@/components/Roadmap";
 import Results from "@/components/Results";
@@ -22,7 +21,6 @@ export default function Home() {
       <AppPreview />
       <Why />
       <HowItWorks />
-      <Demo />
       <Tiers />
       <Roadmap />
       <Results />

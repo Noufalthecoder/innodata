@@ -11,6 +11,8 @@ export const MODEL_CHOICES: { id: string; provider: Provider; label: string }[] 
   { id: "gemini-3.5-flash", provider: "gemini", label: "Gemini 3.5 Flash" },
   { id: "gemini-3.5-flash-lite", provider: "gemini", label: "Gemini 3.5 Flash-Lite" },
   { id: "gemini-3-flash-preview", provider: "gemini", label: "Gemini 3 Flash" },
+  { id: "gemini-3.1-flash-lite", provider: "gemini", label: "Gemini 3.1 Flash-Lite" },
+  { id: "gemma-4-26b-a4b-it", provider: "gemini", label: "Gemma 4 26B (open)" },
   { id: "claude-sonnet-5-5", provider: "anthropic", label: "Claude" },
   { id: "gpt-4o", provider: "openai", label: "GPT-4o" },
 ];
@@ -36,10 +38,19 @@ export function parseChoice(raw: string, n: number): number | null {
     const i = LETTERS.indexOf(l.toUpperCase());
     return i >= 0 && i < n ? i : null;
   };
-  const lead = text.match(/^\(?([A-F])\)?(?:[.:)\s]|$)/i);
+  // 1. an explicitly stated final answer ("The correct option is B", "Answer: D"); the last one wins
+  const stated = Array.from(text.matchAll(/(?:answer|option)\s*(?:is|:)\s*\(?\**([A-F])\b/gi));
+  if (stated.length) return valid(stated[stated.length - 1][1]);
+  // 2. the whole reply is just a letter ("B", "B.", "(C)")
+  const bare = text.match(/^\(?([A-F])\)?\.?$/i);
+  if (bare) return valid(bare[1]);
+  // 3. reasoning that ends on the letter ("... so B")
+  const end = text.match(/\b([A-F])\)?\.?\s*$/);
+  if (end && text.length > 3) return valid(end[1]);
+  // 4. a reply that starts with the letter ("A. The red box")
+  const lead = text.match(/^\(?([A-F])\)?[.:)\s]/i);
   if (lead) return valid(lead[1]);
-  const stated = text.match(/answer\s*(?:is|:)?\s*\(?([A-F])\b/i);
-  if (stated) return valid(stated[1]);
+  // 5. exactly one standalone capital option letter anywhere
   const upper = Array.from(new Set(text.match(/\b[A-F]\b/g) ?? []));
   return upper.length === 1 ? valid(upper[0]) : null;
 }
@@ -83,7 +94,8 @@ export async function askModel(provider: Provider, apiKey: string, jpegBase64: s
     j = await post(url, { "x-goog-api-key": apiKey }, { contents: [{ parts }], generationConfig: { ...gen, thinkingConfig: { thinkingBudget: 0 } } });
   } catch (e) {
     if ((e as { status?: number }).status !== 400) throw e;
-    j = await post(url, { "x-goog-api-key": apiKey }, { contents: [{ parts }], generationConfig: gen });
+    // models without the setting (e.g. Gemma) may write a sentence before the letter: give them room
+    j = await post(url, { "x-goog-api-key": apiKey }, { contents: [{ parts }], generationConfig: { ...gen, maxOutputTokens: 2048 } });
   }
   return j.candidates?.[0]?.content?.parts?.map((p: { text?: string }) => p.text ?? "").join("") ?? "";
 }

@@ -11,3 +11,5 @@ assets
 public/bench/render-result.json
 scratch-render
 !.env.example
+.next-prod
+demo-output

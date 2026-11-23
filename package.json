@@ -13,7 +13,8 @@
     "bench:validate": "tsx scripts/bench/validate.ts",
     "bench:report": "tsx scripts/bench/report.ts",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "bench:reparse": "tsx scripts/bench/reparse.ts"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.9",
@@ -31,6 +32,7 @@
     "@types/react-dom": "^19.0.0",
     "@types/three": "^0.171.0",
     "autoprefixer": "^10.4.20",
+    "playwright-core": "^1.65.1",
     "postcss": "^8.4.49",
     "sharp": "^0.35.5",
     "tailwindcss": "^3.4.17",
