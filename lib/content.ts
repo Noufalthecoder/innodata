@@ -1,101 +1,84 @@
 export const GITHUB_URL = "https://github.com/Noufalthecoder/innodata";
+export const REPORT_URL = `${GITHUB_URL}/blob/main/docs/TECHNICAL_REPORT.md`;
 export const CONTACT_EMAIL = "hello@example.com"; // TODO: replace
 export const TEAM_NAME = "Team SpatialGrid"; // TODO: replace
-export const DEADLINE_ISO = "2026-12-06T23:59:59"; // TODO: confirm submission deadline
 
 export const navLinks = [
-  { href: "#about", label: "About" },
-  { href: "#app", label: "The app" },
-  { href: "#why", label: "Why it matters" },
+  { href: "#problem", label: "Problem" },
+  { href: "#findings", label: "Findings" },
   { href: "#how", label: "How it works" },
-  { href: "#tiers", label: "Tiers" },
-  { href: "#roadmap", label: "Roadmap" },
-  { href: "#results", label: "Results" },
-  { href: "#faq", label: "FAQs" },
+  { href: "#tasks", label: "Tasks" },
+  { href: "#app", label: "App" },
+  { href: "#results", label: "Leaderboard" },
+  { href: "#faq", label: "FAQ" },
 ];
 
-export const badges = [
-  { value: "3", label: "Difficulty tiers" },
-  { value: "100%", label: "Auto-verified answers" },
-  { value: "0", label: "Human or AI graders" },
-  { value: "2–5", label: "Objects per scene" },
+/** the scene on the hero card: a stable stack that every evaluated model called unstable */
+export const heroCase = {
+  image: "/bench/images/s34.jpg",
+  id: "s34",
+  question: "Will this stack of 4 boxes stay standing, or will it fall?",
+  truth: "Stays standing",
+  why: "Each box's load sits over the box below it, with at least 12 cm to spare.",
+  answers: [
+    { model: "Gemini 3.1 Flash-Lite", said: "Falls" },
+    { model: "Gemini 3.5 Flash-Lite", said: "Falls" },
+    { model: "Gemma 4 26B", said: "Falls" },
+  ],
+};
+
+export const stats = [
+  { value: "60", label: "Photoreal test scenes" },
+  { value: "60 / 60", label: "Answers re-derived independently" },
+  { value: "80", label: "Automated tests in CI" },
+  { value: "3", label: "Vision models evaluated" },
 ];
 
-export const aboutParagraphs = [
-  "SpatialGrid is a procedurally generated benchmark that tests whether vision AI models truly understand space: where things are, how they are turned, what is in front of what, and whether a stack is about to fall.",
-  "We build simple 3D scenes where we control every object's position and rotation. Because we place everything ourselves, the correct answer is basic math on numbers we already hold, never a guess and never another AI's opinion.",
-  "Every question passes a visibility check first. If the evidence is not in the image, the question is never asked.",
+export const problem = {
+  lead: "Vision-language models are being wired into robot arms, warehouse pickers and inspection cameras. Most benchmarks check whether a model can describe a picture. SpatialGrid checks whether it can be trusted to act on one.",
+  failures: [
+    { skill: "Depth", question: "Which item is nearest?", cost: "The arm reaches for the wrong item, or hits one it never saw." },
+    { skill: "Pose", question: "Which way is it turned?", cost: "The gripper approaches from the closed side and the grasp fails." },
+    { skill: "Stability", question: "Will this stack hold?", cost: "An unsafe pallet is passed as safe, or a safe one halts the line." },
+  ],
+};
+
+export const findings = [
+  { value: "96%", label: "Depth and position", body: "Average across models on “closest to the camera” and “furthest left”, with up to five objects and partial occlusion. Nearly solved.", tone: "good" },
+  { value: "47%", label: "Orientation", body: "Average across models, against 25% for guessing. One model scored 20%. They answer “toward the camera” almost every time and never say left or right.", tone: "bad" },
+  { value: "1–6 / 10", label: "Stable stacks recognised", body: "Every model caught all 10 unstable stacks but called most stable ones unsafe. They react to any visible offset instead of reasoning about balance.", tone: "bad" },
+] as const;
+
+export const pipeline = [
+  { title: "Choose the numbers", body: "A seed sets every object's shape, position, rotation and the camera. Nothing is drawn yet." },
+  { title: "Render the scene", body: "Blender path-traces it under real studio and workshop lighting, on realistic floors." },
+  { title: "Prove it is visible", body: "Each object is re-rendered as a flat-colour mask. Under 70% visible, cut off or too small: the task is rebuilt." },
+  { title: "Compute the answer", body: "Distance, projection, rotation or centre of mass, from the numbers alone. No labeller, no judge model." },
+  { title: "Score the model", body: "Image and question go to the model; a strict parser reads its letter and scores it against the computed truth." },
 ];
 
-export const why = [
-  { title: "Robots need depth", body: "Misjudge which object is closer and a robot arm grabs the wrong thing, or hits something it never saw." },
-  { title: "Grippers need pose", body: "If a model cannot read orientation, a robot cannot grip. 6-DoF pose is the core of robotic manipulation." },
-  { title: "Inspection needs physics", body: "Spotting an unstable stack before it topples is a safety job, not a quiz question." },
-  { title: "Trust needs ground truth", body: "Answers come from our own scene data, so the benchmark can be re-derived and audited by anyone." },
+export const taskTypes = [
+  { tier: "Tier 1 · Pose", title: "Orientation", image: "/bench/images/s9.jpg", question: "The open side of this container faces which way?", rule: "Read from the container's yaw angle." },
+  { tier: "Tier 2 · Relative", title: "Depth", image: "/bench/images/s43.jpg", question: "Which object is closest to the camera?", rule: "Smallest camera-to-object distance, by a 0.8 m margin." },
+  { tier: "Tier 2 · Relative", title: "Position", image: "/bench/images/s20.jpg", question: "Which object appears furthest to the left?", rule: "Smallest x after perspective projection, by 90 px." },
+  { tier: "Tier 3 · Physics", title: "Stability", image: "/bench/images/s4.jpg", question: "Will this stack stay standing, or fall?", rule: "Centre of mass over each supporting face, by 12 cm." },
 ];
 
-export const steps = [
-  {
-    title: "Generate a scene",
-    body: "Place 2–5 primitive 3D objects at positions and rotations we choose and record. Every number is known before a pixel is drawn."
-  },
-  {
-    title: "Ask the AI a question",
-    body: "Render the scene, run the visibility check so only answerable questions survive, then send image + templated question to GPT-4V, Gemini or Claude."
-  },
-  {
-    title: "Verify the answer",
-    body: "Answers are compared to ground truth computed from our own scene data: no human grader and no AI judge. Every sample can be re-derived from scratch."
-  },
-];
-
-export const tiers = [
-  { n: "01", tag: "Tier 1 · Pose", title: "Read one object's orientation", body: "Which way is this box's open side facing? Reads a single object's position and direction.", example: "Which way is the open side facing?" },
-  { n: "02", tag: "Tier 2 · Relative", title: "Compare objects in space", body: "Is the cylinder in front of or behind the box? Compares two or more objects.", example: "Which object is closer to the camera?" },
-  { n: "03", tag: "Tier 3 · Plausibility", title: "Judge physical stability", body: "Will this stack stand or fall? Decided by a centre-of-mass over base-of-support rule we can show in one line of code.", example: "Is this stack stable?" },
-  { n: "04", tag: "Modifier · Clutter", title: "More objects, more confusion", body: "Scenes scale from 2 to 5 objects, so difficulty comes from real visual complexity.", example: "Same question, denser scene." },
-  { n: "05", tag: "Modifier · Occlusion", title: "Things block each other", body: "Objects partly hide one another. The visibility check keeps only questions the image can answer.", example: "Box in front, cone behind." },
-  { n: "06", tag: "Modifier · Lighting", title: "Light and shadow change", body: "Lighting varies per scene, so models cannot rely on one easy rendering style.", example: "Same scene, different light." },
-];
-
-export const roadmap = [
-  { date: "Phase 1", title: "Scene generation + rendering", body: "2–3 objects, end-to-end pipeline on the simplest case." },
-  { date: "Phase 2", title: "Ground truth + Tier 1/2 questions", body: "Distance, direction and pose extracted from placed objects; templates tested." },
-  { date: "Phase 3", title: "Visibility check", body: "Occlusion, frame-edge and size checks gate every question." },
-  { date: "Phase 4", title: "Model evaluation", body: "Run GPT-4V, Gemini and Claude across the generated set." },
-  { date: "Phase 5", title: "Tier 3 stability", body: "Centre-of-mass rule added once Tiers 1 and 2 are submission-ready." },
-  { date: "Phase 6", title: "Results", body: "Accuracy by tier and difficulty, plus the scenes every model got wrong." },
-  { date: "Dec 6", title: "Submission", body: "Repo, sample outputs, validation evidence, write-up and demo." },
-];
-
-export const deliverables = [
-  { title: "Runnable source code", body: "Scene generator, question generator and model-evaluation script with a clear README." },
-  { title: "Sample outputs", body: "Generated images with their question, answer and ground-truth JSON." },
-  { title: "Validation evidence", body: "A script that re-derives a sample of answers from scratch, plus the stability rule explained." },
-  { title: "Demo and write-up", body: "Short deck and walkthrough covering the pipeline and findings." },
-];
-
-// Sample questions. Replace "status" with measured accuracy once the benchmark run is done.
-export const samples = [
-  { tier: "Tier 1 · Pose", q: "Which way is the open side of this box facing?", truth: "Computed from the box's recorded rotation", status: "Pending run" },
-  { tier: "Tier 2 · Relative", q: "Which object is closer to the camera, the red box or the blue cylinder?", truth: "Computed from camera-space depth of each object", status: "Pending run" },
-  { tier: "Tier 2 · Relative", q: "Is the cylinder in front of or behind the box?", truth: "Computed from recorded positions", status: "Pending run" },
-  { tier: "Tier 3 · Plausibility", q: "Is this stack of boxes stable, or will it fall?", truth: "Centre of mass over base of support", status: "Pending run" },
-];
+export const variation = ["1–5 objects", "Partial occlusion", "Normal and dim light", "6 real-world HDRI environments", "5 floor materials", "Matte, plastic and metal", "2–4 box stacks", "Balanced outcomes"];
 
 export const faqs = [
-  { q: "Why synthetic scenes instead of real photos?", a: "Because we place every object, we know the exact answer before rendering. Real photos need a human or a model to label them, which brings back the very uncertainty we want to remove." },
-  { q: "How are answers verified?", a: "From the numbers we generated: object position, rotation and distance. Never from a person looking at the image and never from another AI. A script re-derives a sample from scratch as proof." },
-  { q: "What stops unanswerable questions?", a: "A visibility check after rendering. If the object we want to ask about is occluded, cropped by the frame or too small, we ask about something else or discard the scene." },
-  { q: "How is stability decided?", a: "A simple rule: the stack is stable if its centre of mass lies over the base of support. It is one line of code and fully reproducible, with no physics engine to debug." },
-  { q: "Which models are tested?", a: "GPT-4V, Gemini and Claude vision models, through the hackathon-provided AI credits." },
-  { q: "Is the code open?", a: "Yes. The runnable source is on GitHub, with sample outputs and the validation script." },
+  { q: "Why synthetic scenes instead of photos?", a: "Because we place every object, the correct answer is arithmetic on numbers we already hold. Real photos need a person or a model to label them, which brings back the uncertainty we want to remove. Path-traced lighting keeps the images realistic." },
+  { q: "How do you know every answer is right?", a: "Separate code that shares no logic with the generator re-derives all 60 answers from the raw scene numbers, every task rebuilds identically from its seed, and 80 automated tests run on every push." },
+  { q: "What stops unanswerable questions?", a: "A visibility check after rendering. Each object must be at least 70% unoccluded, fully in frame and at least 2,500 pixels. Otherwise the scene is discarded and rebuilt from a new seed." },
+  { q: "How is stability decided?", a: "For every box, the centre of mass of everything above it must sit over that box's top face. Tasks are kept only when the margin is at least 12 cm, so no case is borderline." },
+  { q: "Which models were tested?", a: "Gemini 3.1 Flash-Lite, Gemini 3.5 Flash-Lite and the open-weights Gemma 4 26B. Claude and GPT-4o are supported by the code but were not run, and we report only what we actually ran." },
+  { q: "Can I generate more tasks?", a: "Yes. The generator produces any number of tasks from a seed. One command renders, validates and writes them, and the app can build new scenes on demand." },
 ];
 
 export const appFeatures = [
-  { id: "play", title: "Play", body: "Answer the same questions the models are asked, then see the ground truth and how it was computed." },
-  { id: "generate", title: "Generate", body: "Build a fresh scene on demand, with a visibility check, and ask Claude, GPT-4o or Gemini about it." },
-  { id: "tasks", title: "Tasks", body: "Browse the full dataset: images, questions, ground truth and visibility reports." },
-  { id: "validate", title: "Validate", body: "Re-derive every answer from raw scene numbers with independent code, and rebuild tasks from their seeds." },
-  { id: "results", title: "Results", body: "Model accuracy by tier, task type and lighting, plus the scenes every model got wrong." },
+  { id: "play", title: "Play", body: "Answer the same questions the models get, then see the truth and how it was computed." },
+  { id: "generate", title: "Generate", body: "Build a fresh, visibility-checked scene on demand and ask a model about it." },
+  { id: "tasks", title: "Tasks", body: "Browse the dataset in photoreal or interactive 3D, with the truth drawn on the scene." },
+  { id: "validate", title: "Validate", body: "Re-derive every answer with independent code and rebuild tasks from their seeds." },
+  { id: "results", title: "Results", body: "Accuracy by tier, task type and lighting, and the scenes every model got wrong." },
 ];

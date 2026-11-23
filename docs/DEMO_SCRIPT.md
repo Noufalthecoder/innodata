@@ -4,7 +4,7 @@ Record the screen at 1080p with `npm run dev` running. Speak slowly; each block 
 
 ## 1. The problem (0:00–0:25), landing page hero
 
-> "Robots and inspection cameras need to understand space: which object is closer, how it is turned, and whether a stack will fall. A wrong answer means a collision or a toppled pallet. SpatialGrid tests whether today's vision models really have these skills."
+> "Robots and inspection cameras need to know which object is closer, how it is turned, and whether a stack will fall. A wrong answer means a collision or a toppled pallet. SpatialGrid tests whether today's vision models really have these skills."
 
 Scroll slowly through *Why it matters*.
 

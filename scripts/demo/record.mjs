@@ -136,7 +136,7 @@ await sleep(300);
 
 // ---------- the film ----------
 await segment("s0", async (d) => {
-  await card("SpatialGrid", "A spatial &amp; pose reasoning benchmark for physical AI");
+  await card("SpatialGrid", "A perception benchmark for physical AI");
   await sleep(d * 1000 - 300);
   await uncard();
 });
@@ -145,10 +145,10 @@ await segment("s1", async (d) => {
   await sleep(600);
   await focus(page.locator("h1").first(), { dy: 10 });
   await sleep(d * 1000 * 0.35);
-  const why = await page.locator("#why").evaluate((el) => el.getBoundingClientRect().top + scrollY - 40);
+  const why = await page.locator("#problem").evaluate((el) => el.getBoundingClientRect().top + scrollY - 40);
   await smoothScrollTo(why, 2600);
   await sleep(500);
-  await focus(page.locator("#why h3").first(), { dx: -40 });
+  await focus(page.locator("#problem h3").first(), { dx: -40 });
 });
 
 await segment("s2", async () => {

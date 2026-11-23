@@ -22,14 +22,14 @@ function findings() {
 
 export function buildSegments() {
   return [
-    { id: "s0", text: "SpatialGrid. A benchmark that tests whether AI models truly understand space." },
+    { id: "s0", text: "SpatialGrid. Before a robot reaches, it has to see. This benchmark tests whether AI vision models can be trusted to act in the physical world." },
     { id: "s1", text: "Robots and inspection cameras must know which object is closer, how it is turned, and whether a stack will fall. When a vision model gets this wrong, a robot collides, or a pallet topples. SpatialGrid measures exactly these skills." },
     { id: "s2", text: "Every scene is generated from numbers we choose: object positions, rotations, and the camera. Blender renders it photo-realistically, under real studio and workshop lighting. Because we placed every object, we already know the answer." },
     { id: "s3", text: "Here is the same scene in 3D. The ground truth is drawn from those same numbers: the distance from the camera to every object. No person, and no AI, decides what is correct." },
     { id: "s4", text: "Every question must be answerable from the image. We count each object's visible pixels, against the object on its own. Hidden, cut-off, or tiny objects are rejected, and the task is rebuilt." },
     { id: "s5", text: "Four kinds of reasoning, across three tiers: depth, position, orientation, and physical stability. Object count, occlusion, lighting, and materials all vary." },
     { id: "s6", text: "Anyone can answer the same questions the models get. Or generate a brand-new scene on demand, with its answer computed instantly." },
-    { id: "s7", text: "Validation is independent of every model. Separate code re-derives all sixty answers, every task rebuilds identically from its seed, and every task passes the visibility check. Seventy-seven automated tests run on every push." },
+    { id: "s7", text: "Validation is independent of every model. Separate code re-derives all sixty answers, every task rebuilds identically from its seed, and every task passes the visibility check. Eighty automated tests run on every push." },
     { id: "s8", text: findings() },
     { id: "s9", text: "SpatialGrid. A reusable generator, verified answers, and honest results. The code is open on GitHub." },
   ];

@@ -115,7 +115,6 @@ public/bench/     generated tasks, images, results
 ## Credits and licences
 
 - HDRI lighting and floor materials: [Poly Haven](https://polyhaven.com), CC0.
-- Space photography on the landing page: NASA (public domain).
 - Renderer: [Blender](https://www.blender.org) (GPL); the rendering script only drives it.
 
 ## Limitations

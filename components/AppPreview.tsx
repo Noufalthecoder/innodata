@@ -5,7 +5,7 @@ import { Reveal, SectionHead } from "./Section";
 export default function AppPreview() {
   return (
     <section id="app" className="mx-auto max-w-6xl px-6 py-28">
-      <SectionHead eyebrow="The app" title="Open SpatialGrid and use it" sub="Everything the benchmark does is available in the app, running the same code as the command-line pipeline." />
+      <SectionHead eyebrow="The app" title="Everything in the benchmark, in one app" sub="The app runs the same code as the command-line pipeline. Explore the scenes in 3D, try the questions yourself, and re-run validation in the browser." />
       <div className="grid gap-px overflow-hidden rounded-lg border border-white/10 bg-white/10 sm:grid-cols-2 lg:grid-cols-5">
         {appFeatures.map((f, i) => (
           <Reveal key={f.id} delay={i * 0.04} className="bg-ink">
