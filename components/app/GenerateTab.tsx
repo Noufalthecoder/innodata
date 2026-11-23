@@ -57,7 +57,7 @@ export default function GenerateTab() {
       const res = await fetch("/api/bench/ask", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ provider: p.id, kind: task.kind, seed: task.seed, objects: task.difficulty.objects, lighting: task.difficulty.lighting }),
+        body: JSON.stringify({ model: p.id, kind: task.kind, seed: task.seed, objects: task.difficulty.objects, lighting: task.difficulty.lighting }),
       });
       const j = await res.json();
       if (!res.ok) throw new Error(j.error);
@@ -117,7 +117,7 @@ export default function GenerateTab() {
               <div className="mt-3 flex flex-wrap gap-2">
                 {providers.map((p) => (
                   <button key={p.id} onClick={() => ask(p)} disabled={!p.configured || asks[p.id]?.loading} title={p.configured ? p.model : "No API key configured on the server"} className="rounded-md border border-white/20 px-4 py-2 text-sm text-white transition-colors hover:border-white/60 disabled:cursor-not-allowed disabled:opacity-40">
-                    {asks[p.id]?.loading ? "Asking…" : p.configured ? `Ask ${p.label}` : `${p.label} (no key)`}
+                    {asks[p.id]?.loading ? "Asking…" : p.configured ? `Ask ${p.label}` : `${p.label} (add API key)`}
                   </button>
                 ))}
               </div>

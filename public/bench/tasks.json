@@ -6,6 +6,13 @@
     "tier": 2,
     "width": 960,
     "height": 720,
+    "render": {
+      "hdri": "aircraft_workshop_01",
+      "floor": "brown_floor_tiles",
+      "material": "metal",
+      "hdriRotation": 309,
+      "exposure": 0.85
+    },
     "difficulty": {
       "objects": 2,
       "lighting": "normal"
@@ -69,14 +76,14 @@
         "object": "red cylinder",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 16452,
+        "pixels": 16530,
         "ok": true
       },
       {
         "object": "teal cone",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 19556,
+        "pixels": 20385,
         "ok": true
       }
     ],
@@ -89,6 +96,13 @@
     "tier": 2,
     "width": 960,
     "height": 720,
+    "render": {
+      "hdri": "blocky_photo_studio",
+      "floor": "plain",
+      "material": "matte",
+      "hdriRotation": 33,
+      "exposure": 1
+    },
     "difficulty": {
       "objects": 2,
       "lighting": "normal"
@@ -152,14 +166,14 @@
         "object": "violet cone",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 13658,
+        "pixels": 13918,
         "ok": true
       },
       {
         "object": "amber cone",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 10830,
+        "pixels": 11073,
         "ok": true
       }
     ],
@@ -172,6 +186,13 @@
     "tier": 1,
     "width": 960,
     "height": 720,
+    "render": {
+      "hdri": "autoshop_01",
+      "floor": "brown_floor_tiles",
+      "material": "plastic",
+      "hdriRotation": 59,
+      "exposure": 1.03
+    },
     "difficulty": {
       "objects": 1,
       "lighting": "normal"
@@ -217,7 +238,7 @@
         "color": "amber",
         "center": [
           0,
-          0.55,
+          0.6,
           -0.95
         ],
         "size": [
@@ -238,13 +259,13 @@
         "color": "amber",
         "center": [
           -0.95,
-          0.55,
-          0
+          0.6,
+          0.05
         ],
         "size": [
           0.1,
           1,
-          2
+          1.9
         ],
         "rotY": 1.8422359236658106,
         "pivot": [
@@ -259,13 +280,13 @@
         "color": "amber",
         "center": [
           0.95,
-          0.55,
-          0
+          0.6,
+          0.05
         ],
         "size": [
           0.1,
           1,
-          2
+          1.9
         ],
         "rotY": 1.8422359236658106,
         "pivot": [
@@ -289,7 +310,7 @@
         "object": "amber box",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 188849,
+        "pixels": 192034,
         "ok": true
       }
     ],
@@ -302,6 +323,16 @@
     "tier": 3,
     "width": 960,
     "height": 720,
+    "render": {
+      "hdri": "brown_photostudio_02",
+      "floor": "anti_slip_concrete",
+      "material": "matte",
+      "hdriRotation": 276,
+      "exposure": 0.91
+    },
+    "gen": {
+      "stable": true
+    },
     "difficulty": {
       "objects": 2,
       "lighting": "normal"
@@ -341,7 +372,7 @@
         "shape": "box",
         "color": "violet",
         "center": [
-          0.07323119346983731,
+          -0.23539393953979015,
           1.5,
           0
         ],
@@ -359,20 +390,20 @@
       "It falls"
     ],
     "answer": 0,
-    "explanation": "Rule: stable only if the centre of mass of everything above each box lies over that box's top face. above level 1: centre of mass x = 0.07 m vs support -0.75 to 0.75 m. All checks pass.",
+    "explanation": "Rule: stable only if the centre of mass of everything above each box lies over that box's top face. above level 1: centre of mass x = -0.24 m vs support -0.75 to 0.75 m. All checks pass.",
     "visibility": [
       {
         "object": "amber box",
-        "visiblePct": 86,
+        "visiblePct": 90,
         "inFrame": true,
-        "pixels": 40679,
+        "pixels": 40203,
         "ok": true
       },
       {
         "object": "violet box",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 38513,
+        "pixels": 37461,
         "ok": true
       }
     ],
@@ -385,6 +416,13 @@
     "tier": 2,
     "width": 960,
     "height": 720,
+    "render": {
+      "hdri": "blue_photo_studio",
+      "floor": "brushed_concrete",
+      "material": "metal",
+      "hdriRotation": 90,
+      "exposure": 1.27
+    },
     "difficulty": {
       "objects": 2,
       "lighting": "dim"
@@ -446,16 +484,16 @@
     "visibility": [
       {
         "object": "grey box",
-        "visiblePct": 74,
+        "visiblePct": 75,
         "inFrame": true,
-        "pixels": 28243,
+        "pixels": 27829,
         "ok": true
       },
       {
         "object": "amber cylinder",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 28128,
+        "pixels": 28153,
         "ok": true
       }
     ],
@@ -468,6 +506,16 @@
     "tier": 3,
     "width": 960,
     "height": 720,
+    "render": {
+      "hdri": "brown_photostudio_02",
+      "floor": "brown_floor_tiles",
+      "material": "matte",
+      "hdriRotation": 136,
+      "exposure": 1.22
+    },
+    "gen": {
+      "stable": false
+    },
     "difficulty": {
       "objects": 2,
       "lighting": "normal"
@@ -507,7 +555,7 @@
         "shape": "box",
         "color": "violet",
         "center": [
-          0.048245888319797814,
+          1.0585407039849088,
           1.5,
           0
         ],
@@ -524,21 +572,21 @@
       "It stays standing",
       "It falls"
     ],
-    "answer": 0,
-    "explanation": "Rule: stable only if the centre of mass of everything above each box lies over that box's top face. above level 1: centre of mass x = 0.05 m vs support -0.75 to 0.75 m. All checks pass.",
+    "answer": 1,
+    "explanation": "Rule: stable only if the centre of mass of everything above each box lies over that box's top face. above level 1: centre of mass x = 1.06 m vs support -0.75 to 0.75 m. A check fails.",
     "visibility": [
       {
         "object": "amber box",
-        "visiblePct": 86,
+        "visiblePct": 90,
         "inFrame": true,
-        "pixels": 40679,
+        "pixels": 40203,
         "ok": true
       },
       {
         "object": "violet box",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 38444,
+        "pixels": 41033,
         "ok": true
       }
     ],
@@ -551,6 +599,13 @@
     "tier": 2,
     "width": 960,
     "height": 720,
+    "render": {
+      "hdri": "brown_photostudio_02",
+      "floor": "concrete_floor_02",
+      "material": "plastic",
+      "hdriRotation": 226,
+      "exposure": 0.86
+    },
     "difficulty": {
       "objects": 3,
       "lighting": "normal"
@@ -629,23 +684,23 @@
     "visibility": [
       {
         "object": "red sphere",
-        "visiblePct": 91,
+        "visiblePct": 90,
         "inFrame": true,
-        "pixels": 10918,
+        "pixels": 10967,
         "ok": true
       },
       {
         "object": "amber cone",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 23103,
+        "pixels": 24785,
         "ok": true
       },
       {
         "object": "grey cone",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 16305,
+        "pixels": 17002,
         "ok": true
       }
     ],
@@ -658,6 +713,13 @@
     "tier": 2,
     "width": 960,
     "height": 720,
+    "render": {
+      "hdri": "blue_photo_studio",
+      "floor": "concrete_floor_02",
+      "material": "matte",
+      "hdriRotation": 60,
+      "exposure": 0.91
+    },
     "difficulty": {
       "objects": 3,
       "lighting": "normal"
@@ -738,21 +800,21 @@
         "object": "teal cylinder",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 19971,
+        "pixels": 19988,
         "ok": true
       },
       {
         "object": "violet sphere",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 10002,
+        "pixels": 10084,
         "ok": true
       },
       {
         "object": "amber cone",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 19643,
+        "pixels": 20658,
         "ok": true
       }
     ],
@@ -765,6 +827,13 @@
     "tier": 1,
     "width": 960,
     "height": 720,
+    "render": {
+      "hdri": "carpentry_shop_02",
+      "floor": "concrete_floor_02",
+      "material": "matte",
+      "hdriRotation": 42,
+      "exposure": 1.17
+    },
     "difficulty": {
       "objects": 1,
       "lighting": "normal"
@@ -810,7 +879,7 @@
         "color": "amber",
         "center": [
           0,
-          0.55,
+          0.6,
           -0.95
         ],
         "size": [
@@ -831,13 +900,13 @@
         "color": "amber",
         "center": [
           -0.95,
-          0.55,
-          0
+          0.6,
+          0.05
         ],
         "size": [
           0.1,
           1,
-          2
+          1.9
         ],
         "rotY": 1.3610075529341141,
         "pivot": [
@@ -852,13 +921,13 @@
         "color": "amber",
         "center": [
           0.95,
-          0.55,
-          0
+          0.6,
+          0.05
         ],
         "size": [
           0.1,
           1,
-          2
+          1.9
         ],
         "rotY": 1.3610075529341141,
         "pivot": [
@@ -882,7 +951,7 @@
         "object": "amber box",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 198548,
+        "pixels": 201465,
         "ok": true
       }
     ],
@@ -895,6 +964,16 @@
     "tier": 3,
     "width": 960,
     "height": 720,
+    "render": {
+      "hdri": "brown_photostudio_02",
+      "floor": "plain",
+      "material": "matte",
+      "hdriRotation": 119,
+      "exposure": 1
+    },
+    "gen": {
+      "stable": true
+    },
     "difficulty": {
       "objects": 3,
       "lighting": "dim"
@@ -934,7 +1013,7 @@
         "shape": "box",
         "color": "violet",
         "center": [
-          -0.13143559568561614,
+          0.1654800494434312,
           1.5,
           0
         ],
@@ -950,7 +1029,7 @@
         "shape": "box",
         "color": "teal",
         "center": [
-          -0.0664952457882464,
+          -0.0316581807564944,
           2.5,
           0
         ],
@@ -968,27 +1047,27 @@
       "It falls"
     ],
     "answer": 0,
-    "explanation": "Rule: stable only if the centre of mass of everything above each box lies over that box's top face. above level 2: centre of mass x = -0.07 m vs support -0.88 to 0.62 m; above level 1: centre of mass x = -0.10 m vs support -0.75 to 0.75 m. All checks pass.",
+    "explanation": "Rule: stable only if the centre of mass of everything above each box lies over that box's top face. above level 2: centre of mass x = -0.03 m vs support -0.58 to 0.92 m; above level 1: centre of mass x = 0.07 m vs support -0.75 to 0.75 m. All checks pass.",
     "visibility": [
       {
         "object": "amber box",
-        "visiblePct": 87,
+        "visiblePct": 85,
         "inFrame": true,
-        "pixels": 31721,
+        "pixels": 31375,
         "ok": true
       },
       {
         "object": "violet box",
-        "visiblePct": 93,
+        "visiblePct": 95,
         "inFrame": true,
-        "pixels": 29619,
+        "pixels": 29983,
         "ok": true
       },
       {
         "object": "teal box",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 28824,
+        "pixels": 28820,
         "ok": true
       }
     ],
@@ -1001,6 +1080,13 @@
     "tier": 2,
     "width": 960,
     "height": 720,
+    "render": {
+      "hdri": "carpentry_shop_02",
+      "floor": "anti_slip_concrete",
+      "material": "plastic",
+      "hdriRotation": 100,
+      "exposure": 0.81
+    },
     "difficulty": {
       "objects": 3,
       "lighting": "normal"
@@ -1081,21 +1167,21 @@
         "object": "grey cone",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 18856,
+        "pixels": 20321,
         "ok": true
       },
       {
         "object": "amber cone",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 13902,
+        "pixels": 14471,
         "ok": true
       },
       {
         "object": "blue cylinder",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 19520,
+        "pixels": 19562,
         "ok": true
       }
     ],
@@ -1108,6 +1194,16 @@
     "tier": 3,
     "width": 960,
     "height": 720,
+    "render": {
+      "hdri": "autoshop_01",
+      "floor": "plain",
+      "material": "plastic",
+      "hdriRotation": 3,
+      "exposure": 1.06
+    },
+    "gen": {
+      "stable": false
+    },
     "difficulty": {
       "objects": 3,
       "lighting": "normal"
@@ -1147,7 +1243,7 @@
         "shape": "box",
         "color": "violet",
         "center": [
-          0.03227776801213622,
+          1.0942066321265884,
           1.5,
           0
         ],
@@ -1163,7 +1259,7 @@
         "shape": "box",
         "color": "teal",
         "center": [
-          -0.007716513937339187,
+          1.5548301203758457,
           2.5,
           0
         ],
@@ -1180,28 +1276,28 @@
       "It stays standing",
       "It falls"
     ],
-    "answer": 0,
-    "explanation": "Rule: stable only if the centre of mass of everything above each box lies over that box's top face. above level 2: centre of mass x = -0.01 m vs support -0.72 to 0.78 m; above level 1: centre of mass x = 0.01 m vs support -0.75 to 0.75 m. All checks pass.",
+    "answer": 1,
+    "explanation": "Rule: stable only if the centre of mass of everything above each box lies over that box's top face. above level 2: centre of mass x = 1.55 m vs support 0.34 to 1.84 m; above level 1: centre of mass x = 1.32 m vs support -0.75 to 0.75 m. A check fails.",
     "visibility": [
       {
         "object": "amber box",
-        "visiblePct": 85,
+        "visiblePct": 89,
         "inFrame": true,
-        "pixels": 31721,
+        "pixels": 31375,
         "ok": true
       },
       {
         "object": "violet box",
-        "visiblePct": 94,
+        "visiblePct": 93,
         "inFrame": true,
-        "pixels": 29915,
+        "pixels": 31718,
         "ok": true
       },
       {
         "object": "teal box",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 28923,
+        "pixels": 31588,
         "ok": true
       }
     ],
@@ -1214,6 +1310,13 @@
     "tier": 2,
     "width": 960,
     "height": 720,
+    "render": {
+      "hdri": "brown_photostudio_02",
+      "floor": "plain",
+      "material": "metal",
+      "hdriRotation": 67,
+      "exposure": 1
+    },
     "difficulty": {
       "objects": 4,
       "lighting": "normal"
@@ -1311,28 +1414,28 @@
         "object": "grey cylinder",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 25538,
+        "pixels": 25511,
         "ok": true
       },
       {
         "object": "violet box",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 50786,
+        "pixels": 50076,
         "ok": true
       },
       {
         "object": "red box",
-        "visiblePct": 95,
+        "visiblePct": 96,
         "inFrame": true,
-        "pixels": 39965,
+        "pixels": 39759,
         "ok": true
       },
       {
         "object": "blue cylinder",
-        "visiblePct": 90,
+        "visiblePct": 91,
         "inFrame": true,
-        "pixels": 18614,
+        "pixels": 18613,
         "ok": true
       }
     ],
@@ -1345,6 +1448,13 @@
     "tier": 2,
     "width": 960,
     "height": 720,
+    "render": {
+      "hdri": "blue_photo_studio",
+      "floor": "brushed_concrete",
+      "material": "plastic",
+      "hdriRotation": 41,
+      "exposure": 0.94
+    },
     "difficulty": {
       "objects": 4,
       "lighting": "normal"
@@ -1442,28 +1552,28 @@
         "object": "red cylinder",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 48674,
+        "pixels": 48423,
         "ok": true
       },
       {
         "object": "grey sphere",
-        "visiblePct": 78,
+        "visiblePct": 80,
         "inFrame": true,
-        "pixels": 12260,
+        "pixels": 12362,
         "ok": true
       },
       {
         "object": "violet sphere",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 6706,
+        "pixels": 6733,
         "ok": true
       },
       {
         "object": "blue box",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 20048,
+        "pixels": 19777,
         "ok": true
       }
     ],
@@ -1476,6 +1586,13 @@
     "tier": 1,
     "width": 960,
     "height": 720,
+    "render": {
+      "hdri": "autoshop_01",
+      "floor": "anti_slip_concrete",
+      "material": "plastic",
+      "hdriRotation": 68,
+      "exposure": 1.03
+    },
     "difficulty": {
       "objects": 1,
       "lighting": "dim"
@@ -1521,7 +1638,7 @@
         "color": "amber",
         "center": [
           0,
-          0.55,
+          0.6,
           -0.95
         ],
         "size": [
@@ -1542,13 +1659,13 @@
         "color": "amber",
         "center": [
           -0.95,
-          0.55,
-          0
+          0.6,
+          0.05
         ],
         "size": [
           0.1,
           1,
-          2
+          1.9
         ],
         "rotY": -0.17117606657557188,
         "pivot": [
@@ -1563,13 +1680,13 @@
         "color": "amber",
         "center": [
           0.95,
-          0.55,
-          0
+          0.6,
+          0.05
         ],
         "size": [
           0.1,
           1,
-          2
+          1.9
         ],
         "rotY": -0.17117606657557188,
         "pivot": [
@@ -1593,7 +1710,7 @@
         "object": "amber box",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 196947,
+        "pixels": 200087,
         "ok": true
       }
     ],
@@ -1606,6 +1723,16 @@
     "tier": 3,
     "width": 960,
     "height": 720,
+    "render": {
+      "hdri": "brown_photostudio_02",
+      "floor": "concrete_floor_02",
+      "material": "matte",
+      "hdriRotation": 259,
+      "exposure": 1.23
+    },
+    "gen": {
+      "stable": true
+    },
     "difficulty": {
       "objects": 4,
       "lighting": "normal"
@@ -1645,7 +1772,7 @@
         "shape": "box",
         "color": "violet",
         "center": [
-          0.021735871443524957,
+          0.17024734313599765,
           1.5,
           0
         ],
@@ -1661,7 +1788,7 @@
         "shape": "box",
         "color": "teal",
         "center": [
-          -0.07810011820401996,
+          0.2139607007848099,
           2.5,
           0
         ],
@@ -1677,7 +1804,7 @@
         "shape": "box",
         "color": "red",
         "center": [
-          -0.17024418711662292,
+          0.030163745395839214,
           3.5,
           0
         ],
@@ -1695,34 +1822,34 @@
       "It falls"
     ],
     "answer": 0,
-    "explanation": "Rule: stable only if the centre of mass of everything above each box lies over that box's top face. above level 3: centre of mass x = -0.17 m vs support -0.83 to 0.67 m; above level 2: centre of mass x = -0.12 m vs support -0.73 to 0.77 m; above level 1: centre of mass x = -0.08 m vs support -0.75 to 0.75 m. All checks pass.",
+    "explanation": "Rule: stable only if the centre of mass of everything above each box lies over that box's top face. above level 3: centre of mass x = 0.03 m vs support -0.54 to 0.96 m; above level 2: centre of mass x = 0.12 m vs support -0.58 to 0.92 m; above level 1: centre of mass x = 0.14 m vs support -0.75 to 0.75 m. All checks pass.",
     "visibility": [
       {
         "object": "amber box",
         "visiblePct": 84,
         "inFrame": true,
-        "pixels": 25481,
+        "pixels": 25259,
         "ok": true
       },
       {
         "object": "violet box",
         "visiblePct": 92,
         "inFrame": true,
-        "pixels": 24075,
+        "pixels": 24090,
         "ok": true
       },
       {
         "object": "teal box",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 22380,
+        "pixels": 22807,
         "ok": true
       },
       {
         "object": "red box",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 22880,
+        "pixels": 22971,
         "ok": true
       }
     ],
@@ -1735,6 +1862,13 @@
     "tier": 2,
     "width": 960,
     "height": 720,
+    "render": {
+      "hdri": "autoshop_01",
+      "floor": "concrete_floor_02",
+      "material": "plastic",
+      "hdriRotation": 127,
+      "exposure": 1.22
+    },
     "difficulty": {
       "objects": 4,
       "lighting": "normal"
@@ -1832,28 +1966,28 @@
         "object": "violet cone",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 13047,
+        "pixels": 13547,
         "ok": true
       },
       {
         "object": "grey sphere",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 12002,
+        "pixels": 12095,
         "ok": true
       },
       {
         "object": "amber cylinder",
-        "visiblePct": 91,
+        "visiblePct": 92,
         "inFrame": true,
-        "pixels": 17481,
+        "pixels": 17506,
         "ok": true
       },
       {
         "object": "red cylinder",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 62550,
+        "pixels": 62309,
         "ok": true
       }
     ],
@@ -1866,6 +2000,16 @@
     "tier": 3,
     "width": 960,
     "height": 720,
+    "render": {
+      "hdri": "brown_photostudio_02",
+      "floor": "brown_floor_tiles",
+      "material": "matte",
+      "hdriRotation": 260,
+      "exposure": 1.27
+    },
+    "gen": {
+      "stable": false
+    },
     "difficulty": {
       "objects": 4,
       "lighting": "normal"
@@ -1905,7 +2049,7 @@
         "shape": "box",
         "color": "violet",
         "center": [
-          -0.19425407145172358,
+          1.2485640303813852,
           1.5,
           0
         ],
@@ -1921,7 +2065,7 @@
         "shape": "box",
         "color": "teal",
         "center": [
-          -0.3218515709741041,
+          1.9300920919631608,
           2.5,
           0
         ],
@@ -1937,7 +2081,7 @@
         "shape": "box",
         "color": "red",
         "center": [
-          -0.4598583939950913,
+          2.3224926413153297,
           3.5,
           0
         ],
@@ -1954,35 +2098,35 @@
       "It stays standing",
       "It falls"
     ],
-    "answer": 0,
-    "explanation": "Rule: stable only if the centre of mass of everything above each box lies over that box's top face. above level 3: centre of mass x = -0.46 m vs support -1.07 to 0.43 m; above level 2: centre of mass x = -0.39 m vs support -0.94 to 0.56 m; above level 1: centre of mass x = -0.33 m vs support -0.75 to 0.75 m. All checks pass.",
+    "answer": 1,
+    "explanation": "Rule: stable only if the centre of mass of everything above each box lies over that box's top face. above level 3: centre of mass x = 2.32 m vs support 1.18 to 2.68 m; above level 2: centre of mass x = 2.13 m vs support 0.50 to 2.00 m; above level 1: centre of mass x = 1.83 m vs support -0.75 to 0.75 m. A check fails.",
     "visibility": [
       {
         "object": "amber box",
-        "visiblePct": 86,
+        "visiblePct": 90,
         "inFrame": true,
-        "pixels": 25481,
+        "pixels": 25259,
         "ok": true
       },
       {
         "object": "violet box",
         "visiblePct": 92,
         "inFrame": true,
-        "pixels": 23808,
+        "pixels": 25527,
         "ok": true
       },
       {
         "object": "teal box",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 22133,
+        "pixels": 24806,
         "ok": true
       },
       {
         "object": "red box",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 22502,
+        "pixels": 25826,
         "ok": true
       }
     ],
@@ -1995,6 +2139,13 @@
     "tier": 2,
     "width": 960,
     "height": 720,
+    "render": {
+      "hdri": "blocky_photo_studio",
+      "floor": "anti_slip_concrete",
+      "material": "metal",
+      "hdriRotation": 225,
+      "exposure": 1.21
+    },
     "difficulty": {
       "objects": 5,
       "lighting": "normal"
@@ -2109,35 +2260,35 @@
         "object": "blue sphere",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 9114,
+        "pixels": 9163,
         "ok": true
       },
       {
         "object": "grey cone",
         "visiblePct": 79,
         "inFrame": true,
-        "pixels": 7696,
+        "pixels": 7866,
         "ok": true
       },
       {
         "object": "teal sphere",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 9281,
+        "pixels": 9346,
         "ok": true
       },
       {
         "object": "violet sphere",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 17748,
+        "pixels": 17912,
         "ok": true
       },
       {
         "object": "amber cylinder",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 65921,
+        "pixels": 65666,
         "ok": true
       }
     ],
@@ -2150,6 +2301,13 @@
     "tier": 2,
     "width": 960,
     "height": 720,
+    "render": {
+      "hdri": "autoshop_01",
+      "floor": "brown_floor_tiles",
+      "material": "plastic",
+      "hdriRotation": 276,
+      "exposure": 0.96
+    },
     "difficulty": {
       "objects": 5,
       "lighting": "dim"
@@ -2264,35 +2422,35 @@
         "object": "teal box",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 18356,
+        "pixels": 18131,
         "ok": true
       },
       {
         "object": "grey sphere",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 12728,
+        "pixels": 12840,
         "ok": true
       },
       {
         "object": "amber cone",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 33721,
+        "pixels": 36150,
         "ok": true
       },
       {
         "object": "blue cone",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 21698,
+        "pixels": 22678,
         "ok": true
       },
       {
         "object": "violet box",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 35802,
+        "pixels": 35068,
         "ok": true
       }
     ],
@@ -2305,6 +2463,13 @@
     "tier": 1,
     "width": 960,
     "height": 720,
+    "render": {
+      "hdri": "blue_photo_studio",
+      "floor": "concrete_floor_02",
+      "material": "plastic",
+      "hdriRotation": 188,
+      "exposure": 1.13
+    },
     "difficulty": {
       "objects": 1,
       "lighting": "normal"
@@ -2350,7 +2515,7 @@
         "color": "amber",
         "center": [
           0,
-          0.55,
+          0.6,
           -0.95
         ],
         "size": [
@@ -2371,13 +2536,13 @@
         "color": "amber",
         "center": [
           -0.95,
-          0.55,
-          0
+          0.6,
+          0.05
         ],
         "size": [
           0.1,
           1,
-          2
+          1.9
         ],
         "rotY": 3.0695120138865937,
         "pivot": [
@@ -2392,13 +2557,13 @@
         "color": "amber",
         "center": [
           0.95,
-          0.55,
-          0
+          0.6,
+          0.05
         ],
         "size": [
           0.1,
           1,
-          2
+          1.9
         ],
         "rotY": 3.0695120138865937,
         "pivot": [
@@ -2422,7 +2587,7 @@
         "object": "amber box",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 143771,
+        "pixels": 146836,
         "ok": true
       }
     ],
@@ -2435,6 +2600,16 @@
     "tier": 3,
     "width": 960,
     "height": 720,
+    "render": {
+      "hdri": "carpentry_shop_02",
+      "floor": "brushed_concrete",
+      "material": "metal",
+      "hdriRotation": 100,
+      "exposure": 1.21
+    },
+    "gen": {
+      "stable": true
+    },
     "difficulty": {
       "objects": 2,
       "lighting": "normal"
@@ -2474,7 +2649,7 @@
         "shape": "box",
         "color": "violet",
         "center": [
-          0.04291067330632359,
+          -0.03408215788658708,
           1.5,
           0
         ],
@@ -2492,20 +2667,20 @@
       "It falls"
     ],
     "answer": 0,
-    "explanation": "Rule: stable only if the centre of mass of everything above each box lies over that box's top face. above level 1: centre of mass x = 0.04 m vs support -0.75 to 0.75 m. All checks pass.",
+    "explanation": "Rule: stable only if the centre of mass of everything above each box lies over that box's top face. above level 1: centre of mass x = -0.03 m vs support -0.75 to 0.75 m. All checks pass.",
     "visibility": [
       {
         "object": "amber box",
-        "visiblePct": 86,
+        "visiblePct": 88,
         "inFrame": true,
-        "pixels": 40679,
+        "pixels": 40203,
         "ok": true
       },
       {
         "object": "violet box",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 38421,
+        "pixels": 37969,
         "ok": true
       }
     ],
@@ -2518,6 +2693,13 @@
     "tier": 2,
     "width": 960,
     "height": 720,
+    "render": {
+      "hdri": "blocky_photo_studio",
+      "floor": "plain",
+      "material": "matte",
+      "hdriRotation": 68,
+      "exposure": 1.02
+    },
     "difficulty": {
       "objects": 5,
       "lighting": "normal"
@@ -2632,35 +2814,35 @@
         "object": "blue cylinder",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 24935,
+        "pixels": 24956,
         "ok": true
       },
       {
         "object": "violet cone",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 20941,
+        "pixels": 21860,
         "ok": true
       },
       {
         "object": "grey cone",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 16202,
+        "pixels": 16857,
         "ok": true
       },
       {
         "object": "red cone",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 26401,
+        "pixels": 28613,
         "ok": true
       },
       {
         "object": "amber sphere",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 11537,
+        "pixels": 11619,
         "ok": true
       }
     ],
@@ -2673,6 +2855,16 @@
     "tier": 3,
     "width": 960,
     "height": 720,
+    "render": {
+      "hdri": "carpentry_shop_02",
+      "floor": "anti_slip_concrete",
+      "material": "metal",
+      "hdriRotation": 229,
+      "exposure": 0.8
+    },
+    "gen": {
+      "stable": false
+    },
     "difficulty": {
       "objects": 2,
       "lighting": "normal"
@@ -2712,7 +2904,7 @@
         "shape": "box",
         "color": "violet",
         "center": [
-          -0.060763227636925876,
+          1.1712360618403181,
           1.5,
           0
         ],
@@ -2729,21 +2921,21 @@
       "It stays standing",
       "It falls"
     ],
-    "answer": 0,
-    "explanation": "Rule: stable only if the centre of mass of everything above each box lies over that box's top face. above level 1: centre of mass x = -0.06 m vs support -0.75 to 0.75 m. All checks pass.",
+    "answer": 1,
+    "explanation": "Rule: stable only if the centre of mass of everything above each box lies over that box's top face. above level 1: centre of mass x = 1.17 m vs support -0.75 to 0.75 m. A check fails.",
     "visibility": [
       {
         "object": "amber box",
-        "visiblePct": 87,
+        "visiblePct": 91,
         "inFrame": true,
-        "pixels": 40679,
+        "pixels": 40203,
         "ok": true
       },
       {
         "object": "violet box",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 38128,
+        "pixels": 41346,
         "ok": true
       }
     ],
@@ -2756,6 +2948,13 @@
     "tier": 2,
     "width": 960,
     "height": 720,
+    "render": {
+      "hdri": "blocky_photo_studio",
+      "floor": "concrete_floor_02",
+      "material": "metal",
+      "hdriRotation": 329,
+      "exposure": 0.89
+    },
     "difficulty": {
       "objects": 2,
       "lighting": "dim"
@@ -2819,14 +3018,14 @@
         "object": "red sphere",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 12035,
+        "pixels": 12115,
         "ok": true
       },
       {
         "object": "violet sphere",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 26886,
+        "pixels": 27131,
         "ok": true
       }
     ],
@@ -2839,6 +3038,13 @@
     "tier": 2,
     "width": 960,
     "height": 720,
+    "render": {
+      "hdri": "brown_photostudio_02",
+      "floor": "anti_slip_concrete",
+      "material": "plastic",
+      "hdriRotation": 295,
+      "exposure": 1.18
+    },
     "difficulty": {
       "objects": 2,
       "lighting": "normal"
@@ -2902,14 +3108,14 @@
         "object": "amber box",
         "visiblePct": 99,
         "inFrame": true,
-        "pixels": 23485,
+        "pixels": 23237,
         "ok": true
       },
       {
         "object": "teal cone",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 34481,
+        "pixels": 36860,
         "ok": true
       }
     ],
@@ -2922,6 +3128,13 @@
     "tier": 1,
     "width": 960,
     "height": 720,
+    "render": {
+      "hdri": "carpentry_shop_02",
+      "floor": "anti_slip_concrete",
+      "material": "metal",
+      "hdriRotation": 97,
+      "exposure": 1.13
+    },
     "difficulty": {
       "objects": 1,
       "lighting": "normal"
@@ -2967,7 +3180,7 @@
         "color": "amber",
         "center": [
           0,
-          0.55,
+          0.6,
           -0.95
         ],
         "size": [
@@ -2988,13 +3201,13 @@
         "color": "amber",
         "center": [
           -0.95,
-          0.55,
-          0
+          0.6,
+          0.05
         ],
         "size": [
           0.1,
           1,
-          2
+          1.9
         ],
         "rotY": 1.5240593223974597,
         "pivot": [
@@ -3009,13 +3222,13 @@
         "color": "amber",
         "center": [
           0.95,
-          0.55,
-          0
+          0.6,
+          0.05
         ],
         "size": [
           0.1,
           1,
-          2
+          1.9
         ],
         "rotY": 1.5240593223974597,
         "pivot": [
@@ -3039,7 +3252,7 @@
         "object": "amber box",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 195280,
+        "pixels": 198277,
         "ok": true
       }
     ],
@@ -3052,6 +3265,16 @@
     "tier": 3,
     "width": 960,
     "height": 720,
+    "render": {
+      "hdri": "brown_photostudio_02",
+      "floor": "anti_slip_concrete",
+      "material": "matte",
+      "hdriRotation": 221,
+      "exposure": 1.11
+    },
+    "gen": {
+      "stable": true
+    },
     "difficulty": {
       "objects": 3,
       "lighting": "normal"
@@ -3091,7 +3314,7 @@
         "shape": "box",
         "color": "violet",
         "center": [
-          0.7154996042139828,
+          0.19226106035057455,
           1.5,
           0
         ],
@@ -3107,7 +3330,7 @@
         "shape": "box",
         "color": "teal",
         "center": [
-          1.2651776379789226,
+          0.25011763779912144,
           2.5,
           0
         ],
@@ -3124,28 +3347,28 @@
       "It stays standing",
       "It falls"
     ],
-    "answer": 1,
-    "explanation": "Rule: stable only if the centre of mass of everything above each box lies over that box's top face. above level 2: centre of mass x = 1.27 m vs support -0.03 to 1.47 m; above level 1: centre of mass x = 0.99 m vs support -0.75 to 0.75 m. A check fails.",
+    "answer": 0,
+    "explanation": "Rule: stable only if the centre of mass of everything above each box lies over that box's top face. above level 2: centre of mass x = 0.25 m vs support -0.56 to 0.94 m; above level 1: centre of mass x = 0.22 m vs support -0.75 to 0.75 m. All checks pass.",
     "visibility": [
       {
         "object": "amber box",
         "visiblePct": 85,
         "inFrame": true,
-        "pixels": 31721,
+        "pixels": 31375,
         "ok": true
       },
       {
         "object": "violet box",
-        "visiblePct": 93,
+        "visiblePct": 94,
         "inFrame": true,
-        "pixels": 31191,
+        "pixels": 30033,
         "ok": true
       },
       {
         "object": "teal box",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 31154,
+        "pixels": 29278,
         "ok": true
       }
     ],
@@ -3158,6 +3381,13 @@
     "tier": 2,
     "width": 960,
     "height": 720,
+    "render": {
+      "hdri": "autoshop_01",
+      "floor": "concrete_floor_02",
+      "material": "plastic",
+      "hdriRotation": 116,
+      "exposure": 1.22
+    },
     "difficulty": {
       "objects": 2,
       "lighting": "normal"
@@ -3221,14 +3451,14 @@
         "object": "violet box",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 34564,
+        "pixels": 34371,
         "ok": true
       },
       {
         "object": "amber cylinder",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 29767,
+        "pixels": 29729,
         "ok": true
       }
     ],
@@ -3241,6 +3471,16 @@
     "tier": 3,
     "width": 960,
     "height": 720,
+    "render": {
+      "hdri": "aircraft_workshop_01",
+      "floor": "concrete_floor_02",
+      "material": "metal",
+      "hdriRotation": 260,
+      "exposure": 0.89
+    },
+    "gen": {
+      "stable": false
+    },
     "difficulty": {
       "objects": 3,
       "lighting": "dim"
@@ -3280,7 +3520,7 @@
         "shape": "box",
         "color": "violet",
         "center": [
-          -0.008226559381000698,
+          1.081255524500739,
           1.5,
           0
         ],
@@ -3296,7 +3536,7 @@
         "shape": "box",
         "color": "teal",
         "center": [
-          -0.02526775444857776,
+          1.671383653243538,
           2.5,
           0
         ],
@@ -3313,28 +3553,28 @@
       "It stays standing",
       "It falls"
     ],
-    "answer": 0,
-    "explanation": "Rule: stable only if the centre of mass of everything above each box lies over that box's top face. above level 2: centre of mass x = -0.03 m vs support -0.76 to 0.74 m; above level 1: centre of mass x = -0.02 m vs support -0.75 to 0.75 m. All checks pass.",
+    "answer": 1,
+    "explanation": "Rule: stable only if the centre of mass of everything above each box lies over that box's top face. above level 2: centre of mass x = 1.67 m vs support 0.33 to 1.83 m; above level 1: centre of mass x = 1.38 m vs support -0.75 to 0.75 m. A check fails.",
     "visibility": [
       {
         "object": "amber box",
-        "visiblePct": 85,
+        "visiblePct": 89,
         "inFrame": true,
-        "pixels": 31721,
+        "pixels": 31375,
         "ok": true
       },
       {
         "object": "violet box",
         "visiblePct": 94,
         "inFrame": true,
-        "pixels": 29859,
+        "pixels": 31711,
         "ok": true
       },
       {
         "object": "teal box",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 28907,
+        "pixels": 31773,
         "ok": true
       }
     ],
@@ -3347,6 +3587,13 @@
     "tier": 2,
     "width": 960,
     "height": 720,
+    "render": {
+      "hdri": "autoshop_01",
+      "floor": "concrete_floor_02",
+      "material": "metal",
+      "hdriRotation": 4,
+      "exposure": 0.89
+    },
     "difficulty": {
       "objects": 3,
       "lighting": "normal"
@@ -3425,23 +3672,23 @@
     "visibility": [
       {
         "object": "blue cylinder",
-        "visiblePct": 85,
+        "visiblePct": 87,
         "inFrame": true,
-        "pixels": 13627,
+        "pixels": 13722,
         "ok": true
       },
       {
         "object": "red box",
-        "visiblePct": 99,
+        "visiblePct": 100,
         "inFrame": true,
-        "pixels": 28669,
+        "pixels": 28201,
         "ok": true
       },
       {
         "object": "amber sphere",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 21093,
+        "pixels": 21280,
         "ok": true
       }
     ],
@@ -3454,6 +3701,13 @@
     "tier": 2,
     "width": 960,
     "height": 720,
+    "render": {
+      "hdri": "blocky_photo_studio",
+      "floor": "concrete_floor_02",
+      "material": "plastic",
+      "hdriRotation": 92,
+      "exposure": 1.15
+    },
     "difficulty": {
       "objects": 3,
       "lighting": "normal"
@@ -3534,21 +3788,21 @@
         "object": "red cylinder",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 41634,
+        "pixels": 41521,
         "ok": true
       },
       {
         "object": "teal cylinder",
         "visiblePct": 93,
         "inFrame": true,
-        "pixels": 16532,
+        "pixels": 16581,
         "ok": true
       },
       {
         "object": "blue sphere",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 15355,
+        "pixels": 15491,
         "ok": true
       }
     ],
@@ -3561,6 +3815,13 @@
     "tier": 1,
     "width": 960,
     "height": 720,
+    "render": {
+      "hdri": "carpentry_shop_02",
+      "floor": "brushed_concrete",
+      "material": "plastic",
+      "hdriRotation": 175,
+      "exposure": 1.11
+    },
     "difficulty": {
       "objects": 1,
       "lighting": "normal"
@@ -3606,7 +3867,7 @@
         "color": "amber",
         "center": [
           0,
-          0.55,
+          0.6,
           -0.95
         ],
         "size": [
@@ -3627,13 +3888,13 @@
         "color": "amber",
         "center": [
           -0.95,
-          0.55,
-          0
+          0.6,
+          0.05
         ],
         "size": [
           0.1,
           1,
-          2
+          1.9
         ],
         "rotY": 2.8852259043422572,
         "pivot": [
@@ -3648,13 +3909,13 @@
         "color": "amber",
         "center": [
           0.95,
-          0.55,
-          0
+          0.6,
+          0.05
         ],
         "size": [
           0.1,
           1,
-          2
+          1.9
         ],
         "rotY": 2.8852259043422572,
         "pivot": [
@@ -3678,7 +3939,7 @@
         "object": "amber box",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 147937,
+        "pixels": 151056,
         "ok": true
       }
     ],
@@ -3691,6 +3952,16 @@
     "tier": 3,
     "width": 960,
     "height": 720,
+    "render": {
+      "hdri": "aircraft_workshop_01",
+      "floor": "anti_slip_concrete",
+      "material": "matte",
+      "hdriRotation": 98,
+      "exposure": 0.81
+    },
+    "gen": {
+      "stable": true
+    },
     "difficulty": {
       "objects": 4,
       "lighting": "normal"
@@ -3730,7 +4001,7 @@
         "shape": "box",
         "color": "violet",
         "center": [
-          0.1812407086836174,
+          -0.18863494705874473,
           1.5,
           0
         ],
@@ -3746,7 +4017,7 @@
         "shape": "box",
         "color": "teal",
         "center": [
-          0.36592546361498535,
+          -0.0073942383751273155,
           2.5,
           0
         ],
@@ -3762,7 +4033,7 @@
         "shape": "box",
         "color": "red",
         "center": [
-          0.1722461194731295,
+          0.17729051655624062,
           3.5,
           0
         ],
@@ -3780,34 +4051,34 @@
       "It falls"
     ],
     "answer": 0,
-    "explanation": "Rule: stable only if the centre of mass of everything above each box lies over that box's top face. above level 3: centre of mass x = 0.17 m vs support -0.38 to 1.12 m; above level 2: centre of mass x = 0.27 m vs support -0.57 to 0.93 m; above level 1: centre of mass x = 0.24 m vs support -0.75 to 0.75 m. All checks pass.",
+    "explanation": "Rule: stable only if the centre of mass of everything above each box lies over that box's top face. above level 3: centre of mass x = 0.18 m vs support -0.76 to 0.74 m; above level 2: centre of mass x = 0.08 m vs support -0.94 to 0.56 m; above level 1: centre of mass x = -0.01 m vs support -0.75 to 0.75 m. All checks pass.",
     "visibility": [
       {
         "object": "amber box",
-        "visiblePct": 83,
+        "visiblePct": 88,
         "inFrame": true,
-        "pixels": 25481,
+        "pixels": 25259,
         "ok": true
       },
       {
         "object": "violet box",
-        "visiblePct": 90,
+        "visiblePct": 91,
         "inFrame": true,
-        "pixels": 24272,
+        "pixels": 23667,
         "ok": true
       },
       {
         "object": "teal box",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 22881,
+        "pixels": 22540,
         "ok": true
       },
       {
         "object": "red box",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 23236,
+        "pixels": 23143,
         "ok": true
       }
     ],
@@ -3820,6 +4091,13 @@
     "tier": 2,
     "width": 960,
     "height": 720,
+    "render": {
+      "hdri": "carpentry_shop_02",
+      "floor": "concrete_floor_02",
+      "material": "plastic",
+      "hdriRotation": 359,
+      "exposure": 1.04
+    },
     "difficulty": {
       "objects": 3,
       "lighting": "dim"
@@ -3900,21 +4178,21 @@
         "object": "violet cone",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 15538,
+        "pixels": 15818,
         "ok": true
       },
       {
         "object": "blue box",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 17983,
+        "pixels": 17813,
         "ok": true
       },
       {
         "object": "grey box",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 26824,
+        "pixels": 26218,
         "ok": true
       }
     ],
@@ -3927,6 +4205,16 @@
     "tier": 3,
     "width": 960,
     "height": 720,
+    "render": {
+      "hdri": "blocky_photo_studio",
+      "floor": "brushed_concrete",
+      "material": "matte",
+      "hdriRotation": 99,
+      "exposure": 1.08
+    },
+    "gen": {
+      "stable": false
+    },
     "difficulty": {
       "objects": 4,
       "lighting": "normal"
@@ -3966,7 +4254,7 @@
         "shape": "box",
         "color": "violet",
         "center": [
-          -0.061192044988274574,
+          1.1179518756456672,
           1.5,
           0
         ],
@@ -3982,7 +4270,7 @@
         "shape": "box",
         "color": "teal",
         "center": [
-          -0.2622450615745038,
+          1.7352305085398256,
           2.5,
           0
         ],
@@ -3998,7 +4286,7 @@
         "shape": "box",
         "color": "red",
         "center": [
-          -0.043807943584397435,
+          2.3589192777406423,
           3.5,
           0
         ],
@@ -4015,35 +4303,35 @@
       "It stays standing",
       "It falls"
     ],
-    "answer": 0,
-    "explanation": "Rule: stable only if the centre of mass of everything above each box lies over that box's top face. above level 3: centre of mass x = -0.04 m vs support -1.01 to 0.49 m; above level 2: centre of mass x = -0.15 m vs support -0.81 to 0.69 m; above level 1: centre of mass x = -0.12 m vs support -0.75 to 0.75 m. All checks pass.",
+    "answer": 1,
+    "explanation": "Rule: stable only if the centre of mass of everything above each box lies over that box's top face. above level 3: centre of mass x = 2.36 m vs support 0.99 to 2.49 m; above level 2: centre of mass x = 2.05 m vs support 0.37 to 1.87 m; above level 1: centre of mass x = 1.74 m vs support -0.75 to 0.75 m. A check fails.",
     "visibility": [
       {
         "object": "amber box",
-        "visiblePct": 85,
+        "visiblePct": 89,
         "inFrame": true,
-        "pixels": 25481,
+        "pixels": 25259,
         "ok": true
       },
       {
         "object": "violet box",
-        "visiblePct": 93,
+        "visiblePct": 92,
         "inFrame": true,
-        "pixels": 23942,
+        "pixels": 25360,
         "ok": true
       },
       {
         "object": "teal box",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 22173,
+        "pixels": 24615,
         "ok": true
       },
       {
         "object": "red box",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 23008,
+        "pixels": 25875,
         "ok": true
       }
     ],
@@ -4056,6 +4344,13 @@
     "tier": 2,
     "width": 960,
     "height": 720,
+    "render": {
+      "hdri": "blocky_photo_studio",
+      "floor": "brushed_concrete",
+      "material": "matte",
+      "hdriRotation": 135,
+      "exposure": 1.18
+    },
     "difficulty": {
       "objects": 4,
       "lighting": "normal"
@@ -4153,28 +4448,28 @@
         "object": "blue cylinder",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 18726,
+        "pixels": 18717,
         "ok": true
       },
       {
         "object": "amber cylinder",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 16130,
+        "pixels": 16137,
         "ok": true
       },
       {
         "object": "grey cone",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 17374,
+        "pixels": 18510,
         "ok": true
       },
       {
         "object": "teal sphere",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 12354,
+        "pixels": 12464,
         "ok": true
       }
     ],
@@ -4187,6 +4482,13 @@
     "tier": 2,
     "width": 960,
     "height": 720,
+    "render": {
+      "hdri": "blue_photo_studio",
+      "floor": "plain",
+      "material": "matte",
+      "hdriRotation": 24,
+      "exposure": 1.24
+    },
     "difficulty": {
       "objects": 4,
       "lighting": "normal"
@@ -4284,28 +4586,28 @@
         "object": "blue sphere",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 23787,
+        "pixels": 23986,
         "ok": true
       },
       {
         "object": "red box",
-        "visiblePct": 88,
+        "visiblePct": 89,
         "inFrame": true,
-        "pixels": 29765,
+        "pixels": 29505,
         "ok": true
       },
       {
         "object": "violet box",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 21916,
+        "pixels": 21560,
         "ok": true
       },
       {
         "object": "teal sphere",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 9617,
+        "pixels": 9701,
         "ok": true
       }
     ],
@@ -4318,6 +4620,13 @@
     "tier": 1,
     "width": 960,
     "height": 720,
+    "render": {
+      "hdri": "autoshop_01",
+      "floor": "brown_floor_tiles",
+      "material": "plastic",
+      "hdriRotation": 138,
+      "exposure": 1.23
+    },
     "difficulty": {
       "objects": 1,
       "lighting": "normal"
@@ -4363,7 +4672,7 @@
         "color": "amber",
         "center": [
           0,
-          0.55,
+          0.6,
           -0.95
         ],
         "size": [
@@ -4384,13 +4693,13 @@
         "color": "amber",
         "center": [
           -0.95,
-          0.55,
-          0
+          0.6,
+          0.05
         ],
         "size": [
           0.1,
           1,
-          2
+          1.9
         ],
         "rotY": 2.991551483637192,
         "pivot": [
@@ -4405,13 +4714,13 @@
         "color": "amber",
         "center": [
           0.95,
-          0.55,
-          0
+          0.6,
+          0.05
         ],
         "size": [
           0.1,
           1,
-          2
+          1.9
         ],
         "rotY": 2.991551483637192,
         "pivot": [
@@ -4435,7 +4744,7 @@
         "object": "amber box",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 141774,
+        "pixels": 144968,
         "ok": true
       }
     ],
@@ -4448,6 +4757,16 @@
     "tier": 3,
     "width": 960,
     "height": 720,
+    "render": {
+      "hdri": "autoshop_01",
+      "floor": "anti_slip_concrete",
+      "material": "matte",
+      "hdriRotation": 207,
+      "exposure": 0.91
+    },
+    "gen": {
+      "stable": true
+    },
     "difficulty": {
       "objects": 2,
       "lighting": "dim"
@@ -4487,7 +4806,7 @@
         "shape": "box",
         "color": "violet",
         "center": [
-          0.23290657927282155,
+          0.09382431081030518,
           1.5,
           0
         ],
@@ -4505,20 +4824,20 @@
       "It falls"
     ],
     "answer": 0,
-    "explanation": "Rule: stable only if the centre of mass of everything above each box lies over that box's top face. above level 1: centre of mass x = 0.23 m vs support -0.75 to 0.75 m. All checks pass.",
+    "explanation": "Rule: stable only if the centre of mass of everything above each box lies over that box's top face. above level 1: centre of mass x = 0.09 m vs support -0.75 to 0.75 m. All checks pass.",
     "visibility": [
       {
         "object": "amber box",
-        "visiblePct": 85,
+        "visiblePct": 87,
         "inFrame": true,
-        "pixels": 40679,
+        "pixels": 40203,
         "ok": true
       },
       {
         "object": "violet box",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 38927,
+        "pixels": 38323,
         "ok": true
       }
     ],
@@ -4531,6 +4850,13 @@
     "tier": 2,
     "width": 960,
     "height": 720,
+    "render": {
+      "hdri": "carpentry_shop_02",
+      "floor": "brown_floor_tiles",
+      "material": "plastic",
+      "hdriRotation": 261,
+      "exposure": 0.93
+    },
     "difficulty": {
       "objects": 4,
       "lighting": "normal"
@@ -4628,28 +4954,28 @@
         "object": "teal box",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 15584,
+        "pixels": 15353,
         "ok": true
       },
       {
         "object": "violet sphere",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 14681,
+        "pixels": 14803,
         "ok": true
       },
       {
         "object": "amber sphere",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 30685,
+        "pixels": 30991,
         "ok": true
       },
       {
         "object": "grey cone",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 10413,
+        "pixels": 10872,
         "ok": true
       }
     ],
@@ -4662,6 +4988,16 @@
     "tier": 3,
     "width": 960,
     "height": 720,
+    "render": {
+      "hdri": "blocky_photo_studio",
+      "floor": "anti_slip_concrete",
+      "material": "metal",
+      "hdriRotation": 219,
+      "exposure": 0.92
+    },
+    "gen": {
+      "stable": false
+    },
     "difficulty": {
       "objects": 2,
       "lighting": "normal"
@@ -4701,7 +5037,7 @@
         "shape": "box",
         "color": "violet",
         "center": [
-          0.24452696414664388,
+          1.2888171420199797,
           1.5,
           0
         ],
@@ -4718,21 +5054,21 @@
       "It stays standing",
       "It falls"
     ],
-    "answer": 0,
-    "explanation": "Rule: stable only if the centre of mass of everything above each box lies over that box's top face. above level 1: centre of mass x = 0.24 m vs support -0.75 to 0.75 m. All checks pass.",
+    "answer": 1,
+    "explanation": "Rule: stable only if the centre of mass of everything above each box lies over that box's top face. above level 1: centre of mass x = 1.29 m vs support -0.75 to 0.75 m. A check fails.",
     "visibility": [
       {
         "object": "amber box",
-        "visiblePct": 85,
+        "visiblePct": 92,
         "inFrame": true,
-        "pixels": 40679,
+        "pixels": 40203,
         "ok": true
       },
       {
         "object": "violet box",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 38964,
+        "pixels": 41685,
         "ok": true
       }
     ],
@@ -4745,6 +5081,13 @@
     "tier": 2,
     "width": 960,
     "height": 720,
+    "render": {
+      "hdri": "aircraft_workshop_01",
+      "floor": "concrete_floor_02",
+      "material": "matte",
+      "hdriRotation": 302,
+      "exposure": 0.97
+    },
     "difficulty": {
       "objects": 5,
       "lighting": "normal"
@@ -4859,35 +5202,35 @@
         "object": "red cylinder",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 35800,
+        "pixels": 35847,
         "ok": true
       },
       {
         "object": "grey cylinder",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 16958,
+        "pixels": 16939,
         "ok": true
       },
       {
         "object": "blue box",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 16571,
+        "pixels": 16342,
         "ok": true
       },
       {
         "object": "violet box",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 18224,
+        "pixels": 17995,
         "ok": true
       },
       {
         "object": "teal cone",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 23443,
+        "pixels": 25308,
         "ok": true
       }
     ],
@@ -4900,6 +5243,13 @@
     "tier": 2,
     "width": 960,
     "height": 720,
+    "render": {
+      "hdri": "brown_photostudio_02",
+      "floor": "brushed_concrete",
+      "material": "metal",
+      "hdriRotation": 156,
+      "exposure": 0.92
+    },
     "difficulty": {
       "objects": 5,
       "lighting": "normal"
@@ -5014,35 +5364,35 @@
         "object": "violet cylinder",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 32586,
+        "pixels": 32601,
         "ok": true
       },
       {
         "object": "grey cone",
-        "visiblePct": 97,
+        "visiblePct": 96,
         "inFrame": true,
-        "pixels": 10093,
+        "pixels": 10541,
         "ok": true
       },
       {
         "object": "blue sphere",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 22294,
+        "pixels": 22491,
         "ok": true
       },
       {
         "object": "teal cylinder",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 28454,
+        "pixels": 28511,
         "ok": true
       },
       {
         "object": "amber cone",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 10555,
+        "pixels": 10981,
         "ok": true
       }
     ],
@@ -5055,6 +5405,13 @@
     "tier": 1,
     "width": 960,
     "height": 720,
+    "render": {
+      "hdri": "blocky_photo_studio",
+      "floor": "brushed_concrete",
+      "material": "matte",
+      "hdriRotation": 294,
+      "exposure": 1.16
+    },
     "difficulty": {
       "objects": 1,
       "lighting": "dim"
@@ -5100,7 +5457,7 @@
         "color": "amber",
         "center": [
           0,
-          0.55,
+          0.6,
           -0.95
         ],
         "size": [
@@ -5121,13 +5478,13 @@
         "color": "amber",
         "center": [
           -0.95,
-          0.55,
-          0
+          0.6,
+          0.05
         ],
         "size": [
           0.1,
           1,
-          2
+          1.9
         ],
         "rotY": 3.150132329464429,
         "pivot": [
@@ -5142,13 +5499,13 @@
         "color": "amber",
         "center": [
           0.95,
-          0.55,
-          0
+          0.6,
+          0.05
         ],
         "size": [
           0.1,
           1,
-          2
+          1.9
         ],
         "rotY": 3.150132329464429,
         "pivot": [
@@ -5172,7 +5529,7 @@
         "object": "amber box",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 144371,
+        "pixels": 147458,
         "ok": true
       }
     ],
@@ -5185,6 +5542,16 @@
     "tier": 3,
     "width": 960,
     "height": 720,
+    "render": {
+      "hdri": "brown_photostudio_02",
+      "floor": "brushed_concrete",
+      "material": "metal",
+      "hdriRotation": 173,
+      "exposure": 0.86
+    },
+    "gen": {
+      "stable": true
+    },
     "difficulty": {
       "objects": 3,
       "lighting": "normal"
@@ -5224,7 +5591,7 @@
         "shape": "box",
         "color": "violet",
         "center": [
-          -0.18516591738443822,
+          -0.03935181687120348,
           1.5,
           0
         ],
@@ -5240,7 +5607,7 @@
         "shape": "box",
         "color": "teal",
         "center": [
-          0.03138549719005823,
+          -0.2245177342556417,
           2.5,
           0
         ],
@@ -5258,27 +5625,27 @@
       "It falls"
     ],
     "answer": 0,
-    "explanation": "Rule: stable only if the centre of mass of everything above each box lies over that box's top face. above level 2: centre of mass x = 0.03 m vs support -0.94 to 0.56 m; above level 1: centre of mass x = -0.08 m vs support -0.75 to 0.75 m. All checks pass.",
+    "explanation": "Rule: stable only if the centre of mass of everything above each box lies over that box's top face. above level 2: centre of mass x = -0.22 m vs support -0.79 to 0.71 m; above level 1: centre of mass x = -0.13 m vs support -0.75 to 0.75 m. All checks pass.",
     "visibility": [
       {
         "object": "amber box",
         "visiblePct": 87,
         "inFrame": true,
-        "pixels": 31721,
+        "pixels": 31375,
         "ok": true
       },
       {
         "object": "violet box",
-        "visiblePct": 93,
+        "visiblePct": 95,
         "inFrame": true,
-        "pixels": 29528,
+        "pixels": 29604,
         "ok": true
       },
       {
         "object": "teal box",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 28988,
+        "pixels": 28498,
         "ok": true
       }
     ],
@@ -5291,6 +5658,13 @@
     "tier": 2,
     "width": 960,
     "height": 720,
+    "render": {
+      "hdri": "brown_photostudio_02",
+      "floor": "plain",
+      "material": "matte",
+      "hdriRotation": 126,
+      "exposure": 1.06
+    },
     "difficulty": {
       "objects": 5,
       "lighting": "normal"
@@ -5405,35 +5779,35 @@
         "object": "teal cone",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 17342,
+        "pixels": 18076,
         "ok": true
       },
       {
         "object": "red sphere",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 13141,
+        "pixels": 13251,
         "ok": true
       },
       {
         "object": "violet cylinder",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 24719,
+        "pixels": 24837,
         "ok": true
       },
       {
         "object": "amber cylinder",
-        "visiblePct": 88,
+        "visiblePct": 89,
         "inFrame": true,
-        "pixels": 16851,
+        "pixels": 16855,
         "ok": true
       },
       {
         "object": "blue cone",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 25135,
+        "pixels": 27180,
         "ok": true
       }
     ],
@@ -5446,6 +5820,16 @@
     "tier": 3,
     "width": 960,
     "height": 720,
+    "render": {
+      "hdri": "aircraft_workshop_01",
+      "floor": "anti_slip_concrete",
+      "material": "plastic",
+      "hdriRotation": 356,
+      "exposure": 1.24
+    },
+    "gen": {
+      "stable": false
+    },
     "difficulty": {
       "objects": 3,
       "lighting": "normal"
@@ -5485,7 +5869,7 @@
         "shape": "box",
         "color": "violet",
         "center": [
-          -0.10041085933335125,
+          0.9609749341499991,
           1.5,
           0
         ],
@@ -5501,7 +5885,7 @@
         "shape": "box",
         "color": "teal",
         "center": [
-          0.0672166848089546,
+          1.4404819029499776,
           2.5,
           0
         ],
@@ -5518,28 +5902,28 @@
       "It stays standing",
       "It falls"
     ],
-    "answer": 0,
-    "explanation": "Rule: stable only if the centre of mass of everything above each box lies over that box's top face. above level 2: centre of mass x = 0.07 m vs support -0.85 to 0.65 m; above level 1: centre of mass x = -0.02 m vs support -0.75 to 0.75 m. All checks pass.",
+    "answer": 1,
+    "explanation": "Rule: stable only if the centre of mass of everything above each box lies over that box's top face. above level 2: centre of mass x = 1.44 m vs support 0.21 to 1.71 m; above level 1: centre of mass x = 1.20 m vs support -0.75 to 0.75 m. A check fails.",
     "visibility": [
       {
         "object": "amber box",
-        "visiblePct": 86,
+        "visiblePct": 88,
         "inFrame": true,
-        "pixels": 31721,
+        "pixels": 31375,
         "ok": true
       },
       {
         "object": "violet box",
         "visiblePct": 93,
         "inFrame": true,
-        "pixels": 29687,
+        "pixels": 31503,
         "ok": true
       },
       {
         "object": "teal box",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 29051,
+        "pixels": 31337,
         "ok": true
       }
     ],
@@ -5552,6 +5936,13 @@
     "tier": 2,
     "width": 960,
     "height": 720,
+    "render": {
+      "hdri": "blocky_photo_studio",
+      "floor": "plain",
+      "material": "plastic",
+      "hdriRotation": 89,
+      "exposure": 0.82
+    },
     "difficulty": {
       "objects": 2,
       "lighting": "normal"
@@ -5615,14 +6006,14 @@
         "object": "blue sphere",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 6545,
+        "pixels": 6561,
         "ok": true
       },
       {
         "object": "red sphere",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 14905,
+        "pixels": 15045,
         "ok": true
       }
     ],
@@ -5635,6 +6026,13 @@
     "tier": 2,
     "width": 960,
     "height": 720,
+    "render": {
+      "hdri": "blocky_photo_studio",
+      "floor": "plain",
+      "material": "matte",
+      "hdriRotation": 329,
+      "exposure": 0.97
+    },
     "difficulty": {
       "objects": 2,
       "lighting": "dim"
@@ -5698,14 +6096,14 @@
         "object": "grey cone",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 8102,
+        "pixels": 8262,
         "ok": true
       },
       {
         "object": "amber sphere",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 16548,
+        "pixels": 16723,
         "ok": true
       }
     ],
@@ -5718,6 +6116,13 @@
     "tier": 1,
     "width": 960,
     "height": 720,
+    "render": {
+      "hdri": "blocky_photo_studio",
+      "floor": "brushed_concrete",
+      "material": "plastic",
+      "hdriRotation": 357,
+      "exposure": 1.02
+    },
     "difficulty": {
       "objects": 1,
       "lighting": "normal"
@@ -5763,7 +6168,7 @@
         "color": "amber",
         "center": [
           0,
-          0.55,
+          0.6,
           -0.95
         ],
         "size": [
@@ -5784,13 +6189,13 @@
         "color": "amber",
         "center": [
           -0.95,
-          0.55,
-          0
+          0.6,
+          0.05
         ],
         "size": [
           0.1,
           1,
-          2
+          1.9
         ],
         "rotY": -0.17818461572751404,
         "pivot": [
@@ -5805,13 +6210,13 @@
         "color": "amber",
         "center": [
           0.95,
-          0.55,
-          0
+          0.6,
+          0.05
         ],
         "size": [
           0.1,
           1,
-          2
+          1.9
         ],
         "rotY": -0.17818461572751404,
         "pivot": [
@@ -5835,7 +6240,7 @@
         "object": "amber box",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 196756,
+        "pixels": 199867,
         "ok": true
       }
     ],
@@ -5848,6 +6253,16 @@
     "tier": 3,
     "width": 960,
     "height": 720,
+    "render": {
+      "hdri": "aircraft_workshop_01",
+      "floor": "brushed_concrete",
+      "material": "plastic",
+      "hdriRotation": 240,
+      "exposure": 0.94
+    },
+    "gen": {
+      "stable": true
+    },
     "difficulty": {
       "objects": 4,
       "lighting": "normal"
@@ -5887,7 +6302,7 @@
         "shape": "box",
         "color": "violet",
         "center": [
-          0.017768713179975748,
+          0.1246455954387784,
           1.5,
           0
         ],
@@ -5903,7 +6318,7 @@
         "shape": "box",
         "color": "teal",
         "center": [
-          0.0016583172837272286,
+          0.3577448994619772,
           2.5,
           0
         ],
@@ -5919,7 +6334,7 @@
         "shape": "box",
         "color": "red",
         "center": [
-          -0.08223133825231344,
+          0.15805782889947295,
           3.5,
           0
         ],
@@ -5937,34 +6352,34 @@
       "It falls"
     ],
     "answer": 0,
-    "explanation": "Rule: stable only if the centre of mass of everything above each box lies over that box's top face. above level 3: centre of mass x = -0.08 m vs support -0.75 to 0.75 m; above level 2: centre of mass x = -0.04 m vs support -0.73 to 0.77 m; above level 1: centre of mass x = -0.02 m vs support -0.75 to 0.75 m. All checks pass.",
+    "explanation": "Rule: stable only if the centre of mass of everything above each box lies over that box's top face. above level 3: centre of mass x = 0.16 m vs support -0.39 to 1.11 m; above level 2: centre of mass x = 0.26 m vs support -0.63 to 0.87 m; above level 1: centre of mass x = 0.21 m vs support -0.75 to 0.75 m. All checks pass.",
     "visibility": [
       {
         "object": "amber box",
         "visiblePct": 84,
         "inFrame": true,
-        "pixels": 25481,
+        "pixels": 25259,
         "ok": true
       },
       {
         "object": "violet box",
         "visiblePct": 91,
         "inFrame": true,
-        "pixels": 24028,
+        "pixels": 24064,
         "ok": true
       },
       {
         "object": "teal box",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 22455,
+        "pixels": 22970,
         "ok": true
       },
       {
         "object": "red box",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 22953,
+        "pixels": 23111,
         "ok": true
       }
     ],
@@ -5977,6 +6392,13 @@
     "tier": 2,
     "width": 960,
     "height": 720,
+    "render": {
+      "hdri": "aircraft_workshop_01",
+      "floor": "brushed_concrete",
+      "material": "plastic",
+      "hdriRotation": 202,
+      "exposure": 1.06
+    },
     "difficulty": {
       "objects": 2,
       "lighting": "normal"
@@ -6040,14 +6462,14 @@
         "object": "grey cone",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 26724,
+        "pixels": 28746,
         "ok": true
       },
       {
         "object": "red box",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 43550,
+        "pixels": 42796,
         "ok": true
       }
     ],
@@ -6060,6 +6482,16 @@
     "tier": 3,
     "width": 960,
     "height": 720,
+    "render": {
+      "hdri": "brown_photostudio_02",
+      "floor": "plain",
+      "material": "plastic",
+      "hdriRotation": 298,
+      "exposure": 1.25
+    },
+    "gen": {
+      "stable": false
+    },
     "difficulty": {
       "objects": 4,
       "lighting": "normal"
@@ -6099,7 +6531,7 @@
         "shape": "box",
         "color": "violet",
         "center": [
-          -0.22880721325054765,
+          1.1581938284332864,
           1.5,
           0
         ],
@@ -6115,7 +6547,7 @@
         "shape": "box",
         "color": "teal",
         "center": [
-          0.016830693813972175,
+          1.8333447828772478,
           2.5,
           0
         ],
@@ -6131,7 +6563,7 @@
         "shape": "box",
         "color": "red",
         "center": [
-          -0.010575142223387957,
+          2.3172627456835473,
           3.5,
           0
         ],
@@ -6148,35 +6580,35 @@
       "It stays standing",
       "It falls"
     ],
-    "answer": 0,
-    "explanation": "Rule: stable only if the centre of mass of everything above each box lies over that box's top face. above level 3: centre of mass x = -0.01 m vs support -0.73 to 0.77 m; above level 2: centre of mass x = 0.00 m vs support -0.98 to 0.52 m; above level 1: centre of mass x = -0.07 m vs support -0.75 to 0.75 m. All checks pass.",
+    "answer": 1,
+    "explanation": "Rule: stable only if the centre of mass of everything above each box lies over that box's top face. above level 3: centre of mass x = 2.32 m vs support 1.08 to 2.58 m; above level 2: centre of mass x = 2.08 m vs support 0.41 to 1.91 m; above level 1: centre of mass x = 1.77 m vs support -0.75 to 0.75 m. A check fails.",
     "visibility": [
       {
         "object": "amber box",
-        "visiblePct": 87,
+        "visiblePct": 89,
         "inFrame": true,
-        "pixels": 25481,
+        "pixels": 25259,
         "ok": true
       },
       {
         "object": "violet box",
-        "visiblePct": 91,
+        "visiblePct": 92,
         "inFrame": true,
-        "pixels": 23766,
+        "pixels": 25410,
         "ok": true
       },
       {
         "object": "teal box",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 22497,
+        "pixels": 24715,
         "ok": true
       },
       {
         "object": "red box",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 23071,
+        "pixels": 25794,
         "ok": true
       }
     ],
@@ -6189,6 +6621,13 @@
     "tier": 2,
     "width": 960,
     "height": 720,
+    "render": {
+      "hdri": "autoshop_01",
+      "floor": "brown_floor_tiles",
+      "material": "matte",
+      "hdriRotation": 337,
+      "exposure": 0.88
+    },
     "difficulty": {
       "objects": 3,
       "lighting": "dim"
@@ -6269,21 +6708,21 @@
         "object": "amber sphere",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 27307,
+        "pixels": 27547,
         "ok": true
       },
       {
         "object": "teal cone",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 8218,
+        "pixels": 8406,
         "ok": true
       },
       {
         "object": "grey cone",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 14965,
+        "pixels": 15673,
         "ok": true
       }
     ],
@@ -6296,6 +6735,13 @@
     "tier": 2,
     "width": 960,
     "height": 720,
+    "render": {
+      "hdri": "autoshop_01",
+      "floor": "concrete_floor_02",
+      "material": "matte",
+      "hdriRotation": 272,
+      "exposure": 0.99
+    },
     "difficulty": {
       "objects": 3,
       "lighting": "normal"
@@ -6376,21 +6822,21 @@
         "object": "violet box",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 24864,
+        "pixels": 24650,
         "ok": true
       },
       {
         "object": "red sphere",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 16064,
+        "pixels": 16206,
         "ok": true
       },
       {
         "object": "grey cone",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 10501,
+        "pixels": 10740,
         "ok": true
       }
     ],
@@ -6403,6 +6849,13 @@
     "tier": 1,
     "width": 960,
     "height": 720,
+    "render": {
+      "hdri": "aircraft_workshop_01",
+      "floor": "anti_slip_concrete",
+      "material": "matte",
+      "hdriRotation": 241,
+      "exposure": 0.94
+    },
     "difficulty": {
       "objects": 1,
       "lighting": "normal"
@@ -6448,7 +6901,7 @@
         "color": "amber",
         "center": [
           0,
-          0.55,
+          0.6,
           -0.95
         ],
         "size": [
@@ -6469,13 +6922,13 @@
         "color": "amber",
         "center": [
           -0.95,
-          0.55,
-          0
+          0.6,
+          0.05
         ],
         "size": [
           0.1,
           1,
-          2
+          1.9
         ],
         "rotY": 1.3277910851549843,
         "pivot": [
@@ -6490,13 +6943,13 @@
         "color": "amber",
         "center": [
           0.95,
-          0.55,
-          0
+          0.6,
+          0.05
         ],
         "size": [
           0.1,
           1,
-          2
+          1.9
         ],
         "rotY": 1.3277910851549843,
         "pivot": [
@@ -6520,7 +6973,7 @@
         "object": "amber box",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 200494,
+        "pixels": 203509,
         "ok": true
       }
     ],
@@ -6533,6 +6986,16 @@
     "tier": 3,
     "width": 960,
     "height": 720,
+    "render": {
+      "hdri": "autoshop_01",
+      "floor": "plain",
+      "material": "plastic",
+      "hdriRotation": 287,
+      "exposure": 1.2
+    },
+    "gen": {
+      "stable": true
+    },
     "difficulty": {
       "objects": 2,
       "lighting": "normal"
@@ -6572,7 +7035,7 @@
         "shape": "box",
         "color": "violet",
         "center": [
-          -0.24390449840575457,
+          -0.17182843841146678,
           1.5,
           0
         ],
@@ -6590,20 +7053,20 @@
       "It falls"
     ],
     "answer": 0,
-    "explanation": "Rule: stable only if the centre of mass of everything above each box lies over that box's top face. above level 1: centre of mass x = -0.24 m vs support -0.75 to 0.75 m. All checks pass.",
+    "explanation": "Rule: stable only if the centre of mass of everything above each box lies over that box's top face. above level 1: centre of mass x = -0.17 m vs support -0.75 to 0.75 m. All checks pass.",
     "visibility": [
       {
         "object": "amber box",
         "visiblePct": 89,
         "inFrame": true,
-        "pixels": 40679,
+        "pixels": 40203,
         "ok": true
       },
       {
         "object": "violet box",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 37672,
+        "pixels": 37626,
         "ok": true
       }
     ],
@@ -6616,6 +7079,13 @@
     "tier": 2,
     "width": 960,
     "height": 720,
+    "render": {
+      "hdri": "carpentry_shop_02",
+      "floor": "brushed_concrete",
+      "material": "plastic",
+      "hdriRotation": 23,
+      "exposure": 1.11
+    },
     "difficulty": {
       "objects": 3,
       "lighting": "normal"
@@ -6694,23 +7164,23 @@
     "visibility": [
       {
         "object": "violet sphere",
-        "visiblePct": 87,
+        "visiblePct": 88,
         "inFrame": true,
-        "pixels": 12473,
+        "pixels": 12579,
         "ok": true
       },
       {
         "object": "blue sphere",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 11403,
+        "pixels": 11490,
         "ok": true
       },
       {
         "object": "amber cylinder",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 54001,
+        "pixels": 53865,
         "ok": true
       }
     ],
@@ -6723,6 +7193,16 @@
     "tier": 3,
     "width": 960,
     "height": 720,
+    "render": {
+      "hdri": "brown_photostudio_02",
+      "floor": "brushed_concrete",
+      "material": "plastic",
+      "hdriRotation": 336,
+      "exposure": 1.18
+    },
+    "gen": {
+      "stable": false
+    },
     "difficulty": {
       "objects": 2,
       "lighting": "dim"
@@ -6762,7 +7242,7 @@
         "shape": "box",
         "color": "violet",
         "center": [
-          -0.2438529923092574,
+          1.222681354242377,
           1.5,
           0
         ],
@@ -6779,21 +7259,21 @@
       "It stays standing",
       "It falls"
     ],
-    "answer": 0,
-    "explanation": "Rule: stable only if the centre of mass of everything above each box lies over that box's top face. above level 1: centre of mass x = -0.24 m vs support -0.75 to 0.75 m. All checks pass.",
+    "answer": 1,
+    "explanation": "Rule: stable only if the centre of mass of everything above each box lies over that box's top face. above level 1: centre of mass x = 1.22 m vs support -0.75 to 0.75 m. A check fails.",
     "visibility": [
       {
         "object": "amber box",
-        "visiblePct": 89,
+        "visiblePct": 91,
         "inFrame": true,
-        "pixels": 40679,
+        "pixels": 40203,
         "ok": true
       },
       {
         "object": "violet box",
         "visiblePct": 100,
         "inFrame": true,
-        "pixels": 37672,
+        "pixels": 41516,
         "ok": true
       }
     ],

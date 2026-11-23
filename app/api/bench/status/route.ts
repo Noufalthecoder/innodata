@@ -1,10 +1,10 @@
 import { NextResponse } from "next/server";
-import { MODELS, type Provider } from "@/lib/bench/models";
+import { MODEL_CHOICES, MODELS } from "@/lib/bench/models";
 
 export const runtime = "nodejs";
 
-/** Reports which providers have a key configured. Never returns the keys themselves. */
+/** Lists the models the app can ask and whether each has a key on the server. Never returns the keys. */
 export async function GET() {
-  const providers = (Object.keys(MODELS) as Provider[]).map((id) => ({ id, label: MODELS[id].label, model: MODELS[id].model, configured: Boolean(process.env[MODELS[id].env]) }));
+  const providers = MODEL_CHOICES.map((c) => ({ id: c.id, label: c.label, model: c.id, configured: Boolean(process.env[MODELS[c.provider].env]) }));
   return NextResponse.json({ providers });
 }

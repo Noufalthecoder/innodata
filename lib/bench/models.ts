@@ -6,6 +6,15 @@ export const MODELS: Record<Provider, { model: string; env: string; label: strin
   gemini: { model: "gemini-3.5-flash", env: "GEMINI_API_KEY", label: "Gemini" },
 };
 
+/** Every model the app can ask. Each answer is labelled with the model that actually produced it. */
+export const MODEL_CHOICES: { id: string; provider: Provider; label: string }[] = [
+  { id: "gemini-3.5-flash", provider: "gemini", label: "Gemini 3.5 Flash" },
+  { id: "gemini-3.5-flash-lite", provider: "gemini", label: "Gemini 3.5 Flash-Lite" },
+  { id: "gemini-3-flash-preview", provider: "gemini", label: "Gemini 3 Flash" },
+  { id: "claude-sonnet-5-5", provider: "anthropic", label: "Claude" },
+  { id: "gpt-4o", provider: "openai", label: "GPT-4o" },
+];
+
 const LETTERS = "ABCDEF";
 
 export function buildPrompt(question: string, options: string[]): string {
