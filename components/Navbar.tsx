@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { motion, useScroll, useSpring } from "framer-motion";
 import { GITHUB_URL, navLinks } from "@/lib/content";
 
@@ -31,9 +32,12 @@ export default function Navbar() {
           ))}
         </nav>
         <div className="flex items-center gap-3">
-          <a href={GITHUB_URL} target="_blank" rel="noreferrer" className="hidden rounded-md bg-white px-4 py-2 text-sm font-medium text-ink transition-colors hover:bg-zinc-200 sm:block">
+          <a href={GITHUB_URL} target="_blank" rel="noreferrer" className="hidden rounded-md border border-white/20 px-4 py-2 text-sm font-medium text-white transition-colors hover:border-white/60 sm:block">
             GitHub
           </a>
+          <Link href="/app" className="rounded-md bg-accent px-4 py-2 text-sm font-medium text-ink transition-opacity hover:opacity-90">
+            Open app
+          </Link>
           <button aria-label="Menu" aria-expanded={open} onClick={() => setOpen((o) => !o)} className="grid h-10 w-10 place-items-center rounded-md border border-white/15 text-white lg:hidden">
             <span className="block h-0.5 w-5 bg-current shadow-[0_6px_0_currentColor,0_-6px_0_currentColor]" />
           </button>

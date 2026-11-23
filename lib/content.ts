@@ -5,8 +5,10 @@ export const DEADLINE_ISO = "2026-12-06T23:59:59"; // TODO: confirm submission d
 
 export const navLinks = [
   { href: "#about", label: "About" },
+  { href: "#app", label: "The app" },
   { href: "#why", label: "Why it matters" },
   { href: "#how", label: "How it works" },
+  { href: "#demo", label: "Try it" },
   { href: "#tiers", label: "Tiers" },
   { href: "#roadmap", label: "Roadmap" },
   { href: "#results", label: "Results" },
@@ -89,4 +91,12 @@ export const faqs = [
   { q: "How is stability decided?", a: "A simple rule: the stack is stable if its centre of mass lies over the base of support. It is one line of code and fully reproducible, with no physics engine to debug." },
   { q: "Which models are tested?", a: "GPT-4V, Gemini and Claude vision models, through the hackathon-provided AI credits." },
   { q: "Is the code open?", a: "Yes. The runnable source is on GitHub, with sample outputs and the validation script." },
+];
+
+export const appFeatures = [
+  { id: "play", title: "Play", body: "Answer the same questions the models are asked, then see the ground truth and how it was computed." },
+  { id: "generate", title: "Generate", body: "Build a fresh scene on demand, with a visibility check, and ask Claude, GPT-4o or Gemini about it." },
+  { id: "tasks", title: "Tasks", body: "Browse the full dataset: images, questions, ground truth and visibility reports." },
+  { id: "validate", title: "Validate", body: "Re-derive every answer from raw scene numbers with independent code, and rebuild tasks from their seeds." },
+  { id: "results", title: "Results", body: "Model accuracy by tier, task type and lighting, plus the scenes every model got wrong." },
 ];

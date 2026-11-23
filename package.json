@@ -7,13 +7,18 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "placeholders": "node scripts/make-placeholders.mjs"
+    "placeholders": "node scripts/make-placeholders.mjs",
+    "bench:generate": "tsx scripts/bench/generate.ts",
+    "bench:eval": "tsx scripts/bench/eval.ts",
+    "bench:validate": "tsx scripts/bench/validate.ts",
+    "bench:report": "tsx scripts/bench/report.ts"
   },
   "dependencies": {
     "framer-motion": "^11.18.0",
     "next": "^15.1.0",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "tsx": "^4.23.15"
   },
   "devDependencies": {
     "@types/node": "^22.0.0",

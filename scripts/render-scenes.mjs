@@ -19,7 +19,7 @@ const rotY = (p, pivot, ang) => {
   return add([x * c + z * s, y, -x * s + z * c], pivot);
 };
 
-const PALETTE = { red: [229, 72, 77], blue: [62, 99, 221], teal: [18, 165, 148], amber: [245, 165, 36], violet: [142, 78, 198], grey: [139, 141, 152] };
+const PALETTE = { red: [229, 72, 77], blue: [90, 140, 255], teal: [18, 165, 148], amber: [245, 165, 36], violet: [165, 105, 225], grey: [170, 172, 184] };
 const MASKS = [[255, 80, 80], [80, 200, 255], [120, 255, 120], [255, 220, 80], [200, 120, 255], [255, 140, 200], [140, 255, 230]];
 
 // ---------- primitives -> faces ----------
@@ -174,7 +174,7 @@ function renderScene(scene, vp, mode = "rgb") {
       stroke = fill;
     } else {
       const diff = Math.max(0, dot(f.n, toLight));
-      const k = (0.22 + 0.85 * diff) * dim;
+      const k = (0.45 + 0.7 * diff) * dim;
       const fog = Math.min(1, f.d / 30) * 0.5;
       const rim = scene.rim ? Math.max(0, dot(f.n, norm([-0.8, 0.25, -0.55]))) : 0;
       const rimCol = [40, 95, 255];
@@ -367,3 +367,151 @@ if (want("step-3")) {
   await out("step-3", 800, 800, b);
 }
 
+
+// =====================================================================
+// Interactive demo data: node scripts/render-scenes.mjs demo
+// Generates scenes with COMPUTED ground truth and a pixel-based visibility check.
+// Output: public/demo/scenes.json + public/demo/scene-XX.jpg
+// =====================================================================
+if (filter === "demo") {
+  const { writeFileSync } = await import("node:fs");
+  mkdirSync("public/demo", { recursive: true });
+
+  let seedD = 20261206;
+  const R = () => ((seedD = (seedD * 48271) % 2147483647) / 2147483647);
+  const between = (a, b) => a + R() * (b - a);
+  const pick = (arr) => arr[Math.floor(R() * arr.length)];
+  const W = 960, H = 720;
+  const CAM = [0, 2.6, 7], LOOK = [0, 0.5, -1], FOV = 30;
+  const COLORS = ["red", "blue", "teal", "amber", "violet", "grey"];
+  const SHAPE_NAME = { box: "box", cyl: "cylinder", sphere: "sphere", cone: "cone" };
+  const vp = { x: 0, y: 0, w: W, h: H };
+  const project = makeCamera(CAM, LOOK, FOV, vp);
+  const dist = (a, b) => Math.hypot(a[0] - b[0], a[1] - b[1], a[2] - b[2]);
+  const label = (o) => `${o.col} ${SHAPE_NAME[o.t]}`;
+
+  function randomObject(col, id) {
+    const t = pick(["box", "cyl", "sphere", "cone"]);
+    const x = between(-2.6, 2.6), z = between(-4.5, 1.2);
+    if (t === "box") { const a = between(0.8, 1.2); return { t, c: [x, a / 2, z], s: [a, a, a], col, id, rot: between(0, 1.5) }; }
+    if (t === "cyl") { const r = between(0.4, 0.55), h = between(0.9, 1.3); return { t, c: [x, h / 2, z], r, h, col, id }; }
+    if (t === "sphere") { const r = between(0.4, 0.5); return { t, c: [x, r, z], r, col, id }; }
+    const h = between(1, 1.4);
+    return { t, c: [x, h / 2, z], r: 0.5, h, col, id };
+  }
+
+  async function maskPixels(objects) {
+    const scene = { objects, cam: CAM, look: LOOK, fov: FOV };
+    const svg = wrap(W, H, renderScene(scene, vp, "mask"), 1);
+    const { data, info } = await sharp(Buffer.from(svg)).removeAlpha().raw().toBuffer({ resolveWithObject: true });
+    const counts = new Map();
+    for (let i = 0; i < data.length; i += info.channels) {
+      for (const o of objects) {
+        const m = MASKS[o.id % MASKS.length];
+        if (Math.abs(data[i] - m[0]) + Math.abs(data[i + 1] - m[1]) + Math.abs(data[i + 2] - m[2]) < 24) {
+          counts.set(o.id, (counts.get(o.id) ?? 0) + 1);
+          break;
+        }
+      }
+    }
+    return counts;
+  }
+
+  // Visibility check: object must be fully inside the frame, big enough, and >= 70% unoccluded.
+  async function visibility(objects) {
+    const full = await maskPixels(objects);
+    const report = [];
+    for (const o of objects) {
+      const alone = (await maskPixels([o])).get(o.id) ?? 0;
+      const seen = full.get(o.id) ?? 0;
+      const pts = build([o]).flatMap((f) => f.verts.map(project));
+      const inFrame = pts.every((p) => p[0] >= 8 && p[0] <= W - 8 && p[1] >= 8 && p[1] <= H - 8);
+      const ratio = alone ? seen / alone : 0;
+      report.push({ object: label(o), visible: Math.round(ratio * 100), ok: inFrame && alone >= 2500 && ratio >= 0.7 });
+    }
+    return report;
+  }
+
+  const scenes = [];
+  let attempts = 0;
+  const plan = ["closer", "closer", "closer", "closer", "closer", "leftmost", "leftmost", "leftmost", "stack", "stack", "stack", "stack"];
+
+  for (const kind of plan) {
+    for (;;) {
+      if (++attempts > 600) throw new Error("could not generate a valid scene");
+
+      if (kind === "stack") {
+        const wantStable = scenes.filter((s) => s.kind === "stack" && s.stable).length < 2;
+        const n = 3, size = [1.5, 1, 1.5];
+        const cols = ["amber", "violet", "teal"];
+        const cx = [0];
+        for (let i = 1; i < n; i++) cx.push(cx[i - 1] + (wantStable ? between(-0.25, 0.25) : between(0.55, 0.8)));
+        const objects = cx.map((x, i) => ({ t: "box", c: [x, 0.5 + i, 0], s: size, col: cols[i], id: i }));
+        // Rule: the centre of mass of everything above each box must lie over that box's top face.
+        const detail = [];
+        const margins = [];
+        let isStable = true;
+        for (let i = n - 1; i >= 1; i--) {
+          const above = cx.slice(i);
+          const com = above.reduce((a, b) => a + b, 0) / above.length;
+          const lo = cx[i - 1] - size[0] / 2, hi = cx[i - 1] + size[0] / 2;
+          const margin = Math.min(com - lo, hi - com);
+          margins.push(Math.abs(margin));
+          if (margin < 0) isStable = false;
+          detail.push(`everything above level ${i} has centre of mass x = ${com.toFixed(2)} m while the box below spans ${lo.toFixed(2)} to ${hi.toFixed(2)} m`);
+        }
+        if (margins.some((m) => m < 0.12) || isStable !== wantStable) continue;
+        const sceneDef = { objects, cam: [3.5, 2.4, 6], look: [0, 1.3, 0], fov: 32 };
+        const SP = makeCamera(sceneDef.cam, sceneDef.look, sceneDef.fov, vp);
+        const inFrame = objects.every((o) => build([o]).flatMap((f) => f.verts.map(SP)).every((p) => p[0] >= 8 && p[0] <= W - 8 && p[1] >= 8 && p[1] <= H - 8));
+        if (!inFrame) continue;
+        scenes.push({
+          kind, stable: isStable, tier: "Tier 3 · Plausibility",
+          question: "Will this stack of three boxes stay standing, or will it fall?",
+          options: ["It stays standing", "It falls"], answer: isStable ? 0 : 1,
+          explanation: `Rule: a stack is stable only if the centre of mass of everything above each box lies over that box's top face. Here, ${detail.join("; ")}. ${isStable ? "Every check passes, so it stays standing." : "At least one check fails, so it falls."}`,
+          visibility: objects.map((o) => ({ object: label(o), visible: 100, ok: true })), sceneDef,
+        });
+        break;
+      }
+
+      const cols = COLORS.slice().sort(() => R() - 0.5).slice(0, 3);
+      const objects = cols.map((c, i) => randomObject(c, i));
+      if (objects.some((a, i) => objects.some((b, j) => j > i && Math.hypot(a.c[0] - b.c[0], a.c[2] - b.c[2]) < 1.6))) continue;
+      const vis = await visibility(objects);
+      if (!vis.every((v) => v.ok)) continue;
+
+      let answer, question, explanation;
+      if (kind === "closer") {
+        const d = objects.map((o) => dist(CAM, o.c));
+        const sorted = d.slice().sort((a, b) => a - b);
+        if (sorted[1] - sorted[0] < 0.8) continue; // clear winner only
+        answer = d.indexOf(sorted[0]);
+        question = "Which object is closest to the camera?";
+        explanation = `Ground truth is the straight-line distance from the camera (0, 2.6, 7) to each object's centre: ${objects.map((o, i) => `${label(o)} = ${d[i].toFixed(2)} m`).join(", ")}. The smallest is the ${label(objects[answer])}.`;
+      } else {
+        const xs = objects.map((o) => project(o.c)[0]);
+        const s = xs.slice().sort((a, b) => a - b);
+        if (s[1] - s[0] < 90) continue;
+        answer = xs.indexOf(s[0]);
+        question = "Which object appears furthest to the left in the image?";
+        explanation = `Ground truth is each object's centre projected through the camera: horizontal pixel positions are ${objects.map((o, i) => `${label(o)} = ${xs[i].toFixed(0)} px`).join(", ")}. The smallest is the ${label(objects[answer])}.`;
+      }
+      scenes.push({
+        kind, tier: "Tier 2 · Relative", question, options: objects.map((o) => `The ${label(o)}`), answer, explanation,
+        visibility: vis, sceneDef: { objects, cam: CAM, look: LOOK, fov: FOV },
+      });
+      break;
+    }
+  }
+
+  const result = [];
+  for (const [i, s] of scenes.entries()) {
+    const id = String(i + 1).padStart(2, "0");
+    await sharp(Buffer.from(wrap(W, H, renderScene(s.sceneDef, vp), 1))).jpeg({ quality: 88 }).toFile(`public/demo/scene-${id}.jpg`);
+    result.push({ id, image: `/demo/scene-${id}.jpg`, tier: s.tier, question: s.question, options: s.options, answer: s.answer, explanation: s.explanation, visibility: s.visibility });
+    console.log("demo scene", id, s.kind);
+  }
+  writeFileSync("public/demo/scenes.json", JSON.stringify(result, null, 2));
+  console.log(`wrote ${result.length} scenes (${attempts} attempts)`);
+}

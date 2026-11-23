@@ -7,9 +7,9 @@ import { SectionHead } from "./Section";
 export default function Faq() {
   const [open, setOpen] = useState<number | null>(0);
   return (
-    <section id="faq" className="mx-auto max-w-3xl px-6 py-28">
+    <section id="faq" className="mx-auto max-w-6xl px-6 py-28">
       <SectionHead eyebrow="FAQs" title="Frequently asked questions" />
-      <div className="divide-y divide-white/10 border-y border-white/10">
+      <div className="max-w-3xl divide-y divide-white/10 border-y border-white/10">
         {faqs.map((f, i) => {
           const isOpen = open === i;
           return (

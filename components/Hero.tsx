@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { badges, GITHUB_URL } from "@/lib/content";
 import Countdown from "./Countdown";
 
@@ -13,10 +14,13 @@ export default function Hero() {
         Where things are, how they are turned, and whether a stack will fall, with every answer verified independently of the model being tested.
       </p>
       <div className="mt-9 flex flex-wrap gap-3">
-        <a href="#how" className="rounded-md bg-accent px-6 py-3 font-medium text-ink transition-opacity hover:opacity-90">
+        <Link href="/app" className="rounded-md bg-accent px-6 py-3 font-medium text-ink transition-opacity hover:opacity-90">
+          Open SpatialGrid
+        </Link>
+        <a href="#how" className="rounded-md border border-white/25 px-6 py-3 font-medium text-white transition-colors hover:border-white/60">
           See how it works
         </a>
-        <a href={GITHUB_URL} target="_blank" rel="noreferrer" className="rounded-md border border-white/25 px-6 py-3 font-medium text-white transition-colors hover:border-white/60">
+        <a href={GITHUB_URL} target="_blank" rel="noreferrer" className="rounded-md px-3 py-3 font-medium text-zinc-300 underline-offset-4 transition-colors hover:text-white hover:underline">
           View source
         </a>
       </div>

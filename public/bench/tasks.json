@@ -1,0 +1,6802 @@
+[
+  {
+    "id": "s1",
+    "seed": 1,
+    "kind": "closer",
+    "tier": 2,
+    "width": 960,
+    "height": 720,
+    "difficulty": {
+      "objects": 2,
+      "lighting": "normal"
+    },
+    "camera": {
+      "pos": [
+        0,
+        2.6,
+        7
+      ],
+      "look": [
+        0,
+        0.5,
+        -1
+      ],
+      "fov": 30
+    },
+    "objects": [
+      {
+        "id": 0,
+        "shape": "cylinder",
+        "color": "red",
+        "center": [
+          0.700558343157172,
+          0.5105066578835249,
+          -2.741896202601492
+        ],
+        "size": [
+          0.8062651430023835,
+          1.0210133157670498,
+          0.8062651430023835
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 1,
+        "shape": "cone",
+        "color": "teal",
+        "center": [
+          -1.5600206708535551,
+          0.5664276351220906,
+          -0.5138497447129335
+        ],
+        "size": [
+          1,
+          1.1328552702441812,
+          1
+        ],
+        "rotY": 0
+      }
+    ],
+    "question": "Which object is closest to the camera?",
+    "options": [
+      "The red cylinder",
+      "The teal cone"
+    ],
+    "answer": 1,
+    "explanation": "Distance from the camera to each object's centre: red cylinder = 9.99 m, teal cone = 7.94 m. Smallest: teal cone.",
+    "visibility": [
+      {
+        "object": "red cylinder",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 16452,
+        "ok": true
+      },
+      {
+        "object": "teal cone",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 19556,
+        "ok": true
+      }
+    ],
+    "image": "/bench/images/s1.jpg"
+  },
+  {
+    "id": "s2",
+    "seed": 2,
+    "kind": "leftmost",
+    "tier": 2,
+    "width": 960,
+    "height": 720,
+    "difficulty": {
+      "objects": 2,
+      "lighting": "normal"
+    },
+    "camera": {
+      "pos": [
+        0,
+        2.6,
+        7
+      ],
+      "look": [
+        0,
+        0.5,
+        -1
+      ],
+      "fov": 30
+    },
+    "objects": [
+      {
+        "id": 0,
+        "shape": "cone",
+        "color": "violet",
+        "center": [
+          -2.748939275369048,
+          0.59689857121557,
+          -2.385205787559971
+        ],
+        "size": [
+          1,
+          1.19379714243114,
+          1
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 1,
+        "shape": "cone",
+        "color": "amber",
+        "center": [
+          1.0880457587540149,
+          0.5537073971703649,
+          -3.038388367183506
+        ],
+        "size": [
+          1,
+          1.1074147943407298,
+          1
+        ],
+        "rotY": 0
+      }
+    ],
+    "question": "Which object appears furthest to the left in the image?",
+    "options": [
+      "The violet cone",
+      "The amber cone"
+    ],
+    "answer": 0,
+    "explanation": "Horizontal pixel position of each object's centre: violet cone = 95 px, amber cone = 623 px. Smallest: violet cone.",
+    "visibility": [
+      {
+        "object": "violet cone",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 13658,
+        "ok": true
+      },
+      {
+        "object": "amber cone",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 10830,
+        "ok": true
+      }
+    ],
+    "image": "/bench/images/s2.jpg"
+  },
+  {
+    "id": "s3",
+    "seed": 3,
+    "kind": "orientation",
+    "tier": 1,
+    "width": 960,
+    "height": 720,
+    "difficulty": {
+      "objects": 1,
+      "lighting": "normal"
+    },
+    "camera": {
+      "pos": [
+        0,
+        3.2,
+        5.5
+      ],
+      "look": [
+        0,
+        0.4,
+        0
+      ],
+      "fov": 30
+    },
+    "objects": [
+      {
+        "id": 0,
+        "shape": "box",
+        "color": "amber",
+        "center": [
+          0,
+          0.05,
+          0
+        ],
+        "size": [
+          2,
+          0.1,
+          2
+        ],
+        "rotY": 1.8422359236658106,
+        "pivot": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 0,
+        "shape": "box",
+        "color": "amber",
+        "center": [
+          0,
+          0.55,
+          -0.95
+        ],
+        "size": [
+          2,
+          1,
+          0.1
+        ],
+        "rotY": 1.8422359236658106,
+        "pivot": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 0,
+        "shape": "box",
+        "color": "amber",
+        "center": [
+          -0.95,
+          0.55,
+          0
+        ],
+        "size": [
+          0.1,
+          1,
+          2
+        ],
+        "rotY": 1.8422359236658106,
+        "pivot": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 0,
+        "shape": "box",
+        "color": "amber",
+        "center": [
+          0.95,
+          0.55,
+          0
+        ],
+        "size": [
+          0.1,
+          1,
+          2
+        ],
+        "rotY": 1.8422359236658106,
+        "pivot": [
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "question": "The open side of this container faces which way?",
+    "options": [
+      "Toward the camera",
+      "Away from the camera",
+      "To the left in the image",
+      "To the right in the image"
+    ],
+    "answer": 3,
+    "explanation": "The container is rotated 106 degrees, so its open side points along (0.96, -0.27) in the ground plane. Camera looks along -z, so +z is toward the camera and +x is image-right.",
+    "visibility": [
+      {
+        "object": "amber box",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 188849,
+        "ok": true
+      }
+    ],
+    "image": "/bench/images/s3.jpg"
+  },
+  {
+    "id": "s4",
+    "seed": 4,
+    "kind": "stability",
+    "tier": 3,
+    "width": 960,
+    "height": 720,
+    "difficulty": {
+      "objects": 2,
+      "lighting": "normal"
+    },
+    "camera": {
+      "pos": [
+        4.5,
+        2.3,
+        8.4
+      ],
+      "look": [
+        0.3,
+        1,
+        0
+      ],
+      "fov": 32
+    },
+    "objects": [
+      {
+        "id": 0,
+        "shape": "box",
+        "color": "amber",
+        "center": [
+          0,
+          0.5,
+          0
+        ],
+        "size": [
+          1.5,
+          1,
+          1.5
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 1,
+        "shape": "box",
+        "color": "violet",
+        "center": [
+          0.07323119346983731,
+          1.5,
+          0
+        ],
+        "size": [
+          1.5,
+          1,
+          1.5
+        ],
+        "rotY": 0
+      }
+    ],
+    "question": "Will this stack of 2 boxes stay standing, or will it fall?",
+    "options": [
+      "It stays standing",
+      "It falls"
+    ],
+    "answer": 0,
+    "explanation": "Rule: stable only if the centre of mass of everything above each box lies over that box's top face. above level 1: centre of mass x = 0.07 m vs support -0.75 to 0.75 m. All checks pass.",
+    "visibility": [
+      {
+        "object": "amber box",
+        "visiblePct": 86,
+        "inFrame": true,
+        "pixels": 40679,
+        "ok": true
+      },
+      {
+        "object": "violet box",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 38513,
+        "ok": true
+      }
+    ],
+    "image": "/bench/images/s4.jpg"
+  },
+  {
+    "id": "s5",
+    "seed": 5,
+    "kind": "closer",
+    "tier": 2,
+    "width": 960,
+    "height": 720,
+    "difficulty": {
+      "objects": 2,
+      "lighting": "dim"
+    },
+    "camera": {
+      "pos": [
+        0,
+        2.6,
+        7
+      ],
+      "look": [
+        0,
+        0.5,
+        -1
+      ],
+      "fov": 30
+    },
+    "objects": [
+      {
+        "id": 0,
+        "shape": "box",
+        "color": "grey",
+        "center": [
+          2.181308994442224,
+          0.5098324473947287,
+          -2.7336680427193643
+        ],
+        "size": [
+          1.0196648947894573,
+          1.0196648947894573,
+          1.0196648947894573
+        ],
+        "rotY": 1.0007582386024296
+      },
+      {
+        "id": 1,
+        "shape": "cylinder",
+        "color": "amber",
+        "center": [
+          1.1933717753738162,
+          0.4909208551514894,
+          -0.7125040484592313
+        ],
+        "size": [
+          0.8814741217996925,
+          0.9818417103029788,
+          0.8814741217996925
+        ],
+        "rotY": 0
+      }
+    ],
+    "question": "Which object is closest to the camera?",
+    "options": [
+      "The grey box",
+      "The amber cylinder"
+    ],
+    "answer": 1,
+    "explanation": "Distance from the camera to each object's centre: grey box = 10.19 m, amber cylinder = 8.08 m. Smallest: amber cylinder.",
+    "visibility": [
+      {
+        "object": "grey box",
+        "visiblePct": 74,
+        "inFrame": true,
+        "pixels": 28243,
+        "ok": true
+      },
+      {
+        "object": "amber cylinder",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 28128,
+        "ok": true
+      }
+    ],
+    "image": "/bench/images/s5.jpg"
+  },
+  {
+    "id": "s6",
+    "seed": 6,
+    "kind": "stability",
+    "tier": 3,
+    "width": 960,
+    "height": 720,
+    "difficulty": {
+      "objects": 2,
+      "lighting": "normal"
+    },
+    "camera": {
+      "pos": [
+        4.5,
+        2.3,
+        8.4
+      ],
+      "look": [
+        0.3,
+        1,
+        0
+      ],
+      "fov": 32
+    },
+    "objects": [
+      {
+        "id": 0,
+        "shape": "box",
+        "color": "amber",
+        "center": [
+          0,
+          0.5,
+          0
+        ],
+        "size": [
+          1.5,
+          1,
+          1.5
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 1,
+        "shape": "box",
+        "color": "violet",
+        "center": [
+          0.048245888319797814,
+          1.5,
+          0
+        ],
+        "size": [
+          1.5,
+          1,
+          1.5
+        ],
+        "rotY": 0
+      }
+    ],
+    "question": "Will this stack of 2 boxes stay standing, or will it fall?",
+    "options": [
+      "It stays standing",
+      "It falls"
+    ],
+    "answer": 0,
+    "explanation": "Rule: stable only if the centre of mass of everything above each box lies over that box's top face. above level 1: centre of mass x = 0.05 m vs support -0.75 to 0.75 m. All checks pass.",
+    "visibility": [
+      {
+        "object": "amber box",
+        "visiblePct": 86,
+        "inFrame": true,
+        "pixels": 40679,
+        "ok": true
+      },
+      {
+        "object": "violet box",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 38444,
+        "ok": true
+      }
+    ],
+    "image": "/bench/images/s6.jpg"
+  },
+  {
+    "id": "s7",
+    "seed": 7,
+    "kind": "closer",
+    "tier": 2,
+    "width": 960,
+    "height": 720,
+    "difficulty": {
+      "objects": 3,
+      "lighting": "normal"
+    },
+    "camera": {
+      "pos": [
+        0,
+        2.6,
+        7
+      ],
+      "look": [
+        0,
+        0.5,
+        -1
+      ],
+      "fov": 30
+    },
+    "objects": [
+      {
+        "id": 0,
+        "shape": "sphere",
+        "color": "red",
+        "center": [
+          -2.4383613863959908,
+          0.46116010304540395,
+          -3.4316842694766816
+        ],
+        "size": [
+          0.9223202060908079,
+          0.9223202060908079,
+          0.9223202060908079
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 1,
+        "shape": "cone",
+        "color": "amber",
+        "center": [
+          0.5094202563166617,
+          0.5921368796378373,
+          0.11147596649825608
+        ],
+        "size": [
+          1,
+          1.1842737592756747,
+          1
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 2,
+        "shape": "cone",
+        "color": "grey",
+        "center": [
+          -1.5492269778624177,
+          0.5735098244156689,
+          -1.2603309234604239
+        ],
+        "size": [
+          1,
+          1.1470196488313378,
+          1
+        ],
+        "rotY": 0
+      }
+    ],
+    "question": "Which object is closest to the camera?",
+    "options": [
+      "The red sphere",
+      "The amber cone",
+      "The grey cone"
+    ],
+    "answer": 1,
+    "explanation": "Distance from the camera to each object's centre: red sphere = 10.92 m, amber cone = 7.19 m, grey cone = 8.65 m. Smallest: amber cone.",
+    "visibility": [
+      {
+        "object": "red sphere",
+        "visiblePct": 91,
+        "inFrame": true,
+        "pixels": 10918,
+        "ok": true
+      },
+      {
+        "object": "amber cone",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 23103,
+        "ok": true
+      },
+      {
+        "object": "grey cone",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 16305,
+        "ok": true
+      }
+    ],
+    "image": "/bench/images/s7.jpg"
+  },
+  {
+    "id": "s8",
+    "seed": 8,
+    "kind": "leftmost",
+    "tier": 2,
+    "width": 960,
+    "height": 720,
+    "difficulty": {
+      "objects": 3,
+      "lighting": "normal"
+    },
+    "camera": {
+      "pos": [
+        0,
+        2.6,
+        7
+      ],
+      "look": [
+        0,
+        0.5,
+        -1
+      ],
+      "fov": 30
+    },
+    "objects": [
+      {
+        "id": 0,
+        "shape": "cylinder",
+        "color": "teal",
+        "center": [
+          -0.9842374606058002,
+          0.46007505925372244,
+          -1.641098336223513
+        ],
+        "size": [
+          0.8377173149492592,
+          0.9201501185074449,
+          0.8377173149492592
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 1,
+        "shape": "sphere",
+        "color": "violet",
+        "center": [
+          1.8951657539233562,
+          0.47388413657899947,
+          -4.16515593463555
+        ],
+        "size": [
+          0.9477682731579989,
+          0.9477682731579989,
+          0.9477682731579989
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 2,
+        "shape": "cone",
+        "color": "amber",
+        "center": [
+          0.8265156092122194,
+          0.5117136114742606,
+          -0.12769089504145104
+        ],
+        "size": [
+          1,
+          1.0234272229485213,
+          1
+        ],
+        "rotY": 0
+      }
+    ],
+    "question": "Which object appears furthest to the left in the image?",
+    "options": [
+      "The teal cylinder",
+      "The violet sphere",
+      "The amber cone"
+    ],
+    "answer": 0,
+    "explanation": "Horizontal pixel position of each object's centre: teal cylinder = 331 px, violet sphere = 705 px, amber cone = 630 px. Smallest: teal cylinder.",
+    "visibility": [
+      {
+        "object": "teal cylinder",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 19971,
+        "ok": true
+      },
+      {
+        "object": "violet sphere",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 10002,
+        "ok": true
+      },
+      {
+        "object": "amber cone",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 19643,
+        "ok": true
+      }
+    ],
+    "image": "/bench/images/s8.jpg"
+  },
+  {
+    "id": "s9",
+    "seed": 9,
+    "kind": "orientation",
+    "tier": 1,
+    "width": 960,
+    "height": 720,
+    "difficulty": {
+      "objects": 1,
+      "lighting": "normal"
+    },
+    "camera": {
+      "pos": [
+        0,
+        3.2,
+        5.5
+      ],
+      "look": [
+        0,
+        0.4,
+        0
+      ],
+      "fov": 30
+    },
+    "objects": [
+      {
+        "id": 0,
+        "shape": "box",
+        "color": "amber",
+        "center": [
+          0,
+          0.05,
+          0
+        ],
+        "size": [
+          2,
+          0.1,
+          2
+        ],
+        "rotY": 1.3610075529341141,
+        "pivot": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 0,
+        "shape": "box",
+        "color": "amber",
+        "center": [
+          0,
+          0.55,
+          -0.95
+        ],
+        "size": [
+          2,
+          1,
+          0.1
+        ],
+        "rotY": 1.3610075529341141,
+        "pivot": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 0,
+        "shape": "box",
+        "color": "amber",
+        "center": [
+          -0.95,
+          0.55,
+          0
+        ],
+        "size": [
+          0.1,
+          1,
+          2
+        ],
+        "rotY": 1.3610075529341141,
+        "pivot": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 0,
+        "shape": "box",
+        "color": "amber",
+        "center": [
+          0.95,
+          0.55,
+          0
+        ],
+        "size": [
+          0.1,
+          1,
+          2
+        ],
+        "rotY": 1.3610075529341141,
+        "pivot": [
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "question": "The open side of this container faces which way?",
+    "options": [
+      "Toward the camera",
+      "Away from the camera",
+      "To the left in the image",
+      "To the right in the image"
+    ],
+    "answer": 3,
+    "explanation": "The container is rotated 78 degrees, so its open side points along (0.98, 0.21) in the ground plane. Camera looks along -z, so +z is toward the camera and +x is image-right.",
+    "visibility": [
+      {
+        "object": "amber box",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 198548,
+        "ok": true
+      }
+    ],
+    "image": "/bench/images/s9.jpg"
+  },
+  {
+    "id": "s10",
+    "seed": 10,
+    "kind": "stability",
+    "tier": 3,
+    "width": 960,
+    "height": 720,
+    "difficulty": {
+      "objects": 3,
+      "lighting": "dim"
+    },
+    "camera": {
+      "pos": [
+        5,
+        2.65,
+        9.6
+      ],
+      "look": [
+        0.3,
+        1.5,
+        0
+      ],
+      "fov": 32
+    },
+    "objects": [
+      {
+        "id": 0,
+        "shape": "box",
+        "color": "amber",
+        "center": [
+          0,
+          0.5,
+          0
+        ],
+        "size": [
+          1.5,
+          1,
+          1.5
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 1,
+        "shape": "box",
+        "color": "violet",
+        "center": [
+          -0.13143559568561614,
+          1.5,
+          0
+        ],
+        "size": [
+          1.5,
+          1,
+          1.5
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 2,
+        "shape": "box",
+        "color": "teal",
+        "center": [
+          -0.0664952457882464,
+          2.5,
+          0
+        ],
+        "size": [
+          1.5,
+          1,
+          1.5
+        ],
+        "rotY": 0
+      }
+    ],
+    "question": "Will this stack of 3 boxes stay standing, or will it fall?",
+    "options": [
+      "It stays standing",
+      "It falls"
+    ],
+    "answer": 0,
+    "explanation": "Rule: stable only if the centre of mass of everything above each box lies over that box's top face. above level 2: centre of mass x = -0.07 m vs support -0.88 to 0.62 m; above level 1: centre of mass x = -0.10 m vs support -0.75 to 0.75 m. All checks pass.",
+    "visibility": [
+      {
+        "object": "amber box",
+        "visiblePct": 87,
+        "inFrame": true,
+        "pixels": 31721,
+        "ok": true
+      },
+      {
+        "object": "violet box",
+        "visiblePct": 93,
+        "inFrame": true,
+        "pixels": 29619,
+        "ok": true
+      },
+      {
+        "object": "teal box",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 28824,
+        "ok": true
+      }
+    ],
+    "image": "/bench/images/s10.jpg"
+  },
+  {
+    "id": "s11",
+    "seed": 11,
+    "kind": "closer",
+    "tier": 2,
+    "width": 960,
+    "height": 720,
+    "difficulty": {
+      "objects": 3,
+      "lighting": "normal"
+    },
+    "camera": {
+      "pos": [
+        0,
+        2.6,
+        7
+      ],
+      "look": [
+        0,
+        0.5,
+        -1
+      ],
+      "fov": 30
+    },
+    "objects": [
+      {
+        "id": 0,
+        "shape": "cone",
+        "color": "grey",
+        "center": [
+          -0.6420206071808936,
+          0.5152080582920462,
+          -0.19911237712949514
+        ],
+        "size": [
+          1,
+          1.0304161165840924,
+          1
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 1,
+        "shape": "cone",
+        "color": "amber",
+        "center": [
+          -1.8386400474235414,
+          0.6241522583179175,
+          -2.2999877944122997
+        ],
+        "size": [
+          1,
+          1.248304516635835,
+          1
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 2,
+        "shape": "cylinder",
+        "color": "blue",
+        "center": [
+          -0.2820168735459445,
+          0.593654296733439,
+          -3.8671055560000243
+        ],
+        "size": [
+          1.0061408059438692,
+          1.187308593466878,
+          1.0061408059438692
+        ],
+        "rotY": 0
+      }
+    ],
+    "question": "Which object is closest to the camera?",
+    "options": [
+      "The grey cone",
+      "The amber cone",
+      "The blue cylinder"
+    ],
+    "answer": 0,
+    "explanation": "Distance from the camera to each object's centre: grey cone = 7.52 m, amber cone = 9.68 m, blue cylinder = 11.05 m. Smallest: grey cone.",
+    "visibility": [
+      {
+        "object": "grey cone",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 18856,
+        "ok": true
+      },
+      {
+        "object": "amber cone",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 13902,
+        "ok": true
+      },
+      {
+        "object": "blue cylinder",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 19520,
+        "ok": true
+      }
+    ],
+    "image": "/bench/images/s11.jpg"
+  },
+  {
+    "id": "s12",
+    "seed": 12,
+    "kind": "stability",
+    "tier": 3,
+    "width": 960,
+    "height": 720,
+    "difficulty": {
+      "objects": 3,
+      "lighting": "normal"
+    },
+    "camera": {
+      "pos": [
+        5,
+        2.65,
+        9.6
+      ],
+      "look": [
+        0.3,
+        1.5,
+        0
+      ],
+      "fov": 32
+    },
+    "objects": [
+      {
+        "id": 0,
+        "shape": "box",
+        "color": "amber",
+        "center": [
+          0,
+          0.5,
+          0
+        ],
+        "size": [
+          1.5,
+          1,
+          1.5
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 1,
+        "shape": "box",
+        "color": "violet",
+        "center": [
+          0.03227776801213622,
+          1.5,
+          0
+        ],
+        "size": [
+          1.5,
+          1,
+          1.5
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 2,
+        "shape": "box",
+        "color": "teal",
+        "center": [
+          -0.007716513937339187,
+          2.5,
+          0
+        ],
+        "size": [
+          1.5,
+          1,
+          1.5
+        ],
+        "rotY": 0
+      }
+    ],
+    "question": "Will this stack of 3 boxes stay standing, or will it fall?",
+    "options": [
+      "It stays standing",
+      "It falls"
+    ],
+    "answer": 0,
+    "explanation": "Rule: stable only if the centre of mass of everything above each box lies over that box's top face. above level 2: centre of mass x = -0.01 m vs support -0.72 to 0.78 m; above level 1: centre of mass x = 0.01 m vs support -0.75 to 0.75 m. All checks pass.",
+    "visibility": [
+      {
+        "object": "amber box",
+        "visiblePct": 85,
+        "inFrame": true,
+        "pixels": 31721,
+        "ok": true
+      },
+      {
+        "object": "violet box",
+        "visiblePct": 94,
+        "inFrame": true,
+        "pixels": 29915,
+        "ok": true
+      },
+      {
+        "object": "teal box",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 28923,
+        "ok": true
+      }
+    ],
+    "image": "/bench/images/s12.jpg"
+  },
+  {
+    "id": "s13",
+    "seed": 13,
+    "kind": "closer",
+    "tier": 2,
+    "width": 960,
+    "height": 720,
+    "difficulty": {
+      "objects": 4,
+      "lighting": "normal"
+    },
+    "camera": {
+      "pos": [
+        0,
+        2.6,
+        7
+      ],
+      "look": [
+        0,
+        0.5,
+        -1
+      ],
+      "fov": 30
+    },
+    "objects": [
+      {
+        "id": 0,
+        "shape": "cylinder",
+        "color": "grey",
+        "center": [
+          -2.443691020645201,
+          0.5763734513428063,
+          -2.6667257432360203
+        ],
+        "size": [
+          1.0380720333429054,
+          1.1527469026856125,
+          1.0380720333429054
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 1,
+        "shape": "box",
+        "color": "violet",
+        "center": [
+          -0.06189107671380034,
+          0.5004229489713907,
+          0.20115917446091824
+        ],
+        "size": [
+          1.0008458979427814,
+          1.0008458979427814,
+          1.0008458979427814
+        ],
+        "rotY": 0.20437147293705493
+      },
+      {
+        "id": 2,
+        "shape": "box",
+        "color": "red",
+        "center": [
+          1.2125305278226737,
+          0.5775750239379704,
+          -1.549714997364208
+        ],
+        "size": [
+          1.1551500478759409,
+          1.1551500478759409,
+          1.1551500478759409
+        ],
+        "rotY": 1.4092541058780625
+      },
+      {
+        "id": 3,
+        "shape": "cylinder",
+        "color": "blue",
+        "center": [
+          -0.6571983603760598,
+          0.5818725954275579,
+          -4.556046774378046
+        ],
+        "size": [
+          1.0909368014894427,
+          1.1637451908551157,
+          1.0909368014894427
+        ],
+        "rotY": 0
+      }
+    ],
+    "question": "Which object is closest to the camera?",
+    "options": [
+      "The grey cylinder",
+      "The violet box",
+      "The red box",
+      "The blue cylinder"
+    ],
+    "answer": 1,
+    "explanation": "Distance from the camera to each object's centre: grey cylinder = 10.17 m, violet box = 7.12 m, red box = 8.87 m, blue cylinder = 11.75 m. Smallest: violet box.",
+    "visibility": [
+      {
+        "object": "grey cylinder",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 25538,
+        "ok": true
+      },
+      {
+        "object": "violet box",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 50786,
+        "ok": true
+      },
+      {
+        "object": "red box",
+        "visiblePct": 95,
+        "inFrame": true,
+        "pixels": 39965,
+        "ok": true
+      },
+      {
+        "object": "blue cylinder",
+        "visiblePct": 90,
+        "inFrame": true,
+        "pixels": 18614,
+        "ok": true
+      }
+    ],
+    "image": "/bench/images/s13.jpg"
+  },
+  {
+    "id": "s14",
+    "seed": 14,
+    "kind": "leftmost",
+    "tier": 2,
+    "width": 960,
+    "height": 720,
+    "difficulty": {
+      "objects": 4,
+      "lighting": "normal"
+    },
+    "camera": {
+      "pos": [
+        0,
+        2.6,
+        7
+      ],
+      "look": [
+        0,
+        0.5,
+        -1
+      ],
+      "fov": 30
+    },
+    "objects": [
+      {
+        "id": 0,
+        "shape": "cylinder",
+        "color": "red",
+        "center": [
+          -0.6127563998103143,
+          0.4682244576513767,
+          0.7428481586277487
+        ],
+        "size": [
+          1.019668653747067,
+          0.9364489153027534,
+          1.019668653747067
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 1,
+        "shape": "sphere",
+        "color": "grey",
+        "center": [
+          -0.08772181645035726,
+          0.4161889346549288,
+          -1.645328841358423
+        ],
+        "size": [
+          0.8323778693098576,
+          0.8323778693098576,
+          0.8323778693098576
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 2,
+        "shape": "sphere",
+        "color": "violet",
+        "center": [
+          0.7502388430759308,
+          0.4137647247873247,
+          -4.865185799589381
+        ],
+        "size": [
+          0.8275294495746494,
+          0.8275294495746494,
+          0.8275294495746494
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 3,
+        "shape": "box",
+        "color": "blue",
+        "center": [
+          -2.1744921727105972,
+          0.5027550007682293,
+          -4.8316823886707425
+        ],
+        "size": [
+          1.0055100015364586,
+          1.0055100015364586,
+          1.0055100015364586
+        ],
+        "rotY": 1.0571659774286672
+      }
+    ],
+    "question": "Which object appears furthest to the left in the image?",
+    "options": [
+      "The red cylinder",
+      "The grey sphere",
+      "The violet sphere",
+      "The blue box"
+    ],
+    "answer": 3,
+    "explanation": "Horizontal pixel position of each object's centre: red cylinder = 355 px, grey sphere = 467 px, violet sphere = 564 px, blue box = 236 px. Smallest: blue box.",
+    "visibility": [
+      {
+        "object": "red cylinder",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 48674,
+        "ok": true
+      },
+      {
+        "object": "grey sphere",
+        "visiblePct": 78,
+        "inFrame": true,
+        "pixels": 12260,
+        "ok": true
+      },
+      {
+        "object": "violet sphere",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 6706,
+        "ok": true
+      },
+      {
+        "object": "blue box",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 20048,
+        "ok": true
+      }
+    ],
+    "image": "/bench/images/s14.jpg"
+  },
+  {
+    "id": "s15",
+    "seed": 15,
+    "kind": "orientation",
+    "tier": 1,
+    "width": 960,
+    "height": 720,
+    "difficulty": {
+      "objects": 1,
+      "lighting": "dim"
+    },
+    "camera": {
+      "pos": [
+        0,
+        3.2,
+        5.5
+      ],
+      "look": [
+        0,
+        0.4,
+        0
+      ],
+      "fov": 30
+    },
+    "objects": [
+      {
+        "id": 0,
+        "shape": "box",
+        "color": "amber",
+        "center": [
+          0,
+          0.05,
+          0
+        ],
+        "size": [
+          2,
+          0.1,
+          2
+        ],
+        "rotY": -0.17117606657557188,
+        "pivot": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 0,
+        "shape": "box",
+        "color": "amber",
+        "center": [
+          0,
+          0.55,
+          -0.95
+        ],
+        "size": [
+          2,
+          1,
+          0.1
+        ],
+        "rotY": -0.17117606657557188,
+        "pivot": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 0,
+        "shape": "box",
+        "color": "amber",
+        "center": [
+          -0.95,
+          0.55,
+          0
+        ],
+        "size": [
+          0.1,
+          1,
+          2
+        ],
+        "rotY": -0.17117606657557188,
+        "pivot": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 0,
+        "shape": "box",
+        "color": "amber",
+        "center": [
+          0.95,
+          0.55,
+          0
+        ],
+        "size": [
+          0.1,
+          1,
+          2
+        ],
+        "rotY": -0.17117606657557188,
+        "pivot": [
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "question": "The open side of this container faces which way?",
+    "options": [
+      "Toward the camera",
+      "Away from the camera",
+      "To the left in the image",
+      "To the right in the image"
+    ],
+    "answer": 0,
+    "explanation": "The container is rotated -10 degrees, so its open side points along (-0.17, 0.99) in the ground plane. Camera looks along -z, so +z is toward the camera and +x is image-right.",
+    "visibility": [
+      {
+        "object": "amber box",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 196947,
+        "ok": true
+      }
+    ],
+    "image": "/bench/images/s15.jpg"
+  },
+  {
+    "id": "s16",
+    "seed": 16,
+    "kind": "stability",
+    "tier": 3,
+    "width": 960,
+    "height": 720,
+    "difficulty": {
+      "objects": 4,
+      "lighting": "normal"
+    },
+    "camera": {
+      "pos": [
+        5.5,
+        3,
+        10.8
+      ],
+      "look": [
+        0.3,
+        2,
+        0
+      ],
+      "fov": 32
+    },
+    "objects": [
+      {
+        "id": 0,
+        "shape": "box",
+        "color": "amber",
+        "center": [
+          0,
+          0.5,
+          0
+        ],
+        "size": [
+          1.5,
+          1,
+          1.5
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 1,
+        "shape": "box",
+        "color": "violet",
+        "center": [
+          0.021735871443524957,
+          1.5,
+          0
+        ],
+        "size": [
+          1.5,
+          1,
+          1.5
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 2,
+        "shape": "box",
+        "color": "teal",
+        "center": [
+          -0.07810011820401996,
+          2.5,
+          0
+        ],
+        "size": [
+          1.5,
+          1,
+          1.5
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 3,
+        "shape": "box",
+        "color": "red",
+        "center": [
+          -0.17024418711662292,
+          3.5,
+          0
+        ],
+        "size": [
+          1.5,
+          1,
+          1.5
+        ],
+        "rotY": 0
+      }
+    ],
+    "question": "Will this stack of 4 boxes stay standing, or will it fall?",
+    "options": [
+      "It stays standing",
+      "It falls"
+    ],
+    "answer": 0,
+    "explanation": "Rule: stable only if the centre of mass of everything above each box lies over that box's top face. above level 3: centre of mass x = -0.17 m vs support -0.83 to 0.67 m; above level 2: centre of mass x = -0.12 m vs support -0.73 to 0.77 m; above level 1: centre of mass x = -0.08 m vs support -0.75 to 0.75 m. All checks pass.",
+    "visibility": [
+      {
+        "object": "amber box",
+        "visiblePct": 84,
+        "inFrame": true,
+        "pixels": 25481,
+        "ok": true
+      },
+      {
+        "object": "violet box",
+        "visiblePct": 92,
+        "inFrame": true,
+        "pixels": 24075,
+        "ok": true
+      },
+      {
+        "object": "teal box",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 22380,
+        "ok": true
+      },
+      {
+        "object": "red box",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 22880,
+        "ok": true
+      }
+    ],
+    "image": "/bench/images/s16.jpg"
+  },
+  {
+    "id": "s17",
+    "seed": 17,
+    "kind": "closer",
+    "tier": 2,
+    "width": 960,
+    "height": 720,
+    "difficulty": {
+      "objects": 4,
+      "lighting": "normal"
+    },
+    "camera": {
+      "pos": [
+        0,
+        2.6,
+        7
+      ],
+      "look": [
+        0,
+        0.5,
+        -1
+      ],
+      "fov": 30
+    },
+    "objects": [
+      {
+        "id": 0,
+        "shape": "cone",
+        "color": "violet",
+        "center": [
+          -2.6684391278773543,
+          0.6480784791987388,
+          -2.845671580871567
+        ],
+        "size": [
+          1,
+          1.2961569583974777,
+          1
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 1,
+        "shape": "sphere",
+        "color": "grey",
+        "center": [
+          -0.5575946928933262,
+          0.47016823317389933,
+          -2.985752356890589
+        ],
+        "size": [
+          0.9403364663477987,
+          0.9403364663477987,
+          0.9403364663477987
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 2,
+        "shape": "cylinder",
+        "color": "amber",
+        "center": [
+          2.1263606980442997,
+          0.5231997348368168,
+          -3.8096372043713926
+        ],
+        "size": [
+          0.984646548004821,
+          1.0463994696736336,
+          0.984646548004821
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 3,
+        "shape": "cylinder",
+        "color": "red",
+        "center": [
+          1.4107035512104629,
+          0.5152386835776269,
+          0.9453480145893991
+        ],
+        "size": [
+          1.09987293118611,
+          1.0304773671552538,
+          1.09987293118611
+        ],
+        "rotY": 0
+      }
+    ],
+    "question": "Which object is closest to the camera?",
+    "options": [
+      "The violet cone",
+      "The grey sphere",
+      "The amber cylinder",
+      "The red cylinder"
+    ],
+    "answer": 3,
+    "explanation": "Distance from the camera to each object's centre: violet cone = 10.39 m, grey sphere = 10.23 m, amber cylinder = 11.21 m, red cylinder = 6.56 m. Smallest: red cylinder.",
+    "visibility": [
+      {
+        "object": "violet cone",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 13047,
+        "ok": true
+      },
+      {
+        "object": "grey sphere",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 12002,
+        "ok": true
+      },
+      {
+        "object": "amber cylinder",
+        "visiblePct": 91,
+        "inFrame": true,
+        "pixels": 17481,
+        "ok": true
+      },
+      {
+        "object": "red cylinder",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 62550,
+        "ok": true
+      }
+    ],
+    "image": "/bench/images/s17.jpg"
+  },
+  {
+    "id": "s18",
+    "seed": 18,
+    "kind": "stability",
+    "tier": 3,
+    "width": 960,
+    "height": 720,
+    "difficulty": {
+      "objects": 4,
+      "lighting": "normal"
+    },
+    "camera": {
+      "pos": [
+        5.5,
+        3,
+        10.8
+      ],
+      "look": [
+        0.3,
+        2,
+        0
+      ],
+      "fov": 32
+    },
+    "objects": [
+      {
+        "id": 0,
+        "shape": "box",
+        "color": "amber",
+        "center": [
+          0,
+          0.5,
+          0
+        ],
+        "size": [
+          1.5,
+          1,
+          1.5
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 1,
+        "shape": "box",
+        "color": "violet",
+        "center": [
+          -0.19425407145172358,
+          1.5,
+          0
+        ],
+        "size": [
+          1.5,
+          1,
+          1.5
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 2,
+        "shape": "box",
+        "color": "teal",
+        "center": [
+          -0.3218515709741041,
+          2.5,
+          0
+        ],
+        "size": [
+          1.5,
+          1,
+          1.5
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 3,
+        "shape": "box",
+        "color": "red",
+        "center": [
+          -0.4598583939950913,
+          3.5,
+          0
+        ],
+        "size": [
+          1.5,
+          1,
+          1.5
+        ],
+        "rotY": 0
+      }
+    ],
+    "question": "Will this stack of 4 boxes stay standing, or will it fall?",
+    "options": [
+      "It stays standing",
+      "It falls"
+    ],
+    "answer": 0,
+    "explanation": "Rule: stable only if the centre of mass of everything above each box lies over that box's top face. above level 3: centre of mass x = -0.46 m vs support -1.07 to 0.43 m; above level 2: centre of mass x = -0.39 m vs support -0.94 to 0.56 m; above level 1: centre of mass x = -0.33 m vs support -0.75 to 0.75 m. All checks pass.",
+    "visibility": [
+      {
+        "object": "amber box",
+        "visiblePct": 86,
+        "inFrame": true,
+        "pixels": 25481,
+        "ok": true
+      },
+      {
+        "object": "violet box",
+        "visiblePct": 92,
+        "inFrame": true,
+        "pixels": 23808,
+        "ok": true
+      },
+      {
+        "object": "teal box",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 22133,
+        "ok": true
+      },
+      {
+        "object": "red box",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 22502,
+        "ok": true
+      }
+    ],
+    "image": "/bench/images/s18.jpg"
+  },
+  {
+    "id": "s19",
+    "seed": 19,
+    "kind": "closer",
+    "tier": 2,
+    "width": 960,
+    "height": 720,
+    "difficulty": {
+      "objects": 5,
+      "lighting": "normal"
+    },
+    "camera": {
+      "pos": [
+        0,
+        2.6,
+        7
+      ],
+      "look": [
+        0,
+        0.5,
+        -1
+      ],
+      "fov": 30
+    },
+    "objects": [
+      {
+        "id": 0,
+        "shape": "sphere",
+        "color": "blue",
+        "center": [
+          -1.4041690407320857,
+          0.45029917315114293,
+          -4.074009795580059
+        ],
+        "size": [
+          0.9005983463022859,
+          0.9005983463022859,
+          0.9005983463022859
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 1,
+        "shape": "cone",
+        "color": "grey",
+        "center": [
+          0.7822133341804145,
+          0.554671982396394,
+          -4.897096720803529
+        ],
+        "size": [
+          1,
+          1.109343964792788,
+          1
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 2,
+        "shape": "sphere",
+        "color": "teal",
+        "center": [
+          0.14932531695812923,
+          0.42529370223637675,
+          -3.2708545973524448
+        ],
+        "size": [
+          0.8505874044727535,
+          0.8505874044727535,
+          0.8505874044727535
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 3,
+        "shape": "sphere",
+        "color": "violet",
+        "center": [
+          -0.38385377414524546,
+          0.4184307108167559,
+          -0.1431342700030651
+        ],
+        "size": [
+          0.8368614216335118,
+          0.8368614216335118,
+          0.8368614216335118
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 4,
+        "shape": "cylinder",
+        "color": "amber",
+        "center": [
+          1.3333668801933527,
+          0.5508816125802696,
+          1.0195044233929371
+        ],
+        "size": [
+          1.0786803802009672,
+          1.1017632251605392,
+          1.0786803802009672
+        ],
+        "rotY": 0
+      }
+    ],
+    "question": "Which object is closest to the camera?",
+    "options": [
+      "The blue sphere",
+      "The grey cone",
+      "The teal sphere",
+      "The violet sphere",
+      "The amber cylinder"
+    ],
+    "answer": 4,
+    "explanation": "Distance from the camera to each object's centre: blue sphere = 11.37 m, grey cone = 12.10 m, teal sphere = 10.50 m, violet sphere = 7.48 m, amber cylinder = 6.46 m. Smallest: amber cylinder.",
+    "visibility": [
+      {
+        "object": "blue sphere",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 9114,
+        "ok": true
+      },
+      {
+        "object": "grey cone",
+        "visiblePct": 79,
+        "inFrame": true,
+        "pixels": 7696,
+        "ok": true
+      },
+      {
+        "object": "teal sphere",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 9281,
+        "ok": true
+      },
+      {
+        "object": "violet sphere",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 17748,
+        "ok": true
+      },
+      {
+        "object": "amber cylinder",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 65921,
+        "ok": true
+      }
+    ],
+    "image": "/bench/images/s19.jpg"
+  },
+  {
+    "id": "s20",
+    "seed": 20,
+    "kind": "leftmost",
+    "tier": 2,
+    "width": 960,
+    "height": 720,
+    "difficulty": {
+      "objects": 5,
+      "lighting": "dim"
+    },
+    "camera": {
+      "pos": [
+        0,
+        2.6,
+        7
+      ],
+      "look": [
+        0,
+        0.5,
+        -1
+      ],
+      "fov": 30
+    },
+    "objects": [
+      {
+        "id": 0,
+        "shape": "box",
+        "color": "teal",
+        "center": [
+          0.1347888579592107,
+          0.4717199504841119,
+          -3.9505081565584987
+        ],
+        "size": [
+          0.9434399009682238,
+          0.9434399009682238,
+          0.9434399009682238
+        ],
+        "rotY": 1.25037599215284
+      },
+      {
+        "id": 1,
+        "shape": "sphere",
+        "color": "grey",
+        "center": [
+          1.2136503381654622,
+          0.4500761174131185,
+          -2.263226695358753
+        ],
+        "size": [
+          0.900152234826237,
+          0.900152234826237,
+          0.900152234826237
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 2,
+        "shape": "cone",
+        "color": "amber",
+        "center": [
+          0.37961179986596116,
+          0.6305440131109208,
+          1.1594919821713123
+        ],
+        "size": [
+          1,
+          1.2610880262218416,
+          1
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 3,
+        "shape": "cone",
+        "color": "blue",
+        "center": [
+          1.5962984811514618,
+          0.5762610555160791,
+          -0.18512319833971524
+        ],
+        "size": [
+          1,
+          1.1525221110321582,
+          1
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 4,
+        "shape": "box",
+        "color": "violet",
+        "center": [
+          -1.274421465024352,
+          0.4598629696760327,
+          -1.0276607514359055
+        ],
+        "size": [
+          0.9197259393520654,
+          0.9197259393520654,
+          0.9197259393520654
+        ],
+        "rotY": 0.8035443916451186
+      }
+    ],
+    "question": "Which object appears furthest to the left in the image?",
+    "options": [
+      "The teal box",
+      "The grey sphere",
+      "The amber cone",
+      "The blue cone",
+      "The violet box"
+    ],
+    "answer": 4,
+    "explanation": "Horizontal pixel position of each object's centre: teal box = 496 px, grey sphere = 652 px, amber cone = 563 px, blue cone = 767 px, violet box = 274 px. Smallest: violet box.",
+    "visibility": [
+      {
+        "object": "teal box",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 18356,
+        "ok": true
+      },
+      {
+        "object": "grey sphere",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 12728,
+        "ok": true
+      },
+      {
+        "object": "amber cone",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 33721,
+        "ok": true
+      },
+      {
+        "object": "blue cone",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 21698,
+        "ok": true
+      },
+      {
+        "object": "violet box",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 35802,
+        "ok": true
+      }
+    ],
+    "image": "/bench/images/s20.jpg"
+  },
+  {
+    "id": "s21",
+    "seed": 21,
+    "kind": "orientation",
+    "tier": 1,
+    "width": 960,
+    "height": 720,
+    "difficulty": {
+      "objects": 1,
+      "lighting": "normal"
+    },
+    "camera": {
+      "pos": [
+        0,
+        3.2,
+        5.5
+      ],
+      "look": [
+        0,
+        0.4,
+        0
+      ],
+      "fov": 30
+    },
+    "objects": [
+      {
+        "id": 0,
+        "shape": "box",
+        "color": "amber",
+        "center": [
+          0,
+          0.05,
+          0
+        ],
+        "size": [
+          2,
+          0.1,
+          2
+        ],
+        "rotY": 3.0695120138865937,
+        "pivot": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 0,
+        "shape": "box",
+        "color": "amber",
+        "center": [
+          0,
+          0.55,
+          -0.95
+        ],
+        "size": [
+          2,
+          1,
+          0.1
+        ],
+        "rotY": 3.0695120138865937,
+        "pivot": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 0,
+        "shape": "box",
+        "color": "amber",
+        "center": [
+          -0.95,
+          0.55,
+          0
+        ],
+        "size": [
+          0.1,
+          1,
+          2
+        ],
+        "rotY": 3.0695120138865937,
+        "pivot": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 0,
+        "shape": "box",
+        "color": "amber",
+        "center": [
+          0.95,
+          0.55,
+          0
+        ],
+        "size": [
+          0.1,
+          1,
+          2
+        ],
+        "rotY": 3.0695120138865937,
+        "pivot": [
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "question": "The open side of this container faces which way?",
+    "options": [
+      "Toward the camera",
+      "Away from the camera",
+      "To the left in the image",
+      "To the right in the image"
+    ],
+    "answer": 1,
+    "explanation": "The container is rotated 176 degrees, so its open side points along (0.07, -1.00) in the ground plane. Camera looks along -z, so +z is toward the camera and +x is image-right.",
+    "visibility": [
+      {
+        "object": "amber box",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 143771,
+        "ok": true
+      }
+    ],
+    "image": "/bench/images/s21.jpg"
+  },
+  {
+    "id": "s22",
+    "seed": 22,
+    "kind": "stability",
+    "tier": 3,
+    "width": 960,
+    "height": 720,
+    "difficulty": {
+      "objects": 2,
+      "lighting": "normal"
+    },
+    "camera": {
+      "pos": [
+        4.5,
+        2.3,
+        8.4
+      ],
+      "look": [
+        0.3,
+        1,
+        0
+      ],
+      "fov": 32
+    },
+    "objects": [
+      {
+        "id": 0,
+        "shape": "box",
+        "color": "amber",
+        "center": [
+          0,
+          0.5,
+          0
+        ],
+        "size": [
+          1.5,
+          1,
+          1.5
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 1,
+        "shape": "box",
+        "color": "violet",
+        "center": [
+          0.04291067330632359,
+          1.5,
+          0
+        ],
+        "size": [
+          1.5,
+          1,
+          1.5
+        ],
+        "rotY": 0
+      }
+    ],
+    "question": "Will this stack of 2 boxes stay standing, or will it fall?",
+    "options": [
+      "It stays standing",
+      "It falls"
+    ],
+    "answer": 0,
+    "explanation": "Rule: stable only if the centre of mass of everything above each box lies over that box's top face. above level 1: centre of mass x = 0.04 m vs support -0.75 to 0.75 m. All checks pass.",
+    "visibility": [
+      {
+        "object": "amber box",
+        "visiblePct": 86,
+        "inFrame": true,
+        "pixels": 40679,
+        "ok": true
+      },
+      {
+        "object": "violet box",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 38421,
+        "ok": true
+      }
+    ],
+    "image": "/bench/images/s22.jpg"
+  },
+  {
+    "id": "s23",
+    "seed": 23,
+    "kind": "closer",
+    "tier": 2,
+    "width": 960,
+    "height": 720,
+    "difficulty": {
+      "objects": 5,
+      "lighting": "normal"
+    },
+    "camera": {
+      "pos": [
+        0,
+        2.6,
+        7
+      ],
+      "look": [
+        0,
+        0.5,
+        -1
+      ],
+      "fov": 30
+    },
+    "objects": [
+      {
+        "id": 0,
+        "shape": "cylinder",
+        "color": "blue",
+        "center": [
+          -1.6192623836919664,
+          0.6432655845303088,
+          -2.8909343246836214
+        ],
+        "size": [
+          0.9833495087688789,
+          1.2865311690606176,
+          0.9833495087688789
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 1,
+        "shape": "cone",
+        "color": "violet",
+        "center": [
+          2.0173754910007116,
+          0.5988062818534672,
+          -0.4694816655479368
+        ],
+        "size": [
+          1,
+          1.1976125637069344,
+          1
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 2,
+        "shape": "cone",
+        "color": "grey",
+        "center": [
+          0.1414521902799608,
+          0.6463607961777598,
+          -1.6753493472468106
+        ],
+        "size": [
+          1,
+          1.2927215923555195,
+          1
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 3,
+        "shape": "cone",
+        "color": "red",
+        "center": [
+          -1.6449706161394715,
+          0.5054862464778125,
+          0.901741125108674
+        ],
+        "size": [
+          1,
+          1.010972492955625,
+          1
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 4,
+        "shape": "sphere",
+        "color": "amber",
+        "center": [
+          2.128664678148925,
+          0.47158338509034364,
+          -3.329998796479776
+        ],
+        "size": [
+          0.9431667701806873,
+          0.9431667701806873,
+          0.9431667701806873
+        ],
+        "rotY": 0
+      }
+    ],
+    "question": "Which object is closest to the camera?",
+    "options": [
+      "The blue cylinder",
+      "The violet cone",
+      "The grey cone",
+      "The red cone",
+      "The amber sphere"
+    ],
+    "answer": 3,
+    "explanation": "Distance from the camera to each object's centre: blue cylinder = 10.21 m, violet cone = 7.99 m, grey cone = 8.89 m, red cone = 6.65 m, amber sphere = 10.76 m. Smallest: red cone.",
+    "visibility": [
+      {
+        "object": "blue cylinder",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 24935,
+        "ok": true
+      },
+      {
+        "object": "violet cone",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 20941,
+        "ok": true
+      },
+      {
+        "object": "grey cone",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 16202,
+        "ok": true
+      },
+      {
+        "object": "red cone",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 26401,
+        "ok": true
+      },
+      {
+        "object": "amber sphere",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 11537,
+        "ok": true
+      }
+    ],
+    "image": "/bench/images/s23.jpg"
+  },
+  {
+    "id": "s24",
+    "seed": 24,
+    "kind": "stability",
+    "tier": 3,
+    "width": 960,
+    "height": 720,
+    "difficulty": {
+      "objects": 2,
+      "lighting": "normal"
+    },
+    "camera": {
+      "pos": [
+        4.5,
+        2.3,
+        8.4
+      ],
+      "look": [
+        0.3,
+        1,
+        0
+      ],
+      "fov": 32
+    },
+    "objects": [
+      {
+        "id": 0,
+        "shape": "box",
+        "color": "amber",
+        "center": [
+          0,
+          0.5,
+          0
+        ],
+        "size": [
+          1.5,
+          1,
+          1.5
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 1,
+        "shape": "box",
+        "color": "violet",
+        "center": [
+          -0.060763227636925876,
+          1.5,
+          0
+        ],
+        "size": [
+          1.5,
+          1,
+          1.5
+        ],
+        "rotY": 0
+      }
+    ],
+    "question": "Will this stack of 2 boxes stay standing, or will it fall?",
+    "options": [
+      "It stays standing",
+      "It falls"
+    ],
+    "answer": 0,
+    "explanation": "Rule: stable only if the centre of mass of everything above each box lies over that box's top face. above level 1: centre of mass x = -0.06 m vs support -0.75 to 0.75 m. All checks pass.",
+    "visibility": [
+      {
+        "object": "amber box",
+        "visiblePct": 87,
+        "inFrame": true,
+        "pixels": 40679,
+        "ok": true
+      },
+      {
+        "object": "violet box",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 38128,
+        "ok": true
+      }
+    ],
+    "image": "/bench/images/s24.jpg"
+  },
+  {
+    "id": "s25",
+    "seed": 25,
+    "kind": "closer",
+    "tier": 2,
+    "width": 960,
+    "height": 720,
+    "difficulty": {
+      "objects": 2,
+      "lighting": "dim"
+    },
+    "camera": {
+      "pos": [
+        0,
+        2.6,
+        7
+      ],
+      "look": [
+        0,
+        0.5,
+        -1
+      ],
+      "fov": 30
+    },
+    "objects": [
+      {
+        "id": 0,
+        "shape": "sphere",
+        "color": "red",
+        "center": [
+          -0.13917252440005523,
+          0.45000286106951537,
+          -2.5115154792089016
+        ],
+        "size": [
+          0.9000057221390307,
+          0.9000057221390307,
+          0.9000057221390307
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 1,
+        "shape": "sphere",
+        "color": "violet",
+        "center": [
+          0.8822128757834435,
+          0.4435781747102738,
+          0.8813069849740716
+        ],
+        "size": [
+          0.8871563494205476,
+          0.8871563494205476,
+          0.8871563494205476
+        ],
+        "rotY": 0
+      }
+    ],
+    "question": "Which object is closest to the camera?",
+    "options": [
+      "The red sphere",
+      "The violet sphere"
+    ],
+    "answer": 1,
+    "explanation": "Distance from the camera to each object's centre: red sphere = 9.75 m, violet sphere = 6.55 m. Smallest: violet sphere.",
+    "visibility": [
+      {
+        "object": "red sphere",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 12035,
+        "ok": true
+      },
+      {
+        "object": "violet sphere",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 26886,
+        "ok": true
+      }
+    ],
+    "image": "/bench/images/s25.jpg"
+  },
+  {
+    "id": "s26",
+    "seed": 26,
+    "kind": "leftmost",
+    "tier": 2,
+    "width": 960,
+    "height": 720,
+    "difficulty": {
+      "objects": 2,
+      "lighting": "normal"
+    },
+    "camera": {
+      "pos": [
+        0,
+        2.6,
+        7
+      ],
+      "look": [
+        0,
+        0.5,
+        -1
+      ],
+      "fov": 30
+    },
+    "objects": [
+      {
+        "id": 0,
+        "shape": "box",
+        "color": "amber",
+        "center": [
+          1.6238885547965767,
+          0.4332616934552789,
+          -1.477190615655854
+        ],
+        "size": [
+          0.8665233869105577,
+          0.8665233869105577,
+          0.8665233869105577
+        ],
+        "rotY": 1.2746948904823512
+      },
+      {
+        "id": 1,
+        "shape": "cone",
+        "color": "teal",
+        "center": [
+          0.6209347659721969,
+          0.6715515557676554,
+          1.054886678140611
+        ],
+        "size": [
+          1,
+          1.3431031115353107,
+          1
+        ],
+        "rotY": 0
+      }
+    ],
+    "question": "Which object appears furthest to the left in the image?",
+    "options": [
+      "The amber box",
+      "The teal cone"
+    ],
+    "answer": 1,
+    "explanation": "Horizontal pixel position of each object's centre: amber box = 729 px, teal cone = 614 px. Smallest: teal cone.",
+    "visibility": [
+      {
+        "object": "amber box",
+        "visiblePct": 99,
+        "inFrame": true,
+        "pixels": 23485,
+        "ok": true
+      },
+      {
+        "object": "teal cone",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 34481,
+        "ok": true
+      }
+    ],
+    "image": "/bench/images/s26.jpg"
+  },
+  {
+    "id": "s27",
+    "seed": 27,
+    "kind": "orientation",
+    "tier": 1,
+    "width": 960,
+    "height": 720,
+    "difficulty": {
+      "objects": 1,
+      "lighting": "normal"
+    },
+    "camera": {
+      "pos": [
+        0,
+        3.2,
+        5.5
+      ],
+      "look": [
+        0,
+        0.4,
+        0
+      ],
+      "fov": 30
+    },
+    "objects": [
+      {
+        "id": 0,
+        "shape": "box",
+        "color": "amber",
+        "center": [
+          0,
+          0.05,
+          0
+        ],
+        "size": [
+          2,
+          0.1,
+          2
+        ],
+        "rotY": 1.5240593223974597,
+        "pivot": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 0,
+        "shape": "box",
+        "color": "amber",
+        "center": [
+          0,
+          0.55,
+          -0.95
+        ],
+        "size": [
+          2,
+          1,
+          0.1
+        ],
+        "rotY": 1.5240593223974597,
+        "pivot": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 0,
+        "shape": "box",
+        "color": "amber",
+        "center": [
+          -0.95,
+          0.55,
+          0
+        ],
+        "size": [
+          0.1,
+          1,
+          2
+        ],
+        "rotY": 1.5240593223974597,
+        "pivot": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 0,
+        "shape": "box",
+        "color": "amber",
+        "center": [
+          0.95,
+          0.55,
+          0
+        ],
+        "size": [
+          0.1,
+          1,
+          2
+        ],
+        "rotY": 1.5240593223974597,
+        "pivot": [
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "question": "The open side of this container faces which way?",
+    "options": [
+      "Toward the camera",
+      "Away from the camera",
+      "To the left in the image",
+      "To the right in the image"
+    ],
+    "answer": 3,
+    "explanation": "The container is rotated 87 degrees, so its open side points along (1.00, 0.05) in the ground plane. Camera looks along -z, so +z is toward the camera and +x is image-right.",
+    "visibility": [
+      {
+        "object": "amber box",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 195280,
+        "ok": true
+      }
+    ],
+    "image": "/bench/images/s27.jpg"
+  },
+  {
+    "id": "s28",
+    "seed": 28,
+    "kind": "stability",
+    "tier": 3,
+    "width": 960,
+    "height": 720,
+    "difficulty": {
+      "objects": 3,
+      "lighting": "normal"
+    },
+    "camera": {
+      "pos": [
+        5,
+        2.65,
+        9.6
+      ],
+      "look": [
+        0.3,
+        1.5,
+        0
+      ],
+      "fov": 32
+    },
+    "objects": [
+      {
+        "id": 0,
+        "shape": "box",
+        "color": "amber",
+        "center": [
+          0,
+          0.5,
+          0
+        ],
+        "size": [
+          1.5,
+          1,
+          1.5
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 1,
+        "shape": "box",
+        "color": "violet",
+        "center": [
+          0.7154996042139828,
+          1.5,
+          0
+        ],
+        "size": [
+          1.5,
+          1,
+          1.5
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 2,
+        "shape": "box",
+        "color": "teal",
+        "center": [
+          1.2651776379789226,
+          2.5,
+          0
+        ],
+        "size": [
+          1.5,
+          1,
+          1.5
+        ],
+        "rotY": 0
+      }
+    ],
+    "question": "Will this stack of 3 boxes stay standing, or will it fall?",
+    "options": [
+      "It stays standing",
+      "It falls"
+    ],
+    "answer": 1,
+    "explanation": "Rule: stable only if the centre of mass of everything above each box lies over that box's top face. above level 2: centre of mass x = 1.27 m vs support -0.03 to 1.47 m; above level 1: centre of mass x = 0.99 m vs support -0.75 to 0.75 m. A check fails.",
+    "visibility": [
+      {
+        "object": "amber box",
+        "visiblePct": 85,
+        "inFrame": true,
+        "pixels": 31721,
+        "ok": true
+      },
+      {
+        "object": "violet box",
+        "visiblePct": 93,
+        "inFrame": true,
+        "pixels": 31191,
+        "ok": true
+      },
+      {
+        "object": "teal box",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 31154,
+        "ok": true
+      }
+    ],
+    "image": "/bench/images/s28.jpg"
+  },
+  {
+    "id": "s29",
+    "seed": 29,
+    "kind": "closer",
+    "tier": 2,
+    "width": 960,
+    "height": 720,
+    "difficulty": {
+      "objects": 2,
+      "lighting": "normal"
+    },
+    "camera": {
+      "pos": [
+        0,
+        2.6,
+        7
+      ],
+      "look": [
+        0,
+        0.5,
+        -1
+      ],
+      "fov": 30
+    },
+    "objects": [
+      {
+        "id": 0,
+        "shape": "box",
+        "color": "violet",
+        "center": [
+          -2.571293292380869,
+          0.5867111217696219,
+          -2.5053140216507015
+        ],
+        "size": [
+          1.1734222435392438,
+          1.1734222435392438,
+          1.1734222435392438
+        ],
+        "rotY": 0.3588914726860821
+      },
+      {
+        "id": 1,
+        "shape": "cylinder",
+        "color": "amber",
+        "center": [
+          2.196927792392671,
+          0.5333254519850016,
+          -1.0932920953258871
+        ],
+        "size": [
+          0.9256295077735559,
+          1.0666509039700032,
+          0.9256295077735559
+        ],
+        "rotY": 0
+      }
+    ],
+    "question": "Which object is closest to the camera?",
+    "options": [
+      "The violet box",
+      "The amber cylinder"
+    ],
+    "answer": 1,
+    "explanation": "Distance from the camera to each object's centre: violet box = 10.05 m, amber cylinder = 8.64 m. Smallest: amber cylinder.",
+    "visibility": [
+      {
+        "object": "violet box",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 34564,
+        "ok": true
+      },
+      {
+        "object": "amber cylinder",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 29767,
+        "ok": true
+      }
+    ],
+    "image": "/bench/images/s29.jpg"
+  },
+  {
+    "id": "s30",
+    "seed": 30,
+    "kind": "stability",
+    "tier": 3,
+    "width": 960,
+    "height": 720,
+    "difficulty": {
+      "objects": 3,
+      "lighting": "dim"
+    },
+    "camera": {
+      "pos": [
+        5,
+        2.65,
+        9.6
+      ],
+      "look": [
+        0.3,
+        1.5,
+        0
+      ],
+      "fov": 32
+    },
+    "objects": [
+      {
+        "id": 0,
+        "shape": "box",
+        "color": "amber",
+        "center": [
+          0,
+          0.5,
+          0
+        ],
+        "size": [
+          1.5,
+          1,
+          1.5
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 1,
+        "shape": "box",
+        "color": "violet",
+        "center": [
+          -0.008226559381000698,
+          1.5,
+          0
+        ],
+        "size": [
+          1.5,
+          1,
+          1.5
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 2,
+        "shape": "box",
+        "color": "teal",
+        "center": [
+          -0.02526775444857776,
+          2.5,
+          0
+        ],
+        "size": [
+          1.5,
+          1,
+          1.5
+        ],
+        "rotY": 0
+      }
+    ],
+    "question": "Will this stack of 3 boxes stay standing, or will it fall?",
+    "options": [
+      "It stays standing",
+      "It falls"
+    ],
+    "answer": 0,
+    "explanation": "Rule: stable only if the centre of mass of everything above each box lies over that box's top face. above level 2: centre of mass x = -0.03 m vs support -0.76 to 0.74 m; above level 1: centre of mass x = -0.02 m vs support -0.75 to 0.75 m. All checks pass.",
+    "visibility": [
+      {
+        "object": "amber box",
+        "visiblePct": 85,
+        "inFrame": true,
+        "pixels": 31721,
+        "ok": true
+      },
+      {
+        "object": "violet box",
+        "visiblePct": 94,
+        "inFrame": true,
+        "pixels": 29859,
+        "ok": true
+      },
+      {
+        "object": "teal box",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 28907,
+        "ok": true
+      }
+    ],
+    "image": "/bench/images/s30.jpg"
+  },
+  {
+    "id": "s31",
+    "seed": 31,
+    "kind": "closer",
+    "tier": 2,
+    "width": 960,
+    "height": 720,
+    "difficulty": {
+      "objects": 3,
+      "lighting": "normal"
+    },
+    "camera": {
+      "pos": [
+        0,
+        2.6,
+        7
+      ],
+      "look": [
+        0,
+        0.5,
+        -1
+      ],
+      "fov": 30
+    },
+    "objects": [
+      {
+        "id": 0,
+        "shape": "cylinder",
+        "color": "blue",
+        "center": [
+          -1.5457995431497693,
+          0.5578686627559364,
+          -4.798557068035007
+        ],
+        "size": [
+          0.884201020328328,
+          1.1157373255118728,
+          0.884201020328328
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 1,
+        "shape": "box",
+        "color": "red",
+        "center": [
+          -0.408292480185628,
+          0.48804689473472534,
+          -2.44690047679469
+        ],
+        "size": [
+          0.9760937894694507,
+          0.9760937894694507,
+          0.9760937894694507
+        ],
+        "rotY": 0.6198139667976648
+      },
+      {
+        "id": 2,
+        "shape": "sphere",
+        "color": "amber",
+        "center": [
+          0.630677358992398,
+          0.47235549250617626,
+          -0.4388524969108403
+        ],
+        "size": [
+          0.9447109850123525,
+          0.9447109850123525,
+          0.9447109850123525
+        ],
+        "rotY": 0
+      }
+    ],
+    "question": "Which object is closest to the camera?",
+    "options": [
+      "The blue cylinder",
+      "The red box",
+      "The amber sphere"
+    ],
+    "answer": 2,
+    "explanation": "Distance from the camera to each object's centre: blue cylinder = 12.07 m, red box = 9.69 m, amber sphere = 7.76 m. Smallest: amber sphere.",
+    "visibility": [
+      {
+        "object": "blue cylinder",
+        "visiblePct": 85,
+        "inFrame": true,
+        "pixels": 13627,
+        "ok": true
+      },
+      {
+        "object": "red box",
+        "visiblePct": 99,
+        "inFrame": true,
+        "pixels": 28669,
+        "ok": true
+      },
+      {
+        "object": "amber sphere",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 21093,
+        "ok": true
+      }
+    ],
+    "image": "/bench/images/s31.jpg"
+  },
+  {
+    "id": "s32",
+    "seed": 32,
+    "kind": "leftmost",
+    "tier": 2,
+    "width": 960,
+    "height": 720,
+    "difficulty": {
+      "objects": 3,
+      "lighting": "normal"
+    },
+    "camera": {
+      "pos": [
+        0,
+        2.6,
+        7
+      ],
+      "look": [
+        0,
+        0.5,
+        -1
+      ],
+      "fov": 30
+    },
+    "objects": [
+      {
+        "id": 0,
+        "shape": "cylinder",
+        "color": "red",
+        "center": [
+          -1.8512434812262653,
+          0.574750604107976,
+          -0.0347745450679211
+        ],
+        "size": [
+          0.9230332967359574,
+          1.149501208215952,
+          0.9230332967359574
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 1,
+        "shape": "cylinder",
+        "color": "teal",
+        "center": [
+          -1.814665878936648,
+          0.5319809751585126,
+          -3.900097585003823
+        ],
+        "size": [
+          0.94302471219562,
+          1.0639619503170252,
+          0.94302471219562
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 2,
+        "shape": "sphere",
+        "color": "blue",
+        "center": [
+          1.4588937187567348,
+          0.4518671039259061,
+          -1.4439864627551287
+        ],
+        "size": [
+          0.9037342078518122,
+          0.9037342078518122,
+          0.9037342078518122
+        ],
+        "rotY": 0
+      }
+    ],
+    "question": "Which object appears furthest to the left in the image?",
+    "options": [
+      "The red cylinder",
+      "The teal cylinder",
+      "The blue sphere"
+    ],
+    "answer": 0,
+    "explanation": "Horizontal pixel position of each object's centre: red cylinder = 140 px, teal cylinder = 260 px, blue sphere = 705 px. Smallest: red cylinder.",
+    "visibility": [
+      {
+        "object": "red cylinder",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 41634,
+        "ok": true
+      },
+      {
+        "object": "teal cylinder",
+        "visiblePct": 93,
+        "inFrame": true,
+        "pixels": 16532,
+        "ok": true
+      },
+      {
+        "object": "blue sphere",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 15355,
+        "ok": true
+      }
+    ],
+    "image": "/bench/images/s32.jpg"
+  },
+  {
+    "id": "s33",
+    "seed": 33,
+    "kind": "orientation",
+    "tier": 1,
+    "width": 960,
+    "height": 720,
+    "difficulty": {
+      "objects": 1,
+      "lighting": "normal"
+    },
+    "camera": {
+      "pos": [
+        0,
+        3.2,
+        5.5
+      ],
+      "look": [
+        0,
+        0.4,
+        0
+      ],
+      "fov": 30
+    },
+    "objects": [
+      {
+        "id": 0,
+        "shape": "box",
+        "color": "amber",
+        "center": [
+          0,
+          0.05,
+          0
+        ],
+        "size": [
+          2,
+          0.1,
+          2
+        ],
+        "rotY": 2.8852259043422572,
+        "pivot": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 0,
+        "shape": "box",
+        "color": "amber",
+        "center": [
+          0,
+          0.55,
+          -0.95
+        ],
+        "size": [
+          2,
+          1,
+          0.1
+        ],
+        "rotY": 2.8852259043422572,
+        "pivot": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 0,
+        "shape": "box",
+        "color": "amber",
+        "center": [
+          -0.95,
+          0.55,
+          0
+        ],
+        "size": [
+          0.1,
+          1,
+          2
+        ],
+        "rotY": 2.8852259043422572,
+        "pivot": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 0,
+        "shape": "box",
+        "color": "amber",
+        "center": [
+          0.95,
+          0.55,
+          0
+        ],
+        "size": [
+          0.1,
+          1,
+          2
+        ],
+        "rotY": 2.8852259043422572,
+        "pivot": [
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "question": "The open side of this container faces which way?",
+    "options": [
+      "Toward the camera",
+      "Away from the camera",
+      "To the left in the image",
+      "To the right in the image"
+    ],
+    "answer": 1,
+    "explanation": "The container is rotated 165 degrees, so its open side points along (0.25, -0.97) in the ground plane. Camera looks along -z, so +z is toward the camera and +x is image-right.",
+    "visibility": [
+      {
+        "object": "amber box",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 147937,
+        "ok": true
+      }
+    ],
+    "image": "/bench/images/s33.jpg"
+  },
+  {
+    "id": "s34",
+    "seed": 34,
+    "kind": "stability",
+    "tier": 3,
+    "width": 960,
+    "height": 720,
+    "difficulty": {
+      "objects": 4,
+      "lighting": "normal"
+    },
+    "camera": {
+      "pos": [
+        5.5,
+        3,
+        10.8
+      ],
+      "look": [
+        0.3,
+        2,
+        0
+      ],
+      "fov": 32
+    },
+    "objects": [
+      {
+        "id": 0,
+        "shape": "box",
+        "color": "amber",
+        "center": [
+          0,
+          0.5,
+          0
+        ],
+        "size": [
+          1.5,
+          1,
+          1.5
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 1,
+        "shape": "box",
+        "color": "violet",
+        "center": [
+          0.1812407086836174,
+          1.5,
+          0
+        ],
+        "size": [
+          1.5,
+          1,
+          1.5
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 2,
+        "shape": "box",
+        "color": "teal",
+        "center": [
+          0.36592546361498535,
+          2.5,
+          0
+        ],
+        "size": [
+          1.5,
+          1,
+          1.5
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 3,
+        "shape": "box",
+        "color": "red",
+        "center": [
+          0.1722461194731295,
+          3.5,
+          0
+        ],
+        "size": [
+          1.5,
+          1,
+          1.5
+        ],
+        "rotY": 0
+      }
+    ],
+    "question": "Will this stack of 4 boxes stay standing, or will it fall?",
+    "options": [
+      "It stays standing",
+      "It falls"
+    ],
+    "answer": 0,
+    "explanation": "Rule: stable only if the centre of mass of everything above each box lies over that box's top face. above level 3: centre of mass x = 0.17 m vs support -0.38 to 1.12 m; above level 2: centre of mass x = 0.27 m vs support -0.57 to 0.93 m; above level 1: centre of mass x = 0.24 m vs support -0.75 to 0.75 m. All checks pass.",
+    "visibility": [
+      {
+        "object": "amber box",
+        "visiblePct": 83,
+        "inFrame": true,
+        "pixels": 25481,
+        "ok": true
+      },
+      {
+        "object": "violet box",
+        "visiblePct": 90,
+        "inFrame": true,
+        "pixels": 24272,
+        "ok": true
+      },
+      {
+        "object": "teal box",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 22881,
+        "ok": true
+      },
+      {
+        "object": "red box",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 23236,
+        "ok": true
+      }
+    ],
+    "image": "/bench/images/s34.jpg"
+  },
+  {
+    "id": "s35",
+    "seed": 35,
+    "kind": "closer",
+    "tier": 2,
+    "width": 960,
+    "height": 720,
+    "difficulty": {
+      "objects": 3,
+      "lighting": "dim"
+    },
+    "camera": {
+      "pos": [
+        0,
+        2.6,
+        7
+      ],
+      "look": [
+        0,
+        0.5,
+        -1
+      ],
+      "fov": 30
+    },
+    "objects": [
+      {
+        "id": 0,
+        "shape": "cone",
+        "color": "violet",
+        "center": [
+          -2.73335906881839,
+          0.6766096847131848,
+          -2.304256687872112
+        ],
+        "size": [
+          1,
+          1.3532193694263697,
+          1
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 1,
+        "shape": "box",
+        "color": "blue",
+        "center": [
+          0.5148355770856141,
+          0.43272152864374225,
+          -2.7186314384918657
+        ],
+        "size": [
+          0.8654430572874845,
+          0.8654430572874845,
+          0.8654430572874845
+        ],
+        "rotY": 0.09032623248640448
+      },
+      {
+        "id": 2,
+        "shape": "box",
+        "color": "grey",
+        "center": [
+          1.9513724874705076,
+          0.4151658654212952,
+          -1.428759346017614
+        ],
+        "size": [
+          0.8303317308425904,
+          0.8303317308425904,
+          0.8303317308425904
+        ],
+        "rotY": 0.6777027948992327
+      }
+    ],
+    "question": "Which object is closest to the camera?",
+    "options": [
+      "The violet cone",
+      "The blue box",
+      "The grey box"
+    ],
+    "answer": 2,
+    "explanation": "Distance from the camera to each object's centre: violet cone = 9.89 m, blue box = 9.97 m, grey box = 8.92 m. Smallest: grey box.",
+    "visibility": [
+      {
+        "object": "violet cone",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 15538,
+        "ok": true
+      },
+      {
+        "object": "blue box",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 17983,
+        "ok": true
+      },
+      {
+        "object": "grey box",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 26824,
+        "ok": true
+      }
+    ],
+    "image": "/bench/images/s35.jpg"
+  },
+  {
+    "id": "s36",
+    "seed": 36,
+    "kind": "stability",
+    "tier": 3,
+    "width": 960,
+    "height": 720,
+    "difficulty": {
+      "objects": 4,
+      "lighting": "normal"
+    },
+    "camera": {
+      "pos": [
+        5.5,
+        3,
+        10.8
+      ],
+      "look": [
+        0.3,
+        2,
+        0
+      ],
+      "fov": 32
+    },
+    "objects": [
+      {
+        "id": 0,
+        "shape": "box",
+        "color": "amber",
+        "center": [
+          0,
+          0.5,
+          0
+        ],
+        "size": [
+          1.5,
+          1,
+          1.5
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 1,
+        "shape": "box",
+        "color": "violet",
+        "center": [
+          -0.061192044988274574,
+          1.5,
+          0
+        ],
+        "size": [
+          1.5,
+          1,
+          1.5
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 2,
+        "shape": "box",
+        "color": "teal",
+        "center": [
+          -0.2622450615745038,
+          2.5,
+          0
+        ],
+        "size": [
+          1.5,
+          1,
+          1.5
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 3,
+        "shape": "box",
+        "color": "red",
+        "center": [
+          -0.043807943584397435,
+          3.5,
+          0
+        ],
+        "size": [
+          1.5,
+          1,
+          1.5
+        ],
+        "rotY": 0
+      }
+    ],
+    "question": "Will this stack of 4 boxes stay standing, or will it fall?",
+    "options": [
+      "It stays standing",
+      "It falls"
+    ],
+    "answer": 0,
+    "explanation": "Rule: stable only if the centre of mass of everything above each box lies over that box's top face. above level 3: centre of mass x = -0.04 m vs support -1.01 to 0.49 m; above level 2: centre of mass x = -0.15 m vs support -0.81 to 0.69 m; above level 1: centre of mass x = -0.12 m vs support -0.75 to 0.75 m. All checks pass.",
+    "visibility": [
+      {
+        "object": "amber box",
+        "visiblePct": 85,
+        "inFrame": true,
+        "pixels": 25481,
+        "ok": true
+      },
+      {
+        "object": "violet box",
+        "visiblePct": 93,
+        "inFrame": true,
+        "pixels": 23942,
+        "ok": true
+      },
+      {
+        "object": "teal box",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 22173,
+        "ok": true
+      },
+      {
+        "object": "red box",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 23008,
+        "ok": true
+      }
+    ],
+    "image": "/bench/images/s36.jpg"
+  },
+  {
+    "id": "s37",
+    "seed": 37,
+    "kind": "closer",
+    "tier": 2,
+    "width": 960,
+    "height": 720,
+    "difficulty": {
+      "objects": 4,
+      "lighting": "normal"
+    },
+    "camera": {
+      "pos": [
+        0,
+        2.6,
+        7
+      ],
+      "look": [
+        0,
+        0.5,
+        -1
+      ],
+      "fov": 30
+    },
+    "objects": [
+      {
+        "id": 0,
+        "shape": "cylinder",
+        "color": "blue",
+        "center": [
+          2.1019868951290848,
+          0.5805437763221561,
+          -3.8585472057107832
+        ],
+        "size": [
+          0.969845734559931,
+          1.1610875526443123,
+          0.969845734559931
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 1,
+        "shape": "cylinder",
+        "color": "amber",
+        "center": [
+          -2.550391488522291,
+          0.5228480018675328,
+          -3.303092147735879
+        ],
+        "size": [
+          0.8346985982963816,
+          1.0456960037350655,
+          0.8346985982963816
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 2,
+        "shape": "cone",
+        "color": "grey",
+        "center": [
+          0.852334412187338,
+          0.6986517215613275,
+          -1.5789375911001113
+        ],
+        "size": [
+          1,
+          1.397303443122655,
+          1
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 3,
+        "shape": "sphere",
+        "color": "teal",
+        "center": [
+          -0.38992765992879885,
+          0.4774485483765602,
+          -2.988682380830869
+        ],
+        "size": [
+          0.9548970967531204,
+          0.9548970967531204,
+          0.9548970967531204
+        ],
+        "rotY": 0
+      }
+    ],
+    "question": "Which object is closest to the camera?",
+    "options": [
+      "The blue cylinder",
+      "The amber cylinder",
+      "The grey cone",
+      "The teal sphere"
+    ],
+    "answer": 2,
+    "explanation": "Distance from the camera to each object's centre: blue cylinder = 11.24 m, amber cylinder = 10.82 m, grey cone = 8.83 m, teal sphere = 10.22 m. Smallest: grey cone.",
+    "visibility": [
+      {
+        "object": "blue cylinder",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 18726,
+        "ok": true
+      },
+      {
+        "object": "amber cylinder",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 16130,
+        "ok": true
+      },
+      {
+        "object": "grey cone",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 17374,
+        "ok": true
+      },
+      {
+        "object": "teal sphere",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 12354,
+        "ok": true
+      }
+    ],
+    "image": "/bench/images/s37.jpg"
+  },
+  {
+    "id": "s38",
+    "seed": 38,
+    "kind": "leftmost",
+    "tier": 2,
+    "width": 960,
+    "height": 720,
+    "difficulty": {
+      "objects": 4,
+      "lighting": "normal"
+    },
+    "camera": {
+      "pos": [
+        0,
+        2.6,
+        7
+      ],
+      "look": [
+        0,
+        0.5,
+        -1
+      ],
+      "fov": 30
+    },
+    "objects": [
+      {
+        "id": 0,
+        "shape": "sphere",
+        "color": "blue",
+        "center": [
+          0.8193547153845429,
+          0.4764009550912306,
+          -0.054197990894317094
+        ],
+        "size": [
+          0.9528019101824612,
+          0.9528019101824612,
+          0.9528019101824612
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 1,
+        "shape": "box",
+        "color": "red",
+        "center": [
+          -1.7189641647040843,
+          0.5897558621130883,
+          -3.79946661661379
+        ],
+        "size": [
+          1.1795117242261766,
+          1.1795117242261766,
+          1.1795117242261766
+        ],
+        "rotY": 1.4341979798628017
+      },
+      {
+        "id": 2,
+        "shape": "box",
+        "color": "violet",
+        "center": [
+          -0.6154014009982349,
+          0.45812524324283005,
+          -2.648033003648743
+        ],
+        "size": [
+          0.9162504864856601,
+          0.9162504864856601,
+          0.9162504864856601
+        ],
+        "rotY": 0.3317716713063419
+      },
+      {
+        "id": 3,
+        "shape": "sphere",
+        "color": "teal",
+        "center": [
+          2.356664811633527,
+          0.48187962397933004,
+          -4.631651916960254
+        ],
+        "size": [
+          0.9637592479586601,
+          0.9637592479586601,
+          0.9637592479586601
+        ],
+        "rotY": 0
+      }
+    ],
+    "question": "Which object appears furthest to the left in the image?",
+    "options": [
+      "The blue sphere",
+      "The red box",
+      "The violet box",
+      "The teal sphere"
+    ],
+    "answer": 1,
+    "explanation": "Horizontal pixel position of each object's centre: blue sphere = 630 px, red box = 269 px, violet box = 396 px, teal sphere = 749 px. Smallest: red box.",
+    "visibility": [
+      {
+        "object": "blue sphere",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 23787,
+        "ok": true
+      },
+      {
+        "object": "red box",
+        "visiblePct": 88,
+        "inFrame": true,
+        "pixels": 29765,
+        "ok": true
+      },
+      {
+        "object": "violet box",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 21916,
+        "ok": true
+      },
+      {
+        "object": "teal sphere",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 9617,
+        "ok": true
+      }
+    ],
+    "image": "/bench/images/s38.jpg"
+  },
+  {
+    "id": "s39",
+    "seed": 39,
+    "kind": "orientation",
+    "tier": 1,
+    "width": 960,
+    "height": 720,
+    "difficulty": {
+      "objects": 1,
+      "lighting": "normal"
+    },
+    "camera": {
+      "pos": [
+        0,
+        3.2,
+        5.5
+      ],
+      "look": [
+        0,
+        0.4,
+        0
+      ],
+      "fov": 30
+    },
+    "objects": [
+      {
+        "id": 0,
+        "shape": "box",
+        "color": "amber",
+        "center": [
+          0,
+          0.05,
+          0
+        ],
+        "size": [
+          2,
+          0.1,
+          2
+        ],
+        "rotY": 2.991551483637192,
+        "pivot": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 0,
+        "shape": "box",
+        "color": "amber",
+        "center": [
+          0,
+          0.55,
+          -0.95
+        ],
+        "size": [
+          2,
+          1,
+          0.1
+        ],
+        "rotY": 2.991551483637192,
+        "pivot": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 0,
+        "shape": "box",
+        "color": "amber",
+        "center": [
+          -0.95,
+          0.55,
+          0
+        ],
+        "size": [
+          0.1,
+          1,
+          2
+        ],
+        "rotY": 2.991551483637192,
+        "pivot": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 0,
+        "shape": "box",
+        "color": "amber",
+        "center": [
+          0.95,
+          0.55,
+          0
+        ],
+        "size": [
+          0.1,
+          1,
+          2
+        ],
+        "rotY": 2.991551483637192,
+        "pivot": [
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "question": "The open side of this container faces which way?",
+    "options": [
+      "Toward the camera",
+      "Away from the camera",
+      "To the left in the image",
+      "To the right in the image"
+    ],
+    "answer": 1,
+    "explanation": "The container is rotated 171 degrees, so its open side points along (0.15, -0.99) in the ground plane. Camera looks along -z, so +z is toward the camera and +x is image-right.",
+    "visibility": [
+      {
+        "object": "amber box",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 141774,
+        "ok": true
+      }
+    ],
+    "image": "/bench/images/s39.jpg"
+  },
+  {
+    "id": "s40",
+    "seed": 40,
+    "kind": "stability",
+    "tier": 3,
+    "width": 960,
+    "height": 720,
+    "difficulty": {
+      "objects": 2,
+      "lighting": "dim"
+    },
+    "camera": {
+      "pos": [
+        4.5,
+        2.3,
+        8.4
+      ],
+      "look": [
+        0.3,
+        1,
+        0
+      ],
+      "fov": 32
+    },
+    "objects": [
+      {
+        "id": 0,
+        "shape": "box",
+        "color": "amber",
+        "center": [
+          0,
+          0.5,
+          0
+        ],
+        "size": [
+          1.5,
+          1,
+          1.5
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 1,
+        "shape": "box",
+        "color": "violet",
+        "center": [
+          0.23290657927282155,
+          1.5,
+          0
+        ],
+        "size": [
+          1.5,
+          1,
+          1.5
+        ],
+        "rotY": 0
+      }
+    ],
+    "question": "Will this stack of 2 boxes stay standing, or will it fall?",
+    "options": [
+      "It stays standing",
+      "It falls"
+    ],
+    "answer": 0,
+    "explanation": "Rule: stable only if the centre of mass of everything above each box lies over that box's top face. above level 1: centre of mass x = 0.23 m vs support -0.75 to 0.75 m. All checks pass.",
+    "visibility": [
+      {
+        "object": "amber box",
+        "visiblePct": 85,
+        "inFrame": true,
+        "pixels": 40679,
+        "ok": true
+      },
+      {
+        "object": "violet box",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 38927,
+        "ok": true
+      }
+    ],
+    "image": "/bench/images/s40.jpg"
+  },
+  {
+    "id": "s41",
+    "seed": 41,
+    "kind": "closer",
+    "tier": 2,
+    "width": 960,
+    "height": 720,
+    "difficulty": {
+      "objects": 4,
+      "lighting": "normal"
+    },
+    "camera": {
+      "pos": [
+        0,
+        2.6,
+        7
+      ],
+      "look": [
+        0,
+        0.5,
+        -1
+      ],
+      "fov": 30
+    },
+    "objects": [
+      {
+        "id": 0,
+        "shape": "box",
+        "color": "teal",
+        "center": [
+          1.0492831176146864,
+          0.43890130650252107,
+          -4.011608765786514
+        ],
+        "size": [
+          0.8778026130050421,
+          0.8778026130050421,
+          0.8778026130050421
+        ],
+        "rotY": 0.1857179602375254
+      },
+      {
+        "id": 1,
+        "shape": "sphere",
+        "color": "violet",
+        "center": [
+          2.3956427108496428,
+          0.48533606943674384,
+          -2.4243145016487686
+        ],
+        "size": [
+          0.9706721388734877,
+          0.9706721388734877,
+          0.9706721388734877
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 2,
+        "shape": "sphere",
+        "color": "amber",
+        "center": [
+          0.019215944595635026,
+          0.4644503286341205,
+          1.0377462383825335
+        ],
+        "size": [
+          0.928900657268241,
+          0.928900657268241,
+          0.928900657268241
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 3,
+        "shape": "cone",
+        "color": "grey",
+        "center": [
+          -0.30921373162418586,
+          0.5531668297946453,
+          -3.101944244187325
+        ],
+        "size": [
+          1,
+          1.1063336595892905,
+          1
+        ],
+        "rotY": 0
+      }
+    ],
+    "question": "Which object is closest to the camera?",
+    "options": [
+      "The teal box",
+      "The violet sphere",
+      "The amber sphere",
+      "The grey cone"
+    ],
+    "answer": 2,
+    "explanation": "Distance from the camera to each object's centre: teal box = 11.27 m, violet sphere = 9.95 m, amber sphere = 6.33 m, grey cone = 10.31 m. Smallest: amber sphere.",
+    "visibility": [
+      {
+        "object": "teal box",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 15584,
+        "ok": true
+      },
+      {
+        "object": "violet sphere",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 14681,
+        "ok": true
+      },
+      {
+        "object": "amber sphere",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 30685,
+        "ok": true
+      },
+      {
+        "object": "grey cone",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 10413,
+        "ok": true
+      }
+    ],
+    "image": "/bench/images/s41.jpg"
+  },
+  {
+    "id": "s42",
+    "seed": 42,
+    "kind": "stability",
+    "tier": 3,
+    "width": 960,
+    "height": 720,
+    "difficulty": {
+      "objects": 2,
+      "lighting": "normal"
+    },
+    "camera": {
+      "pos": [
+        4.5,
+        2.3,
+        8.4
+      ],
+      "look": [
+        0.3,
+        1,
+        0
+      ],
+      "fov": 32
+    },
+    "objects": [
+      {
+        "id": 0,
+        "shape": "box",
+        "color": "amber",
+        "center": [
+          0,
+          0.5,
+          0
+        ],
+        "size": [
+          1.5,
+          1,
+          1.5
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 1,
+        "shape": "box",
+        "color": "violet",
+        "center": [
+          0.24452696414664388,
+          1.5,
+          0
+        ],
+        "size": [
+          1.5,
+          1,
+          1.5
+        ],
+        "rotY": 0
+      }
+    ],
+    "question": "Will this stack of 2 boxes stay standing, or will it fall?",
+    "options": [
+      "It stays standing",
+      "It falls"
+    ],
+    "answer": 0,
+    "explanation": "Rule: stable only if the centre of mass of everything above each box lies over that box's top face. above level 1: centre of mass x = 0.24 m vs support -0.75 to 0.75 m. All checks pass.",
+    "visibility": [
+      {
+        "object": "amber box",
+        "visiblePct": 85,
+        "inFrame": true,
+        "pixels": 40679,
+        "ok": true
+      },
+      {
+        "object": "violet box",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 38964,
+        "ok": true
+      }
+    ],
+    "image": "/bench/images/s42.jpg"
+  },
+  {
+    "id": "s43",
+    "seed": 43,
+    "kind": "closer",
+    "tier": 2,
+    "width": 960,
+    "height": 720,
+    "difficulty": {
+      "objects": 5,
+      "lighting": "normal"
+    },
+    "camera": {
+      "pos": [
+        0,
+        2.6,
+        7
+      ],
+      "look": [
+        0,
+        0.5,
+        -1
+      ],
+      "fov": 30
+    },
+    "objects": [
+      {
+        "id": 0,
+        "shape": "cylinder",
+        "color": "red",
+        "center": [
+          1.2102720156311992,
+          0.6306610548403114,
+          -1.32769300728105
+        ],
+        "size": [
+          1.024350595427677,
+          1.2613221096806229,
+          1.024350595427677
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 1,
+        "shape": "cylinder",
+        "color": "grey",
+        "center": [
+          2.5714779060333965,
+          0.4593896522186697,
+          -2.5175047103781254
+        ],
+        "size": [
+          0.8386815011268483,
+          0.9187793044373394,
+          0.8386815011268483
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 2,
+        "shape": "box",
+        "color": "blue",
+        "center": [
+          0.19256322532892245,
+          0.43381878137588503,
+          -3.719249018561095
+        ],
+        "size": [
+          0.8676375627517701,
+          0.8676375627517701,
+          0.8676375627517701
+        ],
+        "rotY": 0.3498974048998207
+      },
+      {
+        "id": 3,
+        "shape": "box",
+        "color": "violet",
+        "center": [
+          -2.7378080282360315,
+          0.462077551940456,
+          -4.084890480013565
+        ],
+        "size": [
+          0.924155103880912,
+          0.924155103880912,
+          0.924155103880912
+        ],
+        "rotY": 0.6370996262412518
+      },
+      {
+        "id": 4,
+        "shape": "cone",
+        "color": "teal",
+        "center": [
+          -0.5294053416699169,
+          0.5373254910111427,
+          0.4411968430969866
+        ],
+        "size": [
+          1,
+          1.0746509820222854,
+          1
+        ],
+        "rotY": 0
+      }
+    ],
+    "question": "Which object is closest to the camera?",
+    "options": [
+      "The red cylinder",
+      "The grey cylinder",
+      "The blue box",
+      "The violet box",
+      "The teal cone"
+    ],
+    "answer": 4,
+    "explanation": "Distance from the camera to each object's centre: red cylinder = 8.64 m, grey cylinder = 10.09 m, blue box = 10.94 m, violet box = 11.62 m, teal cone = 6.90 m. Smallest: teal cone.",
+    "visibility": [
+      {
+        "object": "red cylinder",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 35800,
+        "ok": true
+      },
+      {
+        "object": "grey cylinder",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 16958,
+        "ok": true
+      },
+      {
+        "object": "blue box",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 16571,
+        "ok": true
+      },
+      {
+        "object": "violet box",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 18224,
+        "ok": true
+      },
+      {
+        "object": "teal cone",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 23443,
+        "ok": true
+      }
+    ],
+    "image": "/bench/images/s43.jpg"
+  },
+  {
+    "id": "s44",
+    "seed": 44,
+    "kind": "leftmost",
+    "tier": 2,
+    "width": 960,
+    "height": 720,
+    "difficulty": {
+      "objects": 5,
+      "lighting": "normal"
+    },
+    "camera": {
+      "pos": [
+        0,
+        2.6,
+        7
+      ],
+      "look": [
+        0,
+        0.5,
+        -1
+      ],
+      "fov": 30
+    },
+    "objects": [
+      {
+        "id": 0,
+        "shape": "cylinder",
+        "color": "violet",
+        "center": [
+          0.7578669903799891,
+          0.5922994100488722,
+          -0.8971863516606389
+        ],
+        "size": [
+          0.9082367050461472,
+          1.1845988200977444,
+          0.9082367050461472
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 1,
+        "shape": "cone",
+        "color": "grey",
+        "center": [
+          0.009576161578297437,
+          0.5302735344972461,
+          -3.0774736928753557
+        ],
+        "size": [
+          1,
+          1.0605470689944922,
+          1
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 2,
+        "shape": "sphere",
+        "color": "blue",
+        "center": [
+          1.8701359011232848,
+          0.43373901632148776,
+          0.3088322185445582
+        ],
+        "size": [
+          0.8674780326429755,
+          0.8674780326429755,
+          0.8674780326429755
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 3,
+        "shape": "cylinder",
+        "color": "teal",
+        "center": [
+          -1.1736669385805725,
+          0.5532902634702623,
+          -1.4710940868593751
+        ],
+        "size": [
+          0.9560943094082177,
+          1.1065805269405247,
+          0.9560943094082177
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 4,
+        "shape": "cone",
+        "color": "amber",
+        "center": [
+          -2.73622134514153,
+          0.6751242830418049,
+          -4.122813408728689
+        ],
+        "size": [
+          1,
+          1.3502485660836099,
+          1
+        ],
+        "rotY": 0
+      }
+    ],
+    "question": "Which object appears furthest to the left in the image?",
+    "options": [
+      "The violet cylinder",
+      "The grey cone",
+      "The blue sphere",
+      "The teal cylinder",
+      "The amber cone"
+    ],
+    "answer": 4,
+    "explanation": "Horizontal pixel position of each object's centre: violet cylinder = 605 px, grey cone = 481 px, blue sphere = 838 px, teal cylinder = 299 px, amber cone = 153 px. Smallest: amber cone.",
+    "visibility": [
+      {
+        "object": "violet cylinder",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 32586,
+        "ok": true
+      },
+      {
+        "object": "grey cone",
+        "visiblePct": 97,
+        "inFrame": true,
+        "pixels": 10093,
+        "ok": true
+      },
+      {
+        "object": "blue sphere",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 22294,
+        "ok": true
+      },
+      {
+        "object": "teal cylinder",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 28454,
+        "ok": true
+      },
+      {
+        "object": "amber cone",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 10555,
+        "ok": true
+      }
+    ],
+    "image": "/bench/images/s44.jpg"
+  },
+  {
+    "id": "s45",
+    "seed": 45,
+    "kind": "orientation",
+    "tier": 1,
+    "width": 960,
+    "height": 720,
+    "difficulty": {
+      "objects": 1,
+      "lighting": "dim"
+    },
+    "camera": {
+      "pos": [
+        0,
+        3.2,
+        5.5
+      ],
+      "look": [
+        0,
+        0.4,
+        0
+      ],
+      "fov": 30
+    },
+    "objects": [
+      {
+        "id": 0,
+        "shape": "box",
+        "color": "amber",
+        "center": [
+          0,
+          0.05,
+          0
+        ],
+        "size": [
+          2,
+          0.1,
+          2
+        ],
+        "rotY": 3.150132329464429,
+        "pivot": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 0,
+        "shape": "box",
+        "color": "amber",
+        "center": [
+          0,
+          0.55,
+          -0.95
+        ],
+        "size": [
+          2,
+          1,
+          0.1
+        ],
+        "rotY": 3.150132329464429,
+        "pivot": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 0,
+        "shape": "box",
+        "color": "amber",
+        "center": [
+          -0.95,
+          0.55,
+          0
+        ],
+        "size": [
+          0.1,
+          1,
+          2
+        ],
+        "rotY": 3.150132329464429,
+        "pivot": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 0,
+        "shape": "box",
+        "color": "amber",
+        "center": [
+          0.95,
+          0.55,
+          0
+        ],
+        "size": [
+          0.1,
+          1,
+          2
+        ],
+        "rotY": 3.150132329464429,
+        "pivot": [
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "question": "The open side of this container faces which way?",
+    "options": [
+      "Toward the camera",
+      "Away from the camera",
+      "To the left in the image",
+      "To the right in the image"
+    ],
+    "answer": 1,
+    "explanation": "The container is rotated 180 degrees, so its open side points along (-0.01, -1.00) in the ground plane. Camera looks along -z, so +z is toward the camera and +x is image-right.",
+    "visibility": [
+      {
+        "object": "amber box",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 144371,
+        "ok": true
+      }
+    ],
+    "image": "/bench/images/s45.jpg"
+  },
+  {
+    "id": "s46",
+    "seed": 46,
+    "kind": "stability",
+    "tier": 3,
+    "width": 960,
+    "height": 720,
+    "difficulty": {
+      "objects": 3,
+      "lighting": "normal"
+    },
+    "camera": {
+      "pos": [
+        5,
+        2.65,
+        9.6
+      ],
+      "look": [
+        0.3,
+        1.5,
+        0
+      ],
+      "fov": 32
+    },
+    "objects": [
+      {
+        "id": 0,
+        "shape": "box",
+        "color": "amber",
+        "center": [
+          0,
+          0.5,
+          0
+        ],
+        "size": [
+          1.5,
+          1,
+          1.5
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 1,
+        "shape": "box",
+        "color": "violet",
+        "center": [
+          -0.18516591738443822,
+          1.5,
+          0
+        ],
+        "size": [
+          1.5,
+          1,
+          1.5
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 2,
+        "shape": "box",
+        "color": "teal",
+        "center": [
+          0.03138549719005823,
+          2.5,
+          0
+        ],
+        "size": [
+          1.5,
+          1,
+          1.5
+        ],
+        "rotY": 0
+      }
+    ],
+    "question": "Will this stack of 3 boxes stay standing, or will it fall?",
+    "options": [
+      "It stays standing",
+      "It falls"
+    ],
+    "answer": 0,
+    "explanation": "Rule: stable only if the centre of mass of everything above each box lies over that box's top face. above level 2: centre of mass x = 0.03 m vs support -0.94 to 0.56 m; above level 1: centre of mass x = -0.08 m vs support -0.75 to 0.75 m. All checks pass.",
+    "visibility": [
+      {
+        "object": "amber box",
+        "visiblePct": 87,
+        "inFrame": true,
+        "pixels": 31721,
+        "ok": true
+      },
+      {
+        "object": "violet box",
+        "visiblePct": 93,
+        "inFrame": true,
+        "pixels": 29528,
+        "ok": true
+      },
+      {
+        "object": "teal box",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 28988,
+        "ok": true
+      }
+    ],
+    "image": "/bench/images/s46.jpg"
+  },
+  {
+    "id": "s47",
+    "seed": 47,
+    "kind": "closer",
+    "tier": 2,
+    "width": 960,
+    "height": 720,
+    "difficulty": {
+      "objects": 5,
+      "lighting": "normal"
+    },
+    "camera": {
+      "pos": [
+        0,
+        2.6,
+        7
+      ],
+      "look": [
+        0,
+        0.5,
+        -1
+      ],
+      "fov": 30
+    },
+    "objects": [
+      {
+        "id": 0,
+        "shape": "cone",
+        "color": "teal",
+        "center": [
+          1.6638434078544373,
+          0.5339863990433514,
+          -0.7928230717778204
+        ],
+        "size": [
+          1,
+          1.0679727980867029,
+          1
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 1,
+        "shape": "sphere",
+        "color": "red",
+        "center": [
+          -1.8861568277701735,
+          0.47143391764257103,
+          -2.6278357284143565
+        ],
+        "size": [
+          0.9428678352851421,
+          0.9428678352851421,
+          0.9428678352851421
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 2,
+        "shape": "cylinder",
+        "color": "violet",
+        "center": [
+          0.5088597591966391,
+          0.5922388680279255,
+          -2.9903823803644625
+        ],
+        "size": [
+          1.0733252514852212,
+          1.184477736055851,
+          1.0733252514852212
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 3,
+        "shape": "cylinder",
+        "color": "amber",
+        "center": [
+          2.615020188130438,
+          0.5330048707313836,
+          -3.723956647282466
+        ],
+        "size": [
+          0.9178231736877933,
+          1.0660097414627672,
+          0.9178231736877933
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 4,
+        "shape": "cone",
+        "color": "blue",
+        "center": [
+          -0.42798411939293146,
+          0.5257274402771145,
+          0.7255486598704008
+        ],
+        "size": [
+          1,
+          1.051454880554229,
+          1
+        ],
+        "rotY": 0
+      }
+    ],
+    "question": "Which object is closest to the camera?",
+    "options": [
+      "The teal cone",
+      "The red sphere",
+      "The violet cylinder",
+      "The amber cylinder",
+      "The blue cone"
+    ],
+    "answer": 4,
+    "explanation": "Distance from the camera to each object's centre: teal cone = 8.23 m, red sphere = 10.04 m, violet cylinder = 10.20 m, amber cylinder = 11.23 m, blue cone = 6.62 m. Smallest: blue cone.",
+    "visibility": [
+      {
+        "object": "teal cone",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 17342,
+        "ok": true
+      },
+      {
+        "object": "red sphere",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 13141,
+        "ok": true
+      },
+      {
+        "object": "violet cylinder",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 24719,
+        "ok": true
+      },
+      {
+        "object": "amber cylinder",
+        "visiblePct": 88,
+        "inFrame": true,
+        "pixels": 16851,
+        "ok": true
+      },
+      {
+        "object": "blue cone",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 25135,
+        "ok": true
+      }
+    ],
+    "image": "/bench/images/s47.jpg"
+  },
+  {
+    "id": "s48",
+    "seed": 48,
+    "kind": "stability",
+    "tier": 3,
+    "width": 960,
+    "height": 720,
+    "difficulty": {
+      "objects": 3,
+      "lighting": "normal"
+    },
+    "camera": {
+      "pos": [
+        5,
+        2.65,
+        9.6
+      ],
+      "look": [
+        0.3,
+        1.5,
+        0
+      ],
+      "fov": 32
+    },
+    "objects": [
+      {
+        "id": 0,
+        "shape": "box",
+        "color": "amber",
+        "center": [
+          0,
+          0.5,
+          0
+        ],
+        "size": [
+          1.5,
+          1,
+          1.5
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 1,
+        "shape": "box",
+        "color": "violet",
+        "center": [
+          -0.10041085933335125,
+          1.5,
+          0
+        ],
+        "size": [
+          1.5,
+          1,
+          1.5
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 2,
+        "shape": "box",
+        "color": "teal",
+        "center": [
+          0.0672166848089546,
+          2.5,
+          0
+        ],
+        "size": [
+          1.5,
+          1,
+          1.5
+        ],
+        "rotY": 0
+      }
+    ],
+    "question": "Will this stack of 3 boxes stay standing, or will it fall?",
+    "options": [
+      "It stays standing",
+      "It falls"
+    ],
+    "answer": 0,
+    "explanation": "Rule: stable only if the centre of mass of everything above each box lies over that box's top face. above level 2: centre of mass x = 0.07 m vs support -0.85 to 0.65 m; above level 1: centre of mass x = -0.02 m vs support -0.75 to 0.75 m. All checks pass.",
+    "visibility": [
+      {
+        "object": "amber box",
+        "visiblePct": 86,
+        "inFrame": true,
+        "pixels": 31721,
+        "ok": true
+      },
+      {
+        "object": "violet box",
+        "visiblePct": 93,
+        "inFrame": true,
+        "pixels": 29687,
+        "ok": true
+      },
+      {
+        "object": "teal box",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 29051,
+        "ok": true
+      }
+    ],
+    "image": "/bench/images/s48.jpg"
+  },
+  {
+    "id": "s49",
+    "seed": 49,
+    "kind": "closer",
+    "tier": 2,
+    "width": 960,
+    "height": 720,
+    "difficulty": {
+      "objects": 2,
+      "lighting": "normal"
+    },
+    "camera": {
+      "pos": [
+        0,
+        2.6,
+        7
+      ],
+      "look": [
+        0,
+        0.5,
+        -1
+      ],
+      "fov": 30
+    },
+    "objects": [
+      {
+        "id": 0,
+        "shape": "sphere",
+        "color": "blue",
+        "center": [
+          1.0085760008543727,
+          0.4019938113866374,
+          -4.6784992239438
+        ],
+        "size": [
+          0.8039876227732748,
+          0.8039876227732748,
+          0.8039876227732748
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 1,
+        "shape": "sphere",
+        "color": "red",
+        "center": [
+          2.5295842569321394,
+          0.49653083803132175,
+          -2.590521782916039
+        ],
+        "size": [
+          0.9930616760626435,
+          0.9930616760626435,
+          0.9930616760626435
+        ],
+        "rotY": 0
+      }
+    ],
+    "question": "Which object is closest to the camera?",
+    "options": [
+      "The blue sphere",
+      "The red sphere"
+    ],
+    "answer": 1,
+    "explanation": "Distance from the camera to each object's centre: blue sphere = 11.93 m, red sphere = 10.14 m. Smallest: red sphere.",
+    "visibility": [
+      {
+        "object": "blue sphere",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 6545,
+        "ok": true
+      },
+      {
+        "object": "red sphere",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 14905,
+        "ok": true
+      }
+    ],
+    "image": "/bench/images/s49.jpg"
+  },
+  {
+    "id": "s50",
+    "seed": 50,
+    "kind": "leftmost",
+    "tier": 2,
+    "width": 960,
+    "height": 720,
+    "difficulty": {
+      "objects": 2,
+      "lighting": "dim"
+    },
+    "camera": {
+      "pos": [
+        0,
+        2.6,
+        7
+      ],
+      "look": [
+        0,
+        0.5,
+        -1
+      ],
+      "fov": 30
+    },
+    "objects": [
+      {
+        "id": 0,
+        "shape": "cone",
+        "color": "grey",
+        "center": [
+          0.9973088128492233,
+          0.5304987930692733,
+          -4.393259696103632
+        ],
+        "size": [
+          1,
+          1.0609975861385466,
+          1
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 1,
+        "shape": "sphere",
+        "color": "amber",
+        "center": [
+          -1.429135938361287,
+          0.4514267711667344,
+          -1.1041169013828038
+        ],
+        "size": [
+          0.9028535423334688,
+          0.9028535423334688,
+          0.9028535423334688
+        ],
+        "rotY": 0
+      }
+    ],
+    "question": "Which object appears furthest to the left in the image?",
+    "options": [
+      "The grey cone",
+      "The amber sphere"
+    ],
+    "answer": 1,
+    "explanation": "Horizontal pixel position of each object's centre: grey cone = 596 px, amber sphere = 251 px. Smallest: amber sphere.",
+    "visibility": [
+      {
+        "object": "grey cone",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 8102,
+        "ok": true
+      },
+      {
+        "object": "amber sphere",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 16548,
+        "ok": true
+      }
+    ],
+    "image": "/bench/images/s50.jpg"
+  },
+  {
+    "id": "s51",
+    "seed": 51,
+    "kind": "orientation",
+    "tier": 1,
+    "width": 960,
+    "height": 720,
+    "difficulty": {
+      "objects": 1,
+      "lighting": "normal"
+    },
+    "camera": {
+      "pos": [
+        0,
+        3.2,
+        5.5
+      ],
+      "look": [
+        0,
+        0.4,
+        0
+      ],
+      "fov": 30
+    },
+    "objects": [
+      {
+        "id": 0,
+        "shape": "box",
+        "color": "amber",
+        "center": [
+          0,
+          0.05,
+          0
+        ],
+        "size": [
+          2,
+          0.1,
+          2
+        ],
+        "rotY": -0.17818461572751404,
+        "pivot": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 0,
+        "shape": "box",
+        "color": "amber",
+        "center": [
+          0,
+          0.55,
+          -0.95
+        ],
+        "size": [
+          2,
+          1,
+          0.1
+        ],
+        "rotY": -0.17818461572751404,
+        "pivot": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 0,
+        "shape": "box",
+        "color": "amber",
+        "center": [
+          -0.95,
+          0.55,
+          0
+        ],
+        "size": [
+          0.1,
+          1,
+          2
+        ],
+        "rotY": -0.17818461572751404,
+        "pivot": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 0,
+        "shape": "box",
+        "color": "amber",
+        "center": [
+          0.95,
+          0.55,
+          0
+        ],
+        "size": [
+          0.1,
+          1,
+          2
+        ],
+        "rotY": -0.17818461572751404,
+        "pivot": [
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "question": "The open side of this container faces which way?",
+    "options": [
+      "Toward the camera",
+      "Away from the camera",
+      "To the left in the image",
+      "To the right in the image"
+    ],
+    "answer": 0,
+    "explanation": "The container is rotated -10 degrees, so its open side points along (-0.18, 0.98) in the ground plane. Camera looks along -z, so +z is toward the camera and +x is image-right.",
+    "visibility": [
+      {
+        "object": "amber box",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 196756,
+        "ok": true
+      }
+    ],
+    "image": "/bench/images/s51.jpg"
+  },
+  {
+    "id": "s52",
+    "seed": 52,
+    "kind": "stability",
+    "tier": 3,
+    "width": 960,
+    "height": 720,
+    "difficulty": {
+      "objects": 4,
+      "lighting": "normal"
+    },
+    "camera": {
+      "pos": [
+        5.5,
+        3,
+        10.8
+      ],
+      "look": [
+        0.3,
+        2,
+        0
+      ],
+      "fov": 32
+    },
+    "objects": [
+      {
+        "id": 0,
+        "shape": "box",
+        "color": "amber",
+        "center": [
+          0,
+          0.5,
+          0
+        ],
+        "size": [
+          1.5,
+          1,
+          1.5
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 1,
+        "shape": "box",
+        "color": "violet",
+        "center": [
+          0.017768713179975748,
+          1.5,
+          0
+        ],
+        "size": [
+          1.5,
+          1,
+          1.5
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 2,
+        "shape": "box",
+        "color": "teal",
+        "center": [
+          0.0016583172837272286,
+          2.5,
+          0
+        ],
+        "size": [
+          1.5,
+          1,
+          1.5
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 3,
+        "shape": "box",
+        "color": "red",
+        "center": [
+          -0.08223133825231344,
+          3.5,
+          0
+        ],
+        "size": [
+          1.5,
+          1,
+          1.5
+        ],
+        "rotY": 0
+      }
+    ],
+    "question": "Will this stack of 4 boxes stay standing, or will it fall?",
+    "options": [
+      "It stays standing",
+      "It falls"
+    ],
+    "answer": 0,
+    "explanation": "Rule: stable only if the centre of mass of everything above each box lies over that box's top face. above level 3: centre of mass x = -0.08 m vs support -0.75 to 0.75 m; above level 2: centre of mass x = -0.04 m vs support -0.73 to 0.77 m; above level 1: centre of mass x = -0.02 m vs support -0.75 to 0.75 m. All checks pass.",
+    "visibility": [
+      {
+        "object": "amber box",
+        "visiblePct": 84,
+        "inFrame": true,
+        "pixels": 25481,
+        "ok": true
+      },
+      {
+        "object": "violet box",
+        "visiblePct": 91,
+        "inFrame": true,
+        "pixels": 24028,
+        "ok": true
+      },
+      {
+        "object": "teal box",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 22455,
+        "ok": true
+      },
+      {
+        "object": "red box",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 22953,
+        "ok": true
+      }
+    ],
+    "image": "/bench/images/s52.jpg"
+  },
+  {
+    "id": "s53",
+    "seed": 53,
+    "kind": "closer",
+    "tier": 2,
+    "width": 960,
+    "height": 720,
+    "difficulty": {
+      "objects": 2,
+      "lighting": "normal"
+    },
+    "camera": {
+      "pos": [
+        0,
+        2.6,
+        7
+      ],
+      "look": [
+        0,
+        0.5,
+        -1
+      ],
+      "fov": 30
+    },
+    "objects": [
+      {
+        "id": 0,
+        "shape": "cone",
+        "color": "grey",
+        "center": [
+          0.7938294511288402,
+          0.5524535542353988,
+          0.7670355677139016
+        ],
+        "size": [
+          1,
+          1.1049071084707975,
+          1
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 1,
+        "shape": "box",
+        "color": "red",
+        "center": [
+          -1.9500415353104472,
+          0.5193189058452845,
+          -1.2570288678165524
+        ],
+        "size": [
+          1.038637811690569,
+          1.038637811690569,
+          1.038637811690569
+        ],
+        "rotY": 0.8299223778303713
+      }
+    ],
+    "question": "Which object is closest to the camera?",
+    "options": [
+      "The grey cone",
+      "The red box"
+    ],
+    "answer": 0,
+    "explanation": "Distance from the camera to each object's centre: grey cone = 6.61 m, red box = 8.74 m. Smallest: grey cone.",
+    "visibility": [
+      {
+        "object": "grey cone",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 26724,
+        "ok": true
+      },
+      {
+        "object": "red box",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 43550,
+        "ok": true
+      }
+    ],
+    "image": "/bench/images/s53.jpg"
+  },
+  {
+    "id": "s54",
+    "seed": 54,
+    "kind": "stability",
+    "tier": 3,
+    "width": 960,
+    "height": 720,
+    "difficulty": {
+      "objects": 4,
+      "lighting": "normal"
+    },
+    "camera": {
+      "pos": [
+        5.5,
+        3,
+        10.8
+      ],
+      "look": [
+        0.3,
+        2,
+        0
+      ],
+      "fov": 32
+    },
+    "objects": [
+      {
+        "id": 0,
+        "shape": "box",
+        "color": "amber",
+        "center": [
+          0,
+          0.5,
+          0
+        ],
+        "size": [
+          1.5,
+          1,
+          1.5
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 1,
+        "shape": "box",
+        "color": "violet",
+        "center": [
+          -0.22880721325054765,
+          1.5,
+          0
+        ],
+        "size": [
+          1.5,
+          1,
+          1.5
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 2,
+        "shape": "box",
+        "color": "teal",
+        "center": [
+          0.016830693813972175,
+          2.5,
+          0
+        ],
+        "size": [
+          1.5,
+          1,
+          1.5
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 3,
+        "shape": "box",
+        "color": "red",
+        "center": [
+          -0.010575142223387957,
+          3.5,
+          0
+        ],
+        "size": [
+          1.5,
+          1,
+          1.5
+        ],
+        "rotY": 0
+      }
+    ],
+    "question": "Will this stack of 4 boxes stay standing, or will it fall?",
+    "options": [
+      "It stays standing",
+      "It falls"
+    ],
+    "answer": 0,
+    "explanation": "Rule: stable only if the centre of mass of everything above each box lies over that box's top face. above level 3: centre of mass x = -0.01 m vs support -0.73 to 0.77 m; above level 2: centre of mass x = 0.00 m vs support -0.98 to 0.52 m; above level 1: centre of mass x = -0.07 m vs support -0.75 to 0.75 m. All checks pass.",
+    "visibility": [
+      {
+        "object": "amber box",
+        "visiblePct": 87,
+        "inFrame": true,
+        "pixels": 25481,
+        "ok": true
+      },
+      {
+        "object": "violet box",
+        "visiblePct": 91,
+        "inFrame": true,
+        "pixels": 23766,
+        "ok": true
+      },
+      {
+        "object": "teal box",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 22497,
+        "ok": true
+      },
+      {
+        "object": "red box",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 23071,
+        "ok": true
+      }
+    ],
+    "image": "/bench/images/s54.jpg"
+  },
+  {
+    "id": "s55",
+    "seed": 55,
+    "kind": "closer",
+    "tier": 2,
+    "width": 960,
+    "height": 720,
+    "difficulty": {
+      "objects": 3,
+      "lighting": "dim"
+    },
+    "camera": {
+      "pos": [
+        0,
+        2.6,
+        7
+      ],
+      "look": [
+        0,
+        0.5,
+        -1
+      ],
+      "fov": 30
+    },
+    "objects": [
+      {
+        "id": 0,
+        "shape": "sphere",
+        "color": "amber",
+        "center": [
+          0.1111060194671154,
+          0.4608529355376959,
+          0.7006683900952337
+        ],
+        "size": [
+          0.9217058710753918,
+          0.9217058710753918,
+          0.9217058710753918
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 1,
+        "shape": "cone",
+        "color": "teal",
+        "center": [
+          0.7320877553895113,
+          0.5796620490495116,
+          -4.7364426262211055
+        ],
+        "size": [
+          1,
+          1.1593240980990231,
+          1
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 2,
+        "shape": "cone",
+        "color": "grey",
+        "center": [
+          -2.2218391837552187,
+          0.5132336466573179,
+          -1.2757742608897389
+        ],
+        "size": [
+          1,
+          1.0264672933146357,
+          1
+        ],
+        "rotY": 0
+      }
+    ],
+    "question": "Which object is closest to the camera?",
+    "options": [
+      "The amber sphere",
+      "The teal cone",
+      "The grey cone"
+    ],
+    "answer": 0,
+    "explanation": "Distance from the camera to each object's centre: amber sphere = 6.65 m, teal cone = 11.93 m, grey cone = 8.82 m. Smallest: amber sphere.",
+    "visibility": [
+      {
+        "object": "amber sphere",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 27307,
+        "ok": true
+      },
+      {
+        "object": "teal cone",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 8218,
+        "ok": true
+      },
+      {
+        "object": "grey cone",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 14965,
+        "ok": true
+      }
+    ],
+    "image": "/bench/images/s55.jpg"
+  },
+  {
+    "id": "s56",
+    "seed": 56,
+    "kind": "leftmost",
+    "tier": 2,
+    "width": 960,
+    "height": 720,
+    "difficulty": {
+      "objects": 3,
+      "lighting": "normal"
+    },
+    "camera": {
+      "pos": [
+        0,
+        2.6,
+        7
+      ],
+      "look": [
+        0,
+        0.5,
+        -1
+      ],
+      "fov": 30
+    },
+    "objects": [
+      {
+        "id": 0,
+        "shape": "box",
+        "color": "violet",
+        "center": [
+          0.9237024469301103,
+          0.4888634872622788,
+          -2.30026267231442
+        ],
+        "size": [
+          0.9777269745245576,
+          0.9777269745245576,
+          0.9777269745245576
+        ],
+        "rotY": 0.02355944481678307
+      },
+      {
+        "id": 1,
+        "shape": "sphere",
+        "color": "red",
+        "center": [
+          2.3778700752183797,
+          0.4570963951991871,
+          -1.4458198289852588
+        ],
+        "size": [
+          0.9141927903983742,
+          0.9141927903983742,
+          0.9141927903983742
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 2,
+        "shape": "cone",
+        "color": "grey",
+        "center": [
+          -1.4140797758474946,
+          0.5736592932138592,
+          -3.3675562024582177
+        ],
+        "size": [
+          1,
+          1.1473185864277184,
+          1
+        ],
+        "rotY": 0
+      }
+    ],
+    "question": "Which object appears furthest to the left in the image?",
+    "options": [
+      "The violet box",
+      "The red sphere",
+      "The grey cone"
+    ],
+    "answer": 2,
+    "explanation": "Horizontal pixel position of each object's centre: violet box = 610 px, red sphere = 847 px, grey cone = 300 px. Smallest: grey cone.",
+    "visibility": [
+      {
+        "object": "violet box",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 24864,
+        "ok": true
+      },
+      {
+        "object": "red sphere",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 16064,
+        "ok": true
+      },
+      {
+        "object": "grey cone",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 10501,
+        "ok": true
+      }
+    ],
+    "image": "/bench/images/s56.jpg"
+  },
+  {
+    "id": "s57",
+    "seed": 57,
+    "kind": "orientation",
+    "tier": 1,
+    "width": 960,
+    "height": 720,
+    "difficulty": {
+      "objects": 1,
+      "lighting": "normal"
+    },
+    "camera": {
+      "pos": [
+        0,
+        3.2,
+        5.5
+      ],
+      "look": [
+        0,
+        0.4,
+        0
+      ],
+      "fov": 30
+    },
+    "objects": [
+      {
+        "id": 0,
+        "shape": "box",
+        "color": "amber",
+        "center": [
+          0,
+          0.05,
+          0
+        ],
+        "size": [
+          2,
+          0.1,
+          2
+        ],
+        "rotY": 1.3277910851549843,
+        "pivot": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 0,
+        "shape": "box",
+        "color": "amber",
+        "center": [
+          0,
+          0.55,
+          -0.95
+        ],
+        "size": [
+          2,
+          1,
+          0.1
+        ],
+        "rotY": 1.3277910851549843,
+        "pivot": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 0,
+        "shape": "box",
+        "color": "amber",
+        "center": [
+          -0.95,
+          0.55,
+          0
+        ],
+        "size": [
+          0.1,
+          1,
+          2
+        ],
+        "rotY": 1.3277910851549843,
+        "pivot": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 0,
+        "shape": "box",
+        "color": "amber",
+        "center": [
+          0.95,
+          0.55,
+          0
+        ],
+        "size": [
+          0.1,
+          1,
+          2
+        ],
+        "rotY": 1.3277910851549843,
+        "pivot": [
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "question": "The open side of this container faces which way?",
+    "options": [
+      "Toward the camera",
+      "Away from the camera",
+      "To the left in the image",
+      "To the right in the image"
+    ],
+    "answer": 3,
+    "explanation": "The container is rotated 76 degrees, so its open side points along (0.97, 0.24) in the ground plane. Camera looks along -z, so +z is toward the camera and +x is image-right.",
+    "visibility": [
+      {
+        "object": "amber box",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 200494,
+        "ok": true
+      }
+    ],
+    "image": "/bench/images/s57.jpg"
+  },
+  {
+    "id": "s58",
+    "seed": 58,
+    "kind": "stability",
+    "tier": 3,
+    "width": 960,
+    "height": 720,
+    "difficulty": {
+      "objects": 2,
+      "lighting": "normal"
+    },
+    "camera": {
+      "pos": [
+        4.5,
+        2.3,
+        8.4
+      ],
+      "look": [
+        0.3,
+        1,
+        0
+      ],
+      "fov": 32
+    },
+    "objects": [
+      {
+        "id": 0,
+        "shape": "box",
+        "color": "amber",
+        "center": [
+          0,
+          0.5,
+          0
+        ],
+        "size": [
+          1.5,
+          1,
+          1.5
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 1,
+        "shape": "box",
+        "color": "violet",
+        "center": [
+          -0.24390449840575457,
+          1.5,
+          0
+        ],
+        "size": [
+          1.5,
+          1,
+          1.5
+        ],
+        "rotY": 0
+      }
+    ],
+    "question": "Will this stack of 2 boxes stay standing, or will it fall?",
+    "options": [
+      "It stays standing",
+      "It falls"
+    ],
+    "answer": 0,
+    "explanation": "Rule: stable only if the centre of mass of everything above each box lies over that box's top face. above level 1: centre of mass x = -0.24 m vs support -0.75 to 0.75 m. All checks pass.",
+    "visibility": [
+      {
+        "object": "amber box",
+        "visiblePct": 89,
+        "inFrame": true,
+        "pixels": 40679,
+        "ok": true
+      },
+      {
+        "object": "violet box",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 37672,
+        "ok": true
+      }
+    ],
+    "image": "/bench/images/s58.jpg"
+  },
+  {
+    "id": "s59",
+    "seed": 59,
+    "kind": "closer",
+    "tier": 2,
+    "width": 960,
+    "height": 720,
+    "difficulty": {
+      "objects": 3,
+      "lighting": "normal"
+    },
+    "camera": {
+      "pos": [
+        0,
+        2.6,
+        7
+      ],
+      "look": [
+        0,
+        0.5,
+        -1
+      ],
+      "fov": 30
+    },
+    "objects": [
+      {
+        "id": 0,
+        "shape": "sphere",
+        "color": "violet",
+        "center": [
+          -1.3770503289997578,
+          0.4041465481044725,
+          -1.3592374068219213
+        ],
+        "size": [
+          0.808293096208945,
+          0.808293096208945,
+          0.808293096208945
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 1,
+        "shape": "sphere",
+        "color": "blue",
+        "center": [
+          -0.2120525849983097,
+          0.4974195751128718,
+          -3.8929733958560973
+        ],
+        "size": [
+          0.9948391502257437,
+          0.9948391502257437,
+          0.9948391502257437
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 2,
+        "shape": "cylinder",
+        "color": "amber",
+        "center": [
+          -1.5593487426638601,
+          0.61890226053074,
+          1.1465762112755327
+        ],
+        "size": [
+          0.804281384497881,
+          1.23780452106148,
+          0.804281384497881
+        ],
+        "rotY": 0
+      }
+    ],
+    "question": "Which object is closest to the camera?",
+    "options": [
+      "The violet sphere",
+      "The blue sphere",
+      "The amber cylinder"
+    ],
+    "answer": 2,
+    "explanation": "Distance from the camera to each object's centre: violet sphere = 8.75 m, blue sphere = 11.10 m, amber cylinder = 6.37 m. Smallest: amber cylinder.",
+    "visibility": [
+      {
+        "object": "violet sphere",
+        "visiblePct": 87,
+        "inFrame": true,
+        "pixels": 12473,
+        "ok": true
+      },
+      {
+        "object": "blue sphere",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 11403,
+        "ok": true
+      },
+      {
+        "object": "amber cylinder",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 54001,
+        "ok": true
+      }
+    ],
+    "image": "/bench/images/s59.jpg"
+  },
+  {
+    "id": "s60",
+    "seed": 60,
+    "kind": "stability",
+    "tier": 3,
+    "width": 960,
+    "height": 720,
+    "difficulty": {
+      "objects": 2,
+      "lighting": "dim"
+    },
+    "camera": {
+      "pos": [
+        4.5,
+        2.3,
+        8.4
+      ],
+      "look": [
+        0.3,
+        1,
+        0
+      ],
+      "fov": 32
+    },
+    "objects": [
+      {
+        "id": 0,
+        "shape": "box",
+        "color": "amber",
+        "center": [
+          0,
+          0.5,
+          0
+        ],
+        "size": [
+          1.5,
+          1,
+          1.5
+        ],
+        "rotY": 0
+      },
+      {
+        "id": 1,
+        "shape": "box",
+        "color": "violet",
+        "center": [
+          -0.2438529923092574,
+          1.5,
+          0
+        ],
+        "size": [
+          1.5,
+          1,
+          1.5
+        ],
+        "rotY": 0
+      }
+    ],
+    "question": "Will this stack of 2 boxes stay standing, or will it fall?",
+    "options": [
+      "It stays standing",
+      "It falls"
+    ],
+    "answer": 0,
+    "explanation": "Rule: stable only if the centre of mass of everything above each box lies over that box's top face. above level 1: centre of mass x = -0.24 m vs support -0.75 to 0.75 m. All checks pass.",
+    "visibility": [
+      {
+        "object": "amber box",
+        "visiblePct": 89,
+        "inFrame": true,
+        "pixels": 40679,
+        "ok": true
+      },
+      {
+        "object": "violet box",
+        "visiblePct": 100,
+        "inFrame": true,
+        "pixels": 37672,
+        "ok": true
+      }
+    ],
+    "image": "/bench/images/s60.jpg"
+  }
+]

@@ -4,8 +4,7 @@ import { Reveal, SectionHead } from "./Section";
 export default function Why() {
   return (
     <section id="why" className="relative py-28">
-      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-[360px] bg-[url(/images/horizon.jpg)] bg-cover bg-center opacity-50 [mask-image:linear-gradient(to_bottom,transparent,#000_35%,#000_55%,transparent)]" />
-      <div className="relative mx-auto max-w-6xl px-6 pt-32">
+      <div className="relative mx-auto max-w-6xl px-6">
         <SectionHead eyebrow="Why it matters" title="Errors here are not quiz mistakes" sub="They cause real damage in warehouses, factories and robotic systems." />
         <div className="grid gap-px overflow-hidden rounded-lg border border-white/10 bg-white/10 sm:grid-cols-2">
           {why.map((w, i) => (
