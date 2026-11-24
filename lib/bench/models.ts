@@ -1,4 +1,4 @@
-export type Provider = "anthropic" | "openai" | "gemini" | "cloudflare";
+export type Provider = "anthropic" | "openai" | "gemini" | "cloudflare" | "openrouter";
 
 export const MODELS: Record<Provider, { model: string; env: string; label: string }> = {
   anthropic: { model: "claude-sonnet-5-5", env: "ANTHROPIC_API_KEY", label: "Claude" },
@@ -6,6 +6,8 @@ export const MODELS: Record<Provider, { model: string; env: string; label: strin
   gemini: { model: "gemini-3.5-flash", env: "GEMINI_API_KEY", label: "Gemini" },
   // Cloudflare Workers AI (free tier): open models from Meta, Mistral and Alibaba; also needs CLOUDFLARE_ACCOUNT_ID
   cloudflare: { model: "@cf/meta/llama-4-scout-17b-16e-instruct", env: "CLOUDFLARE_API_TOKEN", label: "Cloudflare Workers AI" },
+  // OpenRouter: one key for many vendors; used by Bring Your Own Key, or from .env
+  openrouter: { model: "openai/gpt-4o", env: "OPENROUTER_API_KEY", label: "OpenRouter" },
 };
 
 /** Every model the app can ask. Each answer is labelled with the model that actually produced it. */
@@ -104,6 +106,14 @@ export async function askModel(provider: Provider, apiKey: string, jpegBase64: s
     );
     return j.choices?.[0]?.message?.content ?? "";
   }
+  if (provider === "openrouter") {
+    const j = await post(
+      "https://openrouter.ai/api/v1/chat/completions",
+      { Authorization: `Bearer ${apiKey}`, "X-Title": "SpatialGrid" },
+      { model, max_tokens: 256, temperature: 0, messages: [{ role: "user", content: [{ type: "text", text: prompt }, { type: "image_url", image_url: { url: `data:image/jpeg;base64,${jpegBase64}` } }] }] }
+    );
+    return j.choices?.[0]?.message?.content ?? "";
+  }
   if (provider === "openai") {
     const j = await post(
       "https://api.openai.com/v1/chat/completions",
@@ -125,4 +135,51 @@ export async function askModel(provider: Provider, apiKey: string, jpegBase64: s
     j = await post(url, { "x-goog-api-key": apiKey }, { contents: [{ parts }], generationConfig: { ...gen, maxOutputTokens: 2048 } });
   }
   return j.candidates?.[0]?.content?.parts?.map((p: { text?: string }) => p.text ?? "").join("") ?? "";
+}
+
+/** The smallest possible request, to check that a key works before running anything bigger. */
+export async function pingModel(provider: Provider, apiKey: string, model: string): Promise<string> {
+  const ask = "Reply with the single word OK.";
+  if (provider === "anthropic") {
+    const j = await post("https://api.anthropic.com/v1/messages", { "x-api-key": apiKey, "anthropic-version": "2023-06-01" }, { model, max_tokens: 5, messages: [{ role: "user", content: ask }] });
+    return j.content?.[0]?.text ?? "";
+  }
+  if (provider === "openai" || provider === "openrouter") {
+    const url = provider === "openai" ? "https://api.openai.com/v1/chat/completions" : "https://openrouter.ai/api/v1/chat/completions";
+    const j = await post(url, { Authorization: `Bearer ${apiKey}` }, { model, max_tokens: 16, messages: [{ role: "user", content: ask }] });
+    return j.choices?.[0]?.message?.content ?? "";
+  }
+  if (provider === "gemini") {
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`;
+    const j = await post(url, { "x-goog-api-key": apiKey }, { contents: [{ parts: [{ text: ask }] }], generationConfig: { maxOutputTokens: 64 } });
+    return j.candidates?.[0]?.content?.parts?.map((p: { text?: string }) => p.text ?? "").join("") ?? "";
+  }
+  throw new Error(`ping is not supported for ${provider}`);
+}
+
+export type ErrorKind = "invalid_key" | "no_credit" | "rate_limit" | "model" | "network" | "other";
+
+/**
+ * Turns a raw provider error into one readable sentence, and scrubs the key out of it.
+ * Raw errors look like "401 {json}"; the human message inside the JSON is kept, the rest dropped.
+ */
+export function classifyError(providerLabel: string, err: unknown, model?: string, apiKey?: string): { kind: ErrorKind; message: string } {
+  const e = err as { status?: number; message?: string; name?: string; cause?: unknown };
+  let text = String(e?.message ?? err ?? "");
+  if (apiKey) text = text.split(apiKey).join(apiKey.length > 8 ? `••••${apiKey.slice(-4)}` : "••••");
+  const status = e?.status ?? Number(/^(\d{3})\b/.exec(text)?.[1] ?? 0);
+  const inner = /"message"\s*:\s*"([^"]{1,200})/.exec(text)?.[1] ?? text.replace(/^\d{3}\s*/, "").slice(0, 160);
+  const t = text.toLowerCase();
+
+  if (e?.name === "TimeoutError" || e?.name === "AbortError" || /fetch failed|enotfound|econnrefused|etimedout|non-json reply/.test(t))
+    return { kind: "network", message: `Couldn't reach ${providerLabel}. Check the connection and retry.` };
+  if (status === 401 || status === 403 || /api key not valid|invalid api key|incorrect api key|invalid x-api-key|authentication_error|no auth credentials|user not found|invalid_api_key|permission_denied/.test(t))
+    return { kind: "invalid_key", message: `Invalid key for ${providerLabel}. Check it and retry.` };
+  if (status === 402 || /insufficient_quota|credit balance|no credits|credits remaining|billing|payment required|insufficient credits/.test(t))
+    return { kind: "no_credit", message: `Your ${providerLabel} account has no credit left for this model.` };
+  if (status === 429 || /rate limit|rate_limit|quota|resource_exhausted|too many requests/.test(t))
+    return { kind: "rate_limit", message: `${providerLabel} rate limit or daily quota reached. Wait a minute and retry.` };
+  if (status === 404 || /model.{0,40}(not found|does not exist|not available|unknown|invalid)|not a valid model|no endpoints found/.test(t))
+    return { kind: "model", message: `${model ? `"${model}"` : "This model"} isn't available on ${providerLabel} for this key.` };
+  return { kind: "other", message: `${providerLabel}: ${inner}`.slice(0, 220) };
 }

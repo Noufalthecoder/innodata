@@ -1,6 +1,8 @@
 "use client";
 
 import { Handle, Position, type NodeProps } from "@xyflow/react";
+import { useState } from "react";
+import { BYOK_PROVIDERS, byokProvider, type ByokProvider } from "@/lib/bench/byok";
 import { TIER_LABEL, type Kind } from "@/lib/bench/types";
 import { SLOTS, usePipeline, type Slot, type Status } from "./state";
 
@@ -15,6 +17,7 @@ const ICONS: Record<string, string> = {
   sliders: "M4 6h9v2H4V6Zm13 0h3v2h-3v2h-2V4h2v2ZM4 16h3v2H4v-2Zm7 0h9v2h-9v2H9v-6h2v2Zm-7-5h13v2H4v-2Zm15 0h1v2h-1v-2Z",
   spark: "M12 2l2.2 6.3L20.5 10l-6.3 2.2L12 18.5l-2.2-6.3L3.5 10l6.3-1.7L12 2Zm6 13 1 2.5 2.5 1-2.5 1L18 22l-1-2.5-2.5-1 2.5-1L18 15Z",
   flag: "M5 3h2v18H5V3Zm3 1h11l-2.5 4L19 12H8V4Z",
+  key: "M7 14a5 5 0 1 1 4.9-6H22v4h-2v3h-3v-3h-5.1A5 5 0 0 1 7 14Zm0-3a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z",
 };
 function Icon({ name, color }: { name: string; color: string }) {
   return (
@@ -214,13 +217,14 @@ export function VisibilityNode(_: NodeProps) {
 }
 
 export function SelectorNode(_: NodeProps) {
-  const { slotModels, selected, toggle, slotModel, setSlotModel, run, canRun, running, task, loaded } = usePipeline();
+  const { slotModels, selected, toggle, slotModel, setSlotModel, run, canRun, running, task, loaded, laneReady, laneNote, laneLabel } = usePipeline();
   return (
     <Shell icon="sliders" color="#f472b6" title="Model Selector" sub="Choose who takes the test" status={running ? "running" : "idle"} width={260}>
       <div className="space-y-2">
         {SLOTS.map((s) => {
           const models = slotModels(s.slot);
-          const configured = models.some((m) => m.configured);
+          const configured = laneReady(s.slot);
+          const isByok = s.slot === "byok";
           if (!loaded) return <div key={s.slot} className="h-9 animate-pulse rounded-md bg-white/[0.04]" />;
           return (
             <div key={s.slot} className={`rounded-md border border-white/[0.06] bg-[#0b0c10] px-2 py-1.5 ${configured ? "" : "opacity-50"}`}>
@@ -241,9 +245,12 @@ export function SelectorNode(_: NodeProps) {
                   <span className={`absolute top-0.5 h-3 w-3 rounded-full bg-white transition-all ${selected[s.slot] ? "left-3.5" : "left-0.5"}`} />
                 </button>
               </div>
-              {!configured && <p className="mt-0.5 text-[10px] text-zinc-500">{models.find((m) => m.note)?.note ?? `No ${s.envVar} on the server`}</p>}
-              {configured && models.some((m) => m.note) && <p className="mt-0.5 text-[10px] text-amber-400/80">{models.find((m) => m.note)?.note}</p>}
-              {configured && models.length > 1 && (
+              {isByok ? (
+                <p className={`mt-0.5 truncate text-[10px] ${configured ? "text-emerald-400/80" : "text-zinc-500"}`}>{configured ? `${laneLabel("byok")} · ${laneNote("byok")}` : laneNote("byok")}</p>
+              ) : (
+                !configured && <p className="mt-0.5 text-[10px] text-zinc-500">No {s.envVar} on the server</p>
+              )}
+              {!isByok && configured && models.length > 1 && (
                 <select className={`${select} mt-1.5 py-1`} value={slotModel[s.slot]} disabled={running} onChange={(e) => setSlotModel(s.slot, e.target.value)}>
                   {models.filter((m) => m.configured).map((m) => <option key={m.id} value={m.id}>{m.label}</option>)}
                 </select>
@@ -263,10 +270,10 @@ export function SelectorNode(_: NodeProps) {
 export function ModelNode({ data }: NodeProps) {
   const slot = (data as { slot: Slot }).slot;
   const meta = SLOTS.find((s) => s.slot === slot)!;
-  const { runs, task, slotModels, slotModel, selected, loaded } = usePipeline();
+  const { runs, task, selected, loaded, laneReady, laneLabel, laneNote } = usePipeline();
   const r = runs[slot];
-  const configured = slotModels(slot).some((m) => m.configured);
-  const label = slotModels(slot).find((m) => m.id === slotModel[slot])?.label ?? meta.name;
+  const configured = laneReady(slot);
+  const label = laneLabel(slot);
   return (
     <Shell icon="spark" color={meta.color} title={meta.name} sub={!loaded ? "Checking…" : configured ? label : "Not configured"} status={r.status} width={250} dim={loaded && (!configured || (!selected[slot] && r.status === "idle"))}>
       {r.status === "running" && <p>Image + question sent… awaiting reply</p>}
@@ -276,12 +283,24 @@ export function ModelNode({ data }: NodeProps) {
             Answered <span className="font-mono font-semibold">{r.choice === null || r.choice === undefined ? "?" : String.fromCharCode(65 + r.choice)}</span>
             {r.choice !== null && r.choice !== undefined && <span className="text-zinc-400"> · {task.options[r.choice]}</span>}
           </p>
-          <p className="mt-0.5 truncate text-[11px] text-zinc-500">{((r.ms ?? 0) / 1000).toFixed(1)} s · raw “{(r.raw ?? "").trim().slice(-30)}”</p>
+          <p className="mt-0.5 truncate text-[11px] text-zinc-500">
+            {((r.ms ?? 0) / 1000).toFixed(1)} s{r.keySource === "user" ? " · your key" : ""} · raw “{(r.raw ?? "").trim().slice(-30)}”
+          </p>
         </div>
       )}
       {r.status === "failed" && <p className="line-clamp-2 text-red-300">{r.error}</p>}
       {r.status === "skipped" && <p>Not selected for this run.</p>}
-      {r.status === "idle" && <p>{!loaded ? "Checking server keys…" : configured ? (selected[slot] ? "Ready" : "Off. Toggle it on in the selector.") : slotModels(slot).find((m) => m.note)?.note ?? `Add ${meta.envVar} to .env.local to enable.`}</p>}
+      {r.status === "idle" && (
+        <p>
+          {!loaded
+            ? "Checking server keys…"
+            : slot === "byok"
+              ? laneNote(slot)
+              : configured
+                ? selected[slot] ? "Ready" : "Off. Toggle it on in the selector."
+                : `Add ${meta.envVar} to .env.local to enable.`}
+        </p>
+      )}
     </Shell>
   );
 }
@@ -332,7 +351,103 @@ export function ResultsNode(_: NodeProps) {
   );
 }
 
+/** Step 1: Bring Your Own Key. The key lives in this component tree's memory only. */
+export function ConfigNode(_: NodeProps) {
+  const { byok, setByok, byokModels, byokModelId, serverKeys, testKey, running } = usePipeline();
+  const [show, setShow] = useState(false);
+  const meta = byokProvider(byok.provider)!;
+  const hasKey = byok.key.trim().length > 0;
+  const status = byok.status === "testing" ? "running" : byok.status === "valid" ? "done" : byok.status === "invalid" ? "failed" : "idle";
+  const pill =
+    byok.status === "valid" ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-300"
+    : byok.status === "invalid" ? "border-red-500/30 bg-red-500/10 text-red-300"
+    : byok.status === "testing" ? "border-accent/30 bg-accent/10 text-accent"
+    : "border-white/10 bg-white/[0.03] text-zinc-400";
+  return (
+    <Shell icon="key" color="#10a37f" title="Model Config" sub="Step 1 · bring your own key (optional)" status={status as Status} width={300} noIn>
+      <div className="space-y-2">
+        <div className="grid grid-cols-[0.75fr_1.25fr] gap-2">
+          <label className="block">
+            <span className="text-[11px] text-zinc-500">Provider</span>
+            <select className={select} value={byok.provider} disabled={running} onChange={(e) => setByok({ provider: e.target.value as ByokProvider })}>
+              {BYOK_PROVIDERS.map((p) => <option key={p.id} value={p.id}>{p.label}</option>)}
+            </select>
+          </label>
+          <label className="block">
+            <span className="text-[11px] text-zinc-500">Model</span>
+            <select
+              className={select}
+              value={byok.useCustom ? "__custom" : byok.model}
+              disabled={running}
+              onChange={(e) => (e.target.value === "__custom" ? setByok({ useCustom: true }) : setByok({ model: e.target.value, useCustom: false }))}
+            >
+              {byokModels.map((m) => <option key={m.id} value={m.id}>{m.label}</option>)}
+              <option value="__custom">Custom model id…</option>
+            </select>
+          </label>
+        </div>
+        {byok.useCustom && (
+          <input
+            className={`${select} font-mono`}
+            placeholder="exact model id, e.g. gpt-4.1"
+            value={byok.custom}
+            spellCheck={false}
+            autoComplete="off"
+            onChange={(e) => setByok({ custom: e.target.value })}
+          />
+        )}
+        <label className="block">
+          <span className="flex items-center justify-between text-[11px] text-zinc-500">
+            API key
+            <a href={meta.keyUrl} target="_blank" rel="noreferrer" className="nodrag text-zinc-500 underline-offset-2 hover:text-white hover:underline">get a key ↗</a>
+          </span>
+          <div className="relative">
+            <input
+              type={show ? "text" : "password"}
+              className={`${select} pr-14 font-mono`}
+              placeholder={serverKeys[byok.provider] ? `optional · ${meta.keyHint}` : meta.keyHint}
+              value={byok.key}
+              onChange={(e) => setByok({ key: e.target.value })}
+              autoComplete="off"
+              autoCorrect="off"
+              autoCapitalize="off"
+              spellCheck={false}
+              name="byok-key"
+              data-1p-ignore
+              data-lpignore="true"
+              aria-label={`${meta.label} API key`}
+            />
+            <button type="button" onClick={() => setShow((v) => !v)} className="nodrag absolute right-1 top-1/2 -translate-y-1/2 rounded px-1.5 py-0.5 text-[10px] text-zinc-400 hover:bg-white/10 hover:text-white" aria-label={show ? "Hide key" : "Show key"}>
+              {show ? "Hide" : "Show"}
+            </button>
+          </div>
+        </label>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={testKey}
+            disabled={byok.status === "testing" || !byokModelId || (!hasKey && !serverKeys[byok.provider])}
+            className="nodrag rounded-md border border-white/15 px-3 py-1.5 text-[12px] font-medium text-white transition-colors hover:border-white/40 disabled:opacity-30"
+          >
+            {byok.status === "testing" ? "Testing…" : "Test Key"}
+          </button>
+          {hasKey && (
+            <button onClick={() => setByok({ key: "" })} className="nodrag text-[11px] text-zinc-500 hover:text-white">
+              Clear
+            </button>
+          )}
+          <span className={`ml-auto rounded-full border px-2 py-0.5 text-[10px] font-medium ${pill}`}>
+            {byok.status === "valid" ? "valid" : byok.status === "invalid" ? "invalid" : byok.status === "testing" ? "testing" : hasKey ? "untested" : serverKeys[byok.provider] ? "server key" : "no key"}
+          </span>
+        </div>
+        {byok.message && <p className={`text-[11px] leading-snug ${byok.status === "valid" ? "text-emerald-300/90" : "text-red-300"}`}>{byok.message}</p>}
+        <p className="text-[10px] leading-snug text-zinc-600">Kept in this tab&apos;s memory only. Never saved, logged or stored. A refresh clears it.</p>
+      </div>
+    </Shell>
+  );
+}
+
 export const nodeTypes = {
+  config: ConfigNode,
   trigger: TriggerNode,
   scene: SceneNode,
   preview: PreviewNode,

@@ -15,13 +15,15 @@ const BASE: Node[] = [
   { id: "scene", type: "scene", position: { x: 320, y: 45 }, data: {} },
   { id: "preview", type: "preview", position: { x: 630, y: 0 }, data: {} },
   { id: "truth", type: "truth", position: { x: 1000, y: 30 }, data: {} },
-  { id: "visibility", type: "visibility", position: { x: 10, y: 560 }, data: {} },
+  { id: "visibility", type: "visibility", position: { x: 10, y: 440 }, data: {} },
+  // step 1 for visitors: their own model and key, feeding the selector
+  { id: "config", type: "config", position: { x: 0, y: 650 }, data: {} },
   { id: "selector", type: "selector", position: { x: 340, y: 440 }, data: {} },
   // one model lane per company, stacked
   ...SLOTS.map((s, i) => ({ id: s.slot, type: "model", position: { x: 680, y: 400 + i * 116 }, data: { slot: s.slot } })),
   { id: "results", type: "results", position: { x: 1000, y: 560 }, data: {} },
 ];
-const BASE_W = 1300, BASE_H = 990;
+const BASE_W = 1300, BASE_H = 1040;
 /** stretch the columns so the graph has the same shape as the screen, so it can be zoomed to fill it */
 const layout = (k: number) => BASE.map((n) => ({ ...n, position: { x: n.position.x * k, y: n.position.y } }));
 
@@ -40,7 +42,7 @@ function edge(id: string, source: string, target: string, from: Status, to: Stat
 }
 
 function Flow() {
-  const { stages, runs, task, view3d, setView3d, running, generating, loaded } = usePipeline();
+  const { stages, runs, task, view3d, setView3d, running, generating, loaded, byok } = usePipeline();
   const wrap = useRef<HTMLDivElement>(null);
   const [nodes, setNodes, onNodesChange] = useNodesState(layout(1));
   const { fitView } = useReactFlow();
@@ -84,6 +86,7 @@ function Flow() {
       edge("e3", "preview", "truth", stages.preview, stages.truth),
       edge("e4", "truth", "visibility", stages.truth, stages.visibility, { type: "smoothstep" }),
       edge("e5", "visibility", "selector", stages.visibility, sel),
+      edge("e-cfg", "config", "selector", byok.status === "valid" ? "done" : "idle", byok.status === "testing" ? "running" : byok.status === "valid" ? "done" : byok.status === "invalid" ? "failed" : "idle"),
       ...SLOTS.map(({ slot: s }) => edge(`m-${s}`, "selector", s, sel, runs[s].status)),
       // model -> results: in transit once that model has answered, until every model is back
       ...SLOTS.map(({ slot: s }) => {
@@ -92,7 +95,7 @@ function Flow() {
         return edge(`r-${s}`, s, "results", "idle", st === "skipped" ? "skipped" : "idle");
       }),
     ];
-  }, [stages, runs, running, generating]);
+  }, [stages, runs, running, generating, byok.status]);
 
   return (
     <div ref={wrap} className="sg-canvas relative h-full w-full overflow-hidden">

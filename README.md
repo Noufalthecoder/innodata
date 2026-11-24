@@ -12,7 +12,7 @@
 
 <p align="center">
   <a href="https://github.com/Noufalthecoder/innodata/actions/workflows/ci.yml"><img src="https://github.com/Noufalthecoder/innodata/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
-  <img src="https://img.shields.io/badge/tests-85%20passing-34d399" alt="85 tests passing">
+  <img src="https://img.shields.io/badge/tests-99%20passing-34d399" alt="99 tests passing">
   <img src="https://img.shields.io/badge/ground%20truth-60%2F60%20re--derived-34d399" alt="60 of 60 answers re-derived">
   <img src="https://img.shields.io/badge/renderer-Blender%20Cycles-ff8731" alt="Blender Cycles">
   <img src="https://img.shields.io/badge/Next.js-15-111" alt="Next.js 15">
@@ -159,7 +159,7 @@ Each kind needs a different skill, not a reworded question. Within each kind, di
 | Answers re-derived by separate code ([`lib/bench/truth.ts`](lib/bench/truth.ts), shares no logic with the generator) | **60 / 60** |
 | Tasks rebuilt identically from their seeds | **60 / 60** |
 | Visibility check passed | **60 / 60** |
-| Automated tests (`npm test`, run in CI on every push) | **85 / 85** |
+| Automated tests (`npm test`, run in CI on every push) | **99 / 99** |
 
 The test suite also includes:
 
@@ -180,7 +180,7 @@ Both are documented in the [technical report](docs/TECHNICAL_REPORT.md).
 | Criterion | Where to look |
 |---|---|
 | **Implementation (25%)** | One command each to generate, validate, evaluate and report. It is resumable, quota-aware and covered by CI. See [`scripts/bench/`](scripts/bench), [`lib/bench/`](lib/bench) and [`scripts/blender/render.py`](scripts/blender/render.py). |
-| **Validity (25%)** | Ground truth is computed and then independently re-derived. Exact visibility comes from pixel masks. The suite has 85 tests, including mutation tests. See [Why you can trust the numbers](#why-you-can-trust-the-numbers). |
+| **Validity (25%)** | Ground truth is computed and then independently re-derived. Exact visibility comes from pixel masks. The suite has 99 tests, including mutation tests. See [Why you can trust the numbers](#why-you-can-trust-the-numbers). |
 | **Variation (20%)** | 4 reasoning kinds across 3 tiers, 1–5 objects, occlusion, 2 lighting levels, 6 environments, 5 floors and 3 materials, with balanced outcomes. |
 | **Originality (15%)** | Answers are fixed before rendering; the visibility check proves every question is answerable; scenes can be explored as live 3D with the truth overlaid. |
 | **Impact (15%)** | The failure modes map directly to robot grasping and pallet inspection, and the orientation and stability blind spots are measurable. See [Results](#results). |
@@ -212,7 +212,7 @@ npm run bench:generate -- --count 60 --renderer svg    # instant preview rendere
 npm run bench:validate                                         # re-derives every answer, rebuilds from seeds
 npm run bench:eval -- --model gemini --model-id gemini-3.1-flash-lite
 npm run bench:report                                           # writes public/bench/summary.json
-npm test                                                       # 85 tests
+npm test                                                       # 99 tests
 ```
 
 Open models run free through Cloudflare (`--model cloudflare --model-id @cf/qwen/qwen3.8-27b`). Claude (`--model anthropic`) and GPT-4o (`--model openai`) are supported as well. Evaluation resumes where it stopped, and it stops cleanly when a free quota runs out.
@@ -228,6 +228,22 @@ The app opens on **the pipeline itself**: a node graph in the style of n8n, buil
 1. **Generate Task.** Pick a task type, object count and lighting. The Scene Generator, Rendered Image, Ground Truth and Visibility nodes fill in with the real output of the generator.
 2. **Model Selector.** One lane per company: Gemini (Google), Llama 4 (Meta), Mistral, Qwen (Alibaba), and a paid GPT-4o / Claude lane. Switch each on or off. A model without an API key on the server is shown as not configured, never faked.
 3. **Run.** Each model node moves through *running → done ✓ / failed ✕* live, edges animate while answers are in transit, and the **Results** node scores every answer against the computed truth.
+
+### Bring your own key
+
+The **Model Config** node (step 1, bottom-left of the canvas) lets anyone test their own model. Pick a provider (Anthropic, OpenAI, Google or OpenRouter) and a model, paste an API key, then press **Test Key**. That sends one tiny "reply OK" request first, so a bad key fails in a second instead of in the middle of a run. A passing key switches on the **Your model** lane, which answers next to the built-in models.
+
+*Why it exists:* judges and other teams can benchmark the models they actually use, such as Claude or GPT-4o, without us paying for them or holding their keys.
+
+How the key is handled:
+
+- It lives in browser memory (React state) only. It is never written to `localStorage`, `sessionStorage`, cookies or disk, so a refresh or a closed tab forgets it.
+- It travels in the body of the single request that needs it, and the server passes it straight to the provider.
+- The server never stores, logs or returns it. Any provider error message that quotes the key is masked to `••••` plus the last 4 characters.
+- Model ids are checked against a strict pattern, and keys go only to the four fixed provider hosts.
+- If no key is entered, the provider's server-side `.env` key is used when there is one, so the demo works out of the box.
+- Errors come back as one clear sentence, such as "Invalid key for Anthropic. Check it and retry." or "rate limit or daily quota reached", rather than raw API JSON.
+- [`tests/bench/byok.test.ts`](tests/bench/byok.test.ts) checks all of this, including that no response ever contains the key.
 
 Secondary panels, in the top bar:
 
@@ -270,6 +286,7 @@ tests/bench/      vitest suite
 | `CLOUDFLARE_ACCOUNT_ID`, `CLOUDFLARE_API_TOKEN` | Llama 4, Mistral and Qwen through Cloudflare Workers AI (free tier) |
 | `ANTHROPIC_API_KEY` | Claude evaluation (optional) |
 | `OPENAI_API_KEY` | GPT-4o evaluation (optional) |
+| `OPENROUTER_API_KEY` | OpenRouter evaluation (optional; visitors can also bring their own key in the app) |
 | `BLENDER_PATH` | Blender executable for photoreal rendering |
 
 Keys are read on the server only and never sent to the browser.
