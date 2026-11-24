@@ -35,7 +35,7 @@ export const heroCase = {
 export const stats = [
   { value: "60", label: "Photoreal test scenes" },
   { value: "60 / 60", label: "Answers re-derived independently" },
-  { value: "111", label: "Automated tests in CI" },
+  { value: "116", label: "Automated tests in CI" },
   { value: "6", label: "Vision models, 4 companies" },
 ];
 
@@ -73,7 +73,7 @@ export const variation = ["1–5 objects", "Partial occlusion", "Normal and dim 
 
 export const faqs = [
   { q: "Why synthetic scenes instead of photos?", a: "Because we place every object, the correct answer is arithmetic on numbers we already hold. Real photos need a person or a model to label them, which brings back the uncertainty we want to remove. Path-traced lighting keeps the images realistic." },
-  { q: "How do you know every answer is right?", a: "Separate code that shares no logic with the generator re-derives all 60 answers from the raw scene numbers, every task rebuilds identically from its seed, and 111 automated tests run on every push." },
+  { q: "How do you know every answer is right?", a: "Separate code that shares no logic with the generator re-derives all 60 answers from the raw scene numbers, every task rebuilds identically from its seed, and 116 automated tests run on every push." },
   { q: "What stops unanswerable questions?", a: "A visibility check after rendering. Each object must be at least 70% unoccluded, fully in frame and at least 2,500 pixels. Otherwise the scene is discarded and rebuilt from a new seed." },
   { q: "How is stability decided?", a: "For every box, the centre of mass of everything above it must sit over that box's top face. Tasks are kept only when the margin is at least 12 cm, so no case is borderline." },
   { q: "Which models were tested?", a: "Six models from four companies: Gemini 3.1 Flash-Lite, Gemini 3.5 Flash-Lite and Gemma 4 26B (Google), Qwen3.8 27B (Alibaba), Mistral Small 3.1 24B (Mistral AI) and Llama 4 Scout 17B (Meta). Claude and GPT-4o are supported by the code but were not run, and we report only what we actually ran." },

@@ -140,7 +140,7 @@ kept in the dataset only if, at every level,
   |com - nearest edge| >= 0.12 m          (no borderline cases)`}</pre>
         </div>
         <div>
-          <h3 className="mb-4 text-sm font-medium uppercase tracking-wider text-zinc-500">Also enforced by 111 automated tests</h3>
+          <h3 className="mb-4 text-sm font-medium uppercase tracking-wider text-zinc-500">Also enforced by 116 automated tests</h3>
           <ul className="space-y-2.5">
             {TESTS.map((t) => (
               <li key={t} className="flex gap-3 text-zinc-300">
