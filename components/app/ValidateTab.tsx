@@ -8,6 +8,8 @@ type Report = {
   rederived: { checked: number; matched: number; mismatches: string[] };
   visibility: { checked: number; passed: number; failures: string[] };
   reproducible: { checked: number; matched: number; failures: string[]; ids: string[] };
+  checkedAt?: string;
+  cached?: boolean;
 };
 
 const HOW = [
@@ -43,15 +45,15 @@ export default function ValidateTab() {
   const [error, setError] = useState("");
   const [ranAt, setRanAt] = useState<Date | null>(null);
 
-  async function run() {
+  async function run(fresh = true) {
     setBusy(true);
     setError("");
     try {
-      const res = await fetch("/api/bench/validate", { method: "POST" });
+      const res = await fetch("/api/bench/validate", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ fresh }) });
       const j = await res.json();
       if (!res.ok) throw new Error(j.error);
       setReport(j);
-      setRanAt(new Date());
+      setRanAt(j.checkedAt ? new Date(j.checkedAt) : new Date());
     } catch (e) {
       setError((e as Error).message);
     } finally {
@@ -59,9 +61,9 @@ export default function ValidateTab() {
     }
   }
 
-  // the proof runs as soon as the panel opens
+  // on open: the latest real check of this exact dataset (run now if there is none); "Run again" always re-runs it
   useEffect(() => {
-    run();
+    run(false);
   }, []);
 
   const cards = [
@@ -75,16 +77,16 @@ export default function ValidateTab() {
     <div className="space-y-14">
       <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
         <p className="max-w-3xl text-lg leading-relaxed text-zinc-300">
-          Ground truth must come from numbers we generated, never from a person or a model. This proof runs live on the server, on the shipped dataset, every time you open it.
+          Ground truth must come from numbers we generated, never from a person or a model. This proof runs on the server against the shipped dataset. Opening the panel shows the latest check; Run again repeats it from scratch.
         </p>
         <div className="flex shrink-0 items-center gap-4">
           {report && !busy && (
             <span className={`rounded-full border px-3 py-1 text-sm font-medium ${allPass ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-300" : "border-red-500/30 bg-red-500/10 text-red-300"}`}>
               {allPass ? "All checks passed" : "Check failed"}
-              {ranAt && <span className="ml-2 font-normal text-zinc-500">{ranAt.toLocaleTimeString()}</span>}
+              {ranAt && <span className="ml-2 font-normal text-zinc-500">checked {ranAt.toLocaleTimeString()}</span>}
             </span>
           )}
-          <button onClick={run} disabled={busy} className="rounded-md bg-accent px-6 py-3 font-medium text-ink transition-opacity hover:opacity-90 disabled:opacity-50">
+          <button onClick={() => run(true)} disabled={busy} className="rounded-md bg-accent px-6 py-3 font-medium text-ink transition-opacity hover:opacity-90 disabled:opacity-50">
             {busy ? "Validating…" : report ? "Run again" : "Run validation"}
           </button>
         </div>

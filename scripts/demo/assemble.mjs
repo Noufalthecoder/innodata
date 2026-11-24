@@ -30,6 +30,13 @@ for (const e of tl.events) {
     : { a: e.t - 0.15, b: e.t + 0.55, c: e.t + 2.3, d: e.t + 2.9, k: 0.4, x: e.x, y: e.y };
   const prev = windows.at(-1);
   if (prev && w.a < prev.d + 0.15) continue; // keep zooms separate and calm
+  // never zoom into the closing title card: end the zoom before the last segment starts
+  const lastStart = tl.segments.at(-1).start;
+  if (w.a >= lastStart - 0.6) continue;
+  if (w.d > lastStart - 0.1) {
+    w.d = lastStart - 0.1;
+    w.c = Math.max(w.b + 0.2, w.d - 0.5);
+  }
   windows.push(w);
 }
 const env_ = (w) => `(st(0,min(clip((it-${f3(w.a)})/${f3(w.b - w.a)},0,1),clip((${f3(w.d)}-it)/${f3(w.d - w.c)},0,1)));ld(0)*ld(0)*(3-2*ld(0)))`;
@@ -101,8 +108,41 @@ const graph = [
 writeFileSync(`${OUT}/graph.txt`, graph);
 
 const args = ["-y", "-hide_banner", "-loglevel", "error", "-stats", ...inputs, "-/filter_complex", "graph.txt", "-map", "[v]", "-map", "[a]",
-  "-c:v", "libx264", "-preset", "medium", "-crf", "18", "-r", "30", "-c:a", "aac", "-b:a", "192k", "-movflags", "+faststart", "-t", f3(END), "SpatialGrid-demo.mp4"];
+  "-c:v", "libx264", "-preset", "medium", "-crf", "18", "-r", "30", "-c:a", "aac", "-b:a", "192k", "-ar", "48000", "-ac", "2", "-movflags", "+faststart", "-t", f3(END), "app-part.mp4"];
 console.log(`assembling ${END.toFixed(1)}s, ${frames.length} frames, ${windows.length} zooms, ${tl.segments.length} voice clips`);
 const r = spawnSync(FFMPEG, args, { cwd: OUT, stdio: "inherit" });
 if (r.status !== 0) process.exit(r.status ?? 1);
-console.log(`wrote ${OUT}/SpatialGrid-demo.mp4`);
+
+// ---------- 5. the team's explainer as the opening, narrated with s0 ----------
+// The explainer ends on a stand-in logo at 27.9 s; it is cut just before that, so the film goes straight to the SpatialGrid title.
+const INTRO_END = Number(process.env.DEMO_INTRO_END || 27.8);
+const NARRATION_AT = 0.8;
+let introAss = ass.slice(0, ass.indexOf("[Events]")) + "[Events]\nFormat: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text\n";
+{
+  const parts = chunks(vo.s0.text);
+  const total = parts.reduce((a, p) => a + p.length, 0);
+  let t = NARRATION_AT;
+  for (const p of parts) {
+    const d = (vo.s0.seconds * p.length) / total;
+    introAss += `Dialogue: 0,${ts(t)},${ts(Math.min(t + d, INTRO_END))},Sub,,0,0,0,,${p}\n`;
+    t += d;
+  }
+}
+writeFileSync(`${OUT}/subs_intro.ass`, introAss);
+const introGraph = [
+  `[0:v]trim=0:${INTRO_END},setpts=PTS-STARTPTS,scale=1920:1080:flags=lanczos,fps=30,ass=subs_intro.ass,fade=t=out:st=${f3(INTRO_END - 0.45)}:d=0.45,format=yuv420p[v]`,
+  `[0:a]atrim=0:${INTRO_END},asetpts=PTS-STARTPTS,aformat=sample_rates=48000:channel_layouts=stereo,volume=0.35[bg]`,
+  `[1:a]aresample=48000,aformat=channel_layouts=stereo,adelay=${Math.round(NARRATION_AT * 1000)}:all=1[n]`,
+  `[bg][n]amix=inputs=2:normalize=0:dropout_transition=0,apad,atrim=0:${INTRO_END},loudnorm=I=-16:TP=-1.5:LRA=11,aresample=48000[a]`,
+].join(";\n");
+writeFileSync(`${OUT}/graph_intro.txt`, introGraph);
+const ri = spawnSync(FFMPEG, ["-y", "-hide_banner", "-loglevel", "error", "-i", "intro.mp4", "-i", "vo/s0.wav", "-/filter_complex", "graph_intro.txt", "-map", "[v]", "-map", "[a]",
+  "-c:v", "libx264", "-preset", "medium", "-crf", "18", "-r", "30", "-c:a", "aac", "-b:a", "192k", "-ar", "48000", "-ac", "2", "intro-part.mp4"], { cwd: OUT, stdio: "inherit" });
+if (ri.status !== 0) process.exit(ri.status ?? 1);
+
+// ---------- 6. join: explainer, then the live product ----------
+const rc = spawnSync(FFMPEG, ["-y", "-hide_banner", "-loglevel", "error", "-i", "intro-part.mp4", "-i", "app-part.mp4",
+  "-filter_complex", "[0:v][0:a][1:v][1:a]concat=n=2:v=1:a=1[v][a]", "-map", "[v]", "-map", "[a]",
+  "-c:v", "libx264", "-preset", "medium", "-crf", "18", "-r", "30", "-c:a", "aac", "-b:a", "192k", "-movflags", "+faststart", "SpatialGrid-demo.mp4"], { cwd: OUT, stdio: "inherit" });
+if (rc.status !== 0) process.exit(rc.status ?? 1);
+console.log(`wrote ${OUT}/SpatialGrid-demo.mp4 (${(INTRO_END + END).toFixed(1)} s)`);

@@ -1,39 +1,45 @@
-// Narration for the demo video. The findings segment is written from the real results in public/bench/summary.json.
+// Narration for the demo video. s0 plays over the team's 30-second explainer (demo-output/intro.mp4);
+// s1..s8 play over the live recording of the site and app. The findings line is built from summary.json.
 import { readFileSync } from "node:fs";
 
 const LABEL = {
   "gemini-3.1-flash-lite": "Gemini 3.1 Flash-Lite",
   "gemini-3.5-flash-lite": "Gemini 3.5 Flash-Lite",
-  "gemini-3-flash-preview": "Gemini 3 Flash",
-  "gemini-3.5-flash": "Gemini 3.5 Flash",
   "gemma-4-26b-a4b-it": "Gemma 4",
   "@cf/qwen/qwen3.8-27b": "Alibaba's Qwen",
   "@cf/mistralai/mistral-small-3.1-24b-instruct": "Mistral",
   "@cf/meta/llama-4-scout-17b-16e-instruct": "Meta's Llama 4",
 };
-const pct = (a) => `${Math.round(a * 100)} percent`;
-// insight sentences below were read from the results of the shipped 60-task dataset (see docs/TECHNICAL_REPORT.md)
 
 function findings() {
   const s = JSON.parse(readFileSync("public/bench/summary.json", "utf8"));
   const ms = s.models.slice().sort((a, b) => b.overall.accuracy - a.overall.accuracy);
-  if (!ms.length) return "Model results will appear here once the evaluation has run.";
-  const list = ms.map((m) => `${LABEL[m.model] ?? m.model}, ${pct(m.overall.accuracy)}`);
-  const said = list.length > 1 ? `${list.slice(0, -1).join(", ")}, and ${list.at(-1)}` : list[0];
-  return `And the findings. Six models from four companies, on ${s.taskCount} tasks. ${LABEL[ms[0].model] ?? ms[0].model} leads at ${pct(ms[0].overall.accuracy)}. Depth and position are nearly solved. Orientation is weak for every model: they almost never answer left or right. And on stability, Google's models call safe stacks unsafe, while Qwen, Mistral and Llama get them right.`;
+  const top = ms[0];
+  return `Six models, from four companies. ${LABEL[top.model] ?? top.model} scored highest, at ${Math.round(top.overall.accuracy * 100)} percent. Depth and position are nearly solved. Orientation is broken for every model: they almost never answer left or right. And Google's models call safe stacks unsafe, while Qwen, Mistral and Llama get them right.`;
 }
 
 export function buildSegments() {
   return [
-    { id: "s0", text: "SpatialGrid. Before a robot reaches, it has to see. This benchmark tests whether AI vision models can be trusted to act in the physical world." },
-    { id: "s1", text: "Robots and inspection cameras must know which object is closer, how it is turned, and whether a stack will fall. When a vision model gets this wrong, a robot collides, or a pallet topples. SpatialGrid measures exactly these skills." },
-    { id: "s2", text: "Every scene is generated from numbers we choose: object positions, rotations, and the camera. Blender renders it photo-realistically, under real studio and workshop lighting. Because we placed every object, we already know the answer." },
-    { id: "s3", text: "Here is the same scene in 3D. The ground truth is drawn from those same numbers: the distance from the camera to every object. No person, and no AI, decides what is correct." },
-    { id: "s4", text: "Every question must be answerable from the image. We count each object's visible pixels, against the object on its own. Hidden, cut-off, or tiny objects are rejected, and the task is rebuilt." },
-    { id: "s5", text: "Four kinds of reasoning, across three tiers: depth, position, orientation, and physical stability. Object count, occlusion, lighting, and materials all vary." },
-    { id: "s6", text: "Anyone can answer the same questions the models get. Or generate a brand-new scene on demand, with its answer computed instantly." },
-    { id: "s7", text: "Validation is independent of every model. Separate code re-derives all sixty answers, every task rebuilds identically from its seed, and every task passes the visibility check. One hundred and eleven automated tests run on every push." },
-    { id: "s8", text: findings() },
-    { id: "s9", text: "SpatialGrid. A reusable generator, verified answers, and honest results. The code is open on GitHub." },
+    {
+      id: "s0",
+      text: "Vision models can see objects. But do they understand space: what is nearer, how it is turned, whether a stack will hold? Today, tests use hand-labelled photos, or AI-generated images, and there is no way to prove the answer is right. So we build the scene ourselves. We place every object, so we already know the answer.",
+    },
+    { id: "s1", text: "This is SpatialGrid, from team Hackcrew: a benchmark factory for physical AI, where every answer is computed before the image exists." },
+    { id: "s2", text: "Here is one real scene. Three Google models say this stack falls. Alibaba, Mistral and Meta say it stands. The computed answer: it stands, with at least twelve centimetres to spare." },
+    {
+      id: "s3",
+      text: "The app is the pipeline itself. Generate a task, and each stage fills in with real output: the scene from its seed, the photoreal image, the answer computed from geometry, and a pixel-level check that proves the question is answerable.",
+    },
+    {
+      id: "s4",
+      text: "Then only the image and the question, never the answer, go to four AI companies at once. Judges can add their own model here, with their own key. It stays in memory, and is never stored.",
+    },
+    { id: "s5", text: "Each lane reports back live, and every answer is scored automatically against the computed truth." },
+    {
+      id: "s6",
+      text: "Validation is independent of every model. Separate code re-derives all sixty answers, every task rebuilds from its seed, every image passes the visibility check, and a hundred and sixteen automated tests run on every push.",
+    },
+    { id: "s7", text: findings() },
+    { id: "s8", text: "SpatialGrid, by team Hackcrew. Labels that can't be wrong. Any number of tasks. Zero annotators. The code is open on GitHub." },
   ];
 }

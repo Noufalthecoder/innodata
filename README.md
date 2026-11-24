@@ -173,7 +173,7 @@ Each kind needs a different skill, not a reworded question. Within each kind, di
 | Visibility check passed | **60 / 60** |
 | Automated tests (`npm test`, run in CI on every push) | **116 / 116** |
 
-The proof runs live in the app (**Validation Proof**) every time it is opened. The test suite also covers:
+The proof also runs in the app (**Validation Proof**): it shows the latest check of the shipped dataset with its time, and **Run again** repeats it from scratch. The test suite also covers:
 
 - **Property and mutation tests.** The generator and the independent re-derivation agree on 500 random stacks, and corrupted answers or altered scenes are caught.
 - **Prompt safety.** The answer never reaches a model, and ambiguous replies score as wrong.

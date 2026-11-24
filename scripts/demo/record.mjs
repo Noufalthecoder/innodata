@@ -19,7 +19,8 @@ const W = 1920, H = 1080;
 const browser = await chromium.launch({
   channel: "msedge",
   headless: true,
-  args: ["--hide-scrollbars", "--use-gl=angle", "--use-angle=swiftshader", "--enable-unsafe-swiftshader", "--ignore-gpu-blocklist", "--force-color-profile=srgb"],
+  // the real GPU: software rendering (SwiftShader) drops the 3D canvas to under 1 fps
+  args: ["--hide-scrollbars", "--ignore-gpu-blocklist", "--force-color-profile=srgb"],
 });
 const context = await browser.newContext({ viewport: { width: W, height: H }, deviceScaleFactor: 1 });
 
@@ -126,121 +127,92 @@ async function segment(id, fn) {
 }
 const appTab = (name) => page.locator('nav[aria-label="App sections"] button', { hasText: name });
 
-// ---------- warm up the pages so nothing loads slowly on camera ----------
+// ---------- warm up the pages so nothing compiles or loads slowly on camera ----------
 for (const p of ["/", "/app"]) await page.goto(BASE + p, { waitUntil: "networkidle" });
+// one real, full validation run before filming, so the panel opens on a genuine result without a long wait on camera
+await page.evaluate((b) => fetch(b + "/api/bench/validate", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ fresh: true }) }).then((r) => r.json()), BASE);
 await page.goto(BASE + "/", { waitUntil: "networkidle" });
 await page.mouse.move(mx, my);
 t0 = Date.now() / 1000;
 await cdp.send("Page.startScreencast", { format: "jpeg", quality: 92, maxWidth: W, maxHeight: H, everyNthFrame: 1 });
 await sleep(300);
 
-// ---------- the film ----------
-await segment("s0", async (d) => {
-  await card("SpatialGrid", "A perception benchmark for physical AI");
-  await sleep(d * 1000 - 300);
-  await uncard();
-});
+const top = (name) => page.locator("header button", { hasText: name }).first();
+const node = (type) => page.locator(`.react-flow__node-${type}`).first();
 
+// ---------- the film (s0 plays over the team's explainer, joined in assemble.mjs) ----------
 await segment("s1", async (d) => {
-  await sleep(600);
-  await focus(page.locator("h1").first(), { dy: 10 });
-  await sleep(d * 1000 * 0.35);
-  const why = await page.locator("#problem").evaluate((el) => el.getBoundingClientRect().top + scrollY - 40);
-  await smoothScrollTo(why, 2600);
-  await sleep(500);
-  await focus(page.locator("#problem h3").first(), { dx: -40 });
+  await card("SpatialGrid", "Team Hackcrew · a benchmark factory for physical AI");
+  await sleep(4200);
+  await uncard();
+  await sleep(1200);
+  await focus(page.locator("h1").first(), { dy: 10, ms: 900 });
 });
 
 await segment("s2", async () => {
-  await click(page.locator("header a", { hasText: "Open app" }));
-  await page.waitForURL("**/app**");
-  await page.mouse.move(mx, my);
-  await page.locator("h1").waitFor();
-  await sleep(500);
-  await click(appTab("Tasks"));
-  await page.locator(`main button:has-text("${hero.id} ·")`).waitFor();
-  await sleep(700);
-  await click(page.locator(`main button:has-text("${hero.id} ·")`));
-  await page.locator("main img").first().waitFor();
-  await sleep(800);
-  await focus(page.locator("main img").first(), { ms: 900 });
+  await sleep(300);
+  await focus(page.locator("figure ul").first(), { ms: 900 });
+  await sleep(4200);
+  await focus(page.locator("figure ul li").last(), { dx: 80, ms: 700 });
 });
 
 await segment("s3", async () => {
-  await click(page.getByRole("button", { name: "Interactive 3D" }));
-  await page.locator("canvas").waitFor();
-  maxSteps = 8;
-  await sleep(1500);
-  const [cx, cy] = await centerOf(page.locator("canvas"));
-  await moveTo(cx + 120, cy + 40, 500);
-  await page.mouse.down();
-  await moveTo(cx - 220, cy + 10, 1000);
-  await page.mouse.up();
-  await sleep(700);
-  await click(page.getByRole("button", { name: /ground truth/ }));
-  await sleep(900);
-  await click(page.getByRole("button", { name: /ground truth/ }));
-  maxSteps = 24;
+  await click(page.locator("header a", { hasText: "Open app" }));
+  await page.waitForURL("**/app**");
+  await page.mouse.move(mx, my);
+  await node("config").waitFor();
+  await sleep(1800);
+  await click(page.getByRole("button", { name: /Generate Task/ }));
+  await page.getByText("Held back").waitFor({ timeout: 60000 });
+  await sleep(600);
+  await focus(node("truth"), { ms: 800 });
+  await sleep(2600);
+  await focus(node("visibility"), { ms: 700 });
 });
 
 await segment("s4", async () => {
-  maxSteps = 24;
-  await click(page.getByRole("button", { name: "Rendered image" }), { zoom: false });
-  await sleep(600);
-  await focus(page.getByText("Visibility check").first(), { dx: 120, dy: 26, ms: 900 });
+  await click(page.getByRole("button", { name: /Run$/ }));
+  await sleep(2500);
+  await focus(node("config"), { ms: 900 });
 });
 
 await segment("s5", async () => {
-  await click(page.getByText("← Back to all tasks"), { zoom: false });
-  await page.getByRole("button", { name: "orientation", exact: true }).waitFor();
-  await sleep(400);
-  await focus(page.getByRole("button", { name: "leftmost", exact: true }), { ms: 600 });
-  for (const k of ["orientation", "stability", "all"]) {
-    await click(page.getByRole("button", { name: k, exact: true }), { zoom: false, ms: 400 });
-    await sleep(800);
-  }
+  // the models answer at their own speed; the segment waits for every lane
+  await page.waitForFunction(() => !document.body.innerText.includes("Running…"), null, { timeout: 150000 });
+  await sleep(700);
+  await focus(node("results"), { ms: 900 });
 });
 
 await segment("s6", async () => {
-  await click(appTab("Play"));
-  await page.locator("main img").first().waitFor();
+  await click(top("Validation Proof"));
+  await page.getByText("All checks passed").waitFor({ timeout: 120000 });
   await sleep(500);
-  await click(page.locator('[aria-label="Answer options"] button').first());
-  await sleep(900);
-  await click(appTab("Generate"));
-  await page.locator("select").first().selectOption("stability");
-  await sleep(300);
-  await click(page.getByRole("button", { name: /Generate a new scene/ }));
-  await page.locator("main img").first().waitFor({ timeout: 60000 });
-  await sleep(400);
-  await click(page.locator('[aria-label="Answer options"] button').first());
+  await focus(page.locator("section[role=dialog] .grid > div").first(), { ms: 800 });
+  await sleep(3500);
+  const howTo = await page.locator("section[role=dialog]").evaluate((el) => el.scrollTop + 520);
+  await page.locator("section[role=dialog]").evaluate((el, y) => el.scrollTo({ top: y, behavior: "smooth" }), howTo);
 });
 
 await segment("s7", async () => {
-  await click(appTab("Validate"));
-  await sleep(200);
-  await click(page.getByRole("button", { name: "Run validation" }));
-  await page.getByText("Tasks in dataset").waitFor({ timeout: 180000 });
-  await sleep(400);
-  await focus(page.getByText("Answers re-derived").first(), { dx: 260, ms: 800 });
+  await click(top("Leaderboard"));
+  const dlg = page.locator("section[role=dialog]");
+  await dlg.locator("tbody tr").first().waitFor({ timeout: 30000 });
+  await sleep(600);
+  await focus(dlg.locator("tbody tr").first(), { dx: -300, ms: 800 });
+  await sleep(3500);
+  await click(dlg.locator("tr", { hasText: "Gemma 4 26B" }).first());
+  await page.getByText("Accuracy by skill").waitFor({ timeout: 30000 });
+  await sleep(800);
+  await focus(page.getByText("Accuracy by skill"), { dx: 300, dy: 60, ms: 800 });
+  await sleep(3500);
+  await dlg.evaluate((el) => el.scrollTo({ top: 760, behavior: "smooth" }));
+  await sleep(1200);
+  await focus(page.getByText("Stable stacks recognised").first(), { ms: 800 });
 });
 
-await segment("s8", async () => {
-  await click(appTab("Results"));
-  await page.locator("table").waitFor();
-  await sleep(700);
-  await focus(page.locator("tbody tr").first(), { dx: -150, ms: 900 });
-  const rows = await page.locator("tbody tr").count();
-  for (let i = 1; i < rows; i++) {
-    await sleep(1300);
-    const [x, y] = await centerOf(page.locator("tbody tr").nth(i));
-    await moveTo(x - 150, y, 500);
-  }
-});
-
-await segment("s9", async (d) => {
-  await card("SpatialGrid", "github.com/Noufalthecoder/innodata");
-  await sleep(d * 1000 + 600);
+await segment("s8", async (d) => {
+  await card("SpatialGrid", "Team Hackcrew · github.com/Noufalthecoder/innodata");
+  await sleep(d * 1000 + 800);
 });
 
 const end = now();
