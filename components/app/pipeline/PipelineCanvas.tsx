@@ -2,7 +2,7 @@
 
 import "@xyflow/react/dist/style.css";
 import dynamic from "next/dynamic";
-import { Controls, MarkerType, ReactFlow, ReactFlowProvider, useNodesState, useReactFlow, type Edge, type Node } from "@xyflow/react";
+import { Controls, MarkerType, ReactFlow, ReactFlowProvider, useNodesState, useNodesInitialized, useReactFlow, type Edge, type Node } from "@xyflow/react";
 import { useEffect, useMemo, useRef } from "react";
 import { nodeTypes } from "./nodes";
 import { PipelineProvider, usePipeline, type Status } from "./state";
@@ -41,10 +41,11 @@ function edge(id: string, source: string, target: string, from: Status, to: Stat
 }
 
 function Flow() {
-  const { stages, runs, task, view3d, setView3d, running, generating } = usePipeline();
+  const { stages, runs, task, view3d, setView3d, running, generating, loaded } = usePipeline();
   const wrap = useRef<HTMLDivElement>(null);
   const [nodes, setNodes, onNodesChange] = useNodesState(layout(1));
   const { fitView } = useReactFlow();
+  const nodesReady = useNodesInitialized();
 
   // fill the screen: re-layout and re-fit whenever the canvas changes size
   useEffect(() => {
@@ -73,7 +74,7 @@ function Flow() {
     if (!settled) return;
     const t = setTimeout(() => fitView({ padding: 0.06, maxZoom: 1.8, duration: 400 }), 120);
     return () => clearTimeout(t);
-  }, [settled, task, fitView]);
+  }, [settled, task, nodesReady, loaded, fitView]);
 
   const edges = useMemo<Edge[]>(() => {
     const trig: Status = generating || stages.scene !== "idle" ? "done" : "idle";
