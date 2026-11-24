@@ -12,7 +12,7 @@
 
 <p align="center">
   <a href="https://github.com/Noufalthecoder/innodata/actions/workflows/ci.yml"><img src="https://github.com/Noufalthecoder/innodata/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
-  <img src="https://img.shields.io/badge/tests-99%20passing-34d399" alt="99 tests passing">
+  <img src="https://img.shields.io/badge/tests-111%20passing-34d399" alt="111 tests passing">
   <img src="https://img.shields.io/badge/ground%20truth-60%2F60%20re--derived-34d399" alt="60 of 60 answers re-derived">
   <img src="https://img.shields.io/badge/renderer-Blender%20Cycles-ff8731" alt="Blender Cycles">
   <img src="https://img.shields.io/badge/Next.js-15-111" alt="Next.js 15">
@@ -159,7 +159,7 @@ Each kind needs a different skill, not a reworded question. Within each kind, di
 | Answers re-derived by separate code ([`lib/bench/truth.ts`](lib/bench/truth.ts), shares no logic with the generator) | **60 / 60** |
 | Tasks rebuilt identically from their seeds | **60 / 60** |
 | Visibility check passed | **60 / 60** |
-| Automated tests (`npm test`, run in CI on every push) | **99 / 99** |
+| Automated tests (`npm test`, run in CI on every push) | **111 / 111** |
 
 The test suite also includes:
 
@@ -180,7 +180,7 @@ Both are documented in the [technical report](docs/TECHNICAL_REPORT.md).
 | Criterion | Where to look |
 |---|---|
 | **Implementation (25%)** | One command each to generate, validate, evaluate and report. It is resumable, quota-aware and covered by CI. See [`scripts/bench/`](scripts/bench), [`lib/bench/`](lib/bench) and [`scripts/blender/render.py`](scripts/blender/render.py). |
-| **Validity (25%)** | Ground truth is computed and then independently re-derived. Exact visibility comes from pixel masks. The suite has 99 tests, including mutation tests. See [Why you can trust the numbers](#why-you-can-trust-the-numbers). |
+| **Validity (25%)** | Ground truth is computed and then independently re-derived. Exact visibility comes from pixel masks. The suite has 111 tests, including mutation tests. See [Why you can trust the numbers](#why-you-can-trust-the-numbers). |
 | **Variation (20%)** | 4 reasoning kinds across 3 tiers, 1–5 objects, occlusion, 2 lighting levels, 6 environments, 5 floors and 3 materials, with balanced outcomes. |
 | **Originality (15%)** | Answers are fixed before rendering; the visibility check proves every question is answerable; scenes can be explored as live 3D with the truth overlaid. |
 | **Impact (15%)** | The failure modes map directly to robot grasping and pallet inspection, and the orientation and stability blind spots are measurable. See [Results](#results). |
@@ -212,7 +212,7 @@ npm run bench:generate -- --count 60 --renderer svg    # instant preview rendere
 npm run bench:validate                                         # re-derives every answer, rebuilds from seeds
 npm run bench:eval -- --model gemini --model-id gemini-3.1-flash-lite
 npm run bench:report                                           # writes public/bench/summary.json
-npm test                                                       # 99 tests
+npm test                                                       # 111 tests
 ```
 
 Open models run free through Cloudflare (`--model cloudflare --model-id @cf/qwen/qwen3.8-27b`). Claude (`--model anthropic`) and GPT-4o (`--model openai`) are supported as well. Evaluation resumes where it stopped, and it stops cleanly when a free quota runs out.

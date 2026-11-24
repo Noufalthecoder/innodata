@@ -32,7 +32,7 @@ export function buildSegments() {
     { id: "s4", text: "Every question must be answerable from the image. We count each object's visible pixels, against the object on its own. Hidden, cut-off, or tiny objects are rejected, and the task is rebuilt." },
     { id: "s5", text: "Four kinds of reasoning, across three tiers: depth, position, orientation, and physical stability. Object count, occlusion, lighting, and materials all vary." },
     { id: "s6", text: "Anyone can answer the same questions the models get. Or generate a brand-new scene on demand, with its answer computed instantly." },
-    { id: "s7", text: "Validation is independent of every model. Separate code re-derives all sixty answers, every task rebuilds identically from its seed, and every task passes the visibility check. Ninety-nine automated tests run on every push." },
+    { id: "s7", text: "Validation is independent of every model. Separate code re-derives all sixty answers, every task rebuilds identically from its seed, and every task passes the visibility check. One hundred and eleven automated tests run on every push." },
     { id: "s8", text: findings() },
     { id: "s9", text: "SpatialGrid. A reusable generator, verified answers, and honest results. The code is open on GitHub." },
   ];

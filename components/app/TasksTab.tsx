@@ -3,7 +3,8 @@
 import { useEffect, useMemo, useState } from "react";
 import { TIER_LABEL, type Task } from "@/lib/bench/types";
 import TaskComparisonView from "@/components/bench/TaskComparisonView";
-import { FAILURE_DEEP_DIVES } from "@/lib/bench/failures";
+import { missCounts } from "@/lib/bench/insights";
+import { useBenchData } from "@/components/bench/useBenchData";
 import { exportTasksAsCsv, exportTasksAsJson, exportHuggingFaceJsonl } from "@/lib/bench/export";
 
 export default function TasksTab() {
@@ -20,7 +21,13 @@ export default function TasksTab() {
       .catch(() => setFailed(true));
   }, []);
 
-  const failureIds = useMemo(() => new Set(Object.keys(FAILURE_DEEP_DIVES)), []);
+  // "hardest" comes from the stored results: tasks that at least half of the models got wrong
+  const { data: bench } = useBenchData();
+  const failureIds = useMemo(() => {
+    if (!bench) return new Set<string>();
+    const misses = missCounts(bench.files);
+    return new Set([...misses].filter(([, n]) => n >= Math.ceil(bench.files.length / 2)).map(([id]) => id));
+  }, [bench]);
 
   const shown = useMemo(() => {
     if (!tasks) return [];
@@ -55,7 +62,7 @@ export default function TasksTab() {
 
   const kinds = [
     { id: "all", label: "All tasks" },
-    { id: "failures", label: `Failures (${failureIds.size})` },
+    { id: "failures", label: `Hardest · missed by half or more (${failureIds.size})` },
     ...Array.from(new Set(tasks.map((t) => t.kind))).map((k) => ({ id: k, label: k })),
   ];
 

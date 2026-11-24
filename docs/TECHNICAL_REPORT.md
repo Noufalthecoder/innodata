@@ -72,7 +72,7 @@ Every answer is arithmetic on numbers the generator chose itself. No person and 
 | Answers re-derived by separate code (`lib/bench/truth.ts`, shares no logic with the generator) | 60 / 60 |
 | Tasks rebuilt identically from their seeds | 60 / 60 |
 | Visibility check passed | 60 / 60 |
-| Automated test suite (`npm test`, vitest, run in CI) | 99 / 99 passing |
+| Automated test suite (`npm test`, vitest, run in CI) | 111 / 111 passing |
 
 The test suite also includes:
 
