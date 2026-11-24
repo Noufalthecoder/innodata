@@ -14,8 +14,8 @@
   <a href="https://github.com/Noufalthecoder/innodata/actions/workflows/ci.yml"><img src="https://github.com/Noufalthecoder/innodata/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
   <img src="https://img.shields.io/badge/tests-116%20passing-34d399" alt="116 tests passing">
   <img src="https://img.shields.io/badge/ground%20truth-60%2F60%20re--derived-34d399" alt="60 of 60 answers re-derived">
-  <img src="https://img.shields.io/badge/models-6%20from%204%20companies-4f8cff" alt="6 models from 4 companies">
-  <img src="https://img.shields.io/badge/human%20labels-0-ff8731" alt="0 human labels">
+  <img src="https://img.shields.io/badge/models-6%20from%204%20companies-4f8cff?style=flat" alt="6 models from 4 companies">
+  <img src="https://img.shields.io/badge/human%20labels-0-ff8731?style=flat" alt="0 human labels">
   <img src="https://img.shields.io/badge/renderer-Blender%20Cycles-ff8731" alt="Blender Cycles">
 </p>
 
