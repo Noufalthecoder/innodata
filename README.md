@@ -26,6 +26,7 @@
   <a href="#-watch-it-run"><b>Live pipeline</b></a> ·
   <a href="#-why-you-can-trust-the-numbers"><b>Validation</b></a> ·
   <a href="#-quick-start"><b>Run it</b></a> ·
+  <a href="docs/SpatialGrid-Technical-Documentation.pdf"><b>Technical documentation (PDF)</b></a> ·
   <a href="docs/TECHNICAL_REPORT.md"><b>Technical report</b></a> ·
   <a href="docs/PROJECT_OVERVIEW.md"><b>Project overview</b></a>
 </p>
