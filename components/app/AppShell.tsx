@@ -76,12 +76,12 @@ export default function AppShell() {
         <PipelineCanvas />
 
         {current && (
-          <div className="absolute inset-0 z-30 flex justify-end bg-black/50 backdrop-blur-[2px]" onClick={() => open(null)}>
+          <div className="absolute inset-0 z-30 flex">
             <section
               role="dialog"
               aria-label={current.label}
               onClick={(e) => e.stopPropagation()}
-              className="h-full w-full max-w-[1100px] overflow-y-auto border-l border-white/10 bg-ink px-6 py-8 shadow-2xl shadow-black sm:px-10"
+              className="h-full w-full overflow-y-auto bg-ink px-6 py-8 sm:px-10 lg:px-14"
             >
               <div className="mb-8 flex items-start justify-between gap-6">
                 <div>
