@@ -10,7 +10,8 @@ export const dynamic = "force-dynamic";
  */
 let github: { ok: boolean; at: number } | null = null;
 async function githubReachable(token: string): Promise<boolean> {
-  if (github && Date.now() - github.at < 5 * 60_000) return github.ok;
+  // remember success for 5 minutes, failure only briefly (e.g. after switching networks)
+  if (github && Date.now() - github.at < (github.ok ? 5 * 60_000 : 20_000)) return github.ok;
   let ok = false;
   try {
     const r = await fetch("https://models.github.ai/catalog/models", { headers: { Authorization: `Bearer ${token}`, Accept: "application/json" }, signal: AbortSignal.timeout(4000) });
