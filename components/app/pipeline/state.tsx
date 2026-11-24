@@ -12,13 +12,13 @@ export type RunResult = { status: Status; modelId?: string; label?: string; raw?
 
 export const SLOTS: { slot: Slot; name: string; color: string; envVar: string }[] = [
   { slot: "claude", name: "Claude", color: "#d97757", envVar: "ANTHROPIC_API_KEY" },
-  { slot: "gpt", name: "GPT-4o", color: "#10a37f", envVar: "OPENAI_API_KEY" },
+  { slot: "gpt", name: "GPT-4o", color: "#10a37f", envVar: "GITHUB_TOKEN" },
   { slot: "gemini", name: "Gemini", color: "#4f8cff", envVar: "GEMINI_API_KEY" },
 ];
 /** the model ids each slot can run; Gemini offers the Gemini-API family (incl. open-weights Gemma) */
 const SLOT_MODELS: Record<Slot, (id: string) => boolean> = {
   claude: (id) => id.startsWith("claude"),
-  gpt: (id) => id.startsWith("gpt"),
+  gpt: (id) => id.startsWith("gpt") || id.startsWith("openai/"),
   gemini: (id) => id.startsWith("gemini") || id.startsWith("gemma"),
 };
 
@@ -71,7 +71,7 @@ export function PipelineProvider({ children }: { children: React.ReactNode }) {
   const [genError, setGenError] = useState("");
   const [stages, setStages] = useState(idleStages);
   const [providers, setProviders] = useState<Provider[]>([]);
-  const [slotModel, setSlotModelState] = useState<Record<Slot, string>>({ claude: "claude-sonnet-5-5", gpt: "gpt-4o", gemini: "gemini-3.1-flash-lite" });
+  const [slotModel, setSlotModelState] = useState<Record<Slot, string>>({ claude: "claude-sonnet-5-5", gpt: "openai/gpt-4o", gemini: "gemini-3.1-flash-lite" });
   const [selected, setSelected] = useState<Record<Slot, boolean>>({ claude: false, gpt: false, gemini: true });
   const [runs, setRuns] = useState(idleRuns);
   const [view3d, setView3d] = useState(false);
@@ -83,9 +83,19 @@ export function PipelineProvider({ children }: { children: React.ReactNode }) {
       .then((r) => r.json())
       .then((j: { providers: Provider[] }) => {
         setProviders(j.providers);
-        // pre-select Gemini (free tier); the others can be switched on when their key has credit
+        // pre-select the free routes: Gemini, and GPT-4o through GitHub Models when a GitHub token is set
         const has = (s: Slot) => j.providers.some((p) => SLOT_MODELS[s](p.id) && p.configured);
-        setSelected({ claude: false, gpt: !has("gemini") && has("gpt"), gemini: has("gemini") });
+        const ghGpt = j.providers.some((p) => p.id === "openai/gpt-4o" && p.configured);
+        setSelected({ claude: has("claude"), gpt: ghGpt, gemini: has("gemini") });
+        // each slot starts on its first configured model
+        setSlotModelState((o) => {
+          const n = { ...o };
+          for (const s of ["claude", "gpt", "gemini"] as Slot[]) {
+            const cur = j.providers.find((p) => p.id === o[s]);
+            if (!cur?.configured) n[s] = j.providers.find((p) => SLOT_MODELS[s](p.id) && p.configured)?.id ?? o[s];
+          }
+          return n;
+        });
         setLoaded(true);
       })
       .catch(() => {});

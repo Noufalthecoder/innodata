@@ -1,9 +1,11 @@
-export type Provider = "anthropic" | "openai" | "gemini";
+export type Provider = "anthropic" | "openai" | "gemini" | "github";
 
 export const MODELS: Record<Provider, { model: string; env: string; label: string }> = {
   anthropic: { model: "claude-sonnet-5-5", env: "ANTHROPIC_API_KEY", label: "Claude" },
   openai: { model: "gpt-4o", env: "OPENAI_API_KEY", label: "GPT-4o" },
   gemini: { model: "gemini-3.5-flash", env: "GEMINI_API_KEY", label: "Gemini" },
+  // GitHub Models: OpenAI models through a GitHub token (free, rate-limited tier)
+  github: { model: "openai/gpt-4o", env: "GITHUB_TOKEN", label: "GPT-4o (GitHub Models)" },
 };
 
 /** Every model the app can ask. Each answer is labelled with the model that actually produced it. */
@@ -14,7 +16,8 @@ export const MODEL_CHOICES: { id: string; provider: Provider; label: string }[] 
   { id: "gemini-3.1-flash-lite", provider: "gemini", label: "Gemini 3.1 Flash-Lite" },
   { id: "gemma-4-26b-a4b-it", provider: "gemini", label: "Gemma 4 26B (open)" },
   { id: "claude-sonnet-5-5", provider: "anthropic", label: "Claude" },
-  { id: "gpt-4o", provider: "openai", label: "GPT-4o" },
+  { id: "openai/gpt-4o", provider: "github", label: "GPT-4o · GitHub Models" },
+  { id: "gpt-4o", provider: "openai", label: "GPT-4o · OpenAI API" },
 ];
 
 const LETTERS = "ABCDEF";
@@ -59,7 +62,12 @@ async function post(url: string, headers: Record<string, string>, body: unknown)
   const res = await fetch(url, { method: "POST", headers: { "Content-Type": "application/json", ...headers }, body: JSON.stringify(body) });
   const text = await res.text();
   if (!res.ok) throw Object.assign(new Error(`${res.status} ${text.slice(0, 300)}`), { status: res.status });
-  return JSON.parse(text);
+  try {
+    return JSON.parse(text);
+  } catch {
+    // e.g. a proxy or firewall answering instead of the API
+    throw new Error(`unexpected non-JSON reply from ${new URL(url).host}: "${text.slice(0, 60).trim()}". Is this host reachable from the server?`);
+  }
 }
 
 export async function askModel(provider: Provider, apiKey: string, jpegBase64: string, question: string, options: string[], modelId?: string): Promise<string> {
@@ -77,11 +85,11 @@ export async function askModel(provider: Provider, apiKey: string, jpegBase64: s
     );
     return j.content?.[0]?.text ?? "";
   }
-  if (provider === "openai") {
+  if (provider === "openai" || provider === "github") {
     const j = await post(
-      "https://api.openai.com/v1/chat/completions",
+      provider === "github" ? "https://models.github.ai/inference/chat/completions" : "https://api.openai.com/v1/chat/completions",
       { Authorization: `Bearer ${apiKey}` },
-      { model, max_tokens: 16, messages: [{ role: "user", content: [{ type: "text", text: prompt }, { type: "image_url", image_url: { url: `data:image/jpeg;base64,${jpegBase64}` } }] }] }
+      { model, max_tokens: 16, temperature: 0, messages: [{ role: "user", content: [{ type: "text", text: prompt }, { type: "image_url", image_url: { url: `data:image/jpeg;base64,${jpegBase64}` } }] }] }
     );
     return j.choices?.[0]?.message?.content ?? "";
   }
