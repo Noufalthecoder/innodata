@@ -226,6 +226,19 @@ npm run dev                        # site at http://localhost:3000, app at /app
 The shipped dataset (60 tasks, images and all model results) is in [`public/bench/`](public/bench), so the site and app work straight after `npm install`.
 
 <details>
+<summary><b>Run in Docker (what judges run)</b></summary>
+
+```bash
+cp .env.example .env                                   # optional: add model keys
+docker compose up --build                              # app at http://localhost:3000/app
+docker compose run --rm tools                          # runs the 116 tests in the same image
+docker compose run --rm tools run bench:validate       # re-derives every answer
+```
+
+Or without compose: `docker build -t spatialgrid . && docker run -p 3000:3000 --env-file .env spatialgrid`. The image bundles the shipped dataset, so no keys or Blender are needed to review it.
+</details>
+
+<details>
 <summary><b>Generate your own dataset</b></summary>
 
 Photoreal rendering needs [Blender](https://www.blender.org/download/) (4.5 LTS tested) and free CC0 assets from Poly Haven:

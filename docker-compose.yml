@@ -1,0 +1,17 @@
+services:
+  web:
+    build: .
+    image: spatialgrid:latest
+    ports:
+      - "3000:3000"
+    env_file:
+      - path: .env
+        required: false
+  # one-off checks:  docker compose run --rm tools
+  tools:
+    image: spatialgrid:latest
+    profiles: ["tools"]
+    entrypoint: ["npm"]
+    command: ["test"]
+    environment:
+      NODE_ENV: development
