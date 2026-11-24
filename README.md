@@ -297,7 +297,7 @@ docs/              technical report, demo script, media
 
 ## Team and credits
 
-Built for the Innodata AI Hackathon 2026 by **Team Hackcrew**: Mohammed Noufal V (team lead), DEVENDRAN-P, Adithya A M and KarthikeyanMahendran.
+Built for the Innodata AI Hackathon 2026 by **Team Hackcrew**: Mohammed Noufal V (team lead), Adithya A M, Karthikeyan M and Devendran P.
 
 - **HDRI lighting and floor materials:** [Poly Haven](https://polyhaven.com), CC0.
 - **Renderer:** [Blender](https://www.blender.org) (GPL). The rendering script only drives it.

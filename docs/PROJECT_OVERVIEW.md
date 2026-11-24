@@ -8,7 +8,7 @@
 | **Team leader** | Mohammed Noufal V |
 | **Problem statement** | Visual Task Factory (Innodata AI Hackathon 2026, Track 2) |
 | **Repository** | https://github.com/Noufalthecoder/innodata |
-| **Contributors** | Noufalthecoder (Mohammed Noufal V), DEVENDRAN-P, Adithya A M, KarthikeyanMahendran |
+| **Team members** | Mohammed Noufal V (team lead), Adithya A M, Karthikeyan M, Devendran P |
 
 > **Before a robot reaches, it has to see.** SpatialGrid generates photoreal 3D scenes and asks vision-language models what a robot or an inspection camera needs to know: *which object is nearest, which way is it turned, will this stack hold?* Every answer is computed from the scene's own numbers before the image is rendered, so no human labels it and no AI judges it.
 
