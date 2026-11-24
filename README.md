@@ -24,10 +24,11 @@
   <a href="#-watch-it-run"><b>Live pipeline</b></a> ·
   <a href="#-why-you-can-trust-the-numbers"><b>Validation</b></a> ·
   <a href="#-quick-start"><b>Run it</b></a> ·
-  <a href="docs/TECHNICAL_REPORT.md"><b>Technical report</b></a>
+  <a href="docs/TECHNICAL_REPORT.md"><b>Technical report</b></a> ·
+  <a href="docs/PROJECT_OVERVIEW.md"><b>Project overview</b></a>
 </p>
 
-<p align="center"><sub>Innodata AI Hackathon 2026 · Track 2: Visual Task Factory</sub></p>
+<p align="center"><sub>Team Hackcrew · Innodata AI Hackathon 2026 · Track 2: Visual Task Factory</sub></p>
 
 ---
 
@@ -296,7 +297,7 @@ docs/              technical report, demo script, media
 
 ## Team and credits
 
-Built for the Innodata AI Hackathon 2026 by Noufalthecoder, DEVENDRAN-P, Adithya A M and KarthikeyanMahendran.
+Built for the Innodata AI Hackathon 2026 by **Team Hackcrew**: Mohammed Noufal V (team lead), DEVENDRAN-P, Adithya A M and KarthikeyanMahendran.
 
 - **HDRI lighting and floor materials:** [Poly Haven](https://polyhaven.com), CC0.
 - **Renderer:** [Blender](https://www.blender.org) (GPL). The rendering script only drives it.

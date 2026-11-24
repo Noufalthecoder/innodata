@@ -1,7 +1,7 @@
 export const GITHUB_URL = "https://github.com/Noufalthecoder/innodata";
 export const REPORT_URL = `${GITHUB_URL}/blob/main/docs/TECHNICAL_REPORT.md`;
 export const CONTACT_EMAIL = "hello@example.com"; // TODO: replace
-export const TEAM_NAME = "Team SpatialGrid"; // TODO: replace
+export const TEAM_NAME = "Team Hackcrew";
 
 export const navLinks = [
   { href: "#problem", label: "Problem" },
