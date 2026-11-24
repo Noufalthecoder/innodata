@@ -9,21 +9,24 @@ import { PipelineProvider, SLOTS, usePipeline, type Status } from "./state";
 
 const SceneViewer3D = dynamic(() => import("../SceneViewer3D"), { ssr: false });
 
-/* two rows, read left to right: generation on top, evaluation below. Base layout is ~1300 x 770. */
+/*
+ * Two wide rows, read left to right. Top: the task is generated and checked.
+ * Bottom: models are configured, chosen and run, and the results scored. Base layout is ~1530 x 820.
+ */
 const BASE: Node[] = [
-  { id: "trigger", type: "trigger", position: { x: 0, y: 30 }, data: {} },
-  { id: "scene", type: "scene", position: { x: 320, y: 45 }, data: {} },
-  { id: "preview", type: "preview", position: { x: 630, y: 0 }, data: {} },
-  { id: "truth", type: "truth", position: { x: 1000, y: 30 }, data: {} },
-  { id: "visibility", type: "visibility", position: { x: 10, y: 440 }, data: {} },
+  { id: "trigger", type: "trigger", position: { x: 0, y: 20 }, data: {} },
+  { id: "scene", type: "scene", position: { x: 300, y: 35 }, data: {} },
+  { id: "preview", type: "preview", position: { x: 580, y: 0 }, data: {} },
+  { id: "truth", type: "truth", position: { x: 930, y: 20 }, data: {} },
+  { id: "visibility", type: "visibility", position: { x: 1250, y: 110 }, data: {} },
   // step 1 for visitors: their own model and key, feeding the selector
-  { id: "config", type: "config", position: { x: 0, y: 650 }, data: {} },
-  { id: "selector", type: "selector", position: { x: 340, y: 440 }, data: {} },
-  // one model lane per company, stacked
-  ...SLOTS.map((s, i) => ({ id: s.slot, type: "model", position: { x: 680, y: 400 + i * 116 }, data: { slot: s.slot } })),
-  { id: "results", type: "results", position: { x: 1000, y: 560 }, data: {} },
+  { id: "config", type: "config", position: { x: 170, y: 400 }, data: {} },
+  { id: "selector", type: "selector", position: { x: 560, y: 380 }, data: {} },
+  // one compact lane per company, stacked
+  ...SLOTS.map((s, i) => ({ id: s.slot, type: "model", position: { x: 900, y: 360 + i * 92 }, data: { slot: s.slot } })),
+  { id: "results", type: "results", position: { x: 1230, y: 470 }, data: {} },
 ];
-const BASE_W = 1300, BASE_H = 1040;
+const BASE_W = 1530, BASE_H = 820;
 /** stretch the columns so the graph has the same shape as the screen, so it can be zoomed to fill it */
 const layout = (k: number) => BASE.map((n) => ({ ...n, position: { x: n.position.x * k, y: n.position.y } }));
 
@@ -56,7 +59,7 @@ function Flow() {
     const fit = () => {
       const { width, height } = el.getBoundingClientRect();
       if (!width || !height) return;
-      const k = Math.min(1.7, Math.max(1, (width / height) * (BASE_H / BASE_W)));
+      const k = Math.min(1.5, Math.max(1, (width / height) * (BASE_H / BASE_W)));
       setNodes(layout(k));
       cancelAnimationFrame(raf);
       raf = requestAnimationFrame(() => requestAnimationFrame(() => fitView({ padding: 0.06, maxZoom: 1.8, duration: 250 })));
@@ -84,8 +87,8 @@ function Flow() {
       edge("e1", "trigger", "scene", trig, stages.scene),
       edge("e2", "scene", "preview", stages.scene, stages.preview),
       edge("e3", "preview", "truth", stages.preview, stages.truth),
-      edge("e4", "truth", "visibility", stages.truth, stages.visibility, { type: "smoothstep" }),
-      edge("e5", "visibility", "selector", stages.visibility, sel),
+      edge("e4", "truth", "visibility", stages.truth, stages.visibility),
+      edge("e5", "visibility", "selector", stages.visibility, sel, { type: "smoothstep", targetHandle: "top" }),
       edge("e-cfg", "config", "selector", byok.status === "valid" ? "done" : "idle", byok.status === "testing" ? "running" : byok.status === "valid" ? "done" : byok.status === "invalid" ? "failed" : "idle"),
       ...SLOTS.map(({ slot: s }) => edge(`m-${s}`, "selector", s, sel, runs[s].status)),
       // model -> results: in transit once that model has answered, until every model is back

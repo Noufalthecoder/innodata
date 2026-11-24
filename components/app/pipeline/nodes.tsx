@@ -46,10 +46,10 @@ export function StatusBadge({ s }: { s: Status }) {
 const handleCls = "!h-3 !w-3 !border-2 !border-[#0b0c10] !bg-zinc-500";
 
 function Shell({
-  icon, color, title, sub, status, width = 240, children, inPos = Position.Left, outPos = Position.Right, noIn, noOut, dim,
+  icon, color, title, sub, status, width = 240, children, inPos = Position.Left, outPos = Position.Right, noIn, noOut, dim, topIn, compact,
 }: {
   icon: string; color: string; title: string; sub?: string; status: Status; width?: number; children?: React.ReactNode;
-  inPos?: Position; outPos?: Position; noIn?: boolean; noOut?: boolean; dim?: boolean;
+  inPos?: Position; outPos?: Position; noIn?: boolean; noOut?: boolean; dim?: boolean; topIn?: boolean; compact?: boolean;
 }) {
   const ring =
     status === "running" ? "border-accent/80 sg-running"
@@ -62,7 +62,8 @@ function Shell({
       style={{ width }}
     >
       {!noIn && <Handle type="target" position={inPos} className={handleCls} />}
-      <div className="flex items-center gap-2.5 border-b border-white/[0.06] px-3 py-2.5">
+      {topIn && <Handle type="target" id="top" position={Position.Top} className={handleCls} />}
+      <div className={`flex items-center gap-2.5 border-b border-white/[0.06] px-3 ${compact ? "py-2" : "py-2.5"}`}>
         <Icon name={icon} color={color} />
         <div className="min-w-0 flex-1">
           <p className="truncate text-[13px] font-semibold text-white">{title}</p>
@@ -70,7 +71,7 @@ function Shell({
         </div>
         <StatusBadge s={status} />
       </div>
-      <div className="px-3 py-2.5 text-[12px] leading-relaxed text-zinc-400">{children}</div>
+      <div className={`px-3 text-[12px] leading-relaxed text-zinc-400 ${compact ? "py-1.5" : "py-2.5"}`}>{children}</div>
       {!noOut && <Handle type="source" position={outPos} className={handleCls} />}
     </div>
   );
@@ -176,7 +177,7 @@ export function TruthNode(_: NodeProps) {
   const { task, stages } = usePipeline();
   const ready = task && (stages.truth === "done" || stages.truth === "failed");
   return (
-    <Shell icon="target" color="#34d399" title="Ground Truth Engine" sub="Arithmetic on the scene numbers" status={stages.truth} width={270} outPos={Position.Bottom}>
+    <Shell icon="target" color="#34d399" title="Ground Truth Engine" sub="Arithmetic on the scene numbers" status={stages.truth} width={270}>
       {ready ? (
         <div>
           <p className="text-[12px] text-zinc-300">{task.question}</p>
@@ -197,7 +198,7 @@ export function VisibilityNode(_: NodeProps) {
   const { task, stages } = usePipeline();
   const ready = task && (stages.visibility === "done" || stages.visibility === "failed");
   return (
-    <Shell icon="eye" color="#fbbf24" title="Visibility Check" sub="≥70% visible · in frame · ≥2,500 px" status={stages.visibility} width={260} inPos={Position.Top}>
+    <Shell icon="eye" color="#fbbf24" title="Visibility Check" sub="≥70% visible · in frame · ≥2,500 px" status={stages.visibility} width={260} outPos={Position.Bottom}>
       {ready ? (
         <ul className="space-y-1">
           {task.visibility.map((v) => (
@@ -219,7 +220,7 @@ export function VisibilityNode(_: NodeProps) {
 export function SelectorNode(_: NodeProps) {
   const { slotModels, selected, toggle, slotModel, setSlotModel, run, canRun, running, task, loaded, laneReady, laneNote, laneLabel } = usePipeline();
   return (
-    <Shell icon="sliders" color="#f472b6" title="Model Selector" sub="Choose who takes the test" status={running ? "running" : "idle"} width={260}>
+    <Shell icon="sliders" color="#f472b6" title="Model Selector" sub="Choose who takes the test" status={running ? "running" : "idle"} width={260} topIn>
       <div className="space-y-2">
         {SLOTS.map((s) => {
           const models = slotModels(s.slot);
@@ -275,23 +276,19 @@ export function ModelNode({ data }: NodeProps) {
   const configured = laneReady(slot);
   const label = laneLabel(slot);
   return (
-    <Shell icon="spark" color={meta.color} title={meta.name} sub={!loaded ? "Checking…" : configured ? label : "Not configured"} status={r.status} width={250} dim={loaded && (!configured || (!selected[slot] && r.status === "idle"))}>
-      {r.status === "running" && <p>Image + question sent… awaiting reply</p>}
+    <Shell icon="spark" color={meta.color} title={meta.name} sub={!loaded ? "Checking…" : configured ? label : "Not configured"} status={r.status} width={260} compact dim={loaded && (!configured || (!selected[slot] && r.status === "idle"))}>
+      {r.status === "running" && <p className="truncate">Image + question sent… awaiting reply</p>}
       {r.status === "done" && task && (
-        <div>
-          <p className="text-zinc-200">
-            Answered <span className="font-mono font-semibold">{r.choice === null || r.choice === undefined ? "?" : String.fromCharCode(65 + r.choice)}</span>
-            {r.choice !== null && r.choice !== undefined && <span className="text-zinc-400"> · {task.options[r.choice]}</span>}
-          </p>
-          <p className="mt-0.5 truncate text-[11px] text-zinc-500">
-            {((r.ms ?? 0) / 1000).toFixed(1)} s{r.keySource === "user" ? " · your key" : ""} · raw “{(r.raw ?? "").trim().slice(-30)}”
-          </p>
-        </div>
+        <p className="truncate text-zinc-200" title={`raw reply: ${(r.raw ?? "").trim()}`}>
+          <span className="font-mono font-semibold">{r.choice === null || r.choice === undefined ? "?" : String.fromCharCode(65 + r.choice)}</span>
+          {r.choice !== null && r.choice !== undefined && <span className="text-zinc-400"> · {task.options[r.choice]}</span>}
+          <span className="text-zinc-500"> · {((r.ms ?? 0) / 1000).toFixed(1)} s{r.keySource === "user" ? " · your key" : ""}</span>
+        </p>
       )}
-      {r.status === "failed" && <p className="line-clamp-2 text-red-300">{r.error}</p>}
-      {r.status === "skipped" && <p>Not selected for this run.</p>}
+      {r.status === "failed" && <p className="truncate text-red-300" title={r.error}>{r.error}</p>}
+      {r.status === "skipped" && <p className="truncate">Not selected for this run.</p>}
       {r.status === "idle" && (
-        <p>
+        <p className="truncate">
           {!loaded
             ? "Checking server keys…"
             : slot === "byok"
