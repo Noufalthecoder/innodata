@@ -36,11 +36,13 @@ export default function Hero() {
           </div>
           <figcaption className="p-5">
             <p className="font-medium text-white">{heroCase.question}</p>
-            <ul className="mt-4 space-y-2 text-sm">
+            <ul className="mt-4 space-y-1.5 text-sm">
               {heroCase.answers.map((a) => (
                 <li key={a.model} className="flex items-center justify-between">
-                  <span className="text-zinc-400">{a.model}</span>
-                  <span className="text-red-400">{a.said} ✕</span>
+                  <span className="text-zinc-400">
+                    {a.model} <span className="text-zinc-600">· {a.vendor}</span>
+                  </span>
+                  <span className={a.ok ? "text-emerald-400" : "text-red-400"}>{a.said} {a.ok ? "✓" : "✕"}</span>
                 </li>
               ))}
               <li className="flex items-center justify-between border-t border-white/10 pt-2">

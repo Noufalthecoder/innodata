@@ -228,6 +228,7 @@ export function SelectorNode(_: NodeProps) {
                 <span className="flex items-center gap-2 text-[12px] text-zinc-200">
                   <span className="h-2 w-2 rounded-full" style={{ background: s.color }} />
                   {s.name}
+                  <span className="text-[10px] text-zinc-500">{s.vendor}</span>
                 </span>
                 <button
                   role="switch"
@@ -268,17 +269,17 @@ export function ModelNode({ data }: NodeProps) {
   const label = slotModels(slot).find((m) => m.id === slotModel[slot])?.label ?? meta.name;
   return (
     <Shell icon="spark" color={meta.color} title={meta.name} sub={!loaded ? "Checking…" : configured ? label : "Not configured"} status={r.status} width={250} dim={loaded && (!configured || (!selected[slot] && r.status === "idle"))}>
-      {r.status === "running" && <p>Sending image + question… awaiting reply</p>}
+      {r.status === "running" && <p>Image + question sent… awaiting reply</p>}
       {r.status === "done" && task && (
         <div>
           <p className="text-zinc-200">
             Answered <span className="font-mono font-semibold">{r.choice === null || r.choice === undefined ? "?" : String.fromCharCode(65 + r.choice)}</span>
             {r.choice !== null && r.choice !== undefined && <span className="text-zinc-400"> · {task.options[r.choice]}</span>}
           </p>
-          <p className="mt-0.5 text-[11px] text-zinc-500">{((r.ms ?? 0) / 1000).toFixed(1)} s · raw “{(r.raw ?? "").slice(0, 40)}{(r.raw ?? "").length > 40 ? "…" : ""}”</p>
+          <p className="mt-0.5 truncate text-[11px] text-zinc-500">{((r.ms ?? 0) / 1000).toFixed(1)} s · raw “{(r.raw ?? "").trim().slice(-30)}”</p>
         </div>
       )}
-      {r.status === "failed" && <p className="line-clamp-3 text-red-300">{r.error}</p>}
+      {r.status === "failed" && <p className="line-clamp-2 text-red-300">{r.error}</p>}
       {r.status === "skipped" && <p>Not selected for this run.</p>}
       {r.status === "idle" && <p>{!loaded ? "Checking server keys…" : configured ? (selected[slot] ? "Ready" : "Off. Toggle it on in the selector.") : slotModels(slot).find((m) => m.note)?.note ?? `Add ${meta.envVar} to .env.local to enable.`}</p>}
     </Shell>

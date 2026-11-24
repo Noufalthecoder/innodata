@@ -1,0 +1,367 @@
+{
+  "provider": "cloudflare",
+  "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+  "ran": "2026-11-24T05:20:12.816Z",
+  "results": [
+    {
+      "id": "s1",
+      "raw": "A.",
+      "choice": 0,
+      "correct": false
+    },
+    {
+      "id": "s2",
+      "raw": "A.",
+      "choice": 0,
+      "correct": true
+    },
+    {
+      "id": "s3",
+      "raw": "B.",
+      "choice": 1,
+      "correct": false
+    },
+    {
+      "id": "s4",
+      "raw": "A.",
+      "choice": 0,
+      "correct": true
+    },
+    {
+      "id": "s5",
+      "raw": "B.",
+      "choice": 1,
+      "correct": true
+    },
+    {
+      "id": "s6",
+      "raw": "B.",
+      "choice": 1,
+      "correct": true
+    },
+    {
+      "id": "s7",
+      "raw": "B.",
+      "choice": 1,
+      "correct": true
+    },
+    {
+      "id": "s8",
+      "raw": "A.",
+      "choice": 0,
+      "correct": true
+    },
+    {
+      "id": "s9",
+      "raw": "B.",
+      "choice": 1,
+      "correct": false
+    },
+    {
+      "id": "s10",
+      "raw": "A.",
+      "choice": 0,
+      "correct": true
+    },
+    {
+      "id": "s11",
+      "raw": "A.",
+      "choice": 0,
+      "correct": true
+    },
+    {
+      "id": "s12",
+      "raw": "A.",
+      "choice": 0,
+      "correct": false
+    },
+    {
+      "id": "s13",
+      "raw": "C.",
+      "choice": 2,
+      "correct": false
+    },
+    {
+      "id": "s14",
+      "raw": "D.",
+      "choice": 3,
+      "correct": true
+    },
+    {
+      "id": "s15",
+      "raw": "B.",
+      "choice": 1,
+      "correct": false
+    },
+    {
+      "id": "s16",
+      "raw": "A.",
+      "choice": 0,
+      "correct": true
+    },
+    {
+      "id": "s17",
+      "raw": "D.",
+      "choice": 3,
+      "correct": true
+    },
+    {
+      "id": "s18",
+      "raw": "B.",
+      "choice": 1,
+      "correct": true
+    },
+    {
+      "id": "s19",
+      "raw": "D.",
+      "choice": 3,
+      "correct": false
+    },
+    {
+      "id": "s20",
+      "raw": "E.",
+      "choice": 4,
+      "correct": true
+    },
+    {
+      "id": "s21",
+      "raw": "B.",
+      "choice": 1,
+      "correct": true
+    },
+    {
+      "id": "s22",
+      "raw": "A.",
+      "choice": 0,
+      "correct": true
+    },
+    {
+      "id": "s23",
+      "raw": "D.",
+      "choice": 3,
+      "correct": true
+    },
+    {
+      "id": "s24",
+      "raw": "B.",
+      "choice": 1,
+      "correct": true
+    },
+    {
+      "id": "s25",
+      "raw": "B.",
+      "choice": 1,
+      "correct": true
+    },
+    {
+      "id": "s26",
+      "raw": "B.",
+      "choice": 1,
+      "correct": true
+    },
+    {
+      "id": "s27",
+      "raw": "B.",
+      "choice": 1,
+      "correct": false
+    },
+    {
+      "id": "s28",
+      "raw": "A.",
+      "choice": 0,
+      "correct": true
+    },
+    {
+      "id": "s29",
+      "raw": "A.",
+      "choice": 0,
+      "correct": false
+    },
+    {
+      "id": "s30",
+      "raw": "B.",
+      "choice": 1,
+      "correct": true
+    },
+    {
+      "id": "s31",
+      "raw": "C.",
+      "choice": 2,
+      "correct": true
+    },
+    {
+      "id": "s32",
+      "raw": "A.",
+      "choice": 0,
+      "correct": true
+    },
+    {
+      "id": "s33",
+      "raw": "B.",
+      "choice": 1,
+      "correct": true
+    },
+    {
+      "id": "s34",
+      "raw": "A.",
+      "choice": 0,
+      "correct": true
+    },
+    {
+      "id": "s35",
+      "raw": "A.",
+      "choice": 0,
+      "correct": false
+    },
+    {
+      "id": "s36",
+      "raw": "B.",
+      "choice": 1,
+      "correct": true
+    },
+    {
+      "id": "s37",
+      "raw": "B.",
+      "choice": 1,
+      "correct": false
+    },
+    {
+      "id": "s38",
+      "raw": "B.",
+      "choice": 1,
+      "correct": true
+    },
+    {
+      "id": "s39",
+      "raw": "B.",
+      "choice": 1,
+      "correct": true
+    },
+    {
+      "id": "s40",
+      "raw": "A.",
+      "choice": 0,
+      "correct": true
+    },
+    {
+      "id": "s41",
+      "raw": "C.",
+      "choice": 2,
+      "correct": true
+    },
+    {
+      "id": "s42",
+      "raw": "B.",
+      "choice": 1,
+      "correct": true
+    },
+    {
+      "id": "s43",
+      "raw": "E.",
+      "choice": 4,
+      "correct": true
+    },
+    {
+      "id": "s44",
+      "raw": "A.",
+      "choice": 0,
+      "correct": false
+    },
+    {
+      "id": "s45",
+      "raw": "B.",
+      "choice": 1,
+      "correct": true
+    },
+    {
+      "id": "s46",
+      "raw": "A.",
+      "choice": 0,
+      "correct": true
+    },
+    {
+      "id": "s47",
+      "raw": "B.",
+      "choice": 1,
+      "correct": false
+    },
+    {
+      "id": "s48",
+      "raw": "A.",
+      "choice": 0,
+      "correct": false
+    },
+    {
+      "id": "s49",
+      "raw": "B.",
+      "choice": 1,
+      "correct": true
+    },
+    {
+      "id": "s50",
+      "raw": "A.",
+      "choice": 0,
+      "correct": false
+    },
+    {
+      "id": "s51",
+      "raw": "B.",
+      "choice": 1,
+      "correct": false
+    },
+    {
+      "id": "s52",
+      "raw": "A.",
+      "choice": 0,
+      "correct": true
+    },
+    {
+      "id": "s53",
+      "raw": "B.",
+      "choice": 1,
+      "correct": false
+    },
+    {
+      "id": "s54",
+      "raw": "B.",
+      "choice": 1,
+      "correct": true
+    },
+    {
+      "id": "s55",
+      "raw": "A.",
+      "choice": 0,
+      "correct": true
+    },
+    {
+      "id": "s56",
+      "raw": "C.",
+      "choice": 2,
+      "correct": true
+    },
+    {
+      "id": "s57",
+      "raw": "B.",
+      "choice": 1,
+      "correct": false
+    },
+    {
+      "id": "s58",
+      "raw": "A.",
+      "choice": 0,
+      "correct": true
+    },
+    {
+      "id": "s59",
+      "raw": "C.",
+      "choice": 2,
+      "correct": true
+    },
+    {
+      "id": "s60",
+      "raw": "B.",
+      "choice": 1,
+      "correct": true
+    }
+  ]
+}

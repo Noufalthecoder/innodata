@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 import { Controls, MarkerType, ReactFlow, ReactFlowProvider, useNodesState, useNodesInitialized, useReactFlow, type Edge, type Node } from "@xyflow/react";
 import { useEffect, useMemo, useRef } from "react";
 import { nodeTypes } from "./nodes";
-import { PipelineProvider, usePipeline, type Status } from "./state";
+import { PipelineProvider, SLOTS, usePipeline, type Status } from "./state";
 
 const SceneViewer3D = dynamic(() => import("../SceneViewer3D"), { ssr: false });
 
@@ -15,14 +15,13 @@ const BASE: Node[] = [
   { id: "scene", type: "scene", position: { x: 320, y: 45 }, data: {} },
   { id: "preview", type: "preview", position: { x: 630, y: 0 }, data: {} },
   { id: "truth", type: "truth", position: { x: 1000, y: 30 }, data: {} },
-  { id: "visibility", type: "visibility", position: { x: 10, y: 470 }, data: {} },
-  { id: "selector", type: "selector", position: { x: 340, y: 430 }, data: {} },
-  { id: "claude", type: "model", position: { x: 680, y: 400 }, data: { slot: "claude" } },
-  { id: "gpt", type: "model", position: { x: 680, y: 525 }, data: { slot: "gpt" } },
-  { id: "gemini", type: "model", position: { x: 680, y: 650 }, data: { slot: "gemini" } },
-  { id: "results", type: "results", position: { x: 1000, y: 480 }, data: {} },
+  { id: "visibility", type: "visibility", position: { x: 10, y: 560 }, data: {} },
+  { id: "selector", type: "selector", position: { x: 340, y: 440 }, data: {} },
+  // one model lane per company, stacked
+  ...SLOTS.map((s, i) => ({ id: s.slot, type: "model", position: { x: 680, y: 400 + i * 116 }, data: { slot: s.slot } })),
+  { id: "results", type: "results", position: { x: 1000, y: 560 }, data: {} },
 ];
-const BASE_W = 1300, BASE_H = 770;
+const BASE_W = 1300, BASE_H = 990;
 /** stretch the columns so the graph has the same shape as the screen, so it can be zoomed to fill it */
 const layout = (k: number) => BASE.map((n) => ({ ...n, position: { x: n.position.x * k, y: n.position.y } }));
 
@@ -85,9 +84,9 @@ function Flow() {
       edge("e3", "preview", "truth", stages.preview, stages.truth),
       edge("e4", "truth", "visibility", stages.truth, stages.visibility, { type: "smoothstep" }),
       edge("e5", "visibility", "selector", stages.visibility, sel),
-      ...(["claude", "gpt", "gemini"] as const).map((s) => edge(`m-${s}`, "selector", s, sel, runs[s].status)),
+      ...SLOTS.map(({ slot: s }) => edge(`m-${s}`, "selector", s, sel, runs[s].status)),
       // model -> results: in transit once that model has answered, until every model is back
-      ...(["claude", "gpt", "gemini"] as const).map((s) => {
+      ...SLOTS.map(({ slot: s }) => {
         const st = runs[s].status;
         if (st === "done" || st === "failed") return edge(`r-${s}`, s, "results", "done", running ? "running" : st);
         return edge(`r-${s}`, s, "results", "idle", st === "skipped" ? "skipped" : "idle");

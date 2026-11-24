@@ -1,9 +1,11 @@
-export type Provider = "anthropic" | "openai" | "gemini";
+export type Provider = "anthropic" | "openai" | "gemini" | "cloudflare";
 
 export const MODELS: Record<Provider, { model: string; env: string; label: string }> = {
   anthropic: { model: "claude-sonnet-5-5", env: "ANTHROPIC_API_KEY", label: "Claude" },
   openai: { model: "gpt-4o", env: "OPENAI_API_KEY", label: "GPT-4o" },
   gemini: { model: "gemini-3.5-flash", env: "GEMINI_API_KEY", label: "Gemini" },
+  // Cloudflare Workers AI (free tier): open models from Meta, Mistral and Alibaba; also needs CLOUDFLARE_ACCOUNT_ID
+  cloudflare: { model: "@cf/meta/llama-4-scout-17b-16e-instruct", env: "CLOUDFLARE_API_TOKEN", label: "Cloudflare Workers AI" },
 };
 
 /** Every model the app can ask. Each answer is labelled with the model that actually produced it. */
@@ -13,6 +15,9 @@ export const MODEL_CHOICES: { id: string; provider: Provider; label: string }[] 
   { id: "gemini-3-flash-preview", provider: "gemini", label: "Gemini 3 Flash" },
   { id: "gemini-3.1-flash-lite", provider: "gemini", label: "Gemini 3.1 Flash-Lite" },
   { id: "gemma-4-26b-a4b-it", provider: "gemini", label: "Gemma 4 26B (open)" },
+  { id: "@cf/meta/llama-4-scout-17b-16e-instruct", provider: "cloudflare", label: "Llama 4 Scout 17B · Meta" },
+  { id: "@cf/mistralai/mistral-small-3.1-24b-instruct", provider: "cloudflare", label: "Mistral Small 3.1 24B" },
+  { id: "@cf/qwen/qwen3.8-27b", provider: "cloudflare", label: "Qwen3.8 27B · Alibaba" },
   { id: "claude-sonnet-5-5", provider: "anthropic", label: "Claude" },
   { id: "gpt-4o", provider: "openai", label: "GPT-4o" },
 ];
@@ -81,6 +86,23 @@ export async function askModel(provider: Provider, apiKey: string, jpegBase64: s
       }
     );
     return j.content?.[0]?.text ?? "";
+  }
+  if (provider === "cloudflare") {
+    const account = process.env.CLOUDFLARE_ACCOUNT_ID;
+    if (!account) throw new Error("CLOUDFLARE_ACCOUNT_ID is not set");
+    // OpenAI-compatible endpoint; some models write a short preamble, so allow room for it
+    const j = await post(
+      `https://api.cloudflare.com/client/v4/accounts/${account}/ai/v1/chat/completions`,
+      { Authorization: `Bearer ${apiKey}` },
+      {
+        model,
+        max_tokens: 256,
+        temperature: 0,
+        // hidden reasoning off, as for Gemini: otherwise Qwen spends the whole budget thinking and returns no answer
+        ...(model.includes("qwen") ? { chat_template_kwargs: { enable_thinking: false } } : {}),
+        messages: [{ role: "user", content: [{ type: "text", text: prompt }, { type: "image_url", image_url: { url: `data:image/jpeg;base64,${jpegBase64}` } }] }] }
+    );
+    return j.choices?.[0]?.message?.content ?? "";
   }
   if (provider === "openai") {
     const j = await post(

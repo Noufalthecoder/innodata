@@ -5,22 +5,21 @@ import type { Kind, Task } from "@/lib/bench/types";
 
 export type Status = "idle" | "running" | "done" | "failed" | "skipped";
 export type Stage = "scene" | "preview" | "truth" | "visibility";
-export type Slot = "claude" | "gpt" | "gemini";
+export type Slot = "gemini" | "llama" | "mistral" | "qwen" | "paid";
 
 export type Provider = { id: string; label: string; model: string; configured: boolean; note?: string };
 export type RunResult = { status: Status; modelId?: string; label?: string; raw?: string; choice?: number | null; correct?: boolean; error?: string; ms?: number };
 
-export const SLOTS: { slot: Slot; name: string; color: string; envVar: string }[] = [
-  { slot: "claude", name: "Claude", color: "#d97757", envVar: "ANTHROPIC_API_KEY" },
-  { slot: "gpt", name: "GPT-4o", color: "#10a37f", envVar: "OPENAI_API_KEY" },
-  { slot: "gemini", name: "Gemini", color: "#4f8cff", envVar: "GEMINI_API_KEY" },
+/** one lane per AI company; "paid" holds the commercial APIs that need credit */
+export const SLOTS: { slot: Slot; name: string; vendor: string; color: string; envVar: string; match: (id: string) => boolean; default: string }[] = [
+  { slot: "gemini", name: "Gemini", vendor: "Google", color: "#4f8cff", envVar: "GEMINI_API_KEY", match: (id) => id.startsWith("gemini") || id.startsWith("gemma"), default: "gemini-3.1-flash-lite" },
+  { slot: "llama", name: "Llama 4", vendor: "Meta", color: "#22d3ee", envVar: "CLOUDFLARE_API_TOKEN", match: (id) => id.startsWith("@cf/meta/"), default: "@cf/meta/llama-4-scout-17b-16e-instruct" },
+  { slot: "mistral", name: "Mistral", vendor: "Mistral AI", color: "#facc15", envVar: "CLOUDFLARE_API_TOKEN", match: (id) => id.startsWith("@cf/mistralai/"), default: "@cf/mistralai/mistral-small-3.1-24b-instruct" },
+  { slot: "qwen", name: "Qwen", vendor: "Alibaba", color: "#a78bfa", envVar: "CLOUDFLARE_API_TOKEN", match: (id) => id.startsWith("@cf/qwen/"), default: "@cf/qwen/qwen3.8-27b" },
+  { slot: "paid", name: "GPT-4o / Claude", vendor: "OpenAI · Anthropic (paid)", color: "#10a37f", envVar: "OPENAI_API_KEY", match: (id) => id.startsWith("gpt") || id.startsWith("claude"), default: "gpt-4o" },
 ];
-/** the model ids each slot can run; Gemini offers the Gemini-API family (incl. open-weights Gemma) */
-const SLOT_MODELS: Record<Slot, (id: string) => boolean> = {
-  claude: (id) => id.startsWith("claude"),
-  gpt: (id) => id.startsWith("gpt"),
-  gemini: (id) => id.startsWith("gemini") || id.startsWith("gemma"),
-};
+const SLOT_MODELS = Object.fromEntries(SLOTS.map((s) => [s.slot, s.match])) as Record<Slot, (id: string) => boolean>;
+const bySlot = <T,>(f: (s: Slot) => T) => Object.fromEntries(SLOTS.map((s) => [s.slot, f(s.slot)])) as Record<Slot, T>;
 
 export type Config = { kind: Kind; objects: number; lighting: "normal" | "dim" };
 
@@ -62,7 +61,7 @@ function cleanError(m: string) {
 }
 
 const wait = (ms: number) => new Promise((r) => setTimeout(r, ms));
-const idleRuns = (): Record<Slot, RunResult> => ({ claude: { status: "idle" }, gpt: { status: "idle" }, gemini: { status: "idle" } });
+const idleRuns = (): Record<Slot, RunResult> => bySlot(() => ({ status: "idle" as Status }));
 const idleStages = (): Record<Stage, Status> => ({ scene: "idle", preview: "idle", truth: "idle", visibility: "idle" });
 
 export function PipelineProvider({ children }: { children: React.ReactNode }) {
@@ -71,8 +70,8 @@ export function PipelineProvider({ children }: { children: React.ReactNode }) {
   const [genError, setGenError] = useState("");
   const [stages, setStages] = useState(idleStages);
   const [providers, setProviders] = useState<Provider[]>([]);
-  const [slotModel, setSlotModelState] = useState<Record<Slot, string>>({ claude: "claude-sonnet-5-5", gpt: "gpt-4o", gemini: "gemini-3.1-flash-lite" });
-  const [selected, setSelected] = useState<Record<Slot, boolean>>({ claude: false, gpt: false, gemini: true });
+  const [slotModel, setSlotModelState] = useState<Record<Slot, string>>(() => bySlot((s) => SLOTS.find((x) => x.slot === s)!.default));
+  const [selected, setSelected] = useState<Record<Slot, boolean>>(() => bySlot((s) => s === "gemini"));
   const [runs, setRuns] = useState(idleRuns);
   const [view3d, setView3d] = useState(false);
   const [loaded, setLoaded] = useState(false);
@@ -83,13 +82,13 @@ export function PipelineProvider({ children }: { children: React.ReactNode }) {
       .then((r) => r.json())
       .then((j: { providers: Provider[] }) => {
         setProviders(j.providers);
-        // pre-select Gemini (free tier); Claude and GPT-4o can be switched on when their key has credit
+        // pre-select every free lane that is configured; the paid lane is opt-in
         const has = (s: Slot) => j.providers.some((p) => SLOT_MODELS[s](p.id) && p.configured);
-        setSelected({ claude: false, gpt: !has("gemini") && has("gpt"), gemini: has("gemini") });
+        setSelected(bySlot((s) => s !== "paid" && has(s)));
         // each slot starts on its first configured model
         setSlotModelState((o) => {
           const n = { ...o };
-          for (const s of ["claude", "gpt", "gemini"] as Slot[]) {
+          for (const { slot: s } of SLOTS) {
             const cur = j.providers.find((p) => p.id === o[s]);
             if (!cur?.configured) n[s] = j.providers.find((p) => SLOT_MODELS[s](p.id) && p.configured)?.id ?? o[s];
           }

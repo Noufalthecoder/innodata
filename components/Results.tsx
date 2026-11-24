@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { modelLabel } from "@/lib/bench/labels";
 import { Reveal, SectionHead } from "./Section";
 
 type Acc = { n: number; correct: number; accuracy: number };
@@ -9,13 +10,6 @@ type ModelSummary = { provider: string; model: string; overall: Acc; errors: num
 type Summary = { taskCount: number; models: ModelSummary[]; allWrong: string[] };
 type TaskLite = { id: string; image: string; question: string; options: string[]; answer: number; tier: number };
 
-const LABEL: Record<string, string> = {
-  "gemini-3.1-flash-lite": "Gemini 3.1 Flash-Lite",
-  "gemini-3.5-flash-lite": "Gemini 3.5 Flash-Lite",
-  "gemma-4-26b-a4b-it": "Gemma 4 26B (open weights)",
-  "gemini-3.5-flash": "Gemini 3.5 Flash",
-  "gemini-3-flash-preview": "Gemini 3 Flash",
-};
 
 const pct = (a?: Acc) => (a && a.n ? `${Math.round(a.accuracy * 100)}%` : "n/a");
 
@@ -55,7 +49,7 @@ export default function Results() {
               <tbody className="divide-y divide-white/10">
                 {models.map((m) => (
                   <tr key={m.model}>
-                    <td className="px-5 py-4 text-white">{LABEL[m.model] ?? m.model}</td>
+                    <td className="px-5 py-4 text-white">{modelLabel(m.model)}</td>
                     <td className="px-5 py-4 font-semibold text-accent">{pct(m.overall)}</td>
                     <td className="px-5 py-4 text-zinc-300">{pct(m.byTier.tier1)}</td>
                     <td className="px-5 py-4 text-zinc-300">{pct(m.byTier.tier2)}</td>

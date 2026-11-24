@@ -72,7 +72,7 @@ Every answer is arithmetic on numbers the generator chose itself. No person and 
 | Answers re-derived by separate code (`lib/bench/truth.ts`, shares no logic with the generator) | 60 / 60 |
 | Tasks rebuilt identically from their seeds | 60 / 60 |
 | Visibility check passed | 60 / 60 |
-| Automated test suite (`npm test`, vitest, run in CI) | 80 / 80 passing |
+| Automated test suite (`npm test`, vitest, run in CI) | 85 / 85 passing |
 
 The test suite also includes:
 
@@ -89,32 +89,38 @@ The test suite also includes:
 
 ## 6. Evaluation setup
 
-- **Models:** Gemini 3.1 Flash-Lite, Gemini 3.5 Flash-Lite and the open-weights Gemma 4 26B, via the Gemini API. Claude and GPT-4o are fully supported by the code, but were not run because no funded API keys were available to the team. We report only the models we actually ran.
-- **Prompt:** the image, the question and lettered options, plus "Reply with only the letter of the correct option". Temperature 0, hidden reasoning disabled where supported.
+- **Models:** six models from four companies. From Google: Gemini 3.1 Flash-Lite, Gemini 3.5 Flash-Lite and the open-weights Gemma 4 26B, via the Gemini API. Open-weights Qwen3.8 27B (Alibaba), Mistral Small 3.1 24B (Mistral AI) and Llama 4 Scout 17B (Meta), via Cloudflare Workers AI. Claude and GPT-4o are fully supported by the code, but were not run because no funded API keys were available to the team. We report only the models we actually ran.
+- **Prompt:** the image, the question and lettered options, plus "Reply with only the letter of the correct option". The same prompt goes to every model. Temperature 0, hidden reasoning disabled where supported.
 - **Scoring:** a strict letter parser. Ambiguous or unparseable replies count as wrong, and API errors are reported separately and excluded from accuracy.
 
 ## 7. Results
 
-Each model was run on all 60 tasks, image plus question, temperature 0. Only complete runs are reported. Gemini 3.5 Flash and Gemini 3 Flash hit their free daily quota partway through; their partial runs are kept (the evaluator resumes them) but excluded here.
+Each model was run on all 60 tasks, image plus question, temperature 0, hidden reasoning disabled. Only complete runs are reported. Gemini 3.5 Flash and Gemini 3 Flash hit their free daily quota partway through; their partial runs are kept (the evaluator resumes them) but excluded here.
 
-| Model | Overall | Tier 1 · Orientation | Tier 2 · Depth and position | Tier 3 · Stability | Dim light |
-|---|---|---|---|---|---|
-| Gemini 3.1 Flash-Lite | **81.7%** | 50% | 97% | 75% | 100% |
-| Gemma 4 26B (open weights) | **80.0%** | 70% | 100% | 55% | 83% |
-| Gemini 3.5 Flash-Lite | **75.0%** | 20% | 90% | 80% | 83% |
+| Model | Company | Overall | Tier 1 · Orientation | Tier 2 · Depth & position | Tier 3 · Stability | Dim light |
+|---|---|:-:|:-:|:-:|:-:|:-:|
+| Qwen3.8 27B | Alibaba (open weights) | **88.3%** | 50% | 97% | 95% | 92% |
+| Gemini 3.1 Flash-Lite | Google | **81.7%** | 50% | 97% | 75% | 100% |
+| Mistral Small 3.1 24B | Mistral AI (open weights) | **81.7%** | 30% | 90% | 95% | 75% |
+| Gemma 4 26B | Google (open weights) | **80.0%** | 70% | 100% | 55% | 83% |
+| Gemini 3.5 Flash-Lite | Google | **75.0%** | 20% | 90% | 80% | 83% |
+| Llama 4 Scout 17B | Meta (open weights) | **70.0%** | 40% | 67% | 90% | 75% |
 
 Chance level: orientation 25% (four options), stability 50% (two options), depth and position 25–50% (two to five options).
 
 ### Findings
 
-1. **Depth ordering and image position are nearly solved.** All three models score 90–100% on "closest to the camera" and "furthest left", even with up to five objects and partial occlusion.
-2. **Orientation is the weakest skill.** Average accuracy is 47%. Gemini 3.5 Flash-Lite scores 20%, below random guessing. The models collapse onto one answer. Of the 10 orientation tasks, Gemini 3.5 Flash-Lite answered "toward the camera" 9 times and Gemini 3.1 Flash-Lite 7 times, and neither ever chose "left" or "right", although those are correct for 4 of the 10 tasks. *Impact:* a robot relying on these models would approach containers from the wrong side.
-3. **Every model over-predicts collapse.** All three identify all 10 unstable stacks correctly, but they recognise only 1–6 of the 10 stable ones; Gemma 4 recognises only 1 of the 10. The models appear to treat any visible offset as unstable rather than reasoning about the centre of mass. *Impact:* an inspection system would raise frequent false alarms, and the 55–80% accuracy overstates real understanding.
-4. **Dim lighting did not hurt.** Accuracy under dim light was equal to or higher than under normal light, so the weaknesses above are about reasoning, not visibility. This is consistent with the visibility check guaranteeing that every object is clearly visible.
-5. **Seven scenes defeated every model:** 4 stability tasks (all stable stacks judged as falling) and 3 orientation tasks. They are shown in the failure gallery on the website and in the app.
+1. **Depth ordering and image position are nearly solved.** Five of the six models score 90–100% on "closest to the camera" and "furthest left", even with up to five objects and partial occlusion (average 90%). Llama 4 Scout is the exception at 67%, mostly on depth (60% on "closest").
+2. **Orientation is weak for every company's model.** Average accuracy is 43%, against 25% for guessing. Gemini 3.5 Flash-Lite scores 20%, below random guessing. The models collapse onto "toward" or "away from" the camera: across all 60 orientation answers (6 models × 10 tasks), only one was "left" or "right", although those are correct for 4 of the 10 tasks. Llama 4 answered "away from the camera" for all 10. *Impact:* a robot relying on any of these models would approach containers from the wrong side.
+3. **Over-predicting collapse is a model-family habit, not a universal one.** The three Google models identify all 10 unstable stacks but recognise only 1–6 of the 10 stable ones (Gemma 4: 1 of 10). They appear to treat any visible offset as unstable. Qwen, Mistral and Llama recognise all 10 stable stacks and still catch 8–9 of the 10 unstable ones, scoring 90–95% on Tier 3. *Impact:* the choice of model decides whether an inspection system raises constant false alarms. The benchmark exposes the difference, and a single-vendor evaluation would have hidden it.
+4. **An open-weights model leads overall.** Alibaba's Qwen3.8 27B scored 88.3%, ahead of every Google model, with 95% on stability and 97% on depth and position.
+5. **Lighting made no consistent difference.** Some models scored higher in dim light and some lower. This is consistent with the visibility check guaranteeing that every object is clearly visible, so the weaknesses above are about reasoning, not perception.
+6. **Three scenes defeated all six models:** s9, s27 and s57. All three are orientation tasks whose answer is "to the right in the image". With three Google models alone, seven scenes defeated every model; four of those (stable stacks) were solved by the non-Google models. All are shown in the failure gallery on the website and in the app.
 
 ### Evaluation notes
 
+- **Providers.** Gemini and Gemma were called through the Gemini API; Llama 4 Scout, Mistral Small 3.1 and Qwen3.8 through Cloudflare Workers AI (free tier). Every answer is stored with the exact model that produced it in `public/bench/results/`.
+- **Hidden reasoning off for every model that has it.** For Gemini this is `thinkingBudget: 0`. For Qwen it is `enable_thinking: false`; with thinking on, Qwen spent its whole token budget reasoning and returned no answer.
 - Gemma 4 writes its reasoning before the answer ("… The correct option is B"). The reply parser reads the final stated answer; this was added with tests after the first scoring pass gave Gemma 0%. All saved replies were re-scored with `npm run bench:reparse` (no new API calls), and replies cut off by a token limit were asked again with a larger limit. Three Gemma replies still contained no answer and are counted as wrong.
 - API errors (rate limits, server overload) are retried and never counted as wrong answers.
 - With 10–40 tasks per tier, per-tier numbers are indicative (about ±15 percentage points at 95% confidence for 10 tasks). The generator can produce larger sets; the limit was free API quota.
@@ -124,7 +130,7 @@ Chance level: orientation 25% (four options), stability 50% (two options), depth
 - **Synthetic scenes:** controlled by design, but not photographs of real warehouses.
 - **Stability rule:** a centre-of-mass rule for equal-size, equal-density boxes, not a full physics simulation.
 - **Sample size:** 60 tasks gives wide confidence intervals per tier. The generator can produce any number, so this is limited by rendering time (about 1 minute per image on CPU) and free API quotas, not by design.
-- **Model coverage:** only Gemini-family models were evaluated, for cost reasons.
+- **Model coverage:** six models from four companies (Google, Alibaba, Mistral AI, Meta). Claude and GPT-4o are supported by the code but were not run, for cost reasons.
 - **Prompt sensitivity:** results depend on prompt wording. The exact prompt is in `lib/bench/models.ts`.
 - **No manual fixes:** no generated output was edited by hand.
 

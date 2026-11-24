@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { modelLabel } from "@/lib/bench/labels";
 
 type Acc = { n: number; correct: number; accuracy: number };
 type ModelSummary = { provider: string; model: string; overall: Acc; errors: number; byTier: Record<string, Acc>; byKind: Record<string, Acc>; byObjects: Record<string, Acc>; byLighting: Record<string, Acc> };
@@ -59,7 +60,7 @@ npm run bench:report`}</pre>
           <tbody className="divide-y divide-white/10">
             {s.models.map((m) => (
               <tr key={m.model}>
-                <td className="px-5 py-4 text-white">{m.model}</td>
+                <td className="px-5 py-4 text-white">{modelLabel(m.model)}</td>
                 {cols.map(([h, f]) => (
                   <td key={h} className="px-5 py-4 text-zinc-300">
                     {pct(f(m))}

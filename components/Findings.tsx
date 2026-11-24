@@ -7,7 +7,7 @@ export default function Findings() {
       <SectionHead
         eyebrow="What we found"
         title="Models can tell what is near. They cannot tell how it is turned, or whether it will hold."
-        sub="Three vision models, 60 photoreal tasks, temperature 0. The weaknesses are about reasoning, not visibility: accuracy did not drop in dim light."
+        sub="Six vision models from Google, Alibaba, Mistral AI and Meta, 60 photoreal tasks each, temperature 0. The weaknesses are about reasoning, not visibility: lighting made no consistent difference."
       />
       <div className="grid gap-10 md:grid-cols-3">
         {findings.map((f, i) => (

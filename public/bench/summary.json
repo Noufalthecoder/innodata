@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-23T12:00:16.654Z",
+  "generated": "2026-11-24T05:23:12.062Z",
   "taskCount": 60,
   "models": [
     {
@@ -265,15 +265,275 @@
           "accuracy": 0.8333333333333334
         }
       }
+    },
+    {
+      "provider": "cloudflare",
+      "model": "@cf/meta/llama-4-scout-17b-16e-instruct",
+      "overall": {
+        "n": 60,
+        "correct": 42,
+        "accuracy": 0.7
+      },
+      "errors": 0,
+      "byTier": {
+        "tier2": {
+          "n": 30,
+          "correct": 20,
+          "accuracy": 0.6666666666666666
+        },
+        "tier1": {
+          "n": 10,
+          "correct": 4,
+          "accuracy": 0.4
+        },
+        "tier3": {
+          "n": 20,
+          "correct": 18,
+          "accuracy": 0.9
+        }
+      },
+      "byKind": {
+        "closer": {
+          "n": 20,
+          "correct": 12,
+          "accuracy": 0.6
+        },
+        "leftmost": {
+          "n": 10,
+          "correct": 8,
+          "accuracy": 0.8
+        },
+        "orientation": {
+          "n": 10,
+          "correct": 4,
+          "accuracy": 0.4
+        },
+        "stability": {
+          "n": 20,
+          "correct": 18,
+          "accuracy": 0.9
+        }
+      },
+      "byObjects": {
+        "1": {
+          "n": 10,
+          "correct": 4,
+          "accuracy": 0.4
+        },
+        "2": {
+          "n": 17,
+          "correct": 13,
+          "accuracy": 0.7647058823529411
+        },
+        "3": {
+          "n": 15,
+          "correct": 12,
+          "accuracy": 0.8
+        },
+        "4": {
+          "n": 12,
+          "correct": 10,
+          "accuracy": 0.8333333333333334
+        },
+        "5": {
+          "n": 6,
+          "correct": 3,
+          "accuracy": 0.5
+        }
+      },
+      "byLighting": {
+        "normal": {
+          "n": 48,
+          "correct": 33,
+          "accuracy": 0.6875
+        },
+        "dim": {
+          "n": 12,
+          "correct": 9,
+          "accuracy": 0.75
+        }
+      }
+    },
+    {
+      "provider": "cloudflare",
+      "model": "@cf/mistralai/mistral-small-3.1-24b-instruct",
+      "overall": {
+        "n": 60,
+        "correct": 49,
+        "accuracy": 0.8166666666666667
+      },
+      "errors": 0,
+      "byTier": {
+        "tier2": {
+          "n": 30,
+          "correct": 27,
+          "accuracy": 0.9
+        },
+        "tier1": {
+          "n": 10,
+          "correct": 3,
+          "accuracy": 0.3
+        },
+        "tier3": {
+          "n": 20,
+          "correct": 19,
+          "accuracy": 0.95
+        }
+      },
+      "byKind": {
+        "closer": {
+          "n": 20,
+          "correct": 17,
+          "accuracy": 0.85
+        },
+        "leftmost": {
+          "n": 10,
+          "correct": 10,
+          "accuracy": 1
+        },
+        "orientation": {
+          "n": 10,
+          "correct": 3,
+          "accuracy": 0.3
+        },
+        "stability": {
+          "n": 20,
+          "correct": 19,
+          "accuracy": 0.95
+        }
+      },
+      "byObjects": {
+        "1": {
+          "n": 10,
+          "correct": 3,
+          "accuracy": 0.3
+        },
+        "2": {
+          "n": 17,
+          "correct": 16,
+          "accuracy": 0.9411764705882353
+        },
+        "3": {
+          "n": 15,
+          "correct": 12,
+          "accuracy": 0.8
+        },
+        "4": {
+          "n": 12,
+          "correct": 12,
+          "accuracy": 1
+        },
+        "5": {
+          "n": 6,
+          "correct": 6,
+          "accuracy": 1
+        }
+      },
+      "byLighting": {
+        "normal": {
+          "n": 48,
+          "correct": 40,
+          "accuracy": 0.8333333333333334
+        },
+        "dim": {
+          "n": 12,
+          "correct": 9,
+          "accuracy": 0.75
+        }
+      }
+    },
+    {
+      "provider": "cloudflare",
+      "model": "@cf/qwen/qwen3.8-27b",
+      "overall": {
+        "n": 60,
+        "correct": 53,
+        "accuracy": 0.8833333333333333
+      },
+      "errors": 0,
+      "byTier": {
+        "tier2": {
+          "n": 30,
+          "correct": 29,
+          "accuracy": 0.9666666666666667
+        },
+        "tier1": {
+          "n": 10,
+          "correct": 5,
+          "accuracy": 0.5
+        },
+        "tier3": {
+          "n": 20,
+          "correct": 19,
+          "accuracy": 0.95
+        }
+      },
+      "byKind": {
+        "closer": {
+          "n": 20,
+          "correct": 19,
+          "accuracy": 0.95
+        },
+        "leftmost": {
+          "n": 10,
+          "correct": 10,
+          "accuracy": 1
+        },
+        "orientation": {
+          "n": 10,
+          "correct": 5,
+          "accuracy": 0.5
+        },
+        "stability": {
+          "n": 20,
+          "correct": 19,
+          "accuracy": 0.95
+        }
+      },
+      "byObjects": {
+        "1": {
+          "n": 10,
+          "correct": 5,
+          "accuracy": 0.5
+        },
+        "2": {
+          "n": 17,
+          "correct": 15,
+          "accuracy": 0.8823529411764706
+        },
+        "3": {
+          "n": 15,
+          "correct": 15,
+          "accuracy": 1
+        },
+        "4": {
+          "n": 12,
+          "correct": 12,
+          "accuracy": 1
+        },
+        "5": {
+          "n": 6,
+          "correct": 6,
+          "accuracy": 1
+        }
+      },
+      "byLighting": {
+        "normal": {
+          "n": 48,
+          "correct": 42,
+          "accuracy": 0.875
+        },
+        "dim": {
+          "n": 12,
+          "correct": 11,
+          "accuracy": 0.9166666666666666
+        }
+      }
     }
   ],
   "allWrong": [
-    "s4",
     "s9",
     "s27",
-    "s28",
-    "s34",
-    "s52",
     "s57"
   ]
 }

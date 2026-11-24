@@ -12,7 +12,7 @@
 
 <p align="center">
   <a href="https://github.com/Noufalthecoder/innodata/actions/workflows/ci.yml"><img src="https://github.com/Noufalthecoder/innodata/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
-  <img src="https://img.shields.io/badge/tests-80%20passing-34d399" alt="80 tests passing">
+  <img src="https://img.shields.io/badge/tests-85%20passing-34d399" alt="85 tests passing">
   <img src="https://img.shields.io/badge/ground%20truth-60%2F60%20re--derived-34d399" alt="60 of 60 answers re-derived">
   <img src="https://img.shields.io/badge/renderer-Blender%20Cycles-ff8731" alt="Blender Cycles">
   <img src="https://img.shields.io/badge/Next.js-15-111" alt="Next.js 15">
@@ -30,7 +30,7 @@
 
 ---
 
-## One scene, three wrong answers
+## One scene, two camps
 
 <table>
 <tr>
@@ -42,9 +42,12 @@
 
 | Model | Answer |
 |---|---|
-| Gemini 3.1 Flash-Lite | Falls ❌ |
-| Gemini 3.5 Flash-Lite | Falls ❌ |
-| Gemma 4 26B | Falls ❌ |
+| Gemini 3.1 Flash-Lite (Google) | Falls ❌ |
+| Gemini 3.5 Flash-Lite (Google) | Falls ❌ |
+| Gemma 4 26B (Google) | Falls ❌ |
+| Qwen3.8 27B (Alibaba) | Stands ✅ |
+| Mistral Small 3.1 (Mistral AI) | Stands ✅ |
+| Llama 4 Scout (Meta) | Stands ✅ |
 | **Computed** | **Stays standing ✅** |
 
 The load on every box sits over the box below it, with at least 12 cm to spare. We know because we placed every box ourselves.
@@ -63,21 +66,25 @@ Vision models are being wired into robot arms, warehouse pickers and inspection 
 
 ## Results
 
-60 photoreal tasks, image plus question, temperature 0. Only complete runs are reported.
+Six vision models from four companies, 60 photoreal tasks each, image plus question, temperature 0, hidden reasoning off. Only complete runs are reported.
 
-| Model | Overall | Tier 1 · Orientation | Tier 2 · Depth & position | Tier 3 · Stability | Dim light |
-|---|:-:|:-:|:-:|:-:|:-:|
-| Gemini 3.1 Flash-Lite | **81.7%** | 50% | 97% | 75% | 100% |
-| Gemma 4 26B (open weights) | **80.0%** | 70% | 100% | 55% | 83% |
-| Gemini 3.5 Flash-Lite | **75.0%** | 20% | 90% | 80% | 83% |
+| Model | Company | Overall | Tier 1 · Orientation | Tier 2 · Depth & position | Tier 3 · Stability | Dim light |
+|---|---|:-:|:-:|:-:|:-:|:-:|
+| Qwen3.8 27B | Alibaba (open weights) | **88.3%** | 50% | 97% | 95% | 92% |
+| Gemini 3.1 Flash-Lite | Google | **81.7%** | 50% | 97% | 75% | 100% |
+| Mistral Small 3.1 24B | Mistral AI (open weights) | **81.7%** | 30% | 90% | 95% | 75% |
+| Gemma 4 26B | Google (open weights) | **80.0%** | 70% | 100% | 55% | 83% |
+| Gemini 3.5 Flash-Lite | Google | **75.0%** | 20% | 90% | 80% | 83% |
+| Llama 4 Scout 17B | Meta (open weights) | **70.0%** | 40% | 67% | 90% | 75% |
 
 **What we found**
 
-- 🟢 **Depth and position are nearly solved: 96% on average.** This holds with up to five objects and partial occlusion.
-- 🟠 **Orientation is the weakest skill: 47% on average, against 25% for guessing.** One model scored 20%. The models answer "toward the camera" almost every time and never say left or right, although those are correct for 4 of the 10 tasks.
-- 🟠 **Every model over-predicts collapse.** All three caught all 10 unstable stacks, but they recognised only 1–6 of the 10 stable ones. They react to any visible offset instead of reasoning about balance.
-- ⚪ **Dim light did not hurt.** Because the visibility check guarantees each object is clearly visible, the failures are about reasoning, not perception.
-- 🔴 **Seven scenes defeated every model.** They are s4, s9, s27, s28, s34, s52 and s57, and they appear in the app's failure gallery.
+- 🟢 **Depth and position are nearly solved: 90% on average.** Five of six models score 90–100%, with up to five objects and partial occlusion. Llama 4 Scout is the exception at 67%.
+- 🟠 **Orientation is weak for every company's model: 43% on average, against 25% for guessing.** The models collapse onto "toward" or "away from" the camera. Out of 60 orientation answers, only one said "left" or "right", although those are correct for 4 of the 10 tasks. Llama 4 answered "away from the camera" 10 times out of 10.
+- 🟠 **Over-predicting collapse is a Google-family habit, not a universal one.** The three Google models caught all 10 unstable stacks but recognised only 1–6 of the 10 stable ones. Qwen, Mistral and Llama recognised all 10 stable stacks and still caught 8–9 of the 10 unstable ones.
+- 🥇 **An open-weights model leads.** Alibaba's Qwen3.8 27B scored 88.3%, ahead of every Google model.
+- ⚪ **Light made no consistent difference.** Some models did better in dim light and some worse, so the failures are about reasoning, not visibility.
+- 🔴 **Three scenes defeated all six models.** Scenes s9, s27 and s57 are all containers whose open side faces right. They appear in the app's failure gallery.
 
 ## See it in 3D
 
@@ -152,7 +159,7 @@ Each kind needs a different skill, not a reworded question. Within each kind, di
 | Answers re-derived by separate code ([`lib/bench/truth.ts`](lib/bench/truth.ts), shares no logic with the generator) | **60 / 60** |
 | Tasks rebuilt identically from their seeds | **60 / 60** |
 | Visibility check passed | **60 / 60** |
-| Automated tests (`npm test`, run in CI on every push) | **80 / 80** |
+| Automated tests (`npm test`, run in CI on every push) | **85 / 85** |
 
 The test suite also includes:
 
@@ -173,7 +180,7 @@ Both are documented in the [technical report](docs/TECHNICAL_REPORT.md).
 | Criterion | Where to look |
 |---|---|
 | **Implementation (25%)** | One command each to generate, validate, evaluate and report. It is resumable, quota-aware and covered by CI. See [`scripts/bench/`](scripts/bench), [`lib/bench/`](lib/bench) and [`scripts/blender/render.py`](scripts/blender/render.py). |
-| **Validity (25%)** | Ground truth is computed and then independently re-derived. Exact visibility comes from pixel masks. The suite has 80 tests, including mutation tests. See [Why you can trust the numbers](#why-you-can-trust-the-numbers). |
+| **Validity (25%)** | Ground truth is computed and then independently re-derived. Exact visibility comes from pixel masks. The suite has 85 tests, including mutation tests. See [Why you can trust the numbers](#why-you-can-trust-the-numbers). |
 | **Variation (20%)** | 4 reasoning kinds across 3 tiers, 1–5 objects, occlusion, 2 lighting levels, 6 environments, 5 floors and 3 materials, with balanced outcomes. |
 | **Originality (15%)** | Answers are fixed before rendering; the visibility check proves every question is answerable; scenes can be explored as live 3D with the truth overlaid. |
 | **Impact (15%)** | The failure modes map directly to robot grasping and pallet inspection, and the orientation and stability blind spots are measurable. See [Results](#results). |
@@ -205,10 +212,10 @@ npm run bench:generate -- --count 60 --renderer svg    # instant preview rendere
 npm run bench:validate                                         # re-derives every answer, rebuilds from seeds
 npm run bench:eval -- --model gemini --model-id gemini-3.1-flash-lite
 npm run bench:report                                           # writes public/bench/summary.json
-npm test                                                       # 80 tests
+npm test                                                       # 85 tests
 ```
 
-Claude (`--model anthropic`) and GPT-4o (`--model openai`) are supported as well. Evaluation resumes where it stopped, and it stops cleanly when a free quota runs out.
+Open models run free through Cloudflare (`--model cloudflare --model-id @cf/qwen/qwen3.8-27b`). Claude (`--model anthropic`) and GPT-4o (`--model openai`) are supported as well. Evaluation resumes where it stopped, and it stops cleanly when a free quota runs out.
 
 ## The website and app
 
@@ -219,7 +226,7 @@ The app opens on **the pipeline itself**: a node graph in the style of n8n, buil
 <p align="center"><img src="docs/media/pipeline.png" alt="SpatialGrid pipeline canvas: generate task, scene generator, rendered image, ground truth, visibility check, model selector, Claude, GPT-4o and Gemini nodes, results" width="100%"></p>
 
 1. **Generate Task.** Pick a task type, object count and lighting. The Scene Generator, Rendered Image, Ground Truth and Visibility nodes fill in with the real output of the generator.
-2. **Model Selector.** Switch Claude, GPT-4o and Gemini on or off. A model without an API key on the server is shown as not configured, never faked.
+2. **Model Selector.** One lane per company: Gemini (Google), Llama 4 (Meta), Mistral, Qwen (Alibaba), and a paid GPT-4o / Claude lane. Switch each on or off. A model without an API key on the server is shown as not configured, never faked.
 3. **Run.** Each model node moves through *running → done ✓ / failed ✕* live, edges animate while answers are in transit, and the **Results** node scores every answer against the computed truth.
 
 Secondary panels, in the top bar:
@@ -237,7 +244,7 @@ TypeScript (lib/bench)                         Blender (scripts/blender)
   layout + ground truth      ──tasks.json──▶     path-traced render (Cycles)
   seeds, styles               ◀─visibility──     exact per-object mask pixel counts
         │
-        ├─ evaluate   Gemini / Gemma / Claude / GPT-4o     scripts/bench/eval.ts
+        ├─ evaluate   Gemini · Llama · Mistral · Qwen · Claude · GPT-4o   scripts/bench/eval.ts
         ├─ validate   independent re-derivation            scripts/bench/validate.ts
         └─ report     accuracy by tier / kind / lighting   scripts/bench/report.ts
 
@@ -260,6 +267,7 @@ tests/bench/      vitest suite
 | Variable | Purpose |
 |---|---|
 | `GEMINI_API_KEY` | Gemini and Gemma evaluation (free tier) |
+| `CLOUDFLARE_ACCOUNT_ID`, `CLOUDFLARE_API_TOKEN` | Llama 4, Mistral and Qwen through Cloudflare Workers AI (free tier) |
 | `ANTHROPIC_API_KEY` | Claude evaluation (optional) |
 | `OPENAI_API_KEY` | GPT-4o evaluation (optional) |
 | `BLENDER_PATH` | Blender executable for photoreal rendering |
@@ -271,7 +279,7 @@ Keys are read on the server only and never sent to the browser.
 - **Synthetic scenes.** They are controlled by design, but they are not photographs of real warehouses.
 - **Simplified stability.** It uses a centre-of-mass rule for equal-size, equal-density boxes, not a full physics simulation.
 - **Small per-tier samples.** 60 tasks give wide confidence intervals (about ±15 points for 10 tasks). The generator can make any number; the limit was free API quota.
-- **Gemini-family models only, for cost reasons.** Claude and GPT-4o are supported but were not run, and we report only what we ran.
+- **No closed commercial models besides Gemini.** Claude and GPT-4o are supported by the code but were not run for cost reasons, and we report only what we ran.
 
 ## Credits
 
