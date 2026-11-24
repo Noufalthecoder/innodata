@@ -48,9 +48,16 @@ function Shell({
   icon: string; color: string; title: string; sub?: string; status: Status; width?: number; children?: React.ReactNode;
   inPos?: Position; outPos?: Position; noIn?: boolean; noOut?: boolean; dim?: boolean;
 }) {
-  const ring = status === "running" ? "border-accent shadow-[0_0_0_4px_rgba(255,135,49,0.12)]" : status === "failed" ? "border-red-500/60" : status === "done" ? "border-emerald-500/40" : "border-white/10";
+  const ring =
+    status === "running" ? "border-accent/80 sg-running"
+    : status === "failed" ? "border-red-500/60 shadow-[0_0_30px_-6px_rgba(248,113,113,0.45),0_24px_60px_-20px_rgba(0,0,0,0.9)]"
+    : status === "done" ? "border-emerald-400/45 shadow-[0_0_34px_-8px_rgba(52,211,153,0.4),0_24px_60px_-20px_rgba(0,0,0,0.9)]"
+    : "border-white/10 shadow-[0_24px_60px_-20px_rgba(0,0,0,0.9)]";
   return (
-    <div className={`rounded-xl border bg-[#13141a] text-left shadow-xl shadow-black/40 transition-[border-color,box-shadow,opacity] duration-300 ${ring} ${dim ? "opacity-45" : ""}`} style={{ width }}>
+    <div
+      className={`relative rounded-xl border bg-gradient-to-b from-[#1b1d26]/95 to-[#101117]/95 text-left backdrop-blur-md transition-[border-color,box-shadow,opacity] duration-300 before:pointer-events-none before:absolute before:inset-x-4 before:top-0 before:h-px before:bg-gradient-to-r before:from-transparent before:via-white/25 before:to-transparent ${ring} ${dim ? "opacity-45" : ""}`}
+      style={{ width }}
+    >
       {!noIn && <Handle type="target" position={inPos} className={handleCls} />}
       <div className="flex items-center gap-2.5 border-b border-white/[0.06] px-3 py-2.5">
         <Icon name={icon} color={color} />

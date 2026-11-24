@@ -51,10 +51,10 @@ export default function AppShell() {
           <Link href="/" className="text-[15px] font-semibold tracking-tight text-white">
             SpatialGrid
           </Link>
-          <span className="hidden text-zinc-700 sm:inline">/</span>
-          <h1 className="hidden truncate text-sm text-zinc-300 sm:block">Benchmark pipeline</h1>
+          <span className="hidden text-zinc-700 lg:inline">/</span>
+          <h1 className="hidden truncate text-sm text-zinc-300 lg:block">Benchmark pipeline</h1>
         </div>
-        <nav aria-label="Secondary" className="flex items-center gap-1 overflow-x-auto">
+        <nav aria-label="Secondary" className="flex min-w-0 shrink items-center gap-1 overflow-x-auto">
           {PANELS.map((p) => (
             <button
               key={p.id}

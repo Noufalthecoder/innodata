@@ -2,26 +2,29 @@
 
 import "@xyflow/react/dist/style.css";
 import dynamic from "next/dynamic";
-import { Background, BackgroundVariant, Controls, MarkerType, ReactFlow, type Edge, type Node } from "@xyflow/react";
-import { useMemo } from "react";
+import { Controls, MarkerType, ReactFlow, ReactFlowProvider, useNodesState, useReactFlow, type Edge, type Node } from "@xyflow/react";
+import { useEffect, useMemo, useRef } from "react";
 import { nodeTypes } from "./nodes";
 import { PipelineProvider, usePipeline, type Status } from "./state";
 
 const SceneViewer3D = dynamic(() => import("../SceneViewer3D"), { ssr: false });
 
-/* two rows, read left to right: generation on top, evaluation below */
-const NODES: Node[] = [
+/* two rows, read left to right: generation on top, evaluation below. Base layout is ~1300 x 770. */
+const BASE: Node[] = [
   { id: "trigger", type: "trigger", position: { x: 0, y: 30 }, data: {} },
-  { id: "scene", type: "scene", position: { x: 320, y: 50 }, data: {} },
+  { id: "scene", type: "scene", position: { x: 320, y: 45 }, data: {} },
   { id: "preview", type: "preview", position: { x: 630, y: 0 }, data: {} },
   { id: "truth", type: "truth", position: { x: 1000, y: 30 }, data: {} },
-  { id: "visibility", type: "visibility", position: { x: 10, y: 450 }, data: {} },
-  { id: "selector", type: "selector", position: { x: 340, y: 400 }, data: {} },
-  { id: "claude", type: "model", position: { x: 680, y: 370 }, data: { slot: "claude" } },
-  { id: "gpt", type: "model", position: { x: 680, y: 510 }, data: { slot: "gpt" } },
+  { id: "visibility", type: "visibility", position: { x: 10, y: 470 }, data: {} },
+  { id: "selector", type: "selector", position: { x: 340, y: 430 }, data: {} },
+  { id: "claude", type: "model", position: { x: 680, y: 400 }, data: { slot: "claude" } },
+  { id: "gpt", type: "model", position: { x: 680, y: 525 }, data: { slot: "gpt" } },
   { id: "gemini", type: "model", position: { x: 680, y: 650 }, data: { slot: "gemini" } },
-  { id: "results", type: "results", position: { x: 1000, y: 470 }, data: {} },
+  { id: "results", type: "results", position: { x: 1000, y: 480 }, data: {} },
 ];
+const BASE_W = 1300, BASE_H = 770;
+/** stretch the columns so the graph has the same shape as the screen, so it can be zoomed to fill it */
+const layout = (k: number) => BASE.map((n) => ({ ...n, position: { x: n.position.x * k, y: n.position.y } }));
 
 const C = { idle: "#3f3f46", live: "#ff8731", done: "#34d399", fail: "#f87171" };
 
@@ -30,7 +33,8 @@ function edge(id: string, source: string, target: string, from: Status, to: Stat
   const color = live ? C.live : to === "failed" ? C.fail : from === "done" && to === "done" ? C.done : C.idle;
   return {
     id, source, target, animated: live, type: "default",
-    style: { stroke: color, strokeWidth: live ? 2.5 : 2, opacity: to === "skipped" ? 0.35 : 1 },
+    className: live ? "sg-live" : color === C.done ? "sg-done" : color === C.fail ? "sg-fail" : "",
+    style: { stroke: color, strokeWidth: live ? 3 : 2.2, opacity: to === "skipped" ? 0.35 : 1 },
     markerEnd: { type: MarkerType.ArrowClosed, color, width: 16, height: 16 },
     ...extra,
   };
@@ -38,6 +42,38 @@ function edge(id: string, source: string, target: string, from: Status, to: Stat
 
 function Flow() {
   const { stages, runs, task, view3d, setView3d, running, generating } = usePipeline();
+  const wrap = useRef<HTMLDivElement>(null);
+  const [nodes, setNodes, onNodesChange] = useNodesState(layout(1));
+  const { fitView } = useReactFlow();
+
+  // fill the screen: re-layout and re-fit whenever the canvas changes size
+  useEffect(() => {
+    const el = wrap.current;
+    if (!el) return;
+    let raf = 0;
+    const fit = () => {
+      const { width, height } = el.getBoundingClientRect();
+      if (!width || !height) return;
+      const k = Math.min(1.7, Math.max(1, (width / height) * (BASE_H / BASE_W)));
+      setNodes(layout(k));
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => requestAnimationFrame(() => fitView({ padding: 0.06, maxZoom: 1.8, duration: 250 })));
+    };
+    const ro = new ResizeObserver(fit);
+    ro.observe(el);
+    return () => {
+      ro.disconnect();
+      cancelAnimationFrame(raf);
+    };
+  }, [fitView, setNodes]);
+
+  // nodes grow when they fill with results; keep the whole graph in view
+  const settled = !generating && !running;
+  useEffect(() => {
+    if (!settled) return;
+    const t = setTimeout(() => fitView({ padding: 0.06, maxZoom: 1.8, duration: 400 }), 120);
+    return () => clearTimeout(t);
+  }, [settled, task, fitView]);
 
   const edges = useMemo<Edge[]>(() => {
     const trig: Status = generating || stages.scene !== "idle" ? "done" : "idle";
@@ -59,21 +95,30 @@ function Flow() {
   }, [stages, runs, running, generating]);
 
   return (
-    <div className="relative h-full w-full">
+    <div ref={wrap} className="sg-canvas relative h-full w-full overflow-hidden">
+      {/* depth: a perspective floor grid receding to a glowing horizon */}
+      <div aria-hidden className="pointer-events-none absolute inset-0">
+        <div className="absolute inset-x-0 top-0 h-[45%] bg-[radial-gradient(ellipse_60%_80%_at_50%_100%,rgba(255,135,49,0.10),transparent_70%)]" />
+        <div className="absolute inset-x-0 top-[44%] h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent" />
+        <div className="sg-floor-wrap absolute inset-x-0 bottom-0 top-[44%]">
+          <div className="sg-floor" />
+        </div>
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_55%,rgba(0,0,0,0.65))]" />
+      </div>
       <ReactFlow
-        nodes={NODES}
+        nodes={nodes}
+        onNodesChange={onNodesChange}
         edges={edges}
         nodeTypes={nodeTypes}
         colorMode="dark"
         fitView
-        fitViewOptions={{ padding: 0.12 }}
-        minZoom={0.3}
-        maxZoom={1.6}
+        fitViewOptions={{ padding: 0.06, maxZoom: 1.8 }}
+        minZoom={0.25}
+        maxZoom={2}
         nodesConnectable={false}
         proOptions={{ hideAttribution: true }}
-        style={{ background: "#08090c" }}
+        style={{ background: "transparent" }}
       >
-        <Background variant={BackgroundVariant.Dots} gap={22} size={1.3} color="#2a2c35" />
         <Controls showInteractive={false} position="bottom-right" />
       </ReactFlow>
 
@@ -97,7 +142,9 @@ function Flow() {
 export default function PipelineCanvas() {
   return (
     <PipelineProvider>
-      <Flow />
+      <ReactFlowProvider>
+        <Flow />
+      </ReactFlowProvider>
     </PipelineProvider>
   );
 }
