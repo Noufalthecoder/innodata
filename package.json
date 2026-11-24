@@ -14,7 +14,8 @@
     "bench:report": "tsx scripts/bench/report.ts",
     "test": "vitest run",
     "test:watch": "vitest",
-    "bench:reparse": "tsx scripts/bench/reparse.ts"
+    "bench:reparse": "tsx scripts/bench/reparse.ts",
+    "sg": "tsx scripts/bench/cli.ts"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.9",
@@ -42,5 +43,8 @@
   },
   "optionalDependencies": {
     "@rolldown/binding-win32-x64-msvc": "^1.3.3"
+  },
+  "engines": {
+    "node": ">=22"
   }
 }
