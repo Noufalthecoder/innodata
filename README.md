@@ -82,7 +82,7 @@ Six vision models from four companies, 60 photoreal tasks each, image plus quest
 - 🟢 **Depth and position are nearly solved: 90% on average.** Five of six models score 90–100%, with up to five objects and partial occlusion. Llama 4 Scout is the exception at 67%.
 - 🟠 **Orientation is weak for every company's model: 43% on average, against 25% for guessing.** The models collapse onto "toward" or "away from" the camera. Out of 60 orientation answers, only one said "left" or "right", although those are correct for 4 of the 10 tasks. Llama 4 answered "away from the camera" 10 times out of 10.
 - 🟠 **Over-predicting collapse is a Google-family habit, not a universal one.** The three Google models caught all 10 unstable stacks but recognised only 1–6 of the 10 stable ones. Qwen, Mistral and Llama recognised all 10 stable stacks and still caught 8–9 of the 10 unstable ones.
-- 🥇 **An open-weights model leads.** Alibaba's Qwen3.8 27B scored 88.3%, ahead of every Google model.
+- 🥇 **An open-weights model leads.** Alibaba's Qwen3.8 27B scored 88.3%. With 60 tasks, the lead is statistically significant over Llama 4 (exact McNemar p = 0.007) and Gemini 3.5 Flash-Lite (p = 0.02), but not over Mistral, Gemini 3.1 Flash-Lite or Gemma 4 (p ≈ 0.27–0.29). The leaderboard shows 95% confidence intervals for every score.
 - ⚪ **Light made no consistent difference.** Some models did better in dim light and some worse, so the failures are about reasoning, not visibility.
 - 🔴 **Three scenes defeated all six models.** Scenes s9, s27 and s57 are all containers whose open side faces right. They appear in the app's failure gallery.
 
