@@ -7,7 +7,7 @@ export type Status = "idle" | "running" | "done" | "failed" | "skipped";
 export type Stage = "scene" | "preview" | "truth" | "visibility";
 export type Slot = "claude" | "gpt" | "gemini";
 
-export type Provider = { id: string; label: string; model: string; configured: boolean };
+export type Provider = { id: string; label: string; model: string; configured: boolean; note?: string };
 export type RunResult = { status: Status; modelId?: string; label?: string; raw?: string; choice?: number | null; correct?: boolean; error?: string; ms?: number };
 
 export const SLOTS: { slot: Slot; name: string; color: string; envVar: string }[] = [

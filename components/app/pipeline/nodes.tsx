@@ -240,7 +240,8 @@ export function SelectorNode(_: NodeProps) {
                   <span className={`absolute top-0.5 h-3 w-3 rounded-full bg-white transition-all ${selected[s.slot] ? "left-3.5" : "left-0.5"}`} />
                 </button>
               </div>
-              {!configured && <p className="mt-0.5 text-[10px] text-zinc-500">No {s.envVar} on the server</p>}
+              {!configured && <p className="mt-0.5 text-[10px] text-zinc-500">{models.find((m) => m.note)?.note ?? `No ${s.envVar} on the server`}</p>}
+              {configured && models.some((m) => m.note) && <p className="mt-0.5 text-[10px] text-amber-400/80">{models.find((m) => m.note)?.note}</p>}
               {configured && models.length > 1 && (
                 <select className={`${select} mt-1.5 py-1`} value={slotModel[s.slot]} disabled={running} onChange={(e) => setSlotModel(s.slot, e.target.value)}>
                   {models.filter((m) => m.configured).map((m) => <option key={m.id} value={m.id}>{m.label}</option>)}
@@ -279,7 +280,7 @@ export function ModelNode({ data }: NodeProps) {
       )}
       {r.status === "failed" && <p className="line-clamp-3 text-red-300">{r.error}</p>}
       {r.status === "skipped" && <p>Not selected for this run.</p>}
-      {r.status === "idle" && <p>{!loaded ? "Checking server keys…" : configured ? (selected[slot] ? "Ready" : "Off. Toggle it on in the selector.") : `Add ${meta.envVar} to .env.local to enable.`}</p>}
+      {r.status === "idle" && <p>{!loaded ? "Checking server keys…" : configured ? (selected[slot] ? "Ready" : "Off. Toggle it on in the selector.") : slotModels(slot).find((m) => m.note)?.note ?? `Add ${meta.envVar} to .env.local to enable.`}</p>}
     </Shell>
   );
 }
