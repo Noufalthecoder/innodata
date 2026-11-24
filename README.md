@@ -261,8 +261,7 @@ tests/bench/      vitest suite
 |---|---|
 | `GEMINI_API_KEY` | Gemini and Gemma evaluation (free tier) |
 | `ANTHROPIC_API_KEY` | Claude evaluation (optional) |
-| `OPENAI_API_KEY` | GPT-4o through the OpenAI API (optional, paid) |
-| `GITHUB_TOKEN` | GPT-4o through GitHub Models (free tier; token needs the "Models: read" permission) |
+| `OPENAI_API_KEY` | GPT-4o evaluation (optional) |
 | `BLENDER_PATH` | Blender executable for photoreal rendering |
 
 Keys are read on the server only and never sent to the browser.

@@ -1,11 +1,9 @@
-export type Provider = "anthropic" | "openai" | "gemini" | "github";
+export type Provider = "anthropic" | "openai" | "gemini";
 
 export const MODELS: Record<Provider, { model: string; env: string; label: string }> = {
   anthropic: { model: "claude-sonnet-5-5", env: "ANTHROPIC_API_KEY", label: "Claude" },
   openai: { model: "gpt-4o", env: "OPENAI_API_KEY", label: "GPT-4o" },
   gemini: { model: "gemini-3.5-flash", env: "GEMINI_API_KEY", label: "Gemini" },
-  // GitHub Models: OpenAI models through a GitHub token (free, rate-limited tier)
-  github: { model: "openai/gpt-4o", env: "GITHUB_TOKEN", label: "GPT-4o (GitHub Models)" },
 };
 
 /** Every model the app can ask. Each answer is labelled with the model that actually produced it. */
@@ -16,8 +14,7 @@ export const MODEL_CHOICES: { id: string; provider: Provider; label: string }[] 
   { id: "gemini-3.1-flash-lite", provider: "gemini", label: "Gemini 3.1 Flash-Lite" },
   { id: "gemma-4-26b-a4b-it", provider: "gemini", label: "Gemma 4 26B (open)" },
   { id: "claude-sonnet-5-5", provider: "anthropic", label: "Claude" },
-  { id: "openai/gpt-4o", provider: "github", label: "GPT-4o · GitHub Models" },
-  { id: "gpt-4o", provider: "openai", label: "GPT-4o · OpenAI API" },
+  { id: "gpt-4o", provider: "openai", label: "GPT-4o" },
 ];
 
 const LETTERS = "ABCDEF";
@@ -85,9 +82,9 @@ export async function askModel(provider: Provider, apiKey: string, jpegBase64: s
     );
     return j.content?.[0]?.text ?? "";
   }
-  if (provider === "openai" || provider === "github") {
+  if (provider === "openai") {
     const j = await post(
-      provider === "github" ? "https://models.github.ai/inference/chat/completions" : "https://api.openai.com/v1/chat/completions",
+      "https://api.openai.com/v1/chat/completions",
       { Authorization: `Bearer ${apiKey}` },
       { model, max_tokens: 16, temperature: 0, messages: [{ role: "user", content: [{ type: "text", text: prompt }, { type: "image_url", image_url: { url: `data:image/jpeg;base64,${jpegBase64}` } }] }] }
     );
