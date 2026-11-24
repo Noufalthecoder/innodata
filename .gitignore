@@ -13,3 +13,6 @@ scratch-render
 !.env.example
 .next-prod
 demo-output
+.vercel
+
+.vercel

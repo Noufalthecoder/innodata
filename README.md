@@ -20,6 +20,8 @@
 </p>
 
 <p align="center">
+  <a href="https://spatialgrid.vercel.app"><b>🌐 Live demo</b></a> ·
+  <a href="https://spatialgrid.vercel.app/app"><b>Open the app</b></a> ·
   <a href="#-results"><b>Results</b></a> ·
   <a href="#-watch-it-run"><b>Live pipeline</b></a> ·
   <a href="#-why-you-can-trust-the-numbers"><b>Validation</b></a> ·
