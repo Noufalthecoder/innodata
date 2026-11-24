@@ -214,13 +214,21 @@ Claude (`--model anthropic`) and GPT-4o (`--model openai`) are supported as well
 
 <p align="center"><img src="docs/media/landing.png" alt="SpatialGrid landing page" width="100%"></p>
 
-| Tab | What it does |
+The app opens on **the pipeline itself**: a node graph in the style of n8n, built with React Flow, that runs the real generator and evaluator.
+
+<p align="center"><img src="docs/media/pipeline.png" alt="SpatialGrid pipeline canvas: generate task, scene generator, rendered image, ground truth, visibility check, model selector, Claude, GPT-4o and Gemini nodes, results" width="100%"></p>
+
+1. **Generate Task.** Pick a task type, object count and lighting. The Scene Generator, Rendered Image, Ground Truth and Visibility nodes fill in with the real output of the generator.
+2. **Model Selector.** Switch Claude, GPT-4o and Gemini on or off. A model without an API key on the server is shown as not configured, never faked.
+3. **Run.** Each model node moves through *running → done ✓ / failed ✕* live, edges animate while answers are in transit, and the **Results** node scores every answer against the computed truth.
+
+Secondary panels, in the top bar:
+
+| Panel | What it does |
 |---|---|
-| **Play** | Answer the same questions the models get, then see the truth and how it was computed |
-| **Generate** | Build a fresh, visibility-checked scene on demand and ask a model about it |
-| **Tasks** | Browse the dataset as photoreal images or interactive 3D, with ground-truth overlays |
-| **Validate** | Re-derive every answer in the browser with independent code |
-| **Results** | Accuracy by tier, kind and lighting, plus the scenes every model got wrong |
+| **Dataset** | Browse the 60 photoreal tasks as images or interactive 3D, with ground-truth overlays |
+| **Validation Proof** | Re-derive every answer in the browser with independent code |
+| **Leaderboard** | Accuracy by tier, kind and lighting, plus the scenes every model got wrong |
 
 ## Architecture
 
@@ -234,7 +242,7 @@ TypeScript (lib/bench)                         Blender (scripts/blender)
         └─ report     accuracy by tier / kind / lighting   scripts/bench/report.ts
 
 Next.js 15 + React Three Fiber (app, components)
-  landing page, /app (play, generate, tasks, validate, results), live 3D viewer
+  landing page, /app pipeline canvas (React Flow) + dataset, validation and leaderboard panels, live 3D viewer
 ```
 
 ```

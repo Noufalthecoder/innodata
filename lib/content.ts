@@ -77,9 +77,8 @@ export const faqs = [
 ];
 
 export const appFeatures = [
-  { id: "play", title: "Play", body: "Answer the same questions the models get, then see the truth and how it was computed." },
-  { id: "generate", title: "Generate", body: "Build a fresh, visibility-checked scene on demand and ask a model about it." },
-  { id: "tasks", title: "Tasks", body: "Browse the dataset in photoreal or interactive 3D, with the truth drawn on the scene." },
-  { id: "validate", title: "Validate", body: "Re-derive every answer with independent code and rebuild tasks from their seeds." },
-  { id: "results", title: "Results", body: "Accuracy by tier, task type and lighting, and the scenes every model got wrong." },
+  { id: "", title: "Pipeline", body: "One node-based canvas: generate a scene, watch ground truth and visibility compute, then run Claude, GPT-4o or Gemini side by side." },
+  { id: "dataset", title: "Dataset", body: "Browse the 60 photoreal tasks, in render or interactive 3D, with the truth drawn on the scene." },
+  { id: "validation", title: "Validation Proof", body: "Re-derive every answer with independent code and rebuild tasks from their seeds." },
+  { id: "leaderboard", title: "Leaderboard", body: "Accuracy by tier, task type and lighting, and the scenes every model got wrong." },
 ];

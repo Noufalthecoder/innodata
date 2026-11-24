@@ -75,7 +75,7 @@ export default function Results() {
           <p className="mt-2 text-zinc-400">Scenes every evaluated model got wrong.</p>
           <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {failures.map((t) => (
-              <Link key={t.id} href="/app#tasks" className="overflow-hidden rounded-lg border border-white/10 transition-colors hover:border-white/40">
+              <Link key={t.id} href="/app#dataset" className="overflow-hidden rounded-lg border border-white/10 transition-colors hover:border-white/40">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={t.image} alt={t.question} loading="lazy" className="aspect-[4/3] w-full object-cover" />
                 <div className="p-4">
@@ -88,7 +88,7 @@ export default function Results() {
         </div>
       )}
 
-      <Link href="/app#results" className="mt-10 inline-block text-sm text-zinc-400 underline underline-offset-4 hover:text-white">
+      <Link href="/app#leaderboard" className="mt-10 inline-block text-sm text-zinc-400 underline underline-offset-4 hover:text-white">
         Full breakdown in the app →
       </Link>
     </section>
