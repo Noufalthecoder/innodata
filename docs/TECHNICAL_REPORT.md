@@ -52,6 +52,25 @@ seed ─▶ layout (TypeScript)        objects, camera, render style; determinis
 
 A fast SVG renderer is kept for previews and for the live "Generate" tab of the app.
 
+### Reused components
+
+What we wrote ourselves: the scene generator, the ground-truth rules, the independent re-derivation, the visibility gate, the reply parser, the statistics, the evaluator and the whole app. Everything below is an existing tool or asset that we use as-is.
+
+| Component | Used for | Licence |
+|---|---|---|
+| Blender (Cycles path tracer) | Photoreal rendering and the flat-colour visibility masks; driven by our Python script, run as an external program | GPL (tool only, not linked into our code) |
+| Poly Haven HDRIs and floor textures | Real-world lighting and floor materials, downloaded by `scripts/blender/fetch-assets.mjs` | CC0 |
+| Next.js 15, React 19, Tailwind CSS, Framer Motion | Website and app | MIT |
+| React Flow (`@xyflow/react`) | The node-based pipeline view | MIT |
+| three.js, React Three Fiber, drei | 3D reconstruction of each task from its scene numbers | MIT |
+| sharp | Rasterising SVG masks for the fast visibility check | Apache 2.0 |
+| vitest, tsx | Test suite and TypeScript scripts | MIT |
+| Gemini API; Cloudflare Workers AI | The six evaluated models (see §6) | Provider terms |
+| Anthropic, OpenAI, OpenRouter APIs | Optional "Bring Your Own Key" models in the app | Provider terms |
+| Vercel | Hosting the live prototype | Free tier |
+
+AI coding assistants were used while writing the code. Every number in this report comes from the stored result files, and the tests check that.
+
 ## 4. How reference answers are established
 
 Every answer is arithmetic on numbers the generator chose itself. No person and no model is involved.
@@ -63,6 +82,15 @@ Every answer is arithmetic on numbers the generator chose itself. No person and 
 | orientation | the open side faces (sin θ, 0, cos θ) for yaw θ; the camera looks along −z, so +z is toward the camera and +x is image-right; yaw is within ±0.3 rad of a cardinal direction |
 | stability | for every box, the centre of mass of all boxes above it must lie over that box's top face (equal size and density); kept only if every margin is at least 0.12 m, so no case is borderline |
 
+### Core assumptions
+
+1. **The image shows the scene the answer was computed from.** Blender receives the exact object positions, sizes, rotations and camera that the answer was computed from; nothing in the layout is random at render time. The 3D view in the app rebuilds each task from the same numbers, so this can be checked by eye.
+2. **"Closest" means distance from the camera to the object's centre.** A task is kept only if the winner leads by at least 0.8 m, so small differences in definition (for example nearest surface instead of centre) are unlikely to change the answer.
+3. **Stability is judged statically.** Rigid boxes of equal size and density, no friction or dynamics. A centre-of-mass rule decides, and a 12 cm minimum margin keeps every case far from the tipping point.
+4. **Orientation labels are unambiguous.** The yaw is always within ±0.3 rad (about 17°) of one of four directions, so there is one clearly correct option.
+5. **A question is answerable if every object it mentions is at least 70% visible, fully inside the frame and at least 2,500 pixels.** Below this the task is rejected.
+6. **Models see only the image, the question and the options.** One answer per task at temperature 0; the answer and the explanation are never sent (a test enforces this).
+
 **Every question is answerable from the image.** After rendering, Blender draws each object in a unique flat colour, then counts its visible pixels in the full scene and when drawn alone. An object must be at least 70% unoccluded, fully inside the frame, and at least 2,500 px. Otherwise the task is discarded and rebuilt.
 
 ## 5. Validation evidence (independent of the model)
@@ -72,7 +100,8 @@ Every answer is arithmetic on numbers the generator chose itself. No person and 
 | Answers re-derived by separate code (`lib/bench/truth.ts`, shares no logic with the generator) | 60 / 60 |
 | Tasks rebuilt identically from their seeds | 60 / 60 |
 | Visibility check passed | 60 / 60 |
-| Automated test suite (`npm test`, vitest, run in CI) | 116 / 116 passing |
+| Automated test suite (`npm test`, vitest, run in CI) | 117 / 117 passing |
+| Code mutation testing (`npm run bench:mutation`) | 17 / 17 defects caught |
 
 The test suite also includes:
 
@@ -80,7 +109,34 @@ The test suite also includes:
 - **Property test:** the generator's stability rule and the independent re-derivation agree on 500 random stacks.
 - **Visibility tests:** occluded, off-frame and tiny objects are rejected.
 - **Prompt-safety tests:** the prompt never contains the answer or explanation, and the reply parser rejects ambiguous replies instead of guessing.
-- **Mutation tests:** deliberately corrupted answers and altered scenes are detected by the validators.
+- **Data mutation tests:** deliberately corrupted answers and altered scenes are detected by the validators.
+- **Code mutation testing:** see below.
+
+### Code mutation testing
+
+`npm run bench:mutation` breaks the implementation in 17 deliberate ways, one at a time, runs the full test suite against each broken version, and restores the code. A defect the tests catch is *killed*. Results are saved to [`public/bench/mutation-report.json`](../public/bench/mutation-report.json).
+
+**Result: 17 of 17 defects caught.** The first run caught 16. The survivor (M13: the reply parser taking a model's *first* stated answer instead of its final one) would have mis-scored models that reason out loud and change their mind, such as Gemma 4. We added a test for it, and the re-run caught all 17.
+
+| # | Deliberate defect | First test that caught it |
+|---|---|---|
+| M1 | Depth: re-derivation picks the farthest object instead of the nearest | `dataset.test.ts: every stored answer is re-derived exactly by independent code` |
+| M2 | Position: re-derivation picks the right-most object | `dataset.test.ts: every stored answer is re-derived exactly by independent code` |
+| M3 | Orientation: towards / away from the camera swapped | `dataset.test.ts: every stored answer is re-derived exactly by independent code` |
+| M4 | Orientation: left / right swapped | `dataset.test.ts: every stored answer is re-derived exactly by independent code` |
+| M5 | Stability: support region twice as wide (too lenient) | `stability.test.ts: the generator's rule and the independent re-derivation agree on 500 random stacks` |
+| M6 | Stability: only the top box is checked | `stability.test.ts: the generator's rule and the independent re-derivation agree on 500 random stacks` |
+| M7 | Generator: depth answer set to the farthest object | `dataset.test.ts: rebuilds a sample of tasks identically from their seeds` |
+| M8 | Generator: orientation answer towards / away swapped | `dataset.test.ts: rebuilds a sample of tasks identically from their seeds` |
+| M9 | Generator: stable and unstable labels swapped | `generation.test.ts: ground truth matches the independent re-derivation across seeds` |
+| M10 | Visibility: occlusion threshold disabled (0% visible passes) | `visibility.test.ts: rejects an object hidden behind a larger one` |
+| M11 | Visibility: objects cut off by the frame still pass | `dataset.test.ts: rebuilds a sample of tasks identically from their seeds` |
+| M12 | Visibility: minimum object size disabled | `visibility.test.ts: rejects an object too small to make out` |
+| M13 | Scoring: first stated answer wins instead of the final one | `models.test.ts: takes the final stated answer when a model changes its mind` |
+| M14 | Scoring: letters beyond the offered options accepted | `models.test.ts: rejects "C" instead of guessing` |
+| M15 | Statistics: 90% instead of 95% confidence interval | `metrics.test.ts: wilson interval brackets the estimate and is wide for small n` |
+| M16 | Statistics: chance adjustment not rescaled | `metrics.test.ts: chance-adjusted maps guessing to 0 and perfect to 1` |
+| M17 | Statistics: McNemar test one-sided instead of two-sided | `metrics.test.ts: mcnemar exact matches known values` |
 
 **Bugs the tests found and fixed during development:**
 
@@ -132,7 +188,7 @@ Chance level: orientation 25% (four options), stability 50% (two options), depth
 - **Sample size:** 60 tasks gives wide confidence intervals per tier. The generator can produce any number, so this is limited by rendering time (about 1 minute per image on CPU) and free API quotas, not by design.
 - **Model coverage:** six models from four companies (Google, Alibaba, Mistral AI, Meta). Claude and GPT-4o are supported by the code but were not run, for cost reasons.
 - **Prompt sensitivity:** results depend on prompt wording. The exact prompt is in `lib/bench/models.ts`.
-- **No manual fixes:** no generated output was edited by hand.
+- **No manual fixes to outputs:** no generated task, image or answer was edited by hand. The only corrections were to code (the two bugs in §5 and the reply parser in §7), each followed by regenerating or re-scoring from the stored replies.
 
 ## 9. Reproducing everything
 
@@ -144,5 +200,17 @@ npm run bench:validate
 npm test
 npm run bench:eval -- --model gemini --model-id gemini-3.5-flash
 npm run bench:report
+npm run bench:mutation                         # break the code 17 ways; the tests must catch each one
 npm run dev                                    # site at /, app at /app
 ```
+
+**With Docker** (no Node.js or Blender needed; the rendered dataset ships in the image):
+
+```bash
+docker compose up --build                          # app at http://localhost:3000/app (model keys optional, in .env)
+docker compose run --rm tools                      # all automated tests
+docker compose run --rm tools run bench:validate   # re-derive every answer, rebuild every task
+docker compose run --rm tools run bench:mutation   # mutation testing
+```
+
+CI builds this image on every push and checks that the container serves the app and passes validation.

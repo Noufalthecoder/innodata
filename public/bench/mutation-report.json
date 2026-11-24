@@ -1,0 +1,144 @@
+{
+  "ranAt": "2026-11-24T11:54:48.786Z",
+  "total": 17,
+  "killed": 17,
+  "score": 1,
+  "mutants": [
+    {
+      "id": "M1",
+      "file": "lib/bench/truth.ts",
+      "defect": "Depth: re-derivation picks the farthest object instead of the nearest",
+      "killed": true,
+      "caughtBy": "tests/bench/dataset.test.ts > shipped dataset (public/bench/tasks.json) > every stored answer is re-derived exactly by independent code",
+      "seconds": 6
+    },
+    {
+      "id": "M2",
+      "file": "lib/bench/truth.ts",
+      "defect": "Position: re-derivation picks the right-most object",
+      "killed": true,
+      "caughtBy": "tests/bench/dataset.test.ts > shipped dataset (public/bench/tasks.json) > every stored answer is re-derived exactly by independent code",
+      "seconds": 7
+    },
+    {
+      "id": "M3",
+      "file": "lib/bench/truth.ts",
+      "defect": "Orientation: towards / away from the camera swapped",
+      "killed": true,
+      "caughtBy": "tests/bench/dataset.test.ts > shipped dataset (public/bench/tasks.json) > every stored answer is re-derived exactly by independent code",
+      "seconds": 5
+    },
+    {
+      "id": "M4",
+      "file": "lib/bench/truth.ts",
+      "defect": "Orientation: left / right swapped",
+      "killed": true,
+      "caughtBy": "tests/bench/dataset.test.ts > shipped dataset (public/bench/tasks.json) > every stored answer is re-derived exactly by independent code",
+      "seconds": 7
+    },
+    {
+      "id": "M5",
+      "file": "lib/bench/truth.ts",
+      "defect": "Stability: support region twice as wide (too lenient)",
+      "killed": true,
+      "caughtBy": "tests/bench/stability.test.ts > stability rule cross-check > the generator's rule and the independent re-derivation agree on 500 random stacks",
+      "seconds": 7
+    },
+    {
+      "id": "M6",
+      "file": "lib/bench/truth.ts",
+      "defect": "Stability: only the top box is checked",
+      "killed": true,
+      "caughtBy": "tests/bench/stability.test.ts > stability rule cross-check > the generator's rule and the independent re-derivation agree on 500 random stacks",
+      "seconds": 4
+    },
+    {
+      "id": "M7",
+      "file": "lib/bench/tasks.ts",
+      "defect": "Generator: depth answer set to the farthest object",
+      "killed": true,
+      "caughtBy": "tests/bench/dataset.test.ts > shipped dataset (public/bench/tasks.json) > rebuilds a sample of tasks identically from their seeds",
+      "seconds": 5
+    },
+    {
+      "id": "M8",
+      "file": "lib/bench/tasks.ts",
+      "defect": "Generator: orientation answer towards / away swapped",
+      "killed": true,
+      "caughtBy": "tests/bench/dataset.test.ts > shipped dataset (public/bench/tasks.json) > rebuilds a sample of tasks identically from their seeds",
+      "seconds": 5
+    },
+    {
+      "id": "M9",
+      "file": "lib/bench/tasks.ts",
+      "defect": "Generator: stable and unstable labels swapped",
+      "killed": true,
+      "caughtBy": "tests/bench/generation.test.ts > task generation > stability > ground truth matches the independent re-derivation across seeds",
+      "seconds": 26
+    },
+    {
+      "id": "M10",
+      "file": "lib/bench/visibility.ts",
+      "defect": "Visibility: occlusion threshold disabled (0% visible passes)",
+      "killed": true,
+      "caughtBy": "tests/bench/visibility.test.ts > visibility check > rejects an object hidden behind a larger one",
+      "seconds": 7
+    },
+    {
+      "id": "M11",
+      "file": "lib/bench/visibility.ts",
+      "defect": "Visibility: objects cut off by the frame still pass",
+      "killed": true,
+      "caughtBy": "tests/bench/dataset.test.ts > shipped dataset (public/bench/tasks.json) > rebuilds a sample of tasks identically from their seeds",
+      "seconds": 7
+    },
+    {
+      "id": "M12",
+      "file": "lib/bench/visibility.ts",
+      "defect": "Visibility: minimum object size disabled",
+      "killed": true,
+      "caughtBy": "tests/bench/visibility.test.ts > visibility check > rejects an object too small to make out",
+      "seconds": 22
+    },
+    {
+      "id": "M13",
+      "file": "lib/bench/models.ts",
+      "defect": "Scoring: first stated answer wins instead of the final one",
+      "killed": true,
+      "caughtBy": "tests/bench/models.test.ts > parseChoice > takes the final stated answer when a model changes its mind",
+      "seconds": 6
+    },
+    {
+      "id": "M14",
+      "file": "lib/bench/models.ts",
+      "defect": "Scoring: letters beyond the offered options accepted",
+      "killed": true,
+      "caughtBy": "tests/bench/models.test.ts > parseChoice > rejects \"C\" instead of guessing",
+      "seconds": 7
+    },
+    {
+      "id": "M15",
+      "file": "lib/bench/metrics.ts",
+      "defect": "Statistics: 90% instead of 95% confidence interval",
+      "killed": true,
+      "caughtBy": "tests/bench/metrics.test.ts > metrics > wilson interval brackets the estimate and is wide for small n",
+      "seconds": 16
+    },
+    {
+      "id": "M16",
+      "file": "lib/bench/metrics.ts",
+      "defect": "Statistics: chance adjustment not rescaled",
+      "killed": true,
+      "caughtBy": "tests/bench/metrics.test.ts > metrics > chance-adjusted maps guessing to 0 and perfect to 1",
+      "seconds": 7
+    },
+    {
+      "id": "M17",
+      "file": "lib/bench/metrics.ts",
+      "defect": "Statistics: McNemar test one-sided instead of two-sided",
+      "killed": true,
+      "caughtBy": "tests/bench/metrics.test.ts > metrics > mcnemar exact matches known values",
+      "seconds": 5
+    }
+  ]
+}

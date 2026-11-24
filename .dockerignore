@@ -10,3 +10,4 @@ demo-output
 scratch-render
 .vitest
 *.tsbuildinfo
+.vercel

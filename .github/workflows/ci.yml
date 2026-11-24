@@ -16,3 +16,19 @@ jobs:
       - run: npm ci
       - run: npx tsc --noEmit
       - run: npm test
+
+  docker:
+    # proves the judges' path works: build the image, serve the app, run validation inside the container
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - run: docker build -t spatialgrid .
+      - name: App serves and validates inside the container
+        run: |
+          docker run -d --name sg -p 3000:3000 spatialgrid
+          for i in $(seq 1 60); do curl -fs http://localhost:3000/ > /dev/null && break; sleep 2; done
+          curl -fs http://localhost:3000/app > /dev/null
+          curl -fs -X POST http://localhost:3000/api/bench/validate -H 'content-type: application/json' -d '{"fresh":true}' | tee validate.json
+          grep -q '"matched":60' validate.json
+      - name: Validators inside the container
+        run: docker run --rm spatialgrid npm run bench:validate

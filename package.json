@@ -14,7 +14,8 @@
     "bench:report": "tsx scripts/bench/report.ts",
     "test": "vitest run",
     "test:watch": "vitest",
-    "bench:reparse": "tsx scripts/bench/reparse.ts"
+    "bench:reparse": "tsx scripts/bench/reparse.ts",
+    "bench:mutation": "node scripts/bench/mutation.mjs"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.9",

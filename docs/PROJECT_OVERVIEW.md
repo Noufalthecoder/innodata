@@ -129,7 +129,7 @@ A. It stays standing · B. It falls
 ### Validation and regression testing
 - **Independent re-derivation** of every answer by code that shares no logic with the generator.
 - **Reproducibility check:** tasks rebuilt from seeds must match exactly.
-- **116 automated tests in CI** on every push: rule, property, mutation, prompt-safety, statistics, data-integrity and key-safety tests.
+- **117 automated tests in CI** on every push: rule, property, mutation, prompt-safety, statistics, data-integrity and key-safety tests.
 
 ### The web app
 - **Pipeline canvas** (node graph): Generate Task → Scene Generator → Rendered Image → Ground Truth Engine → Visibility Check → Model Selector → one lane per model → Results, running live.
@@ -267,7 +267,7 @@ flowchart TB
 | 3D viewer | **React Three Fiber**, drei, three.js | Rebuilds any scene in 3D with ground truth drawn on |
 | Models (free tiers) | **Gemini API** (Gemini, Gemma); **Cloudflare Workers AI** (Qwen, Mistral, Llama 4) | Six models from four companies at zero cost |
 | Models (optional) | Anthropic, OpenAI, OpenRouter APIs | Supported in code, and through bring your own key |
-| Testing | **vitest** (116 tests), GitHub Actions CI | Runs on every push |
+| Testing | **vitest** (117 tests), GitHub Actions CI | Runs on every push |
 | Video tooling | Playwright, ffmpeg, Gemini text-to-speech | Automated demo recording with zoom and subtitles |
 
 *Note:* an early plan mentioned Python, pytest and the Claude Code API. We built the evaluator in TypeScript with vitest so that the generator, the evaluator and the web app share one codebase. Claude is supported as a model provider rather than used as a runtime dependency.
@@ -295,7 +295,7 @@ flowchart TB
 | **Runnable source code** | This repository. `npm install && npm run dev`; CLI in `scripts/bench/` |
 | **Sample task packages** | `public/bench/tasks.json` (60 tasks with question, options, answer, explanation, camera, objects and visibility) and `public/bench/images/` |
 | **Model outputs** | `public/bench/results/*.json` (every raw reply, parsed choice and score) and `public/bench/summary.json` |
-| **Validation test logs** | `npm run bench:validate` (60/60 re-derived, 60/60 visible, reproducible from seeds); `npm test` (116 tests); the GitHub Actions CI history |
+| **Validation test logs** | `npm run bench:validate` (60/60 re-derived, 60/60 visible, reproducible from seeds); `npm test` (117 tests); the GitHub Actions CI history |
 | **Technical documentation** | [`README.md`](../README.md), [`docs/TECHNICAL_REPORT.md`](TECHNICAL_REPORT.md) and this overview |
 | **Findings on strengths and weaknesses** | [§10](#10-results-and-findings), the technical report, and the in-app leaderboard and model deep-dives |
 | **Live working prototype** | `/app`: the live pipeline, dataset, validation proof and leaderboard |
@@ -344,7 +344,7 @@ Six models, 60 photoreal tasks each, identical prompt, temperature 0.
 | Answers re-derived by independent code (`lib/bench/truth.ts`) | **60 / 60** |
 | Tasks rebuilt identically from their seeds | **60 / 60** |
 | Visibility check passed | **60 / 60** |
-| Automated tests (vitest, CI on every push) | **116 / 116** |
+| Automated tests (vitest, CI on every push) | **117 / 117** |
 
 What the tests cover:
 - **Rules:** hand-computed cases for every task kind, including perspective effects.
@@ -375,7 +375,7 @@ npm run bench:validate                                                     # ind
 npm run bench:eval -- --model gemini --model-id gemini-3.1-flash-lite      # Google
 npm run bench:eval -- --model cloudflare --model-id @cf/qwen/qwen3.8-27b   # open models
 npm run bench:report                                                       # summary.json with CIs and significance
-npm test                                                                   # 116 tests
+npm test                                                                   # 117 tests
 ```
 
 ---

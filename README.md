@@ -12,7 +12,7 @@
 
 <p align="center">
   <a href="https://github.com/Noufalthecoder/innodata/actions/workflows/ci.yml"><img src="https://github.com/Noufalthecoder/innodata/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
-  <img src="https://img.shields.io/badge/tests-116%20passing-34d399" alt="116 tests passing">
+  <img src="https://img.shields.io/badge/tests-117%20passing-34d399" alt="117 tests passing">
   <img src="https://img.shields.io/badge/ground%20truth-60%2F60%20re--derived-34d399" alt="60 of 60 answers re-derived">
   <img src="https://img.shields.io/badge/models-6%20from%204%20companies-4f8cff?style=flat" alt="6 models from 4 companies">
   <img src="https://img.shields.io/badge/human%20labels-0-ff8731?style=flat" alt="0 human labels">
@@ -40,7 +40,7 @@
 |---|---|
 | **The problem** | Vision-language models are being wired into robot arms, warehouse pickers and inspection cameras. To test them, someone has to label images by hand. That is slow, expensive, and for 3D questions ("which way is it turned?", "will this stack hold?") even careful people disagree. |
 | **Our answer** | Don't label at all. SpatialGrid chooses every object's position, rotation and the camera *first*, computes the answer from those numbers, and only then renders a photoreal image. It produces as many tasks as you want, with labels that cannot be wrong. |
-| **The proof** | 60 path-traced tasks. Every answer re-derived by independent code (60/60), every image visibility-checked (60/60), every task rebuilt identically from its seed. 116 automated tests run in CI. |
+| **The proof** | 60 path-traced tasks. Every answer re-derived by independent code (60/60), every image visibility-checked (60/60), every task rebuilt identically from its seed. 117 automated tests run in CI. |
 | **What we found** | Across six models from Google, Alibaba, Mistral AI and Meta, **depth is nearly solved (90%)**, **orientation is not (43%)**, and **Google's models call most safe stacks unsafe** while the others get all ten right. |
 
 ## One scene, two camps
@@ -173,7 +173,7 @@ Each kind needs a different skill, not a reworded question. Within each kind, di
 | Answers re-derived by separate code ([`lib/bench/truth.ts`](lib/bench/truth.ts), shares no logic with the generator) | **60 / 60** |
 | Tasks rebuilt identically from their seeds | **60 / 60** |
 | Visibility check passed | **60 / 60** |
-| Automated tests (`npm test`, run in CI on every push) | **116 / 116** |
+| Automated tests (`npm test`, run in CI on every push) | **117 / 117** |
 
 The proof also runs in the app (**Validation Proof**): it shows the latest check of the shipped dataset with its time, and **Run again** repeats it from scratch. The test suite also covers:
 
@@ -210,7 +210,7 @@ Every scene can be opened as a live 3D model, rebuilt in the browser from the sa
 | Criterion | Where to look |
 |---|---|
 | **Implementation · 25%** | One command each to generate, validate, evaluate and report; resumable and quota-aware; a live pipeline app; CI on every push. [`lib/bench/`](lib/bench), [`scripts/bench/`](scripts/bench), [`scripts/blender/render.py`](scripts/blender/render.py). |
-| **Validity · 25%** | Computed ground truth, independently re-derived; pixel-mask visibility; 116 tests including mutation, statistics and data-integrity tests; confidence intervals and significance tests on every claim. |
+| **Validity · 25%** | Computed ground truth, independently re-derived; pixel-mask visibility; 117 tests plus code mutation testing (17 of 17 defects caught), statistics and data-integrity tests; confidence intervals and significance tests on every claim. |
 | **Variation · 20%** | 4 reasoning kinds across 3 tiers; 1–5 objects with occlusion; 2 lighting levels; 6 environments; 5 floors; 3 materials; balanced outcomes. |
 | **Originality · 15%** | Answers fixed before rendering; visibility proven per pixel; every scene explorable in 3D with its truth overlaid; a bring-your-own-key lane for any model. |
 | **Impact · 15%** | Failure modes map directly to robot grasping and pallet inspection. Six models from four companies reveal a vendor-specific stability bias and a universal orientation blind spot. |
@@ -225,14 +225,17 @@ npm run dev                        # site at http://localhost:3000, app at /app
 
 The shipped dataset (60 tasks, images and all model results) is in [`public/bench/`](public/bench), so the site and app work straight after `npm install`.
 
+Or skip installing: the live prototype is at **[spatialgrid.vercel.app](https://spatialgrid.vercel.app)**.
+
 <details>
 <summary><b>Run in Docker (what judges run)</b></summary>
 
 ```bash
 cp .env.example .env                                   # optional: add model keys
 docker compose up --build                              # app at http://localhost:3000/app
-docker compose run --rm tools                          # runs the 116 tests in the same image
+docker compose run --rm tools                          # runs the 117 tests in the same image
 docker compose run --rm tools run bench:validate       # re-derives every answer
+docker compose run --rm tools run bench:mutation       # breaks the code 17 ways; tests must catch each
 ```
 
 Or without compose: `docker build -t spatialgrid . && docker run -p 3000:3000 --env-file .env spatialgrid`. The image bundles the shipped dataset, so no keys or Blender are needed to review it.
@@ -256,10 +259,11 @@ npm run bench:generate -- --count 60 --renderer svg    # instant preview rendere
 
 ```bash
 npm run bench:validate                                                   # re-derive every answer, rebuild from seeds
+npm run bench:mutation                                                   # break the code 17 ways; tests must catch each
 npm run bench:eval -- --model gemini --model-id gemini-3.1-flash-lite    # Google (free tier)
 npm run bench:eval -- --model cloudflare --model-id @cf/qwen/qwen3.8-27b # open models via Cloudflare (free tier)
 npm run bench:report                                                     # writes public/bench/summary.json
-npm test                                                                 # 116 tests
+npm test                                                                 # 117 tests
 ```
 
 Claude (`--model anthropic`), GPT-4o (`--model openai`) and OpenRouter (`--model openrouter`) are supported as well. Evaluation resumes where it stopped and stops cleanly when a free quota runs out.

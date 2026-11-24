@@ -32,6 +32,12 @@ describe("parseChoice", () => {
   it("does not mistake the article 'a' for option A", () => {
     expect(parseChoice("It is a clear case, but B is closest", 3)).toBe(1);
   });
+
+  // added after mutation testing (M13) showed no test pinned this down
+  it("takes the final stated answer when a model changes its mind", () => {
+    expect(parseChoice("At first glance the answer is A. Looking again at the shadows, the answer is C.", 3)).toBe(2);
+    expect(parseChoice("Option: B seems likely... but on reflection the correct option is D", 4)).toBe(3);
+  });
 });
 
 describe("prompt", () => {
