@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import type { Task } from "@/lib/bench/types";
+import { modelLabel } from "@/lib/bench/labels";
 import { MODEL_PROFILES } from "@/lib/bench/modelProfiles";
 import { FAILURE_DEEP_DIVES } from "@/lib/bench/failures";
 
@@ -39,12 +40,12 @@ export default function ModelDeepDiveView({
 
   const profile = MODEL_PROFILES[modelId] ?? {
     id: modelId,
-    name: modelId,
+    name: modelLabel(modelId),
     architecture: "Multimodal Foundation Model",
     license: "API Access",
     headline: "Evaluated on 60 SpatialGrid visual tasks.",
     keyFindings: [],
-    strengths: ["General spatial parsing"],
+    strengths: ["General spatial perception"],
     weaknesses: ["3D orientation and stability edge cases"],
   };
 
@@ -78,7 +79,7 @@ export default function ModelDeepDiveView({
   }, [wrongResults, tierFilter, tasksById]);
 
   const total = data?.results.length ?? 60;
-  const correctCount = (data?.results.filter((r) => r.correct).length) ?? 0;
+  const correctCount = data?.results.filter((r) => r.correct).length ?? 0;
   const accuracyPct = Math.round((correctCount / (total || 1)) * 100);
 
   return (
@@ -95,7 +96,7 @@ export default function ModelDeepDiveView({
           </button>
           <span className="font-semibold text-white text-sm">{profile.name}</span>
           <span className="rounded bg-accent/15 px-2.5 py-0.5 text-xs font-semibold text-accent">
-            {accuracyPct}% Overall
+            {accuracyPct}% Accuracy
           </span>
         </div>
         <span className="font-mono text-xs text-zinc-500">
@@ -103,7 +104,7 @@ export default function ModelDeepDiveView({
         </span>
       </div>
 
-      {/* Model Overview Card */}
+      {/* Model Diagnostic Profile Card */}
       <div className="rounded-lg border border-white/10 bg-[#0e0f13] p-6 space-y-5">
         <div>
           <div className="flex flex-wrap items-center gap-2">
@@ -171,7 +172,7 @@ export default function ModelDeepDiveView({
         </div>
       </div>
 
-      {/* Error Breakdown Section */}
+      {/* Error Gallery for this Specific Model */}
       <div className="space-y-4">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div>
@@ -179,7 +180,7 @@ export default function ModelDeepDiveView({
               Error Gallery · {wrongResults.length} Missed Tasks
             </h4>
             <p className="text-xs text-zinc-400">
-              Tasks where {profile.name} failed against the computed ground truth.
+              Visual tasks where {profile.name} failed against computed ground truth.
             </p>
           </div>
 
@@ -189,7 +190,7 @@ export default function ModelDeepDiveView({
               { id: "1", label: "Pose (Tier 1)" },
               { id: "2", label: "Relative (Tier 2)" },
               { id: "3", label: "Stability (Tier 3)" },
-              { id: "shared", label: "Shared Frontier Failures (7)" },
+              { id: "shared", label: "Shared Failures" },
             ].map((f) => (
               <button
                 key={f.id}
@@ -208,7 +209,7 @@ export default function ModelDeepDiveView({
         </div>
 
         {loading ? (
-          <p className="text-sm text-zinc-500">Loading error tasks…</p>
+          <p className="text-sm text-zinc-500">Loading model error tasks…</p>
         ) : filteredErrors.length === 0 ? (
           <div className="rounded-lg border border-white/10 bg-[#0e0f13] p-8 text-center text-sm text-zinc-400">
             No errors match the selected filter.
