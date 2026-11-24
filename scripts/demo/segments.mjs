@@ -40,6 +40,10 @@ export function buildSegments() {
       text: "Validation is independent of every model. Separate code re-derives all sixty answers, every task rebuilds from its seed, every image passes the visibility check, and a hundred and sixteen automated tests run on every push.",
     },
     { id: "s7", text: findings() },
+    {
+      id: "s9",
+      text: "And here is the dataset: all sixty photoreal tasks, filterable by skill. Open any task, and it is rebuilt in 3D from the same numbers that made the image, with the ground truth drawn in: the distance from the camera to every object, and the nearest one marked.",
+    },
     { id: "s8", text: "SpatialGrid, by team Hackcrew. Labels that can't be wrong. Any number of tasks. Zero annotators. The code is open on GitHub." },
   ];
 }

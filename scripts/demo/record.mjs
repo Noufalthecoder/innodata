@@ -5,8 +5,11 @@ import { mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { chromium } from "playwright-core";
 
 const BASE = process.argv[2] || "http://localhost:3100";
+// DEMO_PART=dataset records the extra dataset + 3D scene on its own, into frames-dataset/ and timeline-dataset.json
+const PART = process.env.DEMO_PART || "main";
+const SUF = PART === "main" ? "" : `-${PART}`;
 const OUT = "demo-output";
-const FR = `${OUT}/frames`;
+const FR = `${OUT}/frames${SUF}`;
 rmSync(FR, { recursive: true, force: true });
 mkdirSync(FR, { recursive: true });
 const vo = JSON.parse(readFileSync(`${OUT}/vo/manifest.json`, "utf8"));
@@ -140,6 +143,7 @@ await sleep(300);
 const top = (name) => page.locator("header button", { hasText: name }).first();
 const node = (type) => page.locator(`.react-flow__node-${type}`).first();
 
+if (PART === "main") {
 // ---------- the film (s0 plays over the team's explainer, joined in assemble.mjs) ----------
 await segment("s1", async (d) => {
   await card("SpatialGrid", "Team Hackcrew · a benchmark factory for physical AI");
@@ -215,6 +219,43 @@ await segment("s8", async (d) => {
   await sleep(d * 1000 + 800);
 });
 
+} else if (PART === "dataset") {
+  // ---------- extra scene: the dataset and its 3D view (inserted before the closing card) ----------
+  // pre-warm: open the 3D task view once off camera so its code and shaders are ready
+  await page.goto(BASE + "/app#dataset", { waitUntil: "networkidle" });
+  const warm = page.locator("section[role=dialog] button", { hasText: "s43" }).first();
+  await warm.waitFor({ timeout: 30000 });
+  await warm.scrollIntoViewIfNeeded();
+  await warm.click();
+  await page.locator("section[role=dialog] canvas").first().waitFor({ timeout: 60000 });
+  await sleep(4000);
+  await page.goto(BASE + "/app", { waitUntil: "networkidle" });
+  await page.mouse.move(mx, my);
+  await sleep(600);
+  t0 = Date.now() / 1000; // the clip starts here, on the app
+  await segment("s9", async () => {
+    await click(top("Dataset"));
+    const dlg = page.locator("section[role=dialog]");
+    const card = dlg.locator("button", { hasText: "s43" }).first();
+    await card.waitFor({ timeout: 30000 });
+    await sleep(500);
+    await focus(dlg.getByRole("button", { name: "stability", exact: true }), { dx: -120, ms: 600 });
+    await sleep(1000);
+    await card.scrollIntoViewIfNeeded();
+    await click(card, { ms: 500 });
+    const canvas = dlg.locator("canvas").first();
+    await canvas.waitFor({ timeout: 30000 });
+    await dlg.evaluate((el) => el.scrollTo({ top: 0, behavior: "smooth" }));
+    await sleep(1400);
+    await focus(canvas, { ms: 600 });
+    await sleep(1200);
+    // the 3D viewer is heavy, so no drag on camera: rest on the reconstruction, then the nearest-object label
+    await sleep(1800);
+    maxSteps = 24;
+    const nearest = page.getByText("NEAREST").first();
+    if (await nearest.isVisible().catch(() => false)) await focus(nearest, { ms: 600 });
+  });
+}
 const end = now();
 await cdp.send("Page.stopScreencast");
 await browser.close();
@@ -223,5 +264,5 @@ await browser.close();
 const offs = frames.map((f) => f.arrival - f.ts).sort((a, b) => a - b);
 const useTs = Math.abs(offs[Math.floor(offs.length / 2)]) < 1;
 for (const f of frames) f.t = (useTs ? f.ts : f.arrival) - t0;
-writeFileSync(`${OUT}/timeline.json`, JSON.stringify({ end, segments, events, frames, clock: useTs ? "cdp" : "arrival" }, null, 1));
+writeFileSync(`${OUT}/timeline${SUF}.json`, JSON.stringify({ end, segments, events, frames, clock: useTs ? "cdp" : "arrival" }, null, 1));
 console.log(`recorded ${frames.length} frames, ${end.toFixed(1)}s, ${events.length} zoom events (clock: ${useTs ? "cdp" : "arrival"})`);
